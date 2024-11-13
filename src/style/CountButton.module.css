@@ -1,0 +1,36 @@
+/* Count button */
+.btnWrap {
+  height: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+}
+
+.count,
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.count {
+  width: 20px;
+  height: 100%;
+
+  cursor: pointer;
+}
+.number {
+  width: 30px;
+  height: 100%;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  border-bottom: none;
+}
+
+.context {
+  font-size: 12px;
+  zoom: 0.85;
+}

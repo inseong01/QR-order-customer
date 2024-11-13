@@ -1,0 +1,9 @@
+.wrap {
+  width: 320px;
+  height: 568px;
+  /* border: 1px solid black; */
+  position: relative;
+
+  margin: 0 auto;
+  cursor: default;
+}

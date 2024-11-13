@@ -1,0 +1,33 @@
+/* language */
+.lang {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  font-size: 8px;
+}
+.lang .context {
+  zoom: 0.75;
+}
+.lang .country {
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+}
+.lang .nav {
+  width: 10px;
+  height: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* background-color: #d9d9d9; */
+}
+/* .lang .country {
+  border-radius: 50%;
+} */
+.lang .context,
+.lang .nav {
+  cursor: pointer;
+}

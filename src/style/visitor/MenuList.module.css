@@ -1,0 +1,100 @@
+/* menuList */
+.menuList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  gap: 10px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.menu {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  gap: 10px;
+}
+.imgBox {
+  width: 100px;
+  height: 100%;
+  background-color: #989898;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+/* tag */
+.tag {
+  width: 30px;
+  height: 15px;
+  position: absolute;
+  border-end-end-radius: 3px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popular .tag {
+  background-color: #fbbc58;
+}
+.new .tag {
+  background-color: #b65637;
+}
+.soldout .tag {
+  background-color: #555b5f;
+}
+.soldout .imgBox,
+.soldout .shopIcon {
+  background-color: #e7e7e7;
+}
+.soldout .content {
+  color: #b4b4b4;
+}
+.tag .title {
+  /* font-size: 8px; */
+  line-height: 9px;
+  color: white;
+  zoom: 0.5;
+}
+
+.contextWrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+
+  cursor: pointer;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.name {
+  font-size: 11px;
+}
+.price {
+  font-size: 13px;
+}
+
+/* shopping cart icon */
+.shopIconWrap {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+}
+.shopIcon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #222;
+  border-radius: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

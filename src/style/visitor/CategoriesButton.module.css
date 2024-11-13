@@ -1,0 +1,23 @@
+/* header bottom */
+.categories {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 13px;
+}
+
+/* cate icon */
+.cate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  cursor: pointer;
+}
+.icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
