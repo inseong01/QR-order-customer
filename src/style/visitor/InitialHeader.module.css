@@ -1,7 +1,8 @@
 /* header */
 .header {
   width: 100%;
-  height: 190px;
+  height: 20%;
+  min-height: 200px;
   background-color: #f4f4f4;
 
   display: flex;

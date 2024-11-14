@@ -7,10 +7,15 @@ import 'swiper/css';
 
 export default function MenuTitleList() {
   useEffect(() => {
-    const swiper = new Swiper('.menuTitleList', {
-      slidesPerView: 4,
-      spaceBetween: '30px',
+    new Swiper('.menuTitleList', {
+      slidesPerView: 2,
+      spaceBetween: 30,
       resistanceRatio: 0.5,
+      breakpoints: {
+        360: {
+          slidesPerView: 4,
+        },
+      },
     });
   }, []);
   return (

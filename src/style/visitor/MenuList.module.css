@@ -6,7 +6,7 @@
 
   gap: 10px;
   padding: 15px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .menu {
@@ -21,7 +21,7 @@
   background-color: #989898;
   border-radius: 3px;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   cursor: pointer;
 }
@@ -89,9 +89,9 @@
   justify-content: flex-end;
 }
 .shopIcon {
-  width: 15px;
-  height: 15px;
-  border: 1px solid #222;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #979797;
   border-radius: 2px;
 
   display: flex;

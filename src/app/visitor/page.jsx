@@ -1,7 +1,7 @@
 import Popup from '@/components/popup/Popup';
 import InitialHeader from '@/components/visitor/InitialHeader';
 import InitialMain from '@/components/visitor/InitialMain';
-import styles from '@/style/visitorPage.module.css';
+import styles from '@/style/visitor/visitorPage.module.css';
 
 export default function Page() {
   return (

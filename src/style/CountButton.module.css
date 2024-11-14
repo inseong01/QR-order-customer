@@ -1,13 +1,16 @@
 /* Count button */
 .btnWrap {
-  height: 20px;
+  height: auto;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 5px 0;
 
   border: 1px solid #e6e6e6;
   border-radius: 3px;
+
+  cursor: default;
 }
 
 .count,
@@ -17,8 +20,10 @@
   align-items: center;
 }
 .count {
-  width: 20px;
+  /* width: 20px; */
   height: 100%;
+  padding: 0 10px;
+  color: #959595;
 
   cursor: pointer;
 }
@@ -32,5 +37,5 @@
 
 .context {
   font-size: 12px;
-  zoom: 0.85;
+  /* zoom: 0.85; */
 }

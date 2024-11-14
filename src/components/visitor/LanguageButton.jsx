@@ -5,7 +5,7 @@ export default function LanguageButton() {
   return (
     <li className={styles.lang}>
       <div className={styles.country}>
-        <Image src={'/img/korea-flag.png'} alt="대한민국 국기" width={15} height={15} />
+        <Image src={'/img/korea-flag.png'} alt="대한민국 국기" width={20} height={20} />
       </div>
       <div className={styles.context}>한국어</div>
       <div className={styles.nav}>

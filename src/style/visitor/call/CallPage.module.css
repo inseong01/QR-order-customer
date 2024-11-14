@@ -1,0 +1,38 @@
+.wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  cursor: default;
+  overflow: hidden;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+}
+
+/* top */
+.top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #c9c9c9;
+}
+
+/* middle */
+.middle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

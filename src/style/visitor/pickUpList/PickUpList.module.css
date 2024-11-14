@@ -1,0 +1,84 @@
+.wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  cursor: default;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #c9c9c9;
+}
+
+.pickUpLists,
+.list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* pickUpLists */
+.pickUpLists {
+  width: 100%;
+  height: 100%;
+}
+
+/* swiper */
+.pickUpLists-swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* main - top */
+.titleBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background-color: white;
+  z-index: 9;
+}
+.list .line {
+  background-color: #d9d9d9;
+}
+
+/* main - middle */
+.middle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.middle .top,
+.middle .bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteBtn {
+  color: #959595;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 19px;
+
+  padding: 4px 12px;
+  cursor: pointer;
+}
