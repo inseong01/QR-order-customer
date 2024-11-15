@@ -83,30 +83,28 @@ export default function PickUpListPage() {
               <div className={styles.title}>주문표 목록</div>
               <div className={styles.line}></div>
             </div>
-            <div className={`${styles['pickUpLists-swiper']}`}>
-              <ul className={`${styles.pickUpLists}`}>
-                {pickUpListsArr.map((list, idx) => {
-                  const { name, price } = list;
-                  return (
-                    <li key={idx} className={``}>
-                      <div className={styles.list}>
-                        <div className={styles.middle}>
-                          <div className={styles.top}>
-                            <div className={styles.name}>{name}</div>
-                            <div className={styles.price}>{price}원</div>
-                          </div>
-                          <div className={styles.bottom}>
-                            <div className={styles.deleteBtn}>빼기</div>
-                            <CountButton />
-                          </div>
+            <ul className={`${styles.pickUpLists}`}>
+              {pickUpListsArr.map((list, idx) => {
+                const { name, price } = list;
+                return (
+                  <li key={idx} className={``}>
+                    <div className={styles.list}>
+                      <div className={styles.middle}>
+                        <div className={styles.top}>
+                          <div className={styles.name}>{name}</div>
+                          <div className={styles.price}>{price}원</div>
                         </div>
-                        <div className={styles.line}></div>
+                        <div className={styles.bottom}>
+                          <div className={styles.deleteBtn}>빼기</div>
+                          <CountButton />
+                        </div>
                       </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                      <div className={styles.line}></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </main>
           {/* <SubmitButton type={'order'} /> */}
         </div>

@@ -1,11 +1,22 @@
 'use client';
 
+import {
+  changeMenuCategory,
+  changeMenuList,
+  getSelectedMenuCategoryIdx,
+} from '@/lib/features/menuState/menuSlice';
 import styles from '@/style/visitor/MenuTitleList.module.css';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Swiper from 'swiper';
 import 'swiper/css';
 
-export default function MenuTitleList() {
+function MenuTitleList() {
+  const menuCategoryListArr = useSelector((state) => state.menuState.menuCategoryList);
+  const selectedTagIdx = useSelector((state) => state.menuState.selectedMenuCategoryIdx);
+  const menuCategory = useSelector((state) => state.menuState.menuCategory);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     new Swiper('.menuTitleList', {
       slidesPerView: 2,
@@ -18,25 +29,38 @@ export default function MenuTitleList() {
       },
     });
   }, []);
+
+  function onClickChangeMenuTitle(e) {
+    const innerText = e.target.innerText;
+    if (menuCategory === innerText) return;
+    const tags = document.getElementsByClassName('swiper-slide');
+
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].innerText === innerText) {
+        dispatch(getSelectedMenuCategoryIdx({ idx: i }));
+        break;
+      }
+    }
+    dispatch(changeMenuCategory({ category: innerText }));
+    dispatch(changeMenuList({ category: innerText }));
+    return;
+  }
   return (
     <div className={`menuTitleList ${styles.menuTitleList}`}>
       <div className={`swiper-wrapper ${styles['swiper-wrapper']}`}>
-        <div className={`swiper-slide ${styles.tag} ${styles.clicked}`}>
-          <span className={styles.title}>대표메뉴</span>
-        </div>
-        <div className={`swiper-slide `}>
-          <span className={styles.title}>메인메뉴</span>
-        </div>
-        <div className={`swiper-slide`}>
-          <span className={styles.title}>사이드</span>
-        </div>
-        <div className={`swiper-slide `}>
-          <span className={styles.title}>음료</span>
-        </div>
-        <div className={`swiper-slide ${styles.noneSlice}`}>
-          <span className={styles.title}>주류</span>
-        </div>
+        {menuCategoryListArr.map((category, idx) => {
+          const { title } = category;
+          return (
+            <div key={idx} className={`swiper-slide`} onClick={onClickChangeMenuTitle}>
+              <div className={`${styles.titleWrap} ${selectedTagIdx === idx ? styles.clicked : ''}`}>
+                <span className={styles.title}>{title}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
+
+export default memo(MenuTitleList);
