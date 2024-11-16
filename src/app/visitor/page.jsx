@@ -6,10 +6,10 @@ import InitialMain from '@/components/visitor/InitialMain';
 import styles from '@/style/visitor/VisitorPage.module.css';
 import { useSelector } from 'react-redux';
 
-export default function Page() {
-  const isClicked = useSelector((state) => state.requestState.pickUp.isClicked);
-  const pickUpList = useSelector((state) => state.requestState.pickUp.list);
-  const pickUp = useSelector((state) => state.requestState.pickUp);
+function Page() {
+  const isClicked = useSelector((state) => state.pickUpState.isClicked);
+  const pickUpList = useSelector((state) => state.pickUpState.list);
+  const pickUp = useSelector((state) => state.pickUpState); // /visitor 리렌더링 원인
   const popUpTitle = pickUpList.length && !isClicked ? '주문하기' : '음식 담기';
   const popUpType = pickUpList.length && !isClicked ? 'order' : 'pick';
   console.log(pickUp);
@@ -22,3 +22,5 @@ export default function Page() {
     </div>
   );
 }
+
+export default Page;

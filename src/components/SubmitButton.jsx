@@ -1,5 +1,18 @@
+'use client';
+
 import styles from '@/style/SubmitButton.module.css';
 import CountButton from './CountButton';
+import { useSelector } from 'react-redux';
+import { countItemAmount } from '@/lib/features/requestState/callSlice';
+
+const requestListArr = [
+  { name: '숟저' },
+  { name: '젓가락' },
+  { name: '물' },
+  { name: '앞치마' },
+  { name: '직원호출' },
+];
+// useSelector 데이터 받아옴
 
 function TotalPrice() {
   return (
@@ -11,17 +24,20 @@ function TotalPrice() {
 }
 
 function PickAndCountButton() {
+  const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
   return (
     <div className={styles.pickAndCount}>
       <ul className={styles.pickList}>
-        <li className={styles.list}>
-          <div className={styles.name}>1. 숟저</div>
-          <CountButton />
-        </li>
-        <li className={styles.list}>
-          <div className={styles.name}>2. 젓가락</div>
-          <CountButton />
-        </li>
+        {selectedItemArr.map((item, idx) => {
+          return (
+            <li key={idx} className={styles.list}>
+              <div className={styles.name}>{item.name}</div>
+              {item.name !== '직원호출' && (
+                <CountButton amount={item.amount} idx={idx} countFunction={countItemAmount} />
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

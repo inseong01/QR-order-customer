@@ -1,6 +1,7 @@
 'use client';
 
-import { addMenuToPickUpList, clickMenu } from '@/lib/features/requestState/requestSlice';
+import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
+import { addMenuToPickUpList, clickMenu } from '@/lib/features/requestState/pickUpSlice';
 import styles from '@/style/visitor/MenuList.module.css';
 import Image from 'next/image';
 import { memo } from 'react';
@@ -14,6 +15,7 @@ function MenuList() {
     return () => {
       if (tagDescription === '품절') return;
       dispatch(clickMenu({ menuData: { name, price } }));
+      dispatch(resetCountNumberState());
     };
   }
 
@@ -21,60 +23,58 @@ function MenuList() {
     return (e) => {
       if (tagDescription === '품절') return;
       e.stopPropagation();
-      dispatch(addMenuToPickUpList({ menu: { name, price, count: 1 } }));
+      dispatch(addMenuToPickUpList({ menu: { name, price, amount: 1 } }));
     };
   }
 
   return (
-    <div className={styles.menuListWrap}>
-      <ul className={`menuList ${styles.menuList}`}>
-        {menuStateMenuList.map((list, idx) => {
-          const { name, price, tag } = list;
-          let tagDescription = '';
-          switch (tag) {
-            case 'popular': {
-              tagDescription = '인기';
-              break;
-            }
-            case 'new': {
-              tagDescription = '신규';
-              break;
-            }
-            case 'soldout': {
-              tagDescription = '품절';
-              break;
-            }
+    <ul className={`menuList ${styles.menuList}`}>
+      {menuStateMenuList.map((list, idx) => {
+        const { name, price, tag } = list;
+        let tagDescription = '';
+        switch (tag) {
+          case 'popular': {
+            tagDescription = '인기';
+            break;
           }
-          return (
-            <li
-              key={idx}
-              className={`${styles.menu} ${styles[tag]}`}
-              onClick={onClickMenuClick(name, price, tagDescription)}
-            >
-              <div className={styles.imgBox}>
-                <div className={styles.tag}>
-                  <span className={styles.title}>{tagDescription}</span>
+          case 'new': {
+            tagDescription = '신규';
+            break;
+          }
+          case 'soldout': {
+            tagDescription = '품절';
+            break;
+          }
+        }
+        return (
+          <li
+            key={idx}
+            className={`${styles.menu} ${styles[tag]}`}
+            onClick={onClickMenuClick(name, price, tagDescription)}
+          >
+            <div className={styles.imgBox}>
+              <div className={styles.tag}>
+                <span className={styles.title}>{tagDescription}</span>
+              </div>
+            </div>
+            <div className={styles.contextWrap}>
+              <div className={styles.content}>
+                <div className={styles.name}>{name}</div>
+                <div className={styles.price}>{price}원</div>
+              </div>
+              <div className={styles.shopIconWrap}>
+                <div
+                  className={styles.shopIcon}
+                  onClick={onClickAddMenuToPickUpList(name, price, tagDescription)}
+                >
+                  <Image src={'/img/shopping-cart.png'} alt="장바구니" width={10} height={10} />
                 </div>
               </div>
-              <div className={styles.contextWrap}>
-                <div className={styles.content}>
-                  <div className={styles.name}>{name}</div>
-                  <div className={styles.price}>{price}원</div>
-                </div>
-                <div className={styles.shopIconWrap}>
-                  <div
-                    className={styles.shopIcon}
-                    onClick={onClickAddMenuToPickUpList(name, price, tagDescription)}
-                  >
-                    <Image src={'/img/shopping-cart.png'} alt="장바구니" width={10} height={10} />
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

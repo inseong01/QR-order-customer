@@ -1,10 +1,11 @@
 /* menuTItleList */
 .menuTitleList {
   width: 100%;
-  height: 40px;
+  height: 5vh;
+  min-height: 40px;
+  max-height: 40px;
   padding: 0 15px;
   border-bottom: 1px solid #e7e7e7;
-  overflow: hidden;
 
   position: relative;
 }
@@ -19,13 +20,14 @@
   cursor: pointer;
 }
 
+/* seperate line */
 .swiper-wrapper > div::after {
   position: absolute;
   content: '';
   top: 15px;
   right: -15px;
   width: 1px;
-  height: 10px;
+  height: 12px;
   background-color: #e7e7e7;
 
   cursor: default;
@@ -33,14 +35,14 @@
 
 .titleWrap {
   width: 100%;
-  overflow: hidden;
   position: relative;
 }
+/* click line */
 .titleWrap.clicked::before {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
   height: 1px;
   background-color: #222;

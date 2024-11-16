@@ -3,17 +3,27 @@
 import styles from '@/style/popup/Popup.module.css';
 import CountButton from '../CountButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { pickUpMenu, resetPickUpState } from '@/lib/features/requestState/requestSlice';
+import { pickUpMenu, resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
 import { useRouter } from 'next/navigation';
+import { countNumber } from '@/lib/features/countNumberState/countNumberSlice';
 
 export default function Popup({ type, context }) {
-  const selectedMenu = useSelector((state) => state.requestState.pickUp.selectedMenu);
-  const pickUpLists = useSelector((state) => state.requestState.pickUp.list);
+  const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
+  const pickUpLists = useSelector((state) => state.pickUpState.list);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  function onClickPickUpMenu() {
-    dispatch(pickUpMenu());
+  function onClickList() {
+    switch (type) {
+      case 'pick': {
+        dispatch(pickUpMenu());
+        return;
+      }
+      case 'request': {
+        console.log('click request');
+        return;
+      }
+    }
   }
   function onSubmitOrderMenuLists(e) {
     e.preventDefault();
@@ -24,8 +34,7 @@ export default function Popup({ type, context }) {
     dispatch(resetPickUpState());
   }
   switch (type) {
-    case 'pick':
-    case 'request': {
+    case 'pick': {
       return (
         <div className={styles.wrap} onClick={() => {}}>
           <div className={styles.top}>
@@ -34,7 +43,7 @@ export default function Popup({ type, context }) {
             </div>
             <CountButton />
           </div>
-          <div className={styles.bottom} onClick={onClickPickUpMenu}>
+          <div className={styles.bottom} onClick={onClickList}>
             <span className={styles.context}>{context}</span>
           </div>
         </div>
