@@ -5,13 +5,11 @@ import styles from '@/style/CountButton.module.css';
 import { usePathname } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function CountButton({ amount = undefined, idx = undefined, countFunction = undefined }) {
-  const number = useSelector((state) => state.countNumberState.currentNum);
-  const pathName = usePathname();
+export default function CountButton({ amount, idx = undefined, countFunction = undefined }) {
   const dispatch = useDispatch();
 
   function onClickMenuCount(num) {
-    if (pathName === '/visitor') {
+    if (!countFunction) {
       return () => {
         dispatch(countNumber({ num }));
       };
@@ -27,7 +25,7 @@ export default function CountButton({ amount = undefined, idx = undefined, count
         <span className={styles.context}>-</span>
       </div>
       <div className={styles.number}>
-        <span className={styles.context}>{amount ?? number}</span>
+        <span className={styles.context}>{amount}</span>
       </div>
       <div className={styles.count} onClick={onClickMenuCount(1)}>
         <span className={styles.context}>+</span>

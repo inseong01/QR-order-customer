@@ -1,10 +1,21 @@
+'use client';
+
+import onClickPush from '@/function/onClickPush';
 import styles from '@/style/AlertModal.module.css';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function AlertModal({ type }) {
+  const status = useSelector((state) => state.submitState.status);
+  const router = useRouter();
+
+  useEffect(() => {}, [status]);
+
   switch (type) {
     case 'orderCheck': {
       return (
-        <dialog id="alertModal" className={styles.wrap}>
+        <dialog id="order" className={styles.wrap}>
           <div className={styles.top}>주문하시겠습니까?</div>
           <div className={styles.bottom}>
             <span className={styles.title}>아니요</span>
@@ -13,11 +24,11 @@ export default function AlertModal({ type }) {
         </dialog>
       );
     }
-    case 'requested': {
+    case 'request': {
       return (
-        <dialog id="alertModal" className={styles.wrap}>
+        <dialog id="request" className={styles.wrap}>
           <div className={styles.top}>요청되었습니다</div>
-          <div className={styles.bottom}>
+          <div className={styles.bottom} onClick={onClickPush(router, '/visitor')}>
             <span className={`${styles.title} ${styles.last}`}>확인</span>
           </div>
         </dialog>

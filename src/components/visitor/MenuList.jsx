@@ -31,6 +31,7 @@ function MenuList() {
     <ul className={`menuList ${styles.menuList}`}>
       {menuStateMenuList.map((list, idx) => {
         const { name, price, tag } = list;
+        const priceToString = price.toLocaleString();
         let tagDescription = '';
         switch (tag) {
           case 'popular': {
@@ -60,7 +61,7 @@ function MenuList() {
             <div className={styles.contextWrap}>
               <div className={styles.content}>
                 <div className={styles.name}>{name}</div>
-                <div className={styles.price}>{price}원</div>
+                <div className={styles.price}>{priceToString}원</div>
               </div>
               <div className={styles.shopIconWrap}>
                 <div

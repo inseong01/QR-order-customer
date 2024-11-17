@@ -3,35 +3,24 @@
 import styles from '@/style/popup/Popup.module.css';
 import CountButton from '../CountButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { pickUpMenu, resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
+import { pickUpMenu } from '@/lib/features/requestState/pickUpSlice';
 import { useRouter } from 'next/navigation';
-import { countNumber } from '@/lib/features/countNumberState/countNumberSlice';
+import { changeSubmitStatus } from '@/lib/features/submitState/submitSlice';
 
-export default function Popup({ type, context }) {
+export default function Popup({ type }) {
   const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
-  const pickUpLists = useSelector((state) => state.pickUpState.list);
+  const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
   const dispatch = useDispatch();
   const router = useRouter();
 
+  // 항목 선택
   function onClickList() {
-    switch (type) {
-      case 'pick': {
-        dispatch(pickUpMenu());
-        return;
-      }
-      case 'request': {
-        console.log('click request');
-        return;
-      }
-    }
+    dispatch(pickUpMenu());
   }
-  function onSubmitOrderMenuLists(e) {
-    e.preventDefault();
-    console.log('submit', pickUpLists);
-    // 주문 전송
-    // 주문 결과
+  // 주문표 확인하기
+  function onClickCheckPickUpList() {
+    dispatch(changeSubmitStatus({ status: 'checkCurrentOrderList' }));
     router.push('visitor/pickUpList');
-    dispatch(resetPickUpState());
   }
   switch (type) {
     case 'pick': {
@@ -41,21 +30,21 @@ export default function Popup({ type, context }) {
             <div className={styles.title}>
               <span className={styles.context}>{selectedMenu.name}</span>
             </div>
-            <CountButton />
+            <CountButton amount={selectedMenuAmount} />
           </div>
           <div className={styles.bottom} onClick={onClickList}>
-            <span className={styles.context}>{context}</span>
+            <span className={styles.context}>음식 담기</span>
           </div>
         </div>
       );
     }
     case 'order': {
       return (
-        <form className={styles.wrap} onSubmit={onSubmitOrderMenuLists}>
-          <button type="submit" className={`${styles.bottom} ${styles.submitBtn}`}>
-            <span className={styles.context}>{context}</span>
-          </button>
-        </form>
+        <div className={styles.wrap} onClick={onClickCheckPickUpList}>
+          <div className={styles.bottom}>
+            <span className={styles.context}>주문표 확인하기</span>
+          </div>
+        </div>
       );
     }
   }

@@ -48,9 +48,12 @@ const callSlice = createSlice({
         ...state,
         selectedItemArr: updateItemArr
       }
+    },
+    resetCallState: (state, action) => {
+      return initialState;
     }
   },
 })
 
-export const { selectCallBtn, countItemAmount } = callSlice.actions;
+export const { selectCallBtn, countItemAmount, resetCallState } = callSlice.actions;
 export default callSlice.reducer;

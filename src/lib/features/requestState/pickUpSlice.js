@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { countNumber } from "../countNumberState/countNumberSlice";
+import calculateAmount from "@/function/calculateAmount";
 
 const initialState = {
   isClicked: false,
@@ -72,14 +73,37 @@ const pickUpSlice = createSlice({
     resetPickUpState: (state, action) => {
       return initialState;
     },
+    calculateAmountInPickUpList: (state, action) => {
+      const idx = action.payload.idx;
+      const num = action.payload.num;
+      const updateList = state.list.map((list, i) => {
+        if (i !== idx) return { ...list }
+        const amount = calculateAmount(list.amount, num);
+        return {
+          ...list,
+          amount
+        }
+      })
+
+      return {
+        ...state,
+        list: updateList
+      }
+    },
+    deleteList: (state, action) => {
+      const idx = action.payload.idx;
+      const updateList = state.list.filter((list, i) => idx !== i)
+      return {
+        ...state,
+        list: updateList
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(countNumber, (state, action) => {
       // countNumber dispatch 동작 연동
-      const currentNum = state.selectedMenu.amount;
-      const receivedNum = Number(action.payload.num);
-      let calcedNumber = currentNum + receivedNum
-      if (calcedNumber <= 0) calcedNumber = 1;
+      console.log(state, action)
+      const calcedNumber = calculateAmount(state.selectedMenu.amount, action.payload.num);
       return {
         ...state,
         selectedMenu: {
@@ -91,5 +115,5 @@ const pickUpSlice = createSlice({
   }
 })
 
-export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState } = pickUpSlice.actions;
+export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState, calculateAmountInPickUpList, deleteList } = pickUpSlice.actions;
 export default pickUpSlice.reducer;

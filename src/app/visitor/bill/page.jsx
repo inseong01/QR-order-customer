@@ -7,7 +7,7 @@ export default function BillPage() {
     <div className={styles.wrap}>
       <AppVisitorHeader title={'계산서'} />
       <main className={styles.main}>
-        <OrderList />
+        <OrderList type={'bill'} />
       </main>
     </div>
   );

@@ -1,9 +1,13 @@
+'use client';
+
 import styles from '@/style/visitor/pickUpList/PickUpList.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
 import CountButton from '@/components/CountButton';
 import SubmitButton from '@/components/SubmitButton';
 import OrderSubmit from '@/components/orderSubmit';
 import OrderList from '@/components/OrderList';
+import { useDispatch, useSelector } from 'react-redux';
+import { calculateAmountInPickUpList, deleteList } from '@/lib/features/requestState/pickUpSlice';
 
 const pickUpListsArr = [
   {
@@ -67,14 +71,20 @@ const pickUpListsArr = [
     price: '00,000',
   },
 ];
-// swiper 적용 안 해도 되는지
-// 리스트 최대 height 넘겨서 UI 테스트
 
 export default function PickUpListPage() {
-  const isSubmit = false;
+  const submitStatus = useSelector((state) => state.submitState.status);
+  const currentOrderList = useSelector((state) => state.pickUpState.list);
+  const dispatch = useDispatch();
 
-  switch (isSubmit) {
-    case false: {
+  function onClickDeleteList(idx) {
+    return () => {
+      dispatch(deleteList({ idx }));
+    };
+  }
+
+  switch (submitStatus) {
+    case 'checkCurrentOrderList': {
       return (
         <div className={styles.wrap}>
           <AppVisitorHeader title={'주문표'} />
@@ -84,19 +94,26 @@ export default function PickUpListPage() {
               <div className={styles.line}></div>
             </div>
             <ul className={`${styles.pickUpLists}`}>
-              {pickUpListsArr.map((list, idx) => {
-                const { name, price } = list;
+              {currentOrderList.map((list, idx) => {
+                const { name, price, amount } = list;
+                const priceToString = price.toLocaleString();
                 return (
                   <li key={idx} className={``}>
                     <div className={styles.list}>
                       <div className={styles.middle}>
                         <div className={styles.top}>
                           <div className={styles.name}>{name}</div>
-                          <div className={styles.price}>{price}원</div>
+                          <div className={styles.price}>{priceToString}원</div>
                         </div>
                         <div className={styles.bottom}>
-                          <div className={styles.deleteBtn}>빼기</div>
-                          <CountButton />
+                          <div className={styles.deleteBtn} onClick={onClickDeleteList(idx)}>
+                            빼기
+                          </div>
+                          <CountButton
+                            amount={amount}
+                            idx={idx}
+                            countFunction={calculateAmountInPickUpList}
+                          />
                         </div>
                       </div>
                       <div className={styles.line}></div>
@@ -106,17 +123,17 @@ export default function PickUpListPage() {
               })}
             </ul>
           </main>
-          {/* <SubmitButton type={'order'} /> */}
+          <SubmitButton type={'order'} />
         </div>
       );
     }
-    case true: {
+    case 'OK': {
       return (
         <div className={styles.wrap}>
           <AppVisitorHeader title={'주문완료'} />
           <main className={styles.main}>
             <OrderSubmit />
-            <OrderList />
+            <OrderList type={'currentOrderList'} />
           </main>
           <SubmitButton type={'back'} />
         </div>

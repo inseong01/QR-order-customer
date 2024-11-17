@@ -3,62 +3,62 @@ import { createSlice } from "@reduxjs/toolkit";
 let initMenuListArr = [
   {
     name: '음식 이름 1',
-    price: '00,000',
+    price: 1000,
     tag: 'popular',
   },
   {
     name: '음식 이름 2',
-    price: '00,000',
+    price: 1000,
     tag: 'new',
   },
   {
     name: '음식 이름 3',
-    price: '00,000',
+    price: 1000,
     tag: 'soldout',
   },
   {
     name: '음식 이름 4',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
   {
     name: '음식 이름 5',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
   {
     name: '음식 이름 6',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
   {
     name: '음식 이름 1',
-    price: '00,000',
+    price: 1000,
     tag: 'popular',
   },
   {
     name: '음식 이름 2',
-    price: '00,000',
+    price: 1000,
     tag: 'new',
   },
   {
     name: '음식 이름 3',
-    price: '00,000',
+    price: 1000,
     tag: 'soldout',
   },
   {
     name: '음식 이름 4',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
   {
     name: '음식 이름 5',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
   {
     name: '음식 이름 6',
-    price: '00,000',
+    price: 1000,
     tag: '',
   },
 ];
@@ -105,62 +105,62 @@ const menuStateSlice = createSlice({
           const listArr = [
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 1000,
               tag: 'popular',
             },
             {
               name: '음식 이름 2',
-              price: '00,000',
+              price: 1000,
               tag: 'new',
             },
             {
               name: '음식 이름 3',
-              price: '00,000',
+              price: 1000,
               tag: 'soldout',
             },
             {
               name: '음식 이름 4',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
             {
               name: '음식 이름 5',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
             {
               name: '음식 이름 6',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 1000,
               tag: 'popular',
             },
             {
               name: '음식 이름 2',
-              price: '00,000',
+              price: 1000,
               tag: 'new',
             },
             {
               name: '음식 이름 3',
-              price: '00,000',
+              price: 1000,
               tag: 'soldout',
             },
             {
               name: '음식 이름 4',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
             {
               name: '음식 이름 5',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
             {
               name: '음식 이름 6',
-              price: '00,000',
+              price: 1000,
               tag: '',
             },
           ];
@@ -173,7 +173,7 @@ const menuStateSlice = createSlice({
           const listArr = [
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 10,
               tag: 'popular',
             },
           ];
@@ -186,7 +186,7 @@ const menuStateSlice = createSlice({
           const listArr = [
             {
               name: '음식 이름 2',
-              price: '00,000',
+              price: 20,
               tag: 'popular',
             },
           ];
@@ -199,12 +199,12 @@ const menuStateSlice = createSlice({
           const listArr = [
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 400,
               tag: 'popular',
             },
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 1000,
               tag: 'popular',
             },
           ];
@@ -217,17 +217,17 @@ const menuStateSlice = createSlice({
           const listArr = [
             {
               name: '음식 이름 1',
-              price: '00,000',
+              price: 1000,
               tag: 'popular',
             },
             {
               name: '음식 이름 2',
-              price: '00,000',
+              price: 1100,
               tag: 'popular',
             },
             {
               name: '음식 이름 3',
-              price: '00,000',
+              price: 2000,
               tag: 'popular',
             },
           ];
