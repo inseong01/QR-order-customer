@@ -1,0 +1,42 @@
+<1 framer>
+
+특징: js 끊겨도 애니메이션 유지됨, requestAnimationFrame과 web API에서 동작함
+https://motion.dev/docs/feature-comparison
+
+framer 사용 방법
+- 애니메이션 적용
+  : 태그 명에 motion 붙임, <motion.div></motion.div>
+
+- 변수 사용
+  : 태그에 작성, variants={변수명}
+  예) 변수 = {
+      'active' : {
+        transition: { 움직임 관련 속성 설정 },
+        ...움직임 속성값 부여
+      },
+      'inactive': {}
+    }
+    - 움직임 관련 속성 설정
+    : 움직임 프로퍼티의 속성 설정 가능(개별 속성 부여), transition: { x: { duration: 0 } } 
+
+- 초기 상태 설정
+  : initial={변수 || variants의 프로퍼티 명 || 직접 작성},
+  -> 조건부 적용 가능, initial={isClicked ? 'active' : 'inactive'}
+    variants 프로퍼티 명 사용 시 variants 할당되어 있어야 함, 자식 태그일 때 해당 속성 작성 생략(부모 variants 프로퍼티 명과 일치해야 함) 
+
+- 애니메이션 상태 설정
+  : animate={변수 || variants의 프로퍼티 명 || 직접 작성},
+  -> 조건부 적용 가능, animate={isClicked ? 'active' : 'inactive'}
+    variants 프로퍼티 명 사용 시 variants 할당되어 있어야 함, 자식 태그일 때 해당 속성 작성 생략(부모 variants 프로퍼티 명과 일치해야 함) 
+
+- 애니메이션 추적 컴포넌트
+  : <AnimatePresence>{ children }</AnimatePresence>
+  -> initial, animate, exit 속성 사용, children의 애니메이션 시작과 종료를 설정할 수 있음 
+
+- transition type
+  : default: 'dynamic', 'tween'/'spring'/'inertia' 설정 가능
+  -> 각 타입의 duration 다름, 0으로 설정하여 'linear'로 사용할 수 있음
+
+- transition: staggerChildren
+  : 자식 애니메이션 연쇄 지연 속성, 부모 태그에 적용
+  -> 값이 클수록 오류 발생 가능, 모든 자식 애니메이션 하나로 묶어서 지연하는 delayChildren과 다름 

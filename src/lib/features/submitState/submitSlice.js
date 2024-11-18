@@ -42,7 +42,7 @@ const submitSlice = createSlice({
         status
       }
     },
-    changeModalTarget: (state, action) => {
+    changeModalId: (state, action) => {
       const target = action.payload.target;
       return {
         ...state,
@@ -50,6 +50,12 @@ const submitSlice = createSlice({
           ...state.modal,
           target
         }
+      }
+    },
+    clickToSubmit: (state, action) => {
+      return {
+        ...state,
+        isSubmit: true,
       }
     }
   },
@@ -90,5 +96,5 @@ const submitSlice = createSlice({
 })
 
 
-export const { changeSubmitStatus, resetSubmitState, changeModalTarget } = submitSlice.actions;
+export const { changeSubmitStatus, resetSubmitState, changeModalId, clickToSubmit } = submitSlice.actions;
 export default submitSlice.reducer;

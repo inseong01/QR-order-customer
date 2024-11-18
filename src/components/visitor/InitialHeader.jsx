@@ -10,7 +10,7 @@ export default function InitialHeader() {
         <LanguageButton />
       </ul>
       <div className={styles.middle}>
-        <div className={styles.restaurantName}>매장 명</div>
+        <div className={styles.restaurantName}>ABC 매장</div>
         <div className={styles.description}>주문하실 음식을 골라주세요</div>
       </div>
       <CategoriesButton />

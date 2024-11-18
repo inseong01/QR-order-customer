@@ -5,14 +5,8 @@ import CountButton from './CountButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { countItemAmount, resetCallState } from '@/lib/features/requestState/callSlice';
 import { useRouter } from 'next/navigation';
-import {
-  asyncFetchOrderList,
-  asyncFetchRequestList,
-  changeModalTarget,
-  resetSubmitState,
-} from '@/lib/features/submitState/submitSlice';
+import { asyncFetchRequestList, resetSubmitState } from '@/lib/features/submitState/submitSlice';
 import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
-import { addOrderList } from '@/lib/features/requestState/orderListSlice';
 
 const requestListArr = [
   { name: '숟저' },
@@ -56,8 +50,8 @@ function PickAndCountButton() {
 }
 
 export default function SubmitButton({ type }) {
-  const pickUpList = useSelector((state) => state.pickUpState.list);
   const requestList = useSelector((state) => state.callState.selectedItemArr);
+  const target = useSelector((state) => state.submitState.modal.target);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -70,14 +64,15 @@ export default function SubmitButton({ type }) {
   }
   // 주문하기
   function onClickSubmitOrderList() {
-    dispatch(addOrderList({ list: pickUpList }));
-    dispatch(asyncFetchOrderList(pickUpList));
+    const tag = document.getElementById(target);
+    tag.showModal();
   }
   // 호출하기
   function onClickSubmitRequestList() {
-    dispatch(asyncFetchRequestList(requestList));
-    // 초기화
-    dispatch(resetCallState());
+    const tag = document.getElementById(target);
+    tag.showModal();
+    dispatch(asyncFetchRequestList(requestList)); // 요청 전송
+    dispatch(resetCallState()); // 초기화
   }
 
   switch (type) {

@@ -80,13 +80,13 @@ let initMenuCategoryList = [
   },
 ]
 
+// api 요청으로 메뉴 데이터 가져옴
 const initialState = {
   menuCategory: '대표메뉴',
   selectedMenuCategoryIdx: 0,
   menuList: initMenuListArr,
   menuCategoryList: initMenuCategoryList,
 }
-
 const menuStateSlice = createSlice({
   name: 'menuState',
   initialState,

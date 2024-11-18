@@ -90,7 +90,7 @@ const pickUpSlice = createSlice({
         list: updateList
       }
     },
-    deleteList: (state, action) => {
+    deletePickUpList: (state, action) => {
       const idx = action.payload.idx;
       const updateList = state.list.filter((list, i) => idx !== i)
       return {
@@ -115,5 +115,5 @@ const pickUpSlice = createSlice({
   }
 })
 
-export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState, calculateAmountInPickUpList, deleteList } = pickUpSlice.actions;
+export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState, calculateAmountInPickUpList, deletePickUpList } = pickUpSlice.actions;
 export default pickUpSlice.reducer;

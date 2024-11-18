@@ -1,15 +1,21 @@
 'use client';
 
+import { memo, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'motion/react';
 import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
 import { addMenuToPickUpList, clickMenu } from '@/lib/features/requestState/pickUpSlice';
 import styles from '@/style/visitor/MenuList.module.css';
 import Image from 'next/image';
-import { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 function MenuList() {
   const menuStateMenuList = useSelector((state) => state.menuState.menuList);
+  const [isfirstLoad, setIsFirstLoad] = useState(true);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsFirstLoad((prev) => (prev = false));
+  }, []);
 
   function onClickMenuClick(name, price, tagDescription) {
     return () => {
@@ -27,8 +33,37 @@ function MenuList() {
     };
   }
 
+  // motion
+  const ulVar = {
+    active: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+    inactive: {},
+  };
+  const liVar = {
+    active: {
+      y: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    inactive: {
+      y: 10,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
-    <ul className={`menuList ${styles.menuList}`}>
+    <motion.ul
+      className={`menuList ${styles.menuList}`}
+      variants={ulVar}
+      initial={isfirstLoad ? 'inactive' : false}
+      animate={isfirstLoad ? 'active' : false}
+    >
       {menuStateMenuList.map((list, idx) => {
         const { name, price, tag } = list;
         const priceToString = price.toLocaleString();
@@ -48,10 +83,11 @@ function MenuList() {
           }
         }
         return (
-          <li
+          <motion.li
             key={idx}
             className={`${styles.menu} ${styles[tag]}`}
             onClick={onClickMenuClick(name, price, tagDescription)}
+            variants={liVar}
           >
             <div className={styles.imgBox}>
               <div className={styles.tag}>
@@ -72,10 +108,10 @@ function MenuList() {
                 </div>
               </div>
             </div>
-          </li>
+          </motion.li>
         );
       })}
-    </ul>
+    </motion.ul>
   );
 }
 

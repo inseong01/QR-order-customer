@@ -1,0 +1,20 @@
+/* common */
+.list,
+.menuBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* listBox */
+.listBox {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.list {
+  width: 100%;
+}
+.menuBox {
+  gap: 5px;
+}
