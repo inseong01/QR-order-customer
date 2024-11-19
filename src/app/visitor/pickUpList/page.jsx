@@ -4,18 +4,21 @@ import styles from '@/style/visitor/pickUpList/PickUpList.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
 import CountButton from '@/components/CountButton';
 import SubmitButton from '@/components/SubmitButton';
-import OrderSubmit from '@/components/orderSubmit';
+import OrderSubmit from '@/components/OrderSubmit';
 import OrderList from '@/components/OrderList';
 import AlertModal from '@/components/AlertModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { calculateAmountInPickUpList, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';
 import { useEffect } from 'react';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function PickUpListPage() {
   const submitStatus = useSelector((state) => state.submitState.status);
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   const target = useSelector((state) => state.submitState.modal.target);
+  const modalStatus = useSelector((state) => state.submitState.modal.status);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,12 +31,18 @@ export default function PickUpListPage() {
     };
   }
 
-  switch (submitStatus) {
-    case 'checkCurrentOrderList': {
-      return (
-        <div className={styles.wrap}>
-          <AppVisitorHeader title={'주문표'} />
-          <main className={styles.main}>
+  return (
+    <div className={styles.wrap}>
+      <AppVisitorHeader title={submitStatus !== 'OK' ? '주문표' : '주문완료'} />
+      <AnimatePresence mode="popLayout">
+        {submitStatus !== 'OK' ? (
+          <motion.main
+            className={styles.main}
+            key={'checkCurrentOrderList'}
+            style={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+          >
             <div className={styles.titleBox}>
               <div className={styles.title}>주문표 목록</div>
               <div className={styles.line}></div>
@@ -45,26 +54,24 @@ export default function PickUpListPage() {
                     const { name, price, amount } = list;
                     const priceToString = price.toLocaleString();
                     return (
-                      <li key={idx} className={``}>
-                        <div className={styles.list}>
-                          <div className={styles.middle}>
-                            <div className={styles.top}>
-                              <div className={styles.name}>{name}</div>
-                              <div className={styles.price}>{priceToString}원</div>
-                            </div>
-                            <div className={styles.bottom}>
-                              <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(idx)}>
-                                빼기
-                              </div>
-                              <CountButton
-                                amount={amount}
-                                idx={idx}
-                                countFunction={calculateAmountInPickUpList}
-                              />
-                            </div>
+                      <li key={idx} className={styles.list}>
+                        <div className={styles.middle}>
+                          <div className={styles.top}>
+                            <div className={styles.name}>{name}</div>
+                            <div className={styles.price}>{priceToString}원</div>
                           </div>
-                          <div className={styles.line}></div>
+                          <div className={styles.bottom}>
+                            <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(idx)}>
+                              빼기
+                            </div>
+                            <CountButton
+                              amount={amount}
+                              idx={idx}
+                              countFunction={calculateAmountInPickUpList}
+                            />
+                          </div>
                         </div>
+                        <div className={styles.line}></div>
                       </li>
                     );
                   })}
@@ -73,23 +80,25 @@ export default function PickUpListPage() {
                 <li>주문 목록이 없습니다.</li>
               )}
             </ul>
-          </main>
-          <SubmitButton type={currentOrderList.length !== 0 ? 'order' : 'back'} />
-          <AlertModal type={target} />
-        </div>
-      );
-    }
-    case 'OK': {
-      return (
-        <div className={styles.wrap}>
-          <AppVisitorHeader title={'주문완료'} />
-          <main className={styles.main}>
+            <SubmitButton type={currentOrderList.length !== 0 ? 'order' : 'back'} />
+            <AnimatePresence>
+              {modalStatus && <AlertModal key={'AlertModal'} type={target} />}
+            </AnimatePresence>
+          </motion.main>
+        ) : (
+          <motion.main
+            className={styles.main}
+            key={'OK'}
+            initial={{ x: '100%' }}
+            animate={{ x: '0%' }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+          >
             <OrderSubmit />
             <OrderList type={'currentOrderList'} />
-          </main>
-          <SubmitButton type={'back'} />
-        </div>
-      );
-    }
-  }
+            <SubmitButton type={'back'} />
+          </motion.main>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }

@@ -45,12 +45,14 @@ function MenuList() {
   const liVar = {
     active: {
       y: 0,
+      opacity: 1,
       transition: {
         duration: 0.3,
       },
     },
     inactive: {
       y: 10,
+      opacity: 0,
       transition: {
         duration: 0.3,
       },
@@ -93,6 +95,7 @@ function MenuList() {
               <div className={styles.tag}>
                 <span className={styles.title}>{tagDescription}</span>
               </div>
+              <div className={styles.img}>사진</div>
             </div>
             <div className={styles.contextWrap}>
               <div className={styles.content}>

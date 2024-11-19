@@ -40,3 +40,26 @@ framer 사용 방법
 - transition: staggerChildren
   : 자식 애니메이션 연쇄 지연 속성, 부모 태그에 적용
   -> 값이 클수록 오류 발생 가능, 모든 자식 애니메이션 하나로 묶어서 지연하는 delayChildren과 다름 
+
+- layoutId
+  : 동일 아이디를 가진 요소가 DOM에 있다면 이전 요소 크기/위치에서 시작
+  -> 상속 애니메이션 생성 가능, 이어지는 움직임 연출
+
+- style
+  : 고정 스타일링, 애니메이션 될 때 변하지 않음
+
+- && 논리 연산자
+  : motion은 요소가 등장했을 때 animate가 동작
+  -> dialog 요소처럼 보이지 않은 상태라면 보이지 않는 곳에서 animate 됨, 논리 연산자로 첫 등장을 설정해야 함
+
+- AnimatePresence key
+  : 요소의 고유 key 설정
+  -> key 변경은 리액트에서 새로운 컴포넌트 렌더링, 애니메이션 적용 가능, 예) 슬라이드
+
+- AnimatePresence mode
+  : AnimatePresence의 모드 설정
+  -> 'sync': 기본, 자식요소 삭제/추가 시 즉시 동작 
+      'wait': 자식 요소의 애니메이션 동작 종료까지 기다림
+      'popLayout': 자식 요소 사라지면서 다음 요소 이어지며 등장
+
+  https://motion.dev/docs/react-animation

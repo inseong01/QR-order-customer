@@ -2,55 +2,91 @@
 
 import onClickPush from '@/function/onClickPush';
 import { addOrderList } from '@/lib/features/requestState/orderListSlice';
-import { asyncFetchOrderList } from '@/lib/features/submitState/submitSlice';
+import { asyncFetchOrderList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
 import styles from '@/style/AlertModal.module.css';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'motion/react';
 
 export default function AlertModal({ type }) {
-  const status = useSelector((state) => state.submitState.status);
   const target = useSelector((state) => state.submitState.modal.target);
   const pickUpList = useSelector((state) => state.pickUpState.list);
   const isSubmit = useSelector((state) => state.submitState.isSubmit);
+  const modalStatus = useSelector((state) => state.submitState.modal.status);
   const dispatch = useDispatch();
   const router = useRouter();
 
   function onClickNotEnsureSubmit() {
-    const tag = document.getElementById(target);
-    tag.close();
+    dispatch(changeModalStatus({ status: false }));
   }
 
   function onClickEnsureSubmit() {
     if (isSubmit) return;
     dispatch(addOrderList({ list: pickUpList }));
     dispatch(asyncFetchOrderList(pickUpList));
+    dispatch(changeModalStatus({ status: false }));
   }
 
   switch (type) {
     case 'orderCheck': {
       return (
-        <dialog id="orderCheck" className={styles.wrap}>
-          <div className={styles.top}>주문하시겠습니까?</div>
-          <div className={styles.bottom}>
-            <span className={styles.title} onClick={onClickNotEnsureSubmit}>
-              아니요
-            </span>
-            <span className={styles.title} onClick={onClickEnsureSubmit}>
-              예
-            </span>
-          </div>
-        </dialog>
+        <>
+          <motion.dialog
+            id="orderCheck"
+            className={styles.wrap}
+            open={modalStatus}
+            style={{ translateX: '-50%', translateY: '-50%' }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ type: 'spring', duration: 0.3 }}
+          >
+            <div className={styles.top}>주문하시겠습니까?</div>
+            <div className={styles.bottom}>
+              <span className={styles.title} onClick={onClickNotEnsureSubmit}>
+                아니요
+              </span>
+              <span className={styles.title} onClick={onClickEnsureSubmit}>
+                예
+              </span>
+            </div>
+          </motion.dialog>
+          <motion.div
+            className={styles.backdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          ></motion.div>
+        </>
       );
     }
     case 'request': {
       return (
-        <dialog id="request" className={styles.wrap}>
-          <div className={styles.top}>요청되었습니다</div>
-          <div className={styles.bottom} onClick={onClickPush(router, '/visitor')}>
-            <span className={`${styles.title} ${styles.last}`}>확인</span>
-          </div>
-        </dialog>
+        <>
+          <motion.dialog
+            id="request"
+            className={styles.wrap}
+            open={modalStatus}
+            style={{ translateX: '-50%', translateY: '-50%' }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ type: 'spring', duration: 0.3 }}
+          >
+            <div className={styles.top}>요청되었습니다</div>
+            <div className={styles.bottom} onClick={onClickPush(router, '/visitor')}>
+              <span className={`${styles.title} ${styles.last}`}>확인</span>
+            </div>
+          </motion.dialog>
+          <motion.div
+            className={styles.backdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          ></motion.div>
+        </>
       );
     }
     case 'empty': {

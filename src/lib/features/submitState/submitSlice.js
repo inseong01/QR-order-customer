@@ -9,7 +9,7 @@ const initialState = {
   },
   modal: {
     target: '',
-
+    status: false,
   }
 }
 
@@ -17,14 +17,12 @@ export const asyncFetchOrderList = createAsyncThunk(
   'submitState/asyncFetchOrderList',
   async (pickUpLists) => {
     const a = await new Promise(res => setTimeout(() => res(pickUpLists), 200));
-    console.log(pickUpLists);
     return a;
   })
 export const asyncFetchRequestList = createAsyncThunk(
   'submitState/asyncFetchRequestList',
   async (request) => {
     const a = await new Promise(res => setTimeout(() => res(request), 200));
-    console.log(request);
     return a;
   })
 
@@ -56,6 +54,16 @@ const submitSlice = createSlice({
       return {
         ...state,
         isSubmit: true,
+      }
+    },
+    changeModalStatus: (state, action) => {
+      const status = action.payload.status;
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          status
+        }
       }
     }
   },
@@ -96,5 +104,5 @@ const submitSlice = createSlice({
 })
 
 
-export const { changeSubmitStatus, resetSubmitState, changeModalId, clickToSubmit } = submitSlice.actions;
+export const { changeSubmitStatus, resetSubmitState, changeModalId, clickToSubmit, changeModalStatus } = submitSlice.actions;
 export default submitSlice.reducer;

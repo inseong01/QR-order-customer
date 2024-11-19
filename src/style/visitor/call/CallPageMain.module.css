@@ -46,6 +46,6 @@
   cursor: pointer;
 }
 .clicked {
-  color: white;
-  background-color: #4caff8;
+  color: white !important;
+  background-color: #4caff8 !important;
 }

@@ -110,6 +110,7 @@ export default function LanguageButton() {
               className={styles.langBox}
               onClick={(e) => {
                 e.stopPropagation();
+                console.log('click');
               }}
               variants={listVar}
             >

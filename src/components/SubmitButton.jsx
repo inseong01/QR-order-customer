@@ -5,8 +5,13 @@ import CountButton from './CountButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { countItemAmount, resetCallState } from '@/lib/features/requestState/callSlice';
 import { useRouter } from 'next/navigation';
-import { asyncFetchRequestList, resetSubmitState } from '@/lib/features/submitState/submitSlice';
+import {
+  asyncFetchRequestList,
+  changeModalStatus,
+  resetSubmitState,
+} from '@/lib/features/submitState/submitSlice';
 import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
+import { motion } from 'motion/react';
 
 const requestListArr = [
   { name: '숟저' },
@@ -36,12 +41,19 @@ function PickAndCountButton() {
       <ul className={styles.pickList}>
         {selectedItemArr.map((item, idx) => {
           return (
-            <li key={idx} className={styles.list}>
+            <motion.li
+              key={idx}
+              className={styles.list}
+              style={{ height: 21, scale: 1 }}
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, default: { ease: 'easeOut' } }}
+            >
               <div className={styles.name}>{item.name}</div>
               {item.name !== '직원호출' && (
                 <CountButton amount={item.amount} idx={idx} countFunction={countItemAmount} />
               )}
-            </li>
+            </motion.li>
           );
         })}
       </ul>
@@ -51,26 +63,22 @@ function PickAndCountButton() {
 
 export default function SubmitButton({ type }) {
   const requestList = useSelector((state) => state.callState.selectedItemArr);
-  const target = useSelector((state) => state.submitState.modal.target);
   const router = useRouter();
   const dispatch = useDispatch();
 
   // 돌아가기
-  function onClickReturnHome() {
+  async function onClickReturnHome() {
+    router.push('/visitor');
     // 초기화
     dispatch(resetPickUpState());
-    dispatch(resetSubmitState());
-    router.push('/visitor', { scroll: false });
   }
   // 주문하기
   function onClickSubmitOrderList() {
-    const tag = document.getElementById(target);
-    tag.showModal();
+    dispatch(changeModalStatus({ status: true }));
   }
   // 호출하기
   function onClickSubmitRequestList() {
-    const tag = document.getElementById(target);
-    tag.showModal();
+    dispatch(changeModalStatus({ status: true }));
     dispatch(asyncFetchRequestList(requestList)); // 요청 전송
     dispatch(resetCallState()); // 초기화
   }
@@ -97,14 +105,20 @@ export default function SubmitButton({ type }) {
     }
     case 'request': {
       return (
-        <div className={styles.wrap}>
+        <motion.div
+          className={styles.wrap}
+          initial={{ y: '100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '100%', opacity: 0 }}
+          transition={{ bounce: 0, ease: 'easeOut' }}
+        >
           <div className={styles.top}>
             <PickAndCountButton />
           </div>
           <div className={styles.bottom} onClick={onClickSubmitRequestList}>
             요청하기
           </div>
-        </div>
+        </motion.div>
       );
     }
   }

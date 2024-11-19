@@ -1,8 +1,9 @@
 'use client';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCallBtn } from '@/lib/features/requestState/callSlice';
 import styles from '@/style/visitor/call/CallPageMain.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'motion/react';
 
 const requestListArr = [
   { name: '숟저' },
@@ -33,13 +34,20 @@ export default function CallPageMain() {
           const { name } = req;
           const isIncludedItem = selectedItemArr.some((item) => item.idx === idx);
           return (
-            <div
+            <motion.div
               key={idx}
               className={`${styles.btn} ${isIncludedItem ? styles.clicked : ''}`}
               onClick={onClickSelect(idx, name)}
+              initial={{ backgroundColor: 'rgb(255, 255, 255)' }}
+              whileTap={{
+                scale: 0.85,
+                backgroundColor: '#4caff8',
+                color: 'rgb(255, 255, 255)',
+                transition: { duration: 0.7 },
+              }}
             >
               <div className={styles.title}>{name}</div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

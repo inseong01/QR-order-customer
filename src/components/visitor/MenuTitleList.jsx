@@ -10,6 +10,7 @@ import {
 import styles from '@/style/visitor/MenuTitleList.module.css';
 import Swiper from 'swiper';
 import 'swiper/css';
+import { motion } from 'motion/react';
 
 function MenuTitleList() {
   const menuCategoryListArr = useSelector((state) => state.menuState.menuCategoryList);
@@ -51,9 +52,12 @@ function MenuTitleList() {
           const { title } = category;
           return (
             <div key={idx} className={`swiper-slide`} onClick={onClickChangeMenuTitle}>
-              <div className={`${styles.titleWrap} ${selectedTagIdx === idx ? styles.clicked : ''}`}>
+              <div className={`${styles.titleWrap}`}>
                 <span className={styles.title}>{title}</span>
               </div>
+              {selectedTagIdx === idx && (
+                <motion.div className={styles.underline} layoutId="underline"></motion.div>
+              )}
             </div>
           );
         })}

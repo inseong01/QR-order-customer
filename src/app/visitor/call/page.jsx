@@ -9,9 +9,11 @@ import { resetCallState } from '@/lib/features/requestState/callSlice';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence } from 'motion/react';
 
 export default function CallPage() {
   const isClicked = useSelector((state) => state.callState.isClicked);
+  const modalStatus = useSelector((state) => state.submitState.modal.status);
   const target = useSelector((state) => state.submitState.modal.target);
   const dispatch = useDispatch();
 
@@ -24,8 +26,8 @@ export default function CallPage() {
     <div className={styles.wrap}>
       <AppVisitorHeader title={'직원호출'} />
       <CallPageMain />
-      {isClicked && <SubmitButton type={'request'} />}
-      <AlertModal type={target} />
+      <AnimatePresence>{isClicked && <SubmitButton key={'SubmitButton'} type={'request'} />}</AnimatePresence>
+      <AnimatePresence>{modalStatus && <AlertModal key={'AlertModal'} type={target} />}</AnimatePresence>
     </div>
   );
 }
