@@ -1,16 +1,6 @@
-/* .wrap { 
-  width: 320px;
-  height: 568px;
-  position: relative;
-
-  margin: 0 auto;
-  cursor: default;
-}
-*/
-
 .wrap {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
 
   margin: 0 auto;

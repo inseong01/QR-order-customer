@@ -25,9 +25,9 @@ export default function PickUpListPage() {
     dispatch(changeModalId({ target: 'orderCheck' }));
   }, []);
 
-  function onClickdeletePickUpList(idx) {
+  function onClickdeletePickUpList({ key }) {
     return () => {
-      dispatch(deletePickUpList({ idx }));
+      dispatch(deletePickUpList({ key }));
     };
   }
 
@@ -61,7 +61,7 @@ export default function PickUpListPage() {
                             <div className={styles.price}>{priceToString}원</div>
                           </div>
                           <div className={styles.bottom}>
-                            <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(idx)}>
+                            <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(list)}>
                               빼기
                             </div>
                             <CountButton
@@ -80,7 +80,6 @@ export default function PickUpListPage() {
                 <li>주문 목록이 없습니다.</li>
               )}
             </ul>
-            <SubmitButton type={currentOrderList.length !== 0 ? 'order' : 'back'} />
             <AnimatePresence>
               {modalStatus && <AlertModal key={'AlertModal'} type={target} />}
             </AnimatePresence>
@@ -95,10 +94,12 @@ export default function PickUpListPage() {
           >
             <OrderSubmit />
             <OrderList type={'currentOrderList'} />
-            <SubmitButton type={'back'} />
           </motion.main>
         )}
       </AnimatePresence>
+      <SubmitButton
+        type={submitStatus !== 'OK' ? (currentOrderList.length !== 0 ? 'order' : 'back') : 'back'}
+      />
     </div>
   );
 }

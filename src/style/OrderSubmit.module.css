@@ -17,3 +17,12 @@
   color: #959595;
   font-size: 13px;
 }
+
+@media (max-width: 405px) {
+  .wrap {
+    padding: 40px 25px;
+  }
+  .title {
+    font-size: 27px;
+  }
+}

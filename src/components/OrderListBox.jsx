@@ -12,9 +12,11 @@ export default function OrderListBox({ listData }) {
           <li key={idx} className={styles.list}>
             <div className={styles.menuBox}>
               <div className={styles.name}>{name}</div>
-              <div className={styles.amount}>x {amount}</div>
             </div>
-            <div className={styles.price}>{priceToString}원</div>
+            <div className={styles.priceBox}>
+              <div className={styles.amount}>{amount}</div>x
+              <div className={styles.price}>{priceToString}원</div>
+            </div>
           </li>
         );
       })}

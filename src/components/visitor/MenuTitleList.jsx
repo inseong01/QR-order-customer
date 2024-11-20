@@ -14,7 +14,7 @@ import { motion } from 'motion/react';
 
 function MenuTitleList() {
   const menuCategoryListArr = useSelector((state) => state.menuState.menuCategoryList);
-  const selectedTagIdx = useSelector((state) => state.menuState.selectedMenuCategoryIdx);
+  const selectedTagKey = useSelector((state) => state.menuState.selectedMenuCategoryKey);
   const menuCategory = useSelector((state) => state.menuState.menuCategory);
   const dispatch = useDispatch();
 
@@ -31,31 +31,26 @@ function MenuTitleList() {
     });
   }, []);
 
-  function onClickChangeMenuTitle(e) {
-    const innerText = e.target.innerText;
-    if (menuCategory === innerText) return;
-    const tags = document.getElementsByClassName('swiper-slide');
-    for (let i = 0; i < tags.length; i++) {
-      if (tags[i].innerText === innerText) {
-        dispatch(getSelectedMenuCategoryIdx({ idx: i }));
-        break;
-      }
-    }
-    dispatch(changeMenuCategory({ category: innerText }));
-    dispatch(changeMenuList({ category: innerText }));
-    return;
+  function onClickChangeMenuTitle(category) {
+    return () => {
+      if (selectedTagKey === category.key) return;
+      dispatch(getSelectedMenuCategoryIdx({ key: category.key }));
+      dispatch(changeMenuCategory({ title: category.title }));
+      dispatch(changeMenuList({ title: category.title }));
+      return;
+    };
   }
   return (
     <div className={`menuTitleList ${styles.menuTitleList}`}>
       <div className={`swiper-wrapper ${styles['swiper-wrapper']}`}>
         {menuCategoryListArr.map((category, idx) => {
-          const { title } = category;
+          const { title, key } = category;
           return (
-            <div key={idx} className={`swiper-slide`} onClick={onClickChangeMenuTitle}>
+            <div key={key} className={`swiper-slide`} onClick={onClickChangeMenuTitle(category)}>
               <div className={`${styles.titleWrap}`}>
                 <span className={styles.title}>{title}</span>
               </div>
-              {selectedTagIdx === idx && (
+              {selectedTagKey === idx && (
                 <motion.div className={styles.underline} layoutId="underline"></motion.div>
               )}
             </div>

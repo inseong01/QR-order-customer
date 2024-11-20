@@ -18,3 +18,12 @@
 .menuBox {
   gap: 5px;
 }
+
+/* priceBox */
+.priceBox {
+  min-width: 120px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  text-align: right;
+}

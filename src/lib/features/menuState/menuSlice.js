@@ -2,88 +2,67 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initMenuListArr = [
   {
-    name: '음식 이름 1',
-    price: 1000,
+    key: 0,
+    name: '로스카츠',
+    price: 9500,
     tag: 'popular',
+    img: '/img/menu/menu_0.jpg'
   },
   {
-    name: '음식 이름 2',
-    price: 1000,
+    key: 1,
+    name: '히레카츠',
+    price: 12000,
     tag: 'new',
+    img: '/img/menu/menu_1.jpg'
   },
   {
-    name: '음식 이름 3',
-    price: 1000,
+    key: 2,
+    name: '치즈카츠',
+    price: 11000,
     tag: 'soldout',
+    img: '/img/menu/menu_2.jpg'
   },
   {
-    name: '음식 이름 4',
-    price: 1000,
+    key: 3,
+    name: '고구마 치즈카츠',
+    price: 12000,
     tag: '',
+    img: '/img/menu/menu_3.jpg'
   },
   {
-    name: '음식 이름 5',
-    price: 1000,
+    key: 4,
+    name: '치킨카츠',
+    price: 8000,
     tag: '',
+    img: '/img/menu/menu_4.jpg'
   },
   {
-    name: '음식 이름 6',
-    price: 1000,
+    key: 5,
+    name: '모듬 카츠',
+    price: 14000,
     tag: '',
-  },
-  {
-    name: '음식 이름 1',
-    price: 1000,
-    tag: 'popular',
-  },
-  {
-    name: '음식 이름 2',
-    price: 1000,
-    tag: 'new',
-  },
-  {
-    name: '음식 이름 3',
-    price: 1000,
-    tag: 'soldout',
-  },
-  {
-    name: '음식 이름 4',
-    price: 1000,
-    tag: '',
-  },
-  {
-    name: '음식 이름 5',
-    price: 1000,
-    tag: '',
-  },
-  {
-    name: '음식 이름 6',
-    price: 1000,
-    tag: '',
+    img: '/img/menu/menu_5.jpg'
   },
 ];
 let initMenuCategoryList = [
   {
-    title: '대표메뉴'
-  },
-  {
+    key: 0,
     title: '메인메뉴'
   },
   {
+    key: 1,
     title: '사이드'
   },
   {
+    key: 2,
     title: '음료'
-  },
-  {
-    title: '주류'
   },
 ]
 
 // api 요청으로 메뉴 데이터 가져옴
 const initialState = {
   menuCategory: '대표메뉴',
-  selectedMenuCategoryIdx: 0,
+  selectedMenuCategoryKey: 0,
   menuList: initMenuListArr,
   menuCategoryList: initMenuCategoryList,
 }
@@ -92,91 +71,17 @@ const menuStateSlice = createSlice({
   initialState,
   reducers: {
     changeMenuCategory: (state, action) => {
-      const menuCategory = action.payload.category;
+      const title = action.payload.title;
       return {
         ...state,
-        menuCategory,
+        menuCategory: title,
       }
     },
     changeMenuList: (state, action) => {
-      const menuCategory = action.payload.category;
-      switch (menuCategory) {
-        case '대표메뉴': {
-          const listArr = [
-            {
-              name: '음식 이름 1',
-              price: 1000,
-              tag: 'popular',
-            },
-            {
-              name: '음식 이름 2',
-              price: 1000,
-              tag: 'new',
-            },
-            {
-              name: '음식 이름 3',
-              price: 1000,
-              tag: 'soldout',
-            },
-            {
-              name: '음식 이름 4',
-              price: 1000,
-              tag: '',
-            },
-            {
-              name: '음식 이름 5',
-              price: 1000,
-              tag: '',
-            },
-            {
-              name: '음식 이름 6',
-              price: 1000,
-              tag: '',
-            },
-            {
-              name: '음식 이름 1',
-              price: 1000,
-              tag: 'popular',
-            },
-            {
-              name: '음식 이름 2',
-              price: 1000,
-              tag: 'new',
-            },
-            {
-              name: '음식 이름 3',
-              price: 1000,
-              tag: 'soldout',
-            },
-            {
-              name: '음식 이름 4',
-              price: 1000,
-              tag: '',
-            },
-            {
-              name: '음식 이름 5',
-              price: 1000,
-              tag: '',
-            },
-            {
-              name: '음식 이름 6',
-              price: 1000,
-              tag: '',
-            },
-          ];
-          return {
-            ...state,
-            menuList: listArr,
-          };
-        }
+      const title = action.payload.title;
+      switch (title) {
         case '메인메뉴': {
-          const listArr = [
-            {
-              name: '음식 이름 1',
-              price: 10,
-              tag: 'popular',
-            },
-          ];
+          const listArr = initMenuListArr;
           return {
             ...state,
             menuList: listArr,
@@ -185,9 +90,25 @@ const menuStateSlice = createSlice({
         case '사이드': {
           const listArr = [
             {
-              name: '음식 이름 2',
-              price: 20,
-              tag: 'popular',
+              key: 7,
+              name: '메밀 소바',
+              price: 8000,
+              tag: '',
+              img: '/img/menu/menu_6.jpg'
+            },
+            {
+              key: 8,
+              name: '부산 어묵우동',
+              price: 8000,
+              tag: '',
+              img: '/img/menu/menu_7.jpg'
+            },
+            {
+              key: 9,
+              name: '히레카츠 조각 1p',
+              price: 4000,
+              tag: '',
+              img: '/img/menu/menu_8.jpg'
             },
           ];
           return {
@@ -198,37 +119,18 @@ const menuStateSlice = createSlice({
         case '음료': {
           const listArr = [
             {
-              name: '음식 이름 1',
-              price: 400,
-              tag: 'popular',
+              key: 10,
+              name: '사이다',
+              price: 1500,
+              tag: '',
+              img: '/img/menu/icon.jpg',
             },
             {
-              name: '음식 이름 1',
-              price: 1000,
-              tag: 'popular',
-            },
-          ];
-          return {
-            ...state,
-            menuList: listArr,
-          };
-        }
-        case '주류': {
-          const listArr = [
-            {
-              name: '음식 이름 1',
-              price: 1000,
-              tag: 'popular',
-            },
-            {
-              name: '음식 이름 2',
-              price: 1100,
-              tag: 'popular',
-            },
-            {
-              name: '음식 이름 3',
-              price: 2000,
-              tag: 'popular',
+              key: 11,
+              name: '콜라',
+              price: 1500,
+              tag: '',
+              img: '/img/menu/icon.jpg',
             },
           ];
           return {
@@ -239,10 +141,10 @@ const menuStateSlice = createSlice({
       }
     },
     getSelectedMenuCategoryIdx: (state, action) => {
-      const idx = Number(action.payload.idx);
+      const key = Number(action.payload.key);
       return {
         ...state,
-        selectedMenuCategoryIdx: idx,
+        selectedMenuCategoryKey: key,
       }
     },
   }

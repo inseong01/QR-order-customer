@@ -1,12 +1,11 @@
 'use client';
 
-import onClickPush from '@/function/onClickPush';
 import { addOrderList } from '@/lib/features/requestState/orderListSlice';
 import { asyncFetchOrderList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
 import styles from '@/style/AlertModal.module.css';
-import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
+import Link from 'next/link';
 
 export default function AlertModal({ type }) {
   const target = useSelector((state) => state.submitState.modal.target);
@@ -14,7 +13,6 @@ export default function AlertModal({ type }) {
   const isSubmit = useSelector((state) => state.submitState.isSubmit);
   const modalStatus = useSelector((state) => state.submitState.modal.status);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   function onClickNotEnsureSubmit() {
     dispatch(changeModalStatus({ status: false }));
@@ -75,9 +73,9 @@ export default function AlertModal({ type }) {
             transition={{ type: 'spring', duration: 0.3 }}
           >
             <div className={styles.top}>요청되었습니다</div>
-            <div className={styles.bottom} onClick={onClickPush(router, '/visitor')}>
+            <Link href={'/visitor'} replace={true} className={styles.bottom}>
               <span className={`${styles.title} ${styles.last}`}>확인</span>
-            </div>
+            </Link>
           </motion.dialog>
           <motion.div
             className={styles.backdrop}

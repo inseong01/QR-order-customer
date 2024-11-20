@@ -7,6 +7,7 @@ import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
 import styles from '@/style/visitor/VisitorPage.module.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'motion/react';
 
 function Page() {
   const isClicked = useSelector((state) => state.pickUpState.isClicked);
@@ -20,11 +21,14 @@ function Page() {
   }, []);
 
   return (
-    <div className={styles.wrap}>
+    <motion.div
+      className={styles.wrap}
+      style={{ height: pickUpList.length || isClicked ? 'calc(100vh + 190px)' : '100vh' }}
+    >
       <InitialHeader />
       <InitialMain />
       {(pickUpList.length || isClicked) && <Popup type={popUpType} />}
-    </div>
+    </motion.div>
   );
 }
 

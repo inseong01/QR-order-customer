@@ -8,6 +8,7 @@ const initialState = {
     name: '',
     price: '0',
     amount: 1,
+    key: null,
   },
   list: [],
   error: {
@@ -21,9 +22,9 @@ const pickUpSlice = createSlice({
   initialState,
   reducers: {
     clickMenu: (state, action) => {
-      const { name, price } = action.payload.menuData;
+      const { name, price, key } = action.payload.menuData;
       // 동일 메뉴 선택 시 창 닫기, 창 닫혀있는 상태서는 적용 예외
-      const isSame = state.isClicked && state.selectedMenu.name === name;
+      const isSame = state.isClicked && state.selectedMenu.key === key;
       return {
         ...state,
         selectedMenu: {
@@ -31,6 +32,7 @@ const pickUpSlice = createSlice({
           name,
           price,
           amount: 1,
+          key
         },
         isClicked: !isSame && true,
       }
@@ -39,10 +41,10 @@ const pickUpSlice = createSlice({
       const pickUpList = state.list;
       const selectedMenu = state.selectedMenu;
       // 동일 항목 있으면 덮어씌우기
-      let isOverwrite = pickUpList.some(list => list.name === selectedMenu.name);
+      let isOverwrite = pickUpList.some(list => list.key === selectedMenu.key);
       const updateList = isOverwrite ?
         pickUpList.map(list => (
-          list.name === selectedMenu.name ? { ...list, amount: selectedMenu.amount } : list
+          list.key === selectedMenu.key ? { ...list, amount: selectedMenu.amount } : list
         )) : [...state.list, selectedMenu]
 
       return {
@@ -53,18 +55,6 @@ const pickUpSlice = createSlice({
     },
     addMenuToPickUpList: (state, action) => {
       const selectedMenu = action.payload.menu;
-      const pickUpList = state.list;
-      // 동일 항목 추가 방지
-      for (let i = 0; i < pickUpList.length; i++) {
-        if (selectedMenu.name !== pickUpList[i].name) continue;
-        return {
-          ...state,
-          error: {
-            isError: true,
-            msg: '이미 담은 메뉴입니다.'
-          }
-        }
-      }
       return {
         ...state,
         list: [...state.list, selectedMenu]
@@ -91,8 +81,8 @@ const pickUpSlice = createSlice({
       }
     },
     deletePickUpList: (state, action) => {
-      const idx = action.payload.idx;
-      const updateList = state.list.filter((list, i) => idx !== i)
+      const key = action.payload.key;
+      const updateList = state.list.filter((list) => list.key !== key)
       return {
         ...state,
         list: updateList
@@ -102,7 +92,6 @@ const pickUpSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(countNumber, (state, action) => {
       // countNumber dispatch 동작 연동
-      console.log(state, action)
       const calcedNumber = calculateAmount(state.selectedMenu.amount, action.payload.num);
       return {
         ...state,
