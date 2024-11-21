@@ -9,6 +9,9 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 15px;
+
+  position: relative;
+  z-index: 99;
 }
 /* header top */
 .header .top {

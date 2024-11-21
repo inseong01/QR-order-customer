@@ -1,12 +1,14 @@
 'use client';
 
-import createReceipt from '@/function/createReceipt';
 import styles from '@/style/OrderList.module.css';
-import { useSelector } from 'react-redux';
+import createReceipt from '@/function/createReceipt';
 import OrderListBox from './OrderListBox';
 
+import { useSelector } from 'react-redux';
+
+// type을 받아서 type 조건에 맞는 dispatch 실행, menuList 받아옴
 export default function OrderList({ type, listData = undefined }) {
-  // type을 받아서 type 조건에 맞는 dispatch 실행, menuList 받아옴
+  // useSelector
   const orderList = useSelector((state) => state.orderListState.list);
 
   switch (type) {

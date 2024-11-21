@@ -1,4 +1,5 @@
 import styles from '@/style/visitor/CategoriesButton.module.css';
+
 import Image from 'next/image';
 import Link from 'next/link';
 

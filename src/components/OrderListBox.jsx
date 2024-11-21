@@ -1,5 +1,3 @@
-'use client';
-
 import styles from '@/style/OrderListBox.module.css';
 
 export default function OrderListBox({ listData }) {

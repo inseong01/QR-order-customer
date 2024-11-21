@@ -1,13 +1,16 @@
 'use client';
 
-import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
 import styles from '@/style/AppVisitorHeader.module.css';
+import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function AppVisitorHeader({ title }) {
+  // useSelector
   const submitStatus = useSelector((state) => state.submitState.status);
+  // dispatch
   const dispatch = useDispatch();
 
   function navOnClickBack() {

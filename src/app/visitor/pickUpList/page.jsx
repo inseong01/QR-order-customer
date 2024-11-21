@@ -7,18 +7,20 @@ import SubmitButton from '@/components/SubmitButton';
 import OrderSubmit from '@/components/OrderSubmit';
 import OrderList from '@/components/OrderList';
 import AlertModal from '@/components/AlertModal';
-import { useDispatch, useSelector } from 'react-redux';
 import { calculateAmountInPickUpList, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';
-import { useEffect } from 'react';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
+
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function PickUpListPage() {
+  // useSelector
   const submitStatus = useSelector((state) => state.submitState.status);
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   const target = useSelector((state) => state.submitState.modal.target);
   const modalStatus = useSelector((state) => state.submitState.modal.status);
-
+  // dispatch
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,11 +1,12 @@
 'use client';
 
-import { countNumber } from '@/lib/features/countNumberState/countNumberSlice';
 import styles from '@/style/CountButton.module.css';
-import { usePathname } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
+import { countNumber } from '@/lib/features/countNumberState/countNumberSlice';
+
+import { useDispatch } from 'react-redux';
 
 export default function CountButton({ amount, idx = undefined, countFunction = undefined }) {
+  // dispatch
   const dispatch = useDispatch();
 
   function onClickMenuCount(num) {

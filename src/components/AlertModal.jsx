@@ -1,17 +1,19 @@
 'use client';
 
+import styles from '@/style/AlertModal.module.css';
 import { addOrderList } from '@/lib/features/requestState/orderListSlice';
 import { asyncFetchOrderList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
-import styles from '@/style/AlertModal.module.css';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export default function AlertModal({ type }) {
-  const target = useSelector((state) => state.submitState.modal.target);
+  // useSelector
   const pickUpList = useSelector((state) => state.pickUpState.list);
   const isSubmit = useSelector((state) => state.submitState.isSubmit);
   const modalStatus = useSelector((state) => state.submitState.modal.status);
+  // dispatch
   const dispatch = useDispatch();
 
   function onClickNotEnsureSubmit() {

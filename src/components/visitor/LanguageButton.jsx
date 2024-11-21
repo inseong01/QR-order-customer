@@ -1,6 +1,7 @@
 'use client';
 
 import styles from '@/style/visitor/LanguageButton.module.css';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'motion/react';
@@ -19,7 +20,9 @@ const languageList = [
 ];
 
 export default function LanguageButton() {
+  // useStatee
   const [isClicked, setIsClicked] = useState(false);
+  // motion
   const arrowVar = {
     active: {
       rotateZ: -180,
@@ -28,6 +31,7 @@ export default function LanguageButton() {
       rotateZ: 0,
     },
   };
+  // ul
   const ulVar = {
     active: {
       opacity: 1,
@@ -45,6 +49,7 @@ export default function LanguageButton() {
       },
     },
   };
+  // line
   const lineVar = {
     active: {
       transition: {
@@ -59,6 +64,7 @@ export default function LanguageButton() {
       opacity: 0,
     },
   };
+  // list
   const listVar = {
     active: {
       transition: {

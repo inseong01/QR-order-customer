@@ -11,13 +11,13 @@ const callSlice = createSlice({
   initialState,
   reducers: {
     selectCallBtn: (state, action) => {
-      const idx = action.payload.idx;
+      const key = action.payload.key;
       const name = action.payload.name;
       const amount = action.payload.amount;
-      const isIncludedItem = state.selectedItemArr.some((item) => item.idx === idx);
+      const isIncludedItem = state.selectedItemArr.some((item) => item.key === key);
       // 선택해제
       if (isIncludedItem) {
-        const updateItemArr = state.selectedItemArr.filter(item => item.idx !== idx);
+        const updateItemArr = state.selectedItemArr.filter(item => item.key !== key);
         // 팝업 사라짐
         if (updateItemArr.length === 0) return initialState;
         return {
@@ -29,7 +29,7 @@ const callSlice = createSlice({
       return {
         ...state,
         isClicked: true,
-        selectedItemArr: [...state.selectedItemArr, { idx, name, amount }]
+        selectedItemArr: [...state.selectedItemArr, { key, name, amount }]
       }
     },
     countItemAmount: (state, action) => {

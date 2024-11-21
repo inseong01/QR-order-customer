@@ -38,7 +38,7 @@ framer 사용 방법
   -> 각 타입의 duration 다름, 0으로 설정하여 'linear'로 사용할 수 있음
 
 - transition: staggerChildren
-  : 자식 애니메이션 연쇄 지연 속성, 부모 태그에 적용
+  : 자식 애니메이션 연쇄 지연 속성, 부모 태그에 적용, variants로 적용가능
   -> 값이 클수록 오류 발생 가능, 모든 자식 애니메이션 하나로 묶어서 지연하는 delayChildren과 다름 
 
 - layoutId

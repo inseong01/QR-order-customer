@@ -2,24 +2,20 @@
 
 import styles from '@/style/SubmitButton.module.css';
 import CountButton from './CountButton';
-import { useDispatch, useSelector } from 'react-redux';
 import { countItemAmount, resetCallState } from '@/lib/features/requestState/callSlice';
 import { asyncFetchRequestList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
 import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
-const requestListArr = [
-  { name: '숟저' },
-  { name: '젓가락' },
-  { name: '물' },
-  { name: '앞치마' },
-  { name: '직원호출' },
-];
 // useSelector 데이터 받아옴
 
 function TotalPrice() {
+  // useSelector
   const pickUpList = useSelector((state) => state.pickUpState.list);
+
   const totalPrice = pickUpList.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
   const totalPriceToString = totalPrice.toLocaleString();
   return (
@@ -31,6 +27,7 @@ function TotalPrice() {
 }
 
 function PickAndCountButton() {
+  // useSelector
   const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
   return (
     <div className={styles.pickAndCount}>
@@ -58,7 +55,9 @@ function PickAndCountButton() {
 }
 
 export default function SubmitButton({ type }) {
+  // useSelector
   const requestList = useSelector((state) => state.callState.selectedItemArr);
+  // dispatch
   const dispatch = useDispatch();
 
   // 돌아가기

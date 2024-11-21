@@ -1,11 +1,11 @@
 import styles from '@/style/visitor/InitialMain.module.css';
-import MenuTitleList from './MenuTitleList';
+import MenuCateoryTitleList from './MenuCateoryTitleList';
 import MenuList from './MenuList';
 
 export default function InitialMain() {
   return (
     <main className={styles.main}>
-      <MenuTitleList />
+      <MenuCateoryTitleList />
       <MenuList />
     </main>
   );
