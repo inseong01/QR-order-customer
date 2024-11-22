@@ -57,14 +57,22 @@
   - reactQuery 적용: 클라이언트 컴포넌트에서 fetch 사용 복잡으로 비동기 상태 처리 라이브러리 적용, 직원호출/메뉴 데이터 불러오기 적용
   - motion 보완: useQuery 데이터 생성 되었을 때 애니메이션 적용 수정
   - 코드 정리: 변수/가져온 파일 순서 통일, 사용하지 않는 redux 액션 제거  
-  - 초기 접속 로딩 애니메이션 적용
+  - 메인 페이지 로딩 애니메이션 적용
   ReactQuery: https://tanstack.com/query/latest/docs/framework/react/overview
 
-<--- 주문 테이블 별 주문 데이터 db 보관, favicon 변경 --->
+24.11.22.
+  - db: 고객-읽기(주문 목록만 생성 허용), 관리자-CURD
+    -> db 규칙 생성
+  - 주문목록 전송 db 연동: 사용자 이전 주문목록 확인 localStorage 활용, 데이터 서버 전송할 때는 localStorage 사용 안함
+  - 주문, 요청 알림 전달 계획 구상: supabase Realtime으로 적용, firebase messaging 유료
+    -> 추후 db도 supabase로 변경
+  - Error, ReferenceError: localStorage is not defined
+    -> next build 페이지 생성 할 때 발생, SSR 진행 하면서 오류 발생 
+      typeof window === 'undefined' 조건 설정으로 해결 가능, 'use client' 선언해도 발생함
+  - Error, Favicon 변경되지 않음
+    -> 브라우저 캐시 보관 원인, 빈 캐시 및 하드 새로고침으로 해결 가능
+    app 디렉터리 최상단에 .ico 파일 위치시키면 자동적으로 파비콘으로 인식됨, metadata 할당 필요 x
+  - framer 애니메이션 적용: 메뉴 페이지 팝업 부드럽게 등장/퇴장
+  - 관리자 UI 디자인: 메뉴, 테이블
 
-
-
-
-
-
-<--- 관리자 클라이언트 생성: UI 디자인, UI 구현, 기능 구현 --->
+<--- 관리자 클라이언트 생성: UI 디자인_주문 내역, UI 구현, 기능 구현 --->

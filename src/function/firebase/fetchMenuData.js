@@ -5,12 +5,11 @@ export default function fetchMenuData(type) {
   const user = 'admin00'
   const data = get(child(ref(db), `/qr-order-server/${user}/${type}`))
     .then((snapshot) => {
-      if (!snapshot.exists()) throw new Error(`Do data in /qr-order-server/${user}/${type}`)
+      if (!snapshot.exists()) return null;
       return snapshot.val();
     })
     .catch((err) => {
-      console.error(err);
-      return;
+      throw new Error(err);
     })
 
   return data;

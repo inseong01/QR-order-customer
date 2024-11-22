@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   who: 'visitor',
+  tableNum: 0
 }
 
 const userSlice = createSlice({

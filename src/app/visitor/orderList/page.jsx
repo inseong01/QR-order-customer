@@ -4,11 +4,8 @@ import styles from '@/style/visitor/orderList/OrderListPage.module.css';
 import OrderList from '@/components/OrderList';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
 
-import { useSelector } from 'react-redux';
-
 export default function OrderListPage() {
-  // useSelector
-  const orderList = useSelector((state) => state.orderListState.list);
+  const orderList = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('orderList')) || [] : [];
 
   return (
     <div className={styles.wrap}>

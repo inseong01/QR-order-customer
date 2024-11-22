@@ -4,12 +4,8 @@ import styles from '@/style/OrderList.module.css';
 import createReceipt from '@/function/createReceipt';
 import OrderListBox from './OrderListBox';
 
-import { useSelector } from 'react-redux';
-
-// type을 받아서 type 조건에 맞는 dispatch 실행, menuList 받아옴
 export default function OrderList({ type, listData = undefined }) {
-  // useSelector
-  const orderList = useSelector((state) => state.orderListState.list);
+  const orderList = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('orderList')) || [] : [];
 
   switch (type) {
     case 'AllOforderList': {

@@ -37,7 +37,7 @@ export default function PickUpListPage() {
     <div className={styles.wrap}>
       <AppVisitorHeader title={submitStatus !== 'OK' ? '주문표' : '주문완료'} />
       <AnimatePresence mode="popLayout">
-        {submitStatus !== 'OK' ? (
+        {submitStatus !== 'fulfilled' ? (
           <motion.main
             className={styles.main}
             key={'checkCurrentOrderList'}
@@ -100,7 +100,7 @@ export default function PickUpListPage() {
         )}
       </AnimatePresence>
       <SubmitButton
-        type={submitStatus !== 'OK' ? (currentOrderList.length !== 0 ? 'order' : 'back') : 'back'}
+        type={submitStatus !== 'fulfilled' ? (currentOrderList.length !== 0 ? 'order' : 'back') : 'back'}
       />
     </div>
   );

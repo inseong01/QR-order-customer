@@ -101,8 +101,6 @@ function MenuList() {
     },
   };
 
-  // const isLoading = true;
-
   if (isLoading)
     return (
       <div className={styles.loaderBox}>

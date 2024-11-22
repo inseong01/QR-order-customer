@@ -1,30 +1,43 @@
 'use client';
 
 import styles from '@/style/AlertModal.module.css';
-import { addOrderList } from '@/lib/features/requestState/orderListSlice';
-import { asyncFetchOrderList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
+import { delayFetchOrderResponse, changeModalStatus } from '@/lib/features/submitState/submitSlice';
+import postOrderList from '@/function/firebase/postOrderList';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import { resetCallState } from '@/lib/features/requestState/callSlice';
 
 export default function AlertModal({ type }) {
   // useSelector
   const pickUpList = useSelector((state) => state.pickUpState.list);
   const isSubmit = useSelector((state) => state.submitState.isSubmit);
   const modalStatus = useSelector((state) => state.submitState.modal.status);
+  const tableNum = useSelector((state) => state.userState.tableNum);
   // dispatch
   const dispatch = useDispatch();
 
+  // db 제출 거부
   function onClickNotEnsureSubmit() {
     dispatch(changeModalStatus({ status: false }));
   }
-
+  // db 제출 허용
   function onClickEnsureSubmit() {
     if (isSubmit) return;
-    dispatch(addOrderList({ list: pickUpList }));
-    dispatch(asyncFetchOrderList(pickUpList));
-    dispatch(changeModalStatus({ status: false }));
+    switch (type) {
+      case 'orderCheck': {
+        postOrderList(tableNum, pickUpList); // 주문 DB 전달
+        // 주문(pickUpList) 알림 전달
+        dispatch(delayFetchOrderResponse(pickUpList));
+        dispatch(changeModalStatus({ status: false }));
+        break;
+      }
+      case 'request': {
+        dispatch(resetCallState()); // 초기화
+        break;
+      }
+    }
   }
 
   switch (type) {
@@ -75,7 +88,7 @@ export default function AlertModal({ type }) {
             transition={{ type: 'spring', duration: 0.3 }}
           >
             <div className={styles.top}>요청되었습니다</div>
-            <Link href={'/visitor'} replace={true} className={styles.bottom}>
+            <Link href={'/visitor'} replace={true} className={styles.bottom} onClick={onClickEnsureSubmit}>
               <span className={`${styles.title} ${styles.last}`}>확인</span>
             </Link>
           </motion.dialog>

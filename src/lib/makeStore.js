@@ -5,7 +5,6 @@ import pickUpSlice from "@/lib/features/requestState/pickUpSlice.js"
 import callSliceReducer from "@/lib/features/requestState/callSlice.js"
 import countNumberSliceReducer from "@/lib/features/countNumberState/countNumberSlice.js"
 import submitSliceReducer from "@/lib/features/submitState/submitSlice.js"
-import orderListSliceReducer from "@/lib/features/requestState/orderListSlice.js"
 
 export function makeStore() {
   return configureStore({
@@ -16,7 +15,6 @@ export function makeStore() {
       callState: callSliceReducer,
       countNumberState: countNumberSliceReducer,
       submitState: submitSliceReducer,
-      orderListState: orderListSliceReducer,
     }
   })
 }

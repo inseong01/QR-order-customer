@@ -13,17 +13,10 @@ const initialState = {
   }
 }
 
-export const asyncFetchOrderList = createAsyncThunk(
-  'submitState/asyncFetchOrderList',
+export const delayFetchOrderResponse = createAsyncThunk(
+  'submitState/delayFetchOrderResponse',
   async (pickUpLists) => {
-    const a = await new Promise(res => setTimeout(() => res(pickUpLists), 200));
-    return a;
-  })
-export const asyncFetchRequestList = createAsyncThunk(
-  'submitState/asyncFetchRequestList',
-  async (request) => {
-    const a = await new Promise(res => setTimeout(() => res(request), 200));
-    return a;
+    await new Promise(res => setTimeout(() => res(pickUpLists), 500));
   })
 
 const submitSlice = createSlice({
@@ -32,13 +25,6 @@ const submitSlice = createSlice({
   reducers: {
     resetSubmitState: () => {
       return initialState;
-    },
-    changeSubmitStatus: (state, action) => {
-      const status = action.payload.status;
-      return {
-        ...state,
-        status
-      }
     },
     changeModalId: (state, action) => {
       const target = action.payload.target;
@@ -69,40 +55,25 @@ const submitSlice = createSlice({
   },
   extraReducers: builder => {
     // pickUpList
-    builder.addCase(asyncFetchOrderList.pending, (state, action) => {
-      console.log('action.pending', action)
+    builder.addCase(delayFetchOrderResponse.pending, (state, action) => {
+      console.log('delayFetchOrderResponse.pending')
       return {
         ...state,
         isSubmit: true,
+        status: 'pending'
       }
     })
-    builder.addCase(asyncFetchOrderList.fulfilled, (state, action) => {
-      console.log('action.fulfilled', action)
+    builder.addCase(delayFetchOrderResponse.fulfilled, (state, action) => {
+      console.log('delayFetchOrderResponse.fulfilled')
       return {
         ...state,
         isSubmit: true,
-        status: 'OK'
-      }
-    })
-    // requestList
-    builder.addCase(asyncFetchRequestList.pending, (state, action) => {
-      console.log('action.pending', action)
-      return {
-        ...state,
-        isSubmit: true,
-      }
-    })
-    builder.addCase(asyncFetchRequestList.fulfilled, (state, action) => {
-      console.log('action.fulfilled', action)
-      return {
-        ...state,
-        isSubmit: true,
-        status: 'OK'
+        status: 'fulfilled'
       }
     })
   }
 })
 
 
-export const { changeSubmitStatus, resetSubmitState, changeModalId, clickToSubmit, changeModalStatus } = submitSlice.actions;
+export const { resetSubmitState, changeModalId, clickToSubmit, changeModalStatus } = submitSlice.actions;
 export default submitSlice.reducer;

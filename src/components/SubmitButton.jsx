@@ -2,20 +2,17 @@
 
 import styles from '@/style/SubmitButton.module.css';
 import CountButton from './CountButton';
-import { countItemAmount, resetCallState } from '@/lib/features/requestState/callSlice';
-import { asyncFetchRequestList, changeModalStatus } from '@/lib/features/submitState/submitSlice';
+import { countItemAmount } from '@/lib/features/requestState/callSlice';
+import { changeModalStatus } from '@/lib/features/submitState/submitSlice';
 import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
-// useSelector 데이터 받아옴
-
 function TotalPrice() {
   // useSelector
   const pickUpList = useSelector((state) => state.pickUpState.list);
-
   const totalPrice = pickUpList.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
   const totalPriceToString = totalPrice.toLocaleString();
   return (
@@ -62,8 +59,7 @@ export default function SubmitButton({ type }) {
 
   // 돌아가기
   async function onClickReturnHome() {
-    // 초기화
-    dispatch(resetPickUpState());
+    dispatch(resetPickUpState()); // 초기화
   }
   // 주문하기
   function onClickSubmitOrderList() {
@@ -71,9 +67,8 @@ export default function SubmitButton({ type }) {
   }
   // 호출하기
   function onClickSubmitRequestList() {
+    // 알림으로 requestList(요청) 전달
     dispatch(changeModalStatus({ status: true }));
-    dispatch(asyncFetchRequestList(requestList)); // 요청 전송
-    dispatch(resetCallState()); // 초기화
   }
 
   switch (type) {

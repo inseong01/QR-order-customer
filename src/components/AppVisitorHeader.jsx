@@ -14,7 +14,7 @@ export default function AppVisitorHeader({ title }) {
   const dispatch = useDispatch();
 
   function navOnClickBack() {
-    if (submitStatus !== 'OK') return;
+    if (submitStatus !== 'fulfilled') return;
     dispatch(resetPickUpState());
   }
 

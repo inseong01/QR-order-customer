@@ -34,8 +34,6 @@ function MenuCateoryTitleList() {
     };
   }, [data]);
 
-  // if (!data) return <div>loading...</div>;
-
   return (
     <>
       {data && (
