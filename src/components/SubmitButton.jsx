@@ -26,6 +26,7 @@ function TotalPrice() {
 function PickAndCountButton() {
   // useSelector
   const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
+
   return (
     <div className={styles.pickAndCount}>
       <ul className={styles.pickList}>
@@ -39,7 +40,7 @@ function PickAndCountButton() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, default: { ease: 'easeOut' } }}
             >
-              <div className={styles.name}>{item.name}</div>
+              <div className={styles.name}>{item.title}</div>
               {item.name !== '직원호출' && (
                 <CountButton amount={item.amount} idx={idx} countFunction={countItemAmount} />
               )}

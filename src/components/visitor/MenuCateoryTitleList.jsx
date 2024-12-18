@@ -1,5 +1,6 @@
 import styles from '@/style/visitor/MenuCateoryTitleList.module.css';
 import fetchMenuData from '@/function/firebase/fetchMenuData';
+import getCategoryList from '@/lib/supabase/function/getCategoryList';
 import MenuCategory from './MenuCategory';
 
 import 'swiper/css';
@@ -12,9 +13,8 @@ function MenuCateoryTitleList() {
   // useQuery
   const { data } = useQuery({
     queryKey: ['category'],
-    queryFn: () => fetchMenuData('menu/category'),
+    queryFn: () => getCategoryList('menu'),
     staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
@@ -43,9 +43,11 @@ function MenuCateoryTitleList() {
           animate={{ y: 0 }}
         >
           <div className={`swiper-wrapper ${styles['swiper-wrapper']}`}>
-            {data.map((category, idx) => {
-              return <MenuCategory key={idx} category={category} />;
-            })}
+            {data
+              .filter((list) => list.id !== 0)
+              .map((category, idx) => {
+                return <MenuCategory key={idx} category={category} />;
+              })}
           </div>
         </motion.div>
       )}

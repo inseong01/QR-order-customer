@@ -1,6 +1,6 @@
 'use client';
 
-import { makeStore } from '@/lib/makeStore';
+import { makeStore } from '@/lib/features/makeStore';
 import { useRef } from 'react';
 import { Provider } from 'react-redux';
 

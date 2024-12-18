@@ -3,6 +3,7 @@
 import styles from '@/style/visitor/call/CallPageMain.module.css';
 import fetchMenuData from '@/function/firebase/fetchMenuData';
 import { selectCallBtn } from '@/lib/features/requestState/callSlice';
+import getCategoryList from '@/lib/supabase/function/getCategoryList';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'motion/react';
@@ -16,14 +17,13 @@ export default function CallPageMain() {
   // useQuery
   const { data, isLoading } = useQuery({
     queryKey: ['requestList'],
-    queryFn: () => fetchMenuData('request/list'),
+    queryFn: () => getCategoryList('request'),
     staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 5,
   });
 
-  function onClickSelect({ key, name }) {
+  function onClickSelect({ id, title }) {
     return () => {
-      dispatch(selectCallBtn({ key, name, amount: 1 }));
+      dispatch(selectCallBtn({ id, title, amount: 1 }));
     };
   }
 
@@ -58,8 +58,8 @@ export default function CallPageMain() {
         {data && (
           <motion.div className={styles.middle} initial={'hidden'} animate={'visible'} variants={parents}>
             {data.map((req, idx) => {
-              const { name } = req;
-              const isIncludedItem = selectedItemArr.some((item) => item.key === req.key);
+              const { title } = req;
+              const isIncludedItem = selectedItemArr.some((item) => item.id === req.id);
               return (
                 <motion.div
                   key={idx}
@@ -73,7 +73,7 @@ export default function CallPageMain() {
                     transition: { duration: 0.7 },
                   }}
                 >
-                  <div className={styles.title}>{name}</div>
+                  <div className={styles.title}>{title}</div>
                 </motion.div>
               );
             })}

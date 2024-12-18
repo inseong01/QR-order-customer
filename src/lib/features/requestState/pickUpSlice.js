@@ -8,7 +8,7 @@ const initialState = {
     name: '',
     price: '0',
     amount: 1,
-    key: null,
+    id: null,
   },
   list: [],
   error: {
@@ -22,9 +22,9 @@ const pickUpSlice = createSlice({
   initialState,
   reducers: {
     clickMenu: (state, action) => {
-      const { name, price, key } = action.payload.menuData;
+      const { name, price, id } = action.payload.menuData;
       // 동일 메뉴 선택 시 창 닫기, 창 닫혀있는 상태서는 적용 예외
-      const isSame = state.isClicked && state.selectedMenu.key === key;
+      const isSame = state.isClicked && state.selectedMenu.id === id;
       return {
         ...state,
         selectedMenu: {
@@ -32,7 +32,7 @@ const pickUpSlice = createSlice({
           name,
           price,
           amount: 1,
-          key
+          id
         },
         isClicked: !isSame && true,
       }
@@ -41,10 +41,10 @@ const pickUpSlice = createSlice({
       const pickUpList = state.list;
       const selectedMenu = state.selectedMenu;
       // 동일 항목 있으면 덮어씌우기
-      let isOverwrite = pickUpList.some(list => list.key === selectedMenu.key);
+      let isOverwrite = pickUpList.some(list => list.id === selectedMenu.id);
       const updateList = isOverwrite ?
         pickUpList.map(list => (
-          list.key === selectedMenu.key ? { ...list, amount: selectedMenu.amount } : list
+          list.id === selectedMenu.id ? { ...list, amount: selectedMenu.amount } : list
         )) : [...state.list, selectedMenu]
 
       return {
@@ -81,8 +81,8 @@ const pickUpSlice = createSlice({
       }
     },
     deletePickUpList: (state, action) => {
-      const key = action.payload.key;
-      const updateList = state.list.filter((list) => list.key !== key)
+      const id = action.payload.id;
+      const updateList = state.list.filter((list) => list.id !== id)
       return {
         ...state,
         list: updateList

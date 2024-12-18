@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedMenuCategoryKey: 0,
+  selectedMenuCategoryTitle: '메인메뉴',
 }
 const menuStateSlice = createSlice({
   name: 'menuState',
   initialState,
   reducers: {
-    getSelectedMenuCategoryKey: (state, action) => {
-      const key = Number(action.payload.key);
+    getSelectedMenuCategoryTitle: (state, action) => {
+      const title = action.payload.title;
       return {
         ...state,
-        selectedMenuCategoryKey: key,
+        selectedMenuCategoryTitle: title,
       }
     },
   }
 })
 
-export const { getSelectedMenuCategoryKey } = menuStateSlice.actions;
+export const { getSelectedMenuCategoryTitle } = menuStateSlice.actions;
 export default menuStateSlice.reducer;

@@ -2,6 +2,7 @@
 
 import styles from '@/style/visitor/MenuList.module.css';
 import fetchMenuData from '@/function/firebase/fetchMenuData';
+import getMenuList from '@/lib/supabase/function/getMenuList';
 import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
 import { addMenuToPickUpList, clickMenu, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';
 
@@ -16,16 +17,15 @@ function MenuList() {
   const [isfirstLoad, setIsFirstLoad] = useState(true);
   const [isIconClicked, setIsIconClicked] = useState(false);
   // useSelector
-  const currentCategoryKey = useSelector((state) => state.menuState.selectedMenuCategoryKey);
+  const currentCategoryTitle = useSelector((state) => state.menuState.selectedMenuCategoryTitle);
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   // dispatch
   const dispatch = useDispatch();
   useQuery;
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetched } = useQuery({
     queryKey: ['menuList'],
-    queryFn: () => fetchMenuData('menu/list'),
+    queryFn: getMenuList,
     staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
@@ -33,22 +33,22 @@ function MenuList() {
     setIsFirstLoad(false);
   }, [data]);
 
-  function onClickMenuClick({ name, price, tag, key }) {
+  function onClickMenuClick({ name, price, tag, id }) {
     return () => {
       if (tag === 'soldout') return;
-      dispatch(clickMenu({ menuData: { name, price, tag, key } }));
+      dispatch(clickMenu({ menuData: { name, price, tag, id } }));
       dispatch(resetCountNumberState());
     };
   }
 
-  function onClickIconAddMenuInPickUpList({ name, price, key, tag }) {
+  function onClickIconAddMenuInPickUpList({ name, price, id, tag }) {
     if (tag === 'soldout') return;
-    dispatch(addMenuToPickUpList({ menu: { name, price, amount: 1, key } }));
+    dispatch(addMenuToPickUpList({ menu: { name, price, amount: 1, id } }));
   }
 
-  function onClickIconRemoveMenuInPickUpList({ key, tag }) {
+  function onClickIconRemoveMenuInPickUpList({ id, tag }) {
     if (tag === 'soldout') return;
-    dispatch(deletePickUpList({ key }));
+    dispatch(deletePickUpList({ id }));
   }
 
   function onClickIcon(list, isPickedItem) {
@@ -115,72 +115,89 @@ function MenuList() {
       initial={isfirstLoad ? 'inactive' : false}
       animate={isfirstLoad ? 'active' : false}
     >
-      {data[currentCategoryKey] &&
-        data[currentCategoryKey].map((list, idx) => {
-          const { name, price, tag, key, img } = list;
-          const priceToString = price.toLocaleString();
-          const isPickedItem = currentOrderList.some((list) => list.key === key);
-          let tagDescription = '';
-          switch (tag) {
-            case 'popular': {
-              tagDescription = '인기';
-              break;
+      {isFetched &&
+        data
+          .filter((list) => list.sort === currentCategoryTitle)
+          .map((list, idx) => {
+            const { name, price, tag, id, img } = list;
+            const priceToString = price.toLocaleString();
+            const isPickedItem = currentOrderList.some((list) => list.id === id);
+            let tagDescription = '';
+            switch (tag) {
+              case 'popular': {
+                tagDescription = '인기';
+                break;
+              }
+              case 'new': {
+                tagDescription = '신규';
+                break;
+              }
+              case 'soldout': {
+                tagDescription = '품절';
+                break;
+              }
             }
-            case 'new': {
-              tagDescription = '신규';
-              break;
-            }
-            case 'soldout': {
-              tagDescription = '품절';
-              break;
-            }
-          }
-          return (
-            <motion.li
-              key={idx}
-              className={`${styles.menu} ${styles[tag]}`}
-              onClick={onClickMenuClick(list)}
-              variants={liVariants}
-            >
-              <div className={styles.imgBox} onClick={onClickImg}>
-                <div className={styles.tag}>
-                  <span className={styles.title}>{tagDescription}</span>
+            return (
+              <motion.li
+                key={idx}
+                className={`${styles.menu} ${styles[tag]}`}
+                onClick={onClickMenuClick(list)}
+                variants={liVariants}
+              >
+                <div className={styles.imgBox} onClick={onClickImg}>
+                  <div className={styles.tag}>
+                    <span className={styles.title}>{tagDescription}</span>
+                  </div>
+                  <Image
+                    src={img}
+                    alt={name}
+                    width={100}
+                    height={60}
+                    priority={true}
+                    style={{
+                      objectFit: 'cover',
+                      filter: tag === 'soldout' ? 'opacity(0.5)' : 'opacity(1)',
+                    }}
+                  />
                 </div>
-                <Image
-                  src={img}
-                  alt={name}
-                  width={100}
-                  height={60}
-                  priority={true}
-                  style={{
-                    objectFit: 'cover',
-                    filter: tag === 'soldout' ? 'opacity(0.5)' : 'opacity(1)',
-                  }}
-                />
-              </div>
-              <div className={styles.contextWrap}>
-                <div className={styles.content}>
-                  <div className={styles.name}>{name}</div>
-                  <div className={styles.price}>{priceToString}원</div>
-                </div>
-                <div className={styles.shopIconWrap}>
-                  <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
-                    <AnimatePresence>
-                      {!isPickedItem ? (
-                        tag === 'soldout' ? (
-                          <div className={styles.shopIcon}>
-                            <Image
-                              src={'/img/error-border-icon.png'}
-                              alt="담기"
-                              width={20}
-                              height={20}
-                              style={{ filter: 'opacity(0.3)' }}
-                            />
-                          </div>
+                <div className={styles.contextWrap}>
+                  <div className={styles.content}>
+                    <div className={styles.name}>{name}</div>
+                    <div className={styles.price}>{priceToString}원</div>
+                  </div>
+                  <div className={styles.shopIconWrap}>
+                    <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
+                      <AnimatePresence>
+                        {!isPickedItem ? (
+                          tag === 'soldout' ? (
+                            <div className={styles.shopIcon}>
+                              <Image
+                                src={'/img/error-border-icon.png'}
+                                alt="담기"
+                                width={20}
+                                height={20}
+                                style={{ filter: 'opacity(0.3)' }}
+                              />
+                            </div>
+                          ) : (
+                            <motion.div
+                              className={styles.shopIcon}
+                              key={'plus'}
+                              initial={{ rotateY: 0 }}
+                              animate={{ rotateY: 180 }}
+                              exit={{ rotateY: 0 }}
+                              onAnimationStart={() => setIsIconClicked(true)}
+                              onAnimationComplete={(status) =>
+                                status.rotateY === 180 && setIsIconClicked(false)
+                              }
+                            >
+                              <Image src={'/img/plus-border-icon.png'} alt="담기" width={20} height={20} />
+                            </motion.div>
+                          )
                         ) : (
                           <motion.div
                             className={styles.shopIcon}
-                            key={'plus'}
+                            key={'minus'}
                             initial={{ rotateY: 0 }}
                             animate={{ rotateY: 180 }}
                             exit={{ rotateY: 0 }}
@@ -189,29 +206,16 @@ function MenuList() {
                               status.rotateY === 180 && setIsIconClicked(false)
                             }
                           >
-                            <Image src={'/img/plus-border-icon.png'} alt="담기" width={20} height={20} />
+                            <Image src={'/img/minus-border-icon.png'} alt="빼기" width={20} height={20} />
                           </motion.div>
-                        )
-                      ) : (
-                        <motion.div
-                          className={styles.shopIcon}
-                          key={'minus'}
-                          initial={{ rotateY: 0 }}
-                          animate={{ rotateY: 180 }}
-                          exit={{ rotateY: 0 }}
-                          onAnimationStart={() => setIsIconClicked(true)}
-                          onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
-                        >
-                          <Image src={'/img/minus-border-icon.png'} alt="빼기" width={20} height={20} />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.li>
-          );
-        })}
+              </motion.li>
+            );
+          })}
     </motion.ul>
   );
 }

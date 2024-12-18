@@ -5,12 +5,13 @@ import Popup from '@/components/popup/Popup';
 import InitialHeader from '@/components/visitor/InitialHeader';
 import InitialMain from '@/components/visitor/InitialMain';
 import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
+import fetchMenuData from '@/function/firebase/fetchMenuData';
+import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
 
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { QueryClient, useQuery } from '@tanstack/react-query';
-import fetchMenuData from '@/function/firebase/fetchMenuData';
+import { useQuery } from '@tanstack/react-query';
 
 function InitialClientPage() {
   // useSelector
@@ -23,9 +24,8 @@ function InitialClientPage() {
   // useQuery
   const { data } = useQuery({
     queryKey: ['orderList'],
-    queryFn: () => fetchMenuData(`table/${tableNum}/orderList`),
+    queryFn: () => getTableOrderList(tableNum),
     staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function InitialClientPage() {
 
   useEffect(() => {
     if (!data) return;
-    const orderListData = data ? data : null;
+    const orderListData = data[0].order ? data[0].order : null;
     localStorage.setItem('orderList', JSON.stringify(orderListData));
   }, [data]);
 

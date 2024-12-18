@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '@/style/visitor/MenuCategory.module.css';
-import { getSelectedMenuCategoryKey } from '@/lib/features/menuState/menuSlice';
+import { getSelectedMenuCategoryTitle } from '@/lib/features/menuState/menuSlice';
 
 import { motion } from 'motion/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ export default function MenuCategory({ category }) {
   // useState
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   // useSelector
-  const selectedTagKey = useSelector((state) => state.menuState.selectedMenuCategoryKey);
+  const selectedTagTitle = useSelector((state) => state.menuState.selectedMenuCategoryTitle);
   // dispatch
   const dispatch = useDispatch();
 
@@ -21,8 +21,8 @@ export default function MenuCategory({ category }) {
 
   function onClickChangeMenuTitle(category) {
     return () => {
-      if (selectedTagKey === category.key) return;
-      dispatch(getSelectedMenuCategoryKey({ key: category.key }));
+      if (selectedTagTitle === category.title) return;
+      dispatch(getSelectedMenuCategoryTitle({ title: category.title }));
       return;
     };
   }
@@ -33,7 +33,7 @@ export default function MenuCategory({ category }) {
         <span className={styles.title}>{category.title}</span>
       </div>
       {isFirstLoad ||
-        (selectedTagKey === category.key && (
+        (selectedTagTitle === category.title && (
           <motion.div className={styles.underline} layoutId="underline"></motion.div>
         ))}
     </div>

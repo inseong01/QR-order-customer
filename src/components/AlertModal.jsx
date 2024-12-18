@@ -27,7 +27,8 @@ export default function AlertModal({ type }) {
     if (isSubmit) return;
     switch (type) {
       case 'orderCheck': {
-        postOrderList(tableNum, pickUpList); // 주문 DB 전달
+        console.log(tableNum, pickUpList);
+        // postOrderList(tableNum, pickUpList); // 주문 DB 전달
         // 주문(pickUpList) 알림 전달
         dispatch(delayFetchOrderResponse(pickUpList));
         dispatch(changeModalStatus({ status: false }));
