@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { countNumber } from "../countNumberState/countNumberSlice";
-import calculateAmount from "@/function/calculateAmount";
+import calculateAmount from "@/lib/function/calculateAmount";
 
 const initialState = {
   isClicked: false,

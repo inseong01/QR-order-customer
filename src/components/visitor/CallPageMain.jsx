@@ -1,7 +1,6 @@
 'use client';
 
 import styles from '@/style/visitor/call/CallPageMain.module.css';
-import fetchMenuData from '@/function/firebase/fetchMenuData';
 import { selectCallBtn } from '@/lib/features/requestState/callSlice';
 import getCategoryList from '@/lib/supabase/function/getCategoryList';
 

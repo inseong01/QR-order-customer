@@ -1,23 +1,29 @@
 'use client';
 
 import styles from '@/style/OrderList.module.css';
-import createReceipt from '@/function/createReceipt';
+import createReceipt from '@/lib/function/createReceipt';
 import OrderListBox from './OrderListBox';
 
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function OrderList({ type, listData = undefined }) {
   const orderList = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('orderList')) || [] : [];
+  // useSelector
   const tableNum = useSelector((state) => state.userState.tableNum);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') return;
+  }, []);
 
   switch (type) {
     case 'AllOforderList': {
-      const totalPrice = listData.order.reduce((prev, current) => prev + current.price * current.amount, 0);
+      const totalPrice = listData.reduce((prev, current) => prev + current.price * current.amount, 0);
       const totalPriceToString = totalPrice.toLocaleString();
       return (
         <div className={styles.wrap}>
           <div className={styles.top}>
-            <OrderListBox listData={listData.order} />
+            <OrderListBox listData={listData} />
           </div>
           <div className={styles.line}></div>
           <div className={styles.bottom}>
@@ -28,16 +34,14 @@ export default function OrderList({ type, listData = undefined }) {
       );
     }
     case 'currentOrderList': {
-      const totalPrice = orderList[0].order.reduce(
-        (prev, current) => prev + current.price * current.amount,
-        0
-      );
+      console.log('listData', type, listData);
+      const totalPrice = listData.reduce((prev, current) => prev + current.price * current.amount, 0);
       const totalPriceToString = totalPrice.toLocaleString();
       return (
         <div className={styles.includeMsg}>
           <div className={styles.wrap}>
             <div className={styles.top}>
-              <OrderListBox listData={orderList[0].order} />
+              <OrderListBox listData={listData} />
             </div>
             <div className={styles.line}></div>
             <div className={styles.bottom}>
@@ -53,7 +57,7 @@ export default function OrderList({ type, listData = undefined }) {
       );
     }
     case 'bill': {
-      const orderListArr = orderList.map((list) => list.order);
+      const orderListArr = orderList.map((list) => list.orderList);
       const billArr = createReceipt(orderListArr);
       const totalPrice = billArr.reduce((result, data) => result + data.price * data.amount, 0);
       const totalPriceToString = totalPrice.toLocaleString();

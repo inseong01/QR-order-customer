@@ -5,7 +5,6 @@ import Popup from '@/components/popup/Popup';
 import InitialHeader from '@/components/visitor/InitialHeader';
 import InitialMain from '@/components/visitor/InitialMain';
 import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
-import fetchMenuData from '@/function/firebase/fetchMenuData';
 import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -19,11 +18,12 @@ function InitialClientPage() {
   const pickUpList = useSelector((state) => state.pickUpState.list);
   const popUpType = pickUpList.length && !isClicked ? 'order' : 'pick';
   const tableNum = useSelector((state) => state.userState.tableNum);
+  const submitStatus = useSelector((state) => state.submitState.status);
   // dispatch
   const dispatch = useDispatch();
   // useQuery
   const { data } = useQuery({
-    queryKey: ['orderList'],
+    queryKey: ['orderList', submitStatus],
     queryFn: () => getTableOrderList(tableNum),
     staleTime: 1000 * 60 * 5,
   });

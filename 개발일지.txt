@@ -82,4 +82,22 @@
   - tableNum 얻는 방법 구상
     : qr 코드로 접속, pathName에서 추출, tableNum 전역으로 상태관리 + 이외 접근방식 제한하기
 
-<--- supabase insert 구현 --->
+24.12.19.
+  - 주문목록 DB insert/update 구상
+    1. qr-order-allOrderList Table 
+      : orderList, tableNum(고정) 필수, tableNum/orderNum/tableId 불필요
+        - tableNum 전역 상태 관리: pathName에서 받아옴
+        - orderList 하나의 주문 전달
+    2. qr-order-table-list
+      : allOrderList에서 행 삽입되면 tableId와 동일한 id의 행 속성 order에 orderList 배열 요소 추가
+      => sql trigger 적용
+  - 요청목록 DB insert 구상
+    1. qr-order-request-list Table
+      : requestList, tableNum 필수
+        - requestList: text 유형, 배열을 문구로 가공하여 문자로 전달, fulfilled 되면 모달 닫음, rejected 되면 에러 출력
+  - DB 변환
+    : DB firebase -> supabase
+    => insert 구현 완료, sql trigger 적용 
+  - 코드 변수명, DB 속성 일치화
+
+<--- 코드 점검, 메뉴 사진 db에서 불러오기 --->

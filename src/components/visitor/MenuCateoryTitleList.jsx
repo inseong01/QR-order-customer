@@ -1,5 +1,4 @@
 import styles from '@/style/visitor/MenuCateoryTitleList.module.css';
-import fetchMenuData from '@/function/firebase/fetchMenuData';
 import getCategoryList from '@/lib/supabase/function/getCategoryList';
 import MenuCategory from './MenuCategory';
 

@@ -1,3 +1,6 @@
+import postOrderList from "@/lib/supabase/function/postOrderList";
+import postRequestList from "@/lib/supabase/function/postRequestList";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -13,11 +16,24 @@ const initialState = {
   }
 }
 
-export const delayFetchOrderResponse = createAsyncThunk(
-  'submitState/delayFetchOrderResponse',
-  async (pickUpLists) => {
-    await new Promise(res => setTimeout(() => res(pickUpLists), 500));
-  })
+export const fetchOrderListResponse = createAsyncThunk(
+  'submitState/fetchOrderListResponse',
+  async ({ tableNum, pickUpList }) => {
+    const result = await postOrderList(tableNum, pickUpList)
+    await new Promise(res => setTimeout(() => res(), 500));
+    return result;
+  }
+)
+
+export const fetchRequestListResponse = createAsyncThunk(
+  'submitState/fetchRequestListResponse',
+  async ({ tableNum, requestStr }) => {
+    const result = await postRequestList(tableNum, requestStr)
+    console.log(tableNum, requestStr, result)
+    await new Promise(res => setTimeout(() => res(), 500));
+    return result;
+  }
+)
 
 const submitSlice = createSlice({
   name: 'submitState',
@@ -55,20 +71,54 @@ const submitSlice = createSlice({
   },
   extraReducers: builder => {
     // pickUpList
-    builder.addCase(delayFetchOrderResponse.pending, (state, action) => {
-      console.log('delayFetchOrderResponse.pending')
+    builder.addCase(fetchOrderListResponse.pending, (state, action) => {
+      console.log('fetchOrderListResponse.pending')
       return {
         ...state,
         isSubmit: true,
-        status: 'pending'
       }
     })
-    builder.addCase(delayFetchOrderResponse.fulfilled, (state, action) => {
-      console.log('delayFetchOrderResponse.fulfilled')
+    builder.addCase(fetchOrderListResponse.fulfilled, (state, action) => {
+      console.log('fetchOrderListResponse.fulfilled')
       return {
         ...state,
         isSubmit: true,
         status: 'fulfilled'
+      }
+    })
+    builder.addCase(fetchOrderListResponse.rejected, (state, action) => {
+      console.log('fetchOrderListResponse.rejected')
+      return {
+        ...state,
+        isSubmit: false,
+        status: 'rejected'
+      }
+    })
+    builder.addCase(fetchRequestListResponse.pending, (state, action) => {
+      console.log('fetchRequestListResponse.pending')
+      return {
+        ...state,
+        isSubmit: true,
+      }
+    })
+    builder.addCase(fetchRequestListResponse.fulfilled, (state, action) => {
+      console.log('fetchRequestListResponse.fulfilled')
+      return {
+        ...state,
+        isSubmit: true,
+        status: 'fulfilled',
+        modal: {
+          ...state.modal,
+          status: true
+        }
+      }
+    })
+    builder.addCase(fetchRequestListResponse.rejected, (state, action) => {
+      console.log('fetchRequestListResponse.rejected')
+      return {
+        ...state,
+        isSubmit: false,
+        status: 'rejected'
       }
     })
   }

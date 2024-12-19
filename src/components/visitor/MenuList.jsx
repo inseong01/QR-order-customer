@@ -1,7 +1,6 @@
 'use client';
 
 import styles from '@/style/visitor/MenuList.module.css';
-import fetchMenuData from '@/function/firebase/fetchMenuData';
 import getMenuList from '@/lib/supabase/function/getMenuList';
 import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
 import { addMenuToPickUpList, clickMenu, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';

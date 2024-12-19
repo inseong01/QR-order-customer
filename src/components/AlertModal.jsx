@@ -1,13 +1,12 @@
 'use client';
 
 import styles from '@/style/AlertModal.module.css';
-import { delayFetchOrderResponse, changeModalStatus } from '@/lib/features/submitState/submitSlice';
-import postOrderList from '@/function/firebase/postOrderList';
+import { changeModalStatus, fetchOrderListResponse } from '@/lib/features/submitState/submitSlice';
+import { resetCallState } from '@/lib/features/requestState/callSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { resetCallState } from '@/lib/features/requestState/callSlice';
 
 export default function AlertModal({ type }) {
   // useSelector
@@ -22,15 +21,13 @@ export default function AlertModal({ type }) {
   function onClickNotEnsureSubmit() {
     dispatch(changeModalStatus({ status: false }));
   }
+
   // db 제출 허용
   function onClickEnsureSubmit() {
     if (isSubmit) return;
     switch (type) {
       case 'orderCheck': {
-        console.log(tableNum, pickUpList);
-        // postOrderList(tableNum, pickUpList); // 주문 DB 전달
-        // 주문(pickUpList) 알림 전달
-        dispatch(delayFetchOrderResponse(pickUpList));
+        dispatch(fetchOrderListResponse({ tableNum, pickUpList }));
         dispatch(changeModalStatus({ status: false }));
         break;
       }

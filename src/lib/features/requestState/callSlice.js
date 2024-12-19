@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import calculateAmount from "@/function/calculateAmount";
+import calculateAmount from "@/lib/function/calculateAmount";
 
 const initialState = {
   isClicked: false,

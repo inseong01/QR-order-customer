@@ -9,10 +9,12 @@ import OrderList from '@/components/OrderList';
 import AlertModal from '@/components/AlertModal';
 import { calculateAmountInPickUpList, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
+import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'motion/react';
+import { useQuery } from '@tanstack/react-query';
 
 export default function PickUpListPage() {
   // useSelector
@@ -20,12 +22,29 @@ export default function PickUpListPage() {
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   const target = useSelector((state) => state.submitState.modal.target);
   const modalStatus = useSelector((state) => state.submitState.modal.status);
+  const tableNum = useSelector((state) => state.userState.tableNum);
   // dispatch
   const dispatch = useDispatch();
+  // useState
+  const [currentOrder, getCurrentOrder] = useState([]);
+  // useQuery
+  const { data, isFetching } = useQuery({
+    queryKey: ['orderList', submitStatus],
+    queryFn: () => getTableOrderList(tableNum),
+    staleTime: 1000 * 60 * 5,
+  });
 
   useEffect(() => {
     dispatch(changeModalId({ target: 'orderCheck' }));
   }, []);
+
+  useEffect(() => {
+    if (isFetching || submitStatus !== 'fulfilled') return;
+    const sortOrder = data[0].order.sort(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+    getCurrentOrder(sortOrder[0].orderList);
+  }, [data, isFetching, submitStatus]);
 
   function onClickdeletePickUpList({ key }) {
     return () => {
@@ -95,7 +114,7 @@ export default function PickUpListPage() {
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           >
             <OrderSubmit />
-            <OrderList type={'currentOrderList'} />
+            <OrderList type={'currentOrderList'} listData={currentOrder} />
           </motion.main>
         )}
       </AnimatePresence>

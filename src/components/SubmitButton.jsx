@@ -3,8 +3,9 @@
 import styles from '@/style/SubmitButton.module.css';
 import CountButton from './CountButton';
 import { countItemAmount } from '@/lib/features/requestState/callSlice';
-import { changeModalStatus } from '@/lib/features/submitState/submitSlice';
+import { changeModalStatus, fetchRequestListResponse } from '@/lib/features/submitState/submitSlice';
 import { resetPickUpState } from '@/lib/features/requestState/pickUpSlice';
+import makeSentence from '@/lib/function/makeSentence';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
@@ -41,7 +42,7 @@ function PickAndCountButton() {
               transition={{ duration: 0.5, default: { ease: 'easeOut' } }}
             >
               <div className={styles.name}>{item.title}</div>
-              {item.name !== '직원호출' && (
+              {item.title !== '직원호출' && (
                 <CountButton amount={item.amount} idx={idx} countFunction={countItemAmount} />
               )}
             </motion.li>
@@ -55,6 +56,7 @@ function PickAndCountButton() {
 export default function SubmitButton({ type }) {
   // useSelector
   const requestList = useSelector((state) => state.callState.selectedItemArr);
+  const tableNum = useSelector((state) => state.userState.tableNum);
   // dispatch
   const dispatch = useDispatch();
 
@@ -69,7 +71,9 @@ export default function SubmitButton({ type }) {
   // 호출하기
   function onClickSubmitRequestList() {
     // 알림으로 requestList(요청) 전달
-    dispatch(changeModalStatus({ status: true }));
+    const requestStr = makeSentence(requestList);
+    dispatch(fetchRequestListResponse({ tableNum, requestStr }));
+    // dispatch(changeModalStatus({ status: true }));
   }
 
   switch (type) {
