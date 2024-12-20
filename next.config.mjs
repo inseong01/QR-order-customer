@@ -3,6 +3,17 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'onofrsiptqngmwfzenlr.supabase.co',
+        port: '',
+        pathname: '/storage/**',
+        search: ''
+      }
+    ]
+  },
   rewrites() {
     return [
       {

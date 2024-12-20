@@ -20,7 +20,7 @@ function MenuList() {
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   // dispatch
   const dispatch = useDispatch();
-  useQuery;
+  // useQuery;
   const { data, isLoading, isFetched } = useQuery({
     queryKey: ['menuList'],
     queryFn: getMenuList,
@@ -118,7 +118,7 @@ function MenuList() {
         data
           .filter((list) => list.sort === currentCategoryTitle)
           .map((list, idx) => {
-            const { name, price, tag, id, img } = list;
+            const { name, price, tag, id, url } = list;
             const priceToString = price.toLocaleString();
             const isPickedItem = currentOrderList.some((list) => list.id === id);
             let tagDescription = '';
@@ -148,7 +148,7 @@ function MenuList() {
                     <span className={styles.title}>{tagDescription}</span>
                   </div>
                   <Image
-                    src={img}
+                    src={`https://onofrsiptqngmwfzenlr.supabase.co/storage/v1/object/public/qr-order-img/${url}`}
                     alt={name}
                     width={100}
                     height={60}

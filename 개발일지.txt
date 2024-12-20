@@ -100,4 +100,14 @@
     => insert 구현 완료, sql trigger 적용 
   - 코드 변수명, DB 속성 일치화
 
-<--- 코드 점검, 메뉴 사진 db에서 불러오기 --->
+24.12.20.
+  - DB 사진 불러오기 구상
+    : 개별 메뉴 메타 데이터의 uri를 사용, sql trigger 적용, 파일명은 메뉴 아이디 붙여서, 관리자 측에서 설정
+    링크 예시) https://[project_id].supabase.co/storage/v1/object/public/[bucket]/[asset-name]
+
+    - 생성: storage에 이미지 저장, 생성된 uri를 해당 메뉴가 있는 DB에 삽입
+    - 갱신: storage 이미지 변경, uri는 그대로, 파일명 중복 가능하지 않으면 uri 변경하여 삽입
+    - 삭제: storage 이미지 삭제, 해당 메뉴 있는 DB에서 uri 삭제, 관리자에서 삭제 기능 없음 
+  - Next.config.mjs images remotePatterns 설정
+
+<--- 코드 점검, 최적화 --->
