@@ -111,3 +111,5 @@
   - Next.config.mjs images remotePatterns 설정
 
 <--- 코드 점검, 최적화 --->
+24.12.23.
+  - 테이블 고유 링크 이동 설정

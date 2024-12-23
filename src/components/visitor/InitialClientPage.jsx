@@ -35,7 +35,7 @@ function InitialClientPage() {
 
   useEffect(() => {
     if (!data) return;
-    const orderListData = data[0].order ? data[0].order : null;
+    const orderListData = data?.length ? data[0].order : null;
     localStorage.setItem('orderList', JSON.stringify(orderListData));
   }, [data]);
 
