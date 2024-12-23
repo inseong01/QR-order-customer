@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function AppVisitorHeader({ title }) {
   // useSelector
   const submitStatus = useSelector((state) => state.submitState.status);
+  const tableNum = useSelector((state) => state.userState.tableNum);
   // dispatch
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ export default function AppVisitorHeader({ title }) {
   return (
     <header className={styles.header}>
       <div className={styles.wrap}>
-        <Link href={'/visitor'} className={styles.nav}>
+        <Link href={`/${tableNum}`} className={styles.nav}>
           <div onClick={navOnClickBack}>
             <Image src={'/img/back-button.png'} alt={'이전'} width={15} height={15} />
           </div>

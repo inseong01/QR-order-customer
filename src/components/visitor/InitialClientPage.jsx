@@ -5,39 +5,32 @@ import Popup from '@/components/popup/Popup';
 import InitialHeader from '@/components/visitor/InitialHeader';
 import InitialMain from '@/components/visitor/InitialMain';
 import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
-import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { setTableNum } from '@/lib/features/userState/userSlice';
 
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
+import { usePathname } from 'next/navigation';
 
 function InitialClientPage() {
   // useSelector
   const isClicked = useSelector((state) => state.pickUpState.isClicked);
   const pickUpList = useSelector((state) => state.pickUpState.list);
+  // variant
   const popUpType = pickUpList.length && !isClicked ? 'order' : 'pick';
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  const submitStatus = useSelector((state) => state.submitState.status);
   // dispatch
   const dispatch = useDispatch();
-  // useQuery
-  const { data } = useQuery({
-    queryKey: ['orderList', submitStatus],
-    queryFn: () => getTableOrderList(tableNum),
-    staleTime: 1000 * 60 * 5,
-  });
+  // usePathname
+  const pathName = usePathname();
 
   useEffect(() => {
     // 직원호출 초기화
     dispatch(resetSubmitState());
-  }, []);
 
-  useEffect(() => {
-    if (!data) return;
-    const orderListData = data?.length ? data[0].order : null;
-    localStorage.setItem('orderList', JSON.stringify(orderListData));
-  }, [data]);
+    // 고유 테이블 숫자 할당
+    const tableNum = Number(pathName.replace('/', ''));
+    dispatch(setTableNum({ tableNum }));
+  }, []);
 
   return (
     <motion.div

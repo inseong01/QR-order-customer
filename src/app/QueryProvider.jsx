@@ -1,21 +1,7 @@
 'use client';
+import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
 
-import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-function makeQueryClient() {
-  return new QueryClient();
-}
-
-let browserQueryClient = undefined;
-
-function getQueryClient() {
-  if (isServer) {
-    return makeQueryClient();
-  } else {
-    if (!browserQueryClient) browserQueryClient = makeQueryClient();
-    return browserQueryClient;
-  }
-}
+import { QueryClientProvider } from '@tanstack/react-query';
 
 export default function QueryProvider({ children }) {
   const queryClient = getQueryClient();

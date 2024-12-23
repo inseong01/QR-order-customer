@@ -80,7 +80,7 @@ export default function SubmitButton({ type }) {
     case 'back': {
       return (
         <div className={styles.wrap} onClick={onClickReturnHome}>
-          <Link href={'/visitor'} replace={true} className={styles.bottom}>
+          <Link href={`/${tableNum}`} replace={true} className={styles.bottom}>
             돌아가기
           </Link>
         </div>

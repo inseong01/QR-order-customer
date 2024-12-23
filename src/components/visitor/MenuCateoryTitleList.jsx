@@ -1,6 +1,6 @@
 import styles from '@/style/visitor/MenuCateoryTitleList.module.css';
-import getCategoryList from '@/lib/supabase/function/getCategoryList';
 import MenuCategory from './MenuCategory';
+import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 
 import 'swiper/css';
 import Swiper from 'swiper';
@@ -8,15 +8,10 @@ import { motion } from 'motion/react';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-function MenuCateoryTitleList() {
-  // useQuery
-  const { data } = useQuery({
-    queryKey: ['category'],
-    queryFn: () => getCategoryList('menu'),
-    staleTime: 1000 * 60 * 5,
-  });
-
+function MenuCateoryTitleList({ data }) {
   useEffect(() => {
+    if (!data) return;
+
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 2,
       spaceBetween: 30,

@@ -1,6 +1,7 @@
 'use client';
 
 import styles from '@/style/visitor/LanguageButton.module.css';
+import { arrowVar, lineVar, listVar, ulVar } from '@/lib/motion/header/motion_languageButton';
 
 import Image from 'next/image';
 import { useState } from 'react';
@@ -9,12 +10,12 @@ import { motion } from 'motion/react';
 const languageList = [
   {
     title: '한국어',
-    img: '/img/korea-flag.png',
+    img: '/img/korea-flag.webp',
     country: 'korea',
   },
   {
     title: 'English',
-    img: '/img/us-flag.png',
+    img: '/img/us-flag.webp',
     country: 'america',
   },
 ];
@@ -22,66 +23,6 @@ const languageList = [
 export default function LanguageButton() {
   // useStatee
   const [isClicked, setIsClicked] = useState(false);
-  // motion
-  const arrowVar = {
-    active: {
-      rotateZ: -180,
-    },
-    inactive: {
-      rotateZ: 0,
-    },
-  };
-  // ul
-  const ulVar = {
-    active: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: 'easeIn',
-        staggerChildren: 0.2,
-      },
-    },
-    inactive: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-  // line
-  const lineVar = {
-    active: {
-      transition: {
-        duration: 0.3,
-      },
-      opacity: 1,
-    },
-    inactive: {
-      transition: {
-        duration: 0.3,
-      },
-      opacity: 0,
-    },
-  };
-  // list
-  const listVar = {
-    active: {
-      transition: {
-        duration: 0.3,
-        y: { duration: 0 },
-      },
-      y: 0,
-      opacity: 1,
-    },
-    inactive: {
-      transition: {
-        duration: 0.3,
-      },
-      y: 5,
-      opacity: 0,
-    },
-  };
 
   return (
     <li
@@ -99,7 +40,7 @@ export default function LanguageButton() {
         variants={arrowVar}
         animate={isClicked ? 'active' : 'inactive'}
       >
-        <Image src={'/img/down-arrow.png'} alt="아랫 방향 화살표" width={10} height={10} />
+        <Image src={'/img/down-arrow.webp'} alt="아랫 방향 화살표" width={10} height={10} />
       </motion.div>
       <motion.ul
         className={styles.otherLang}

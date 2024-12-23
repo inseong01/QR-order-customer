@@ -20,7 +20,7 @@
   width: 100px;
   height: 100%;
   max-height: 60px;
-  border-radius: 3px;
+  border-radius: 5px;
   position: relative;
   background-color: #989898;
   border: 1px solid #e7e7e7;
@@ -109,30 +109,4 @@
   position: absolute;
   right: 0;
   bottom: 0;
-}
-
-/* loader */
-.loaderBox {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.loader {
-  width: 50px;
-  padding: 8px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #4caff8;
-  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
-  -webkit-mask: var(--_m);
-  mask: var(--_m);
-  -webkit-mask-composite: source-out;
-  mask-composite: subtract;
-  animation: l3 1s infinite linear;
-}
-@keyframes l3 {
-  to {
-    transform: rotate(1turn);
-  }
 }

@@ -1,22 +1,19 @@
-'use client';
-
 import InitialClientPage from '@/components/visitor/InitialClientPage';
-import { setTableNum } from '@/lib/features/userState/userSlice';
+import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
+import { menuListQueryOption } from '@/lib/function/useQuery/queryOption';
 
-import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 function Page() {
-  const pathName = usePathname();
-  const dispatch = useDispatch();
+  // useQuery prefetching
+  const queryClient = getQueryClient();
+  queryClient.prefetchQuery(menuListQueryOption);
 
-  useEffect(() => {
-    const tableNum = Number(pathName.replace('/', ''));
-    dispatch(setTableNum({ tableNum }));
-  }, []);
-
-  return <InitialClientPage />;
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <InitialClientPage />
+    </HydrationBoundary>
+  );
 }
 
 export default Page;

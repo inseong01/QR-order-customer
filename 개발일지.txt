@@ -110,6 +110,9 @@
     - 삭제: storage 이미지 삭제, 해당 메뉴 있는 DB에서 uri 삭제, 관리자에서 삭제 기능 없음 
   - Next.config.mjs images remotePatterns 설정
 
-<--- 코드 점검, 최적화 --->
 24.12.23.
   - 테이블 고유 링크 이동 설정
+  - 웹 성능 최적화 진행
+    : useQuery -> SSR 적용, img png -> webp 변환
+
+<--- 코드 점검, 성능 최적화 이전 비교  --->

@@ -1,17 +1,16 @@
 'use client';
 
 import styles from '@/style/visitor/MenuList.module.css';
-import getMenuList from '@/lib/supabase/function/getMenuList';
 import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
 import { addMenuToPickUpList, clickMenu, deletePickUpList } from '@/lib/features/requestState/pickUpSlice';
+import { liVariants, ulVariants } from '@/lib/motion/middle/motion_menuList';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'motion/react';
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
-function MenuList() {
+function MenuList({ data, isFetched }) {
   // useState
   const [isfirstLoad, setIsFirstLoad] = useState(true);
   const [isIconClicked, setIsIconClicked] = useState(false);
@@ -20,17 +19,11 @@ function MenuList() {
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   // dispatch
   const dispatch = useDispatch();
-  // useQuery;
-  const { data, isLoading, isFetched } = useQuery({
-    queryKey: ['menuList'],
-    queryFn: getMenuList,
-    staleTime: 1000 * 60 * 5,
-  });
 
   useEffect(() => {
-    if (!data) return;
-    setIsFirstLoad(false);
-  }, [data]);
+    if (!isFetched) return;
+    setIsFirstLoad(isFetched);
+  }, [isFetched]);
 
   function onClickMenuClick({ name, price, tag, id }) {
     return () => {
@@ -72,40 +65,6 @@ function MenuList() {
     e.stopPropagation();
     console.log('clicked');
   }
-
-  // motion
-  const ulVariants = {
-    active: {
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.1,
-      },
-    },
-    inactive: {},
-  };
-  const liVariants = {
-    active: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    inactive: {
-      y: -10,
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
-  if (isLoading)
-    return (
-      <div className={styles.loaderBox}>
-        <div className={styles.loader}></div>
-      </div>
-    );
 
   return (
     <motion.ul
@@ -171,7 +130,7 @@ function MenuList() {
                           tag === 'soldout' ? (
                             <div className={styles.shopIcon}>
                               <Image
-                                src={'/img/error-border-icon.png'}
+                                src={'/img/error-border-icon.webp'}
                                 alt="담기"
                                 width={20}
                                 height={20}
@@ -190,7 +149,7 @@ function MenuList() {
                                 status.rotateY === 180 && setIsIconClicked(false)
                               }
                             >
-                              <Image src={'/img/plus-border-icon.png'} alt="담기" width={20} height={20} />
+                              <Image src={'/img/plus-border-icon.webp'} alt="담기" width={20} height={20} />
                             </motion.div>
                           )
                         ) : (
@@ -205,7 +164,7 @@ function MenuList() {
                               status.rotateY === 180 && setIsIconClicked(false)
                             }
                           >
-                            <Image src={'/img/minus-border-icon.png'} alt="빼기" width={20} height={20} />
+                            <Image src={'/img/minus-border-icon.webp'} alt="빼기" width={20} height={20} />
                           </motion.div>
                         )}
                       </AnimatePresence>

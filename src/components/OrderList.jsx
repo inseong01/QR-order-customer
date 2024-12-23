@@ -3,18 +3,26 @@
 import styles from '@/style/OrderList.module.css';
 import createReceipt from '@/lib/function/createReceipt';
 import OrderListBox from './OrderListBox';
+import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
 
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import Loading from './loading/Loading';
 
 export default function OrderList({ type, listData = undefined }) {
-  const orderList = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('orderList')) || [] : [];
   // useSelector
   const tableNum = useSelector((state) => state.userState.tableNum);
+  const submitStatus = useSelector((state) => state.submitState.status);
+  // useQuery
+  const orderList = useQuery({
+    queryKey: ['orderList', submitStatus],
+    queryFn: () => getTableOrderList(tableNum),
+    initialData: [],
+  });
+  console.log('orderList', orderList.data, 'isFetched: ', orderList.isFetched);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') return;
-  }, []);
+  // if (orderList.isFetching) return <Loading />;
 
   switch (type) {
     case 'AllOforderList': {
@@ -34,7 +42,6 @@ export default function OrderList({ type, listData = undefined }) {
       );
     }
     case 'currentOrderList': {
-      console.log('listData', type, listData);
       const totalPrice = listData.reduce((prev, current) => prev + current.price * current.amount, 0);
       const totalPriceToString = totalPrice.toLocaleString();
       return (
@@ -57,7 +64,8 @@ export default function OrderList({ type, listData = undefined }) {
       );
     }
     case 'bill': {
-      const orderListArr = orderList.map((list) => list.orderList);
+      // if (!orderList.data.length) return;
+      const orderListArr = orderList.data[0].order?.map((list) => list.orderList) ?? [];
       const billArr = createReceipt(orderListArr);
       const totalPrice = billArr.reduce((result, data) => result + data.price * data.amount, 0);
       const totalPriceToString = totalPrice.toLocaleString();
