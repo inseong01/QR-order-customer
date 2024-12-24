@@ -1,12 +1,10 @@
 import styles from '@/style/visitor/MenuCateoryTitleList.module.css';
 import MenuCategory from './MenuCategory';
-import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 
 import 'swiper/css';
 import Swiper from 'swiper';
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 
 function MenuCateoryTitleList({ data }) {
   useEffect(() => {

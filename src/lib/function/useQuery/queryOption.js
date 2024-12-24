@@ -14,3 +14,9 @@ export const categoryListQueryOption = queryOptions({
   queryFn: () => getCategoryList('menu'),
   // 공통 옵션 생성 가능
 });
+
+export const requestListQueryOption = queryOptions({
+  queryKey: ['request'],
+  queryFn: () => getCategoryList('request'),
+  // 공통 옵션 생성 가능
+});

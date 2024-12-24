@@ -29,7 +29,6 @@ export const fetchRequestListResponse = createAsyncThunk(
   'submitState/fetchRequestListResponse',
   async ({ tableNum, requestStr }) => {
     const result = await postRequestList(tableNum, requestStr)
-    console.log(tableNum, requestStr, result)
     await new Promise(res => setTimeout(() => res(), 500));
     return result;
   }
@@ -72,7 +71,7 @@ const submitSlice = createSlice({
   extraReducers: builder => {
     // pickUpList
     builder.addCase(fetchOrderListResponse.pending, (state, action) => {
-      console.log('fetchOrderListResponse.pending')
+      // console.log('fetchOrderListResponse.pending')
       return {
         ...state,
         isSubmit: true,
@@ -95,7 +94,7 @@ const submitSlice = createSlice({
       }
     })
     builder.addCase(fetchRequestListResponse.pending, (state, action) => {
-      console.log('fetchRequestListResponse.pending')
+      // console.log('fetchRequestListResponse.pending')
       return {
         ...state,
         isSubmit: true,

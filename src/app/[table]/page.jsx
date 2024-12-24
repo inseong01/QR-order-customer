@@ -1,13 +1,14 @@
 import InitialClientPage from '@/components/visitor/InitialClientPage';
 import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
-import { menuListQueryOption } from '@/lib/function/useQuery/queryOption';
+import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
 
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-function Page() {
-  // useQuery prefetching
+async function Page() {
+  // useQuery prefetch
   const queryClient = getQueryClient();
-  queryClient.prefetchQuery(menuListQueryOption);
+  await queryClient.prefetchQuery(menuListQueryOption);
+  await queryClient.prefetchQuery(categoryListQueryOption);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

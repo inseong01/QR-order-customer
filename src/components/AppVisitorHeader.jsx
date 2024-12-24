@@ -23,7 +23,7 @@ export default function AppVisitorHeader({ title }) {
     <header className={styles.header}>
       <div className={styles.wrap}>
         <Link href={`/${tableNum}`} className={styles.nav}>
-          <div onClick={navOnClickBack}>
+          <div onClick={navOnClickBack} className={styles.imgBox}>
             <Image src={'/img/back-button.png'} alt={'이전'} width={15} height={15} />
           </div>
         </Link>

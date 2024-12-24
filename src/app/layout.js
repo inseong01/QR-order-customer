@@ -12,6 +12,9 @@ export const metadata = {
 const inter = Inter({
   subsets: ['latin']
 })
+// const notoSansKR = Noto_Sans_KR({
+//   subsets: ['latin']
+// })
 
 export default function RootLayout({ children }) {
   return (

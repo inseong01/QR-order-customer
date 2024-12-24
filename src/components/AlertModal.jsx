@@ -86,7 +86,12 @@ export default function AlertModal({ type }) {
             transition={{ type: 'spring', duration: 0.3 }}
           >
             <div className={styles.top}>요청되었습니다</div>
-            <Link href={'/visitor'} replace={true} className={styles.bottom} onClick={onClickEnsureSubmit}>
+            <Link
+              href={`/${tableNum}`}
+              replace={true}
+              className={styles.bottom}
+              onClick={onClickEnsureSubmit}
+            >
               <span className={`${styles.title} ${styles.last}`}>확인</span>
             </Link>
           </motion.dialog>

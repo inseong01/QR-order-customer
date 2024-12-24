@@ -2,11 +2,15 @@ import styles from '@/style/visitor/InitialHeader.module.css';
 import LanguageButton from './LanguageButton';
 import CategoriesButton from './CategoriesButton';
 
+import Image from 'next/image';
+
 export default function InitialHeader() {
   return (
     <header className={styles.header}>
       <ul className={styles.top}>
-        <li className={styles.service}>QR Order</li>
+        <li className={styles.service}>
+          <Image src={'/img/qr-order-icon.webp'} alt="qr order" width={88} height={15} />
+        </li>
         <LanguageButton />
       </ul>
       <div className={styles.middle}>

@@ -12,6 +12,7 @@ export default function Popup({ type }) {
   // useSelector
   const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
   const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
+  const tableNum = useSelector((state) => state.userState.tableNum);
   // dispatch
   const dispatch = useDispatch();
   // useRouter
@@ -24,7 +25,7 @@ export default function Popup({ type }) {
 
   // 주문표 확인하기
   function onClickCheckPickUpList() {
-    router.push('visitor/pickUpList');
+    router.push(`${tableNum}/pickUpList`);
   }
 
   switch (type) {
