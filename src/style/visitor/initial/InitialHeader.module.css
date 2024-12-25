@@ -13,7 +13,8 @@
   position: relative;
   z-index: 99;
 }
-/* header top */
+
+/* top */
 .header .top {
   width: 100%;
 }
@@ -26,7 +27,7 @@
   align-items: center;
 }
 
-/* header middle */
+/* middle */
 .middle {
   font-weight: 800;
 }

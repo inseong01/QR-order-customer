@@ -2,7 +2,8 @@
 
 import styles from '@/style/popup/Popup.module.css';
 import CountButton from '../CountButton';
-import { pickUpMenu } from '@/lib/features/requestState/pickUpSlice';
+import { pickUpMenu } from '@/lib/features/pickUpState/pickUpSlice';
+import { setRequestClick } from '@/lib/features/requestState/requestSlice';
 
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
@@ -13,6 +14,7 @@ export default function Popup({ type }) {
   const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
   const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
   const tableNum = useSelector((state) => state.userState.tableNum);
+  const isRequestClicked = useSelector((state) => state.requestState.isClicked);
   // dispatch
   const dispatch = useDispatch();
   // useRouter
@@ -25,6 +27,8 @@ export default function Popup({ type }) {
 
   // 주문표 확인하기
   function onClickCheckPickUpList() {
+    if (isRequestClicked) return;
+    dispatch(setRequestClick({ isClicked: true }));
     router.push(`${tableNum}/pickUpList`);
   }
 

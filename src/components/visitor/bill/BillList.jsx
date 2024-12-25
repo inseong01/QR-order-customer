@@ -16,11 +16,6 @@ export default function BillList() {
     queryFn: () => getTableOrderList(tableNum),
   });
 
-  useEffect(() => {
-    console.log('data: ', data);
-    if (!data) return;
-  }, [data]);
-
   const orderListArr = data[0].order?.map((list) => list.orderList) ?? [];
   const billArr = createReceipt(orderListArr);
   const totalPrice = billArr.reduce((result, data) => result + data.price * data.amount, 0);

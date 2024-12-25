@@ -2,7 +2,7 @@
 
 import styles from '@/style/AlertModal.module.css';
 import { changeModalStatus, fetchOrderListResponse } from '@/lib/features/submitState/submitSlice';
-import { resetCallState } from '@/lib/features/requestState/callSlice';
+import { resetCallState } from '@/lib/features/callState/callSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';

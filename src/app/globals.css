@@ -25,3 +25,7 @@ li {
   color: inherit;
   list-style: none;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

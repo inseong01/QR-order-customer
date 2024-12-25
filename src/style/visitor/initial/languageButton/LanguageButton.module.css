@@ -11,9 +11,7 @@
   transform: translateY(0);
   transition: 0.3s;
 }
-.context {
-  /* zoom: 0.75; */
-}
+
 .country {
   width: 20px;
   height: 20px;

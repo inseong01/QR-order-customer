@@ -1,12 +1,16 @@
-import styles from '@/style/visitor/MenuCateoryTitleList.module.css';
+import styles from '@/style/visitor/initial/MenuCateoryTitleList.module.css';
+import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 import MenuCategory from './MenuCategory';
 
 import 'swiper/css';
 import Swiper from 'swiper';
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-function MenuCateoryTitleList({ data }) {
+function MenuCateoryTitleList() {
+  const { data } = useSuspenseQuery(categoryListQueryOption);
+
   useEffect(() => {
     if (!data) return;
 

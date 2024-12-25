@@ -93,6 +93,7 @@ const pickUpSlice = createSlice({
     builder.addCase(countNumber, (state, action) => {
       // countNumber dispatch 동작 연동
       const calcedNumber = calculateAmount(state.selectedMenu.amount, action.payload.num);
+      if (calcedNumber === state.selectedMenu.amount) return state
       return {
         ...state,
         selectedMenu: {

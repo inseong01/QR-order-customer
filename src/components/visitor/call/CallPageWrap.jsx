@@ -2,7 +2,7 @@
 
 import styles from '@/style/visitor/call/CallPageWrap.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
-import { resetCallState } from '@/lib/features/requestState/callSlice';
+import { resetCallState } from '@/lib/features/callState/callSlice';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
 import CallPageMain from './CallPageMain';
 import SubmitButtonWrap from './SubmitButtonWrap';

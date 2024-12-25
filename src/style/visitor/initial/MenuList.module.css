@@ -1,0 +1,11 @@
+/* menuList */
+.menuList {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+  padding: 15px 0;
+  /* overflow-y: auto; */
+}

@@ -1,6 +1,4 @@
-'use client';
-
-import styles from '@/style/visitor/MenuCategory.module.css';
+import styles from '@/style/visitor/initial/MenuCategory.module.css';
 import { getSelectedMenuCategoryTitle } from '@/lib/features/menuState/menuSlice';
 
 import { motion } from 'motion/react';

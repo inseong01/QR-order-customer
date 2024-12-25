@@ -1,4 +1,4 @@
-import InitialClientPage from '@/components/visitor/InitialClientPage';
+import InitialClientPage from '@/components/visitor/initial/InitialClientPage';
 import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
 import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
 

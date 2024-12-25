@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSliceReducer from "@/lib/features/userState/userSlice.js"
 import menuStateSliceReducer from "@/lib/features/menuState/menuSlice.js"
-import pickUpSlice from "@/lib/features/requestState/pickUpSlice.js"
-import callSliceReducer from "@/lib/features/requestState/callSlice.js"
+import pickUpSlice from "@/lib/features/pickUpState/pickUpSlice.js"
+import callSliceReducer from "@/lib/features/callState/callSlice.js"
 import countNumberSliceReducer from "@/lib/features/countNumberState/countNumberSlice.js"
 import submitSliceReducer from "@/lib/features/submitState/submitSlice.js"
+import requestSliceReducer from '@/lib/features/requestState/requestSlice.js'
 
 export function makeStore() {
   return configureStore({
@@ -15,6 +16,7 @@ export function makeStore() {
       callState: callSliceReducer,
       countNumberState: countNumberSliceReducer,
       submitState: submitSliceReducer,
+      requestState: requestSliceReducer,
     }
   })
 }

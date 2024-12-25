@@ -1,16 +1,15 @@
-import styles from '@/style/visitor/InitialHeader.module.css';
+import styles from '@/style/visitor/initial/InitialHeader.module.css';
 import LanguageButton from './LanguageButton';
 import CategoriesButton from './CategoriesButton';
+import LogoImage from './LogoImage';
 
-import Image from 'next/image';
+import { memo } from 'react';
 
-export default function InitialHeader() {
+function InitialHeader() {
   return (
     <header className={styles.header}>
       <ul className={styles.top}>
-        <li className={styles.service}>
-          <Image src={'/img/qr-order-icon.webp'} alt="qr order" width={88} height={15} />
-        </li>
+        <LogoImage />
         <LanguageButton />
       </ul>
       <div className={styles.middle}>
@@ -21,3 +20,5 @@ export default function InitialHeader() {
     </header>
   );
 }
+
+export default memo(InitialHeader);

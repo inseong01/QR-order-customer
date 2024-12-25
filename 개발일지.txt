@@ -116,9 +116,15 @@
     : useQuery -> SSR 적용, img png -> webp 변환
 
 24.12.24.
-  - 성능 최적화
+  - 웹 성능 최적화 진행
     : useQuery SSR/CSR 적용
   - 이전/이후 코드 성능 내용 추출 "GET"
     : 네트워크 3G 로드 시간 측정
 
-<--- 코드 점검, 성능 최적화 비교  --->
+24.12.25.
+  - 컴포넌트 분할
+  - 요청 횟수 제한: category, pickUp
+  - 렌더링 최적화: initialClientPage
+
+<--- 코드 점검, 렌더링 최적화: submitButton, PickAndCountButton - 선택 추가하면 전부 렌더링 됨, countNumberSlice 사용여부 점검  --->
+

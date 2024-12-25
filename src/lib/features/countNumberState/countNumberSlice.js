@@ -12,7 +12,10 @@ const countNumberSlice = createSlice({
       const currentNum = state.currentNum;
       const receivedNum = Number(action.payload.num);
       let calcedNumber = currentNum + receivedNum
-      if (calcedNumber <= 0) calcedNumber = 1;
+      if (calcedNumber <= 0) return {
+        currentNum
+      };
+
       return {
         currentNum: calcedNumber
       }

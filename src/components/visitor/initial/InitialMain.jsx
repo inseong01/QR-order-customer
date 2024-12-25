@@ -1,15 +1,13 @@
-'use client';
-
-import styles from '@/style/visitor/InitialMain.module.css';
+import styles from '@/style/visitor/initial/InitialMain.module.css';
 import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
 import MenuCateoryTitleList from './MenuCateoryTitleList';
-import Loading from '../loading/Loading';
+import Loading from '../../loading/Loading';
 import MenuList from './MenuList';
 
 import { useSuspenseQueries } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
-export default function InitialMain() {
+function InitialMain() {
   // useState
   const [screenLoading, setLoading] = useState(true);
   // useSuspenseQueries;
@@ -29,10 +27,12 @@ export default function InitialMain() {
         <Loading />
       ) : (
         <>
-          <MenuCateoryTitleList data={categoryList.data} />
-          <MenuList data={menuList.data} isFetched={menuList.isFetched} />
+          <MenuCateoryTitleList />
+          <MenuList />
         </>
       )}
     </main>
   );
 }
+
+export default memo(InitialMain);
