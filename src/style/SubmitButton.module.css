@@ -17,14 +17,10 @@
   border-top: 1px solid #e6e6e6;
   padding: 15px;
 }
+
 /* bottom */
 .bottom {
   width: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
 
   color: white;
   font-weight: 700;

@@ -126,5 +126,12 @@
   - 요청 횟수 제한: category, pickUp
   - 렌더링 최적화: initialClientPage
 
-<--- 코드 점검, 렌더링 최적화: submitButton, PickAndCountButton - 선택 추가하면 전부 렌더링 됨, countNumberSlice 사용여부 점검  --->
+24.12.26.
+  - 팝업 주문 타입 변경 오류 수정
+  - 주문/요청 개수 코드 수정
+  - 렌더링 최적화 / 코드 분할
+    : 개수 증감은 객체 배열에서 특정 항목의 개수를 변경, 다른 항목이 변하지 않더라도 새로운 상태로 반환됨, 전체 렌더링 원인
+  - bundle analyzer 검사
+    : ANALYZE=true npm run build 실행 오류 => npx cross-env ANALYZE=true npm run build
 
+<--- 코드 점검, 트리세이킹, 모듈 사이즈 최소화(swiper...) --->

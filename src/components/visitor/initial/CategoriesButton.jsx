@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
-function CategoriesButton() {
+export default function CategoriesButton() {
   // useSelector
   const tableNum = useSelector((state) => state.userState.tableNum);
   const requestIsClicked = useSelector((state) => state.requestState.isClicked);
@@ -45,5 +45,3 @@ function CategoriesButton() {
     </ul>
   );
 }
-
-export default CategoriesButton;

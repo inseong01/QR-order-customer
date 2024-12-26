@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
-export default function AppVisitorHeader({ title }) {
+function AppVisitorHeader({ title }) {
   // useSelector
   const isSubmit = useSelector((state) => state.submitState.isSubmit);
   // dispatch
@@ -18,7 +18,8 @@ export default function AppVisitorHeader({ title }) {
   function navOnClickBack() {
     if (isSubmit) return;
     router.back();
-    dispatch(resetPickUpState());
+    // 주문완료 이후 초기화
+    // dispatch(resetPickUpState());
   }
 
   return (
@@ -32,3 +33,5 @@ export default function AppVisitorHeader({ title }) {
     </header>
   );
 }
+
+export default AppVisitorHeader;

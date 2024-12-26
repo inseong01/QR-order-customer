@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import calculateAmount from "@/lib/function/calculateAmount";
 
 const initialState = {
   isClicked: false,
@@ -32,14 +31,13 @@ const callSlice = createSlice({
         selectedItemArr: [...state.selectedItemArr, { id, title, amount }]
       }
     },
-    countItemAmount: (state, action) => {
-      const idx = action.payload.idx;
-      const num = action.payload.num;
-      const updateItemArr = state.selectedItemArr.map((item, i) => {
-        const calcedAmount = calculateAmount(item.amount, num);
-        if (i === idx) return {
+    changeItemAmount: (state, action) => {
+      const id = action.payload.id;
+      const amount = action.payload.amount;
+      const updateItemArr = [...state.selectedItemArr].map((item) => {
+        if (item.id === id) return {
           ...item,
-          amount: calcedAmount,
+          amount,
         }
         return { ...item }
       })
@@ -55,5 +53,5 @@ const callSlice = createSlice({
   },
 })
 
-export const { selectCallBtn, countItemAmount, resetCallState } = callSlice.actions;
+export const { selectCallBtn, changeItemAmount, resetCallState } = callSlice.actions;
 export default callSlice.reducer;

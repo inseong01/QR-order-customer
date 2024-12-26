@@ -9,12 +9,19 @@ import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function Popup({ type }) {
+export default function Popup() {
   // useSelector
   const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
+  const selectedMenuID = useSelector((state) => state.pickUpState.selectedMenu.id);
   const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
+  const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
+  const pickUpList = useSelector((state) => state.pickUpState.list);
+  const currentSelectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
   const tableNum = useSelector((state) => state.userState.tableNum);
   const isRequestClicked = useSelector((state) => state.requestState.isClicked);
+  // variant
+  const alreadySelected = pickUpList.some((list) => list.id === currentSelectedMenu.id);
+  const popUpType = !pickUpIsClicked || alreadySelected ? 'order' : 'pick';
   // dispatch
   const dispatch = useDispatch();
   // useRouter
@@ -32,7 +39,7 @@ export default function Popup({ type }) {
     router.push(`${tableNum}/pickUpList`);
   }
 
-  switch (type) {
+  switch (popUpType) {
     case 'pick': {
       return (
         <motion.div
@@ -46,7 +53,7 @@ export default function Popup({ type }) {
             <div className={styles.title}>
               <span className={styles.context}>{selectedMenu.name}</span>
             </div>
-            <CountButton amount={selectedMenuAmount} />
+            <CountButton type={popUpType} amount={selectedMenuAmount} id={selectedMenuID} />
           </div>
           <div className={styles.bottom} onClick={onClickList}>
             <span className={styles.context}>음식 담기</span>

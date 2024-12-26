@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { countNumber } from "../countNumberState/countNumberSlice";
 import calculateAmount from "@/lib/function/calculateAmount";
 
 const initialState = {
@@ -63,12 +62,11 @@ const pickUpSlice = createSlice({
     resetPickUpState: (state, action) => {
       return initialState;
     },
-    calculateAmountInPickUpList: (state, action) => {
-      const idx = action.payload.idx;
-      const num = action.payload.num;
-      const updateList = state.list.map((list, i) => {
-        if (i !== idx) return { ...list }
-        const amount = calculateAmount(list.amount, num);
+    changeAmountInPickUpList: (state, action) => {
+      const id = action.payload.id;
+      const amount = action.payload.amount;
+      const updateList = [...state.list].map((list) => {
+        if (list.id !== id) return { ...list }
         return {
           ...list,
           amount
@@ -80,6 +78,16 @@ const pickUpSlice = createSlice({
         list: updateList
       }
     },
+    changeSelectedMenuAmount: (state, action) => {
+      const amount = action.payload.amount;
+      return {
+        ...state,
+        selectedMenu: {
+          ...state.selectedMenu,
+          amount
+        }
+      }
+    },
     deletePickUpList: (state, action) => {
       const id = action.payload.id;
       const updateList = state.list.filter((list) => list.id !== id)
@@ -89,21 +97,7 @@ const pickUpSlice = createSlice({
       }
     },
   },
-  extraReducers: builder => {
-    builder.addCase(countNumber, (state, action) => {
-      // countNumber dispatch 동작 연동
-      const calcedNumber = calculateAmount(state.selectedMenu.amount, action.payload.num);
-      if (calcedNumber === state.selectedMenu.amount) return state
-      return {
-        ...state,
-        selectedMenu: {
-          ...state.selectedMenu,
-          amount: calcedNumber
-        }
-      }
-    })
-  }
 })
 
-export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState, calculateAmountInPickUpList, deletePickUpList } = pickUpSlice.actions;
+export const { clickMenu, pickUpMenu, addMenuToPickUpList, resetPickUpState, changeAmountInPickUpList, deletePickUpList, changeSelectedMenuAmount } = pickUpSlice.actions;
 export default pickUpSlice.reducer;

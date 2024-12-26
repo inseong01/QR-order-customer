@@ -6,14 +6,11 @@ import { motion } from 'motion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { memo } from 'react';
 
-function Request({ req }) {
-  // useSelector
-  const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
+function Request({ req, isIncludedItem }) {
   // useDispatch
   const dispatch = useDispatch();
   // variant
   const { title } = req;
-  const isIncludedItem = selectedItemArr.some((item) => item.id === req.id);
 
   function onClickSelect({ id, title }) {
     return () => {

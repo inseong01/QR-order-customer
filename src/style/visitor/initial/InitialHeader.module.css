@@ -26,6 +26,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.table {
+  font-size: 13px;
+}
 
 /* middle */
 .middle {

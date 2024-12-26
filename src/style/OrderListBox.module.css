@@ -24,6 +24,7 @@
   min-width: 120px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
   text-align: right;
 }

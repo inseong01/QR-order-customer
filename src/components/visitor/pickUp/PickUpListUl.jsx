@@ -10,9 +10,9 @@ export default function PickUpListUl() {
   // useDispatch
   const dispatch = useDispatch();
 
-  function onClickdeletePickUpList({ key }) {
+  function onClickdeletePickUpList(id) {
     return () => {
-      dispatch(deletePickUpList({ key }));
+      dispatch(deletePickUpList({ id }));
     };
   }
 
@@ -21,7 +21,7 @@ export default function PickUpListUl() {
       {currentOrderList.length !== 0 ? (
         <>
           {currentOrderList.map((list, idx) => {
-            const { name, price, amount } = list;
+            const { name, price, amount, id } = list;
             const priceToString = price.toLocaleString();
             return (
               <li key={idx} className={styles.list}>
@@ -31,10 +31,10 @@ export default function PickUpListUl() {
                     <div className={styles.price}>{priceToString}원</div>
                   </div>
                   <div className={styles.bottom}>
-                    <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(list)}>
+                    <div className={styles.deleteBtn} onClick={onClickdeletePickUpList(id)}>
                       빼기
                     </div>
-                    <CountButton amount={amount} idx={idx} countFunction={calculateAmountInPickUpList} />
+                    <CountButton type={'pickUpList'} amount={amount} id={id} />
                   </div>
                 </div>
                 <div className={styles.line}></div>

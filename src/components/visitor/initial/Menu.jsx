@@ -1,5 +1,4 @@
 import styles from '@/style/visitor/initial/Menu.module.css';
-import { resetCountNumberState } from '@/lib/features/countNumberState/countNumberSlice';
 import { clickMenu } from '@/lib/features/pickUpState/pickUpSlice';
 import { liVariants } from '@/lib/motion/middle/motion_menuList';
 import MenuIconWrap from './MenuIconWrap';
@@ -8,7 +7,7 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Menu({ list }) {
+export default function Menu({ list }) {
   // useSelector
   const currentOrderList = useSelector((state) => state.pickUpState.list);
   // dispatch
@@ -38,7 +37,6 @@ function Menu({ list }) {
     return () => {
       if (tag === 'soldout') return;
       dispatch(clickMenu({ menuData: { name, price, tag, id } }));
-      dispatch(resetCountNumberState());
     };
   }
 
@@ -80,5 +78,3 @@ function Menu({ list }) {
     </motion.li>
   );
 }
-
-export default Menu;

@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 import { useEffect } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-function MenuCateoryTitleList() {
+export default function MenuCateoryTitleList() {
   const { data } = useSuspenseQuery(categoryListQueryOption);
 
   useEffect(() => {
@@ -50,5 +50,3 @@ function MenuCateoryTitleList() {
     </>
   );
 }
-
-export default MenuCateoryTitleList;

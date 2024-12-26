@@ -3,7 +3,7 @@ import PickItem from './PickItem';
 
 import { useSelector } from 'react-redux';
 
-export default (function PickAndCountButton() {
+export default function PickAndCountButton() {
   // useSelector
   const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
 
@@ -11,9 +11,9 @@ export default (function PickAndCountButton() {
     <div className={styles.pickAndCount}>
       <ul className={styles.pickList}>
         {selectedItemArr.map((item, idx) => {
-          return <PickItem key={idx} item={item} idx={idx} />;
+          return <PickItem key={idx} item={item} />;
         })}
       </ul>
     </div>
   );
-});
+}

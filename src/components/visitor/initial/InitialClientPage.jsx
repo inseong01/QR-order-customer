@@ -13,12 +13,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname } from 'next/navigation';
 
-function InitialClientPage() {
+export default function InitialClientPage() {
   // useSelector
   const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
   const pickUpList = useSelector((state) => state.pickUpState.list);
-  // variant
-  const popUpType = pickUpList.length && !pickUpIsClicked ? 'order' : 'pick';
   // dispatch
   const dispatch = useDispatch();
   // usePathname
@@ -44,11 +42,7 @@ function InitialClientPage() {
     >
       <InitialHeader />
       <InitialMain />
-      <AnimatePresence>
-        {(pickUpList.length || pickUpIsClicked) && <Popup type={popUpType} key={'popUp'} />}
-      </AnimatePresence>
+      <AnimatePresence>{(pickUpList.length || pickUpIsClicked) && <Popup key={'popUp'} />}</AnimatePresence>
     </motion.div>
   );
 }
-
-export default InitialClientPage;

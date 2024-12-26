@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+import withBundleAnalyzer from '@next/bundle-analyzer'
+
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true'
+})
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
@@ -14,14 +21,6 @@ const nextConfig = {
       }
     ]
   },
-  rewrites() {
-    return [
-      {
-        source: '/visitor/api/menu',
-        destination: 'http://localhost:3001/data/menu'
-      }
-    ]
-  }
 };
 
-export default nextConfig;
+export default bundleAnalyzer(nextConfig);
