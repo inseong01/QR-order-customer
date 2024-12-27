@@ -1,35 +1,19 @@
 /* cateoryList */
 .cateoryList {
   width: 100%;
-  height: 5vh;
-  min-height: 40px;
-  max-height: 40px;
+  height: 40px;
   padding: 0 15px;
   border-bottom: 1px solid #e7e7e7;
   background-color: #fff;
 
   position: relative;
+  display: flex;
+  overflow-x: auto;
+
+  /* underLine cover */
+  padding-bottom: 1px;
 }
-
-.swiper-wrapper div {
-  height: 100%;
-
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-}
-
-/* seperate line */
-.swiper-wrapper > div::after {
-  position: absolute;
-  content: '';
-  top: 15px;
-  right: -15px;
-  width: 1px;
-  height: 12px;
-  background-color: #e7e7e7;
-
-  cursor: default;
+.cateoryList::-webkit-scrollbar {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
 }

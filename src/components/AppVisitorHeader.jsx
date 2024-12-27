@@ -1,7 +1,6 @@
 'use client';
 
 import styles from '@/style/AppVisitorHeader.module.css';
-import { resetPickUpState } from '@/lib/features/pickUpState/pickUpSlice';
 
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';

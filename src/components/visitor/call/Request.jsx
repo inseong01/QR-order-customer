@@ -3,7 +3,7 @@ import { selectCallBtn } from '@/lib/features/callState/callSlice';
 import { child } from '@/lib/motion/call/motion_requestList';
 
 import { motion } from 'motion/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { memo } from 'react';
 
 function Request({ req, isIncludedItem }) {

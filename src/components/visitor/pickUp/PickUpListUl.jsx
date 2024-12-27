@@ -1,5 +1,5 @@
 import styles from '@/style/visitor/pickUpList/PickUpListUl.module.css';
-import { calculateAmountInPickUpList, deletePickUpList } from '@/lib/features/pickUpState/pickUpSlice';
+import { deletePickUpList } from '@/lib/features/pickUpState/pickUpSlice';
 import CountButton from '../../CountButton';
 
 import { useDispatch, useSelector } from 'react-redux';

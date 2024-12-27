@@ -4,7 +4,6 @@ import AlertModal from '../../AlertModal';
 
 import { motion, AnimatePresence } from 'motion/react';
 import { useSelector } from 'react-redux';
-import { memo } from 'react';
 
 export default function NotCompletedOrder() {
   // useSelector

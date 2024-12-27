@@ -128,10 +128,18 @@
 
 24.12.26.
   - 팝업 주문 타입 변경 오류 수정
-  - 주문/요청 개수 코드 수정
+  - 주문/요청 개수 코드 개선
   - 렌더링 최적화 / 코드 분할
     : 개수 증감은 객체 배열에서 특정 항목의 개수를 변경, 다른 항목이 변하지 않더라도 새로운 상태로 반환됨, 전체 렌더링 원인
   - bundle analyzer 검사
     : ANALYZE=true npm run build 실행 오류 => npx cross-env ANALYZE=true npm run build
 
-<--- 코드 점검, 트리세이킹, 모듈 사이즈 최소화(swiper...) --->
+24.12.27.
+  - swiper 자체 구현
+    : overflow-x 적용, category min/max-width 적용, onDrag 이벤트
+  - MenuCategory 렌더링: useSelector 원인, 전부 렌더링 됨 
+
+<--- 코드 점검, dynamic 적용(language) --->
+  - 트리세이킹: NextJS 자체 ESM 적용됨, commonJS 동적구조로 정적분석 불가, 적용 해당하지 않음 -> 트리세이킹: 웹팩 공식문서 참고확인, 빌드: 웹팩 사용하는지 NextJS 공식문서 참고확인  
+  - motion 번들 최소화 하기
+    : https://motion.dev/docs/react-reduce-bundle-size

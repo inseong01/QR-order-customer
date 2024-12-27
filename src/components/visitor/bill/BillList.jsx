@@ -5,7 +5,6 @@ import OrderListBox from '../order/OrderListBox';
 
 import { useSelector } from 'react-redux';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 export default function BillList() {
   // useSelector
