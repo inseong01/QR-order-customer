@@ -15,10 +15,12 @@ export default function OrderListPageBox() {
   const { data } = useSuspenseQuery({
     queryKey: ['orderList'],
     queryFn: () => getTableOrderList(tableNum),
+    staleTime: 1000 * 1,
   });
   const [orderListArr, setListArr] = useState([]);
 
   useEffect(() => {
+    console.log('data', data);
     if (!data) return;
 
     setListArr(
@@ -28,7 +30,7 @@ export default function OrderListPageBox() {
 
   return (
     <ul className={`${styles.listWrap}`}>
-      {!data ? (
+      {!orderListArr.length ? (
         <li className={`${styles.list}`}>
           <div className={styles.top}>
             <div className={styles.title}>주문 내역이 없습니다.</div>

@@ -4,6 +4,16 @@ import { getSelectedMenuCategoryTitle } from '@/lib/features/menuState/menuSlice
 import { useDispatch, useSelector } from 'react-redux';
 import MenuCategoryUnderLine from './MenuCategoryUnderLine';
 
+function Category({ category, children, onClickChangeMenuTitle }) {
+  return (
+    <div className={styles.category} onClick={onClickChangeMenuTitle}>
+      <div className={`${styles.titleWrap}`}>
+        <span className={styles.title}>{category.title}</span>
+      </div>
+      {children}
+    </div>
+  );
+}
 export default function MenuCategory({ category }) {
   // useSelector
   const selectedTagTitle = useSelector((state) => state.menuState.selectedMenuCategoryTitle);
@@ -16,11 +26,8 @@ export default function MenuCategory({ category }) {
   }
 
   return (
-    <div className={styles.category} onClick={onClickChangeMenuTitle}>
-      <div className={`${styles.titleWrap}`}>
-        <span className={styles.title}>{category.title}</span>
-      </div>
+    <Category category={category} onClickChangeMenuTitle={onClickChangeMenuTitle}>
       <MenuCategoryUnderLine category={category} />
-    </div>
+    </Category>
   );
 }

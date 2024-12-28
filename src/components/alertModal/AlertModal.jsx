@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/style/AlertModal.module.css';
+import styles from '@/style/alertModal/AlertModal.module.css';
 import { changeModalStatus, fetchOrderListResponse } from '@/lib/features/submitState/submitSlice';
 import { resetCallState } from '@/lib/features/callState/callSlice';
 
@@ -103,13 +103,6 @@ export default function AlertModal({ type }) {
             transition={{ duration: 0.3 }}
           ></motion.div>
         </>
-      );
-    }
-    case 'empty': {
-      return (
-        <div id="empty" className={`${styles.wrap} ${styles.error}`}>
-          <span className={styles.msg}>항목을 골라주세요</span>
-        </div>
       );
     }
   }

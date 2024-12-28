@@ -81,7 +81,8 @@ const submitSlice = createSlice({
       console.log('fetchOrderListResponse.fulfilled')
       return {
         ...state,
-        isSubmit: true,
+        // 뒤로가기 허용
+        isSubmit: false,
         status: 'fulfilled'
       }
     })

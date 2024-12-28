@@ -9,9 +9,13 @@ import PickUpListSubmit from './PickUpListSubmit';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function PickUpListPageWrap() {
+function AppVisitorHeaderBox() {
   // useSelector
   const submitStatus = useSelector((state) => state.submitState.status);
+  return <AppVisitorHeader title={submitStatus !== 'fulfilled' ? '주문표' : '주문완료'} />;
+}
+
+export default function PickUpListPageWrap() {
   // dispatch
   const dispatch = useDispatch();
 
@@ -21,7 +25,7 @@ export default function PickUpListPageWrap() {
 
   return (
     <div className={styles.wrap}>
-      <AppVisitorHeader title={submitStatus !== 'OK' ? '주문표' : '주문완료'} />
+      <AppVisitorHeaderBox />
       <PickUpListMain />
       <PickUpListSubmit />
     </div>

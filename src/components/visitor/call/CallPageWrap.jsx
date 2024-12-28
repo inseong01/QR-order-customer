@@ -6,7 +6,7 @@ import { resetCallState } from '@/lib/features/callState/callSlice';
 import { changeModalId } from '@/lib/features/submitState/submitSlice';
 import CallPageMain from './CallPageMain';
 import SubmitButtonWrap from './SubmitButtonWrap';
-import AlertModalWrap from './AlertModalWrap';
+import DynamicAlertModalBox from '../../alertModal/DynamicAlertModalBox';
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -25,7 +25,7 @@ export default function CallPageWrap() {
       <AppVisitorHeader title={'직원호출'} />
       <CallPageMain />
       <SubmitButtonWrap />
-      <AlertModalWrap />
+      <DynamicAlertModalBox />
     </div>
   );
 }

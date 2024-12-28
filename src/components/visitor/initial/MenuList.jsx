@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-function MenuList() {
+export default function MenuList() {
   // useState
   const [isfirstLoad, setIsFirstLoad] = useState(true);
   // useSelector
@@ -37,5 +37,3 @@ function MenuList() {
     </motion.ul>
   );
 }
-
-export default MenuList;

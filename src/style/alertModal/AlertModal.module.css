@@ -67,13 +67,3 @@
 .title.last {
   border-right: none;
 }
-
-/* error msg */
-.error {
-  height: auto;
-  min-height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
