@@ -46,7 +46,7 @@ export default function MenuIconBox({ list }) {
 
   return (
     <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="popLayout">
         {!isPickedItem ? (
           list.tag === 'soldout' ? (
             <div className={styles.shopIcon}>
@@ -64,7 +64,7 @@ export default function MenuIconBox({ list }) {
               key={'plus'}
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 180 }}
-              exit={{ rotateY: 0 }}
+              exit={{ rotateY: 360 }}
               transition={{ duration: 0.3 }}
               onAnimationStart={() => setIsIconClicked(true)}
               onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
@@ -78,7 +78,7 @@ export default function MenuIconBox({ list }) {
             key={'minus'}
             initial={{ rotateY: 0 }}
             animate={{ rotateY: 180 }}
-            exit={{ rotateY: 0 }}
+            exit={{ rotateY: 360 }}
             transition={{ duration: 0.3 }}
             onAnimationStart={() => setIsIconClicked(true)}
             onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}

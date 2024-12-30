@@ -1,4 +1,4 @@
-import styles from '@/style/visitor/initial/MenuCateoryTitleList.module.css';
+import styles from '@/style/visitor/initial/menuCategory/MenuCateoryTitleList.module.css';
 import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { throttle } from '@/lib/function/throttle';
 import MenuCategoryList from './MenuCategoryList';

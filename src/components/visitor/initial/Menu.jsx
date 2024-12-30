@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { memo } from 'react';
-import MenuImageBox from './MenuImageBox';
-import MenuIconBox from './MenuIconBox';
+import MenuImageBox from './menuCategory/MenuImageBox';
+import MenuIconBox from './menuCategory/MenuIconBox';
 
 export default memo(function Menu({ list }) {
   // dispatch

@@ -1,4 +1,4 @@
-import styles from '@/style/visitor/initial/MenuCategory.module.css';
+import styles from '@/style/visitor/initial/MenuCategory/MenuCategory.module.css';
 import { getSelectedMenuCategoryTitle } from '@/lib/features/menuState/menuSlice';
 
 import { useDispatch, useSelector } from 'react-redux';

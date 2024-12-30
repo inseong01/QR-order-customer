@@ -1,6 +1,6 @@
 import styles from '@/style/visitor/initial/InitialMain.module.css';
 import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
-import MenuCateoryTitleList from './MenuCateoryTitleList';
+import MenuCateoryTitleList from './menuCategory/MenuCateoryTitleList';
 import Loading from '../../loading/Loading';
 import MenuList from './MenuList';
 

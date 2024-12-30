@@ -16,7 +16,7 @@ export default function MainLanguage({ languageList, isClicked }) {
         variants={arrowVar}
         animate={isClicked ? 'active' : 'inactive'}
       >
-        <Image src={'/img/down-arrow.webp'} alt="아랫 방향 화살표" width={10} height={10} />
+        {/* <Image src={'/img/down-arrow.webp'} alt="아랫 방향 화살표" width={10} height={10} /> */}
       </motion.div>
     </>
   );

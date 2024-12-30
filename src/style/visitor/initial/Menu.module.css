@@ -85,7 +85,6 @@
 /* shopping cart icon */
 .shopIconWrap {
   width: 100%;
-  height: 20px;
 
   display: flex;
   justify-content: flex-end;
@@ -93,14 +92,13 @@
 .iconBox {
   width: 20px;
   height: 20px;
-  background-color: white;
-  border-radius: 50%;
-
   position: relative;
 }
 .shopIcon {
   width: 100%;
   height: 100%;
+  background-color: white;
+  border-radius: 50%;
 
   position: absolute;
   top: 0;

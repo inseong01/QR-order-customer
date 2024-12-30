@@ -1,4 +1,4 @@
-import styles from '@/style/visitor/initial/MenuCategory.module.css';
+import styles from '@/style/visitor/initial/menuCategory/MenuCategoryUnderLine.module.css';
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

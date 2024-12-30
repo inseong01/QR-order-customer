@@ -1,10 +1,10 @@
 import styles from '@/style/visitor/initial/languageButton/LanguageButton.module.css';
-import MainLanguage from './languageButton/MainLanguage';
+import MainLanguage from './MainLanguage';
 
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
-const DynamicSubLanguages = dynamic(() => import('./languageButton/SubLanguages'));
+// const DynamicSubLanguages = dynamic(() => import('./languageButton/SubLanguages'));
 
 const languageList = [
   {
@@ -37,7 +37,7 @@ export default function LanguageButton() {
   return (
     <li className={styles.langBox} onClick={onClickLanguageBtn}>
       <MainLanguage languageList={languageList} isClicked={isClicked} />
-      {isMounted && <DynamicSubLanguages languageList={languageList} isClicked={isClicked} />}
+      {/* {isMounted && <DynamicSubLanguages languageList={languageList} isClicked={isClicked} />} */}
     </li>
   );
 }

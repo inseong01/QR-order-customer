@@ -1,5 +1,5 @@
 import styles from '@/style/visitor/initial/InitialHeader.module.css';
-import LanguageButton from './LanguageButton';
+import LanguageButton from './languageButton/LanguageButton';
 import CategoriesButton from './CategoriesButton';
 import LogoImage from './LogoImage';
 import HeaderMiddle from './HeaderMiddle';
