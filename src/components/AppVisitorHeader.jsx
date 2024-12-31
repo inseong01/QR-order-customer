@@ -30,7 +30,7 @@ function AppVisitorHeader({ title }) {
     <header className={styles.header}>
       <div className={styles.wrap}>
         <div onClick={navOnClickBack} className={styles.nav}>
-          <Image src={'/img/back-button.png'} alt={'이전'} width={15} height={15} />
+          <Image src={'/img/back-button.webp'} alt={'이전'} width={15} height={15} />
         </div>
         <div className={styles.title}>{title}</div>
       </div>
