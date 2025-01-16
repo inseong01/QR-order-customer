@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- 고객 전용 QR-order 로고 삽입 -->
+## QR-Order-Customer
+QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주문 웹 애플리케이션**입니다.
 
-## Getting Started
+이 웹 애플리케이션은 [QR-order-admin 프로젝트](https://github.com/inseong01/QR-order-admin)와 연계됩니다.
 
-First, run the development server:
+## 프로젝트
+### 목표
+- 효율적인 주문 접근    
+  : 메뉴판을 찾을 필요 없이 스마트폰으로 즉시 메뉴 확인, 주문 과정 진입 시간 최소화
 
+- 사용자 만족도 향상    
+  : 웹 구조 복잡함 없이 필요한 정보 제공, 주문 과정 직관화
+  
+### 웹 주요 기능 
+- 메뉴
+  1. 카테고리 별 메뉴 분류
+  2. 장바구니 담기/빼기
+
+- 테이블 요청   
+
+- 주문 목록    
+
+- 계산서
+
+- 주문
+
+### 기술 스택
+`React` `Next` `Tanstack React Query` `Redux` `Supabase`
+
+## 미리보기
+
+클릭하면 [QR-order-client 웹 1번 테이블](https://qr-order-client.vercel.app/1)로 접속할 수 있어요.
+
+## 설치하기
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 리포지토리를 클론합니다
+git clone https://github.com/inseong01/QR-order-customer.git
+
+# 프로젝트 디렉터리로 이동합니다
+cd qr-order-customer
+
+# 필요한 패키지를 설치합니다
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 서버 접속
+```bash
+# .env 파일이 존재하지 않아 서버를 생성/접속할 수 없어요 :(
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<!-- QR-order 로고 첨부 -->
