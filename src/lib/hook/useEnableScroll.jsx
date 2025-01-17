@@ -11,6 +11,7 @@ export default function useEnableScroll(scrollContainer) {
   // 화면 너비 감지
   useEffect(() => {
     if (!scrollContainer.current) return;
+    // 스크롤 조건적 허용, 이벤트 발생 제한
     function checkScroll() {
       if (scrollContainer.current.scrollWidth > scrollContainer.current.offsetWidth) {
         setScrollAble(true);

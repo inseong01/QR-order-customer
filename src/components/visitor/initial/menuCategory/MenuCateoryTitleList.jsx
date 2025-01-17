@@ -1,18 +1,19 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuCateoryTitleList.module.css';
 import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { throttle } from '@/lib/function/throttle';
+import useEnableScroll from '@/lib/hook/useEnableScroll';
 import MenuCategoryList from './MenuCategoryList';
 
 import { motion } from 'motion/react';
 import { useRef, useState } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import useEnableScroll from '@/lib/hook/useEnableScroll';
 
 export default function MenuCateoryTitleList() {
   // useState
   const [scrollStart, geScrollX] = useState({});
   // useRef
   const scrollContainer = useRef(null);
+  const callCount = useRef(0);
   // useSuspenseQuery
   const { data } = useSuspenseQuery(categoryListQueryOption);
   // hook
@@ -38,6 +39,23 @@ export default function MenuCateoryTitleList() {
     // 스크롤 위치가 스크롤 길이를 넘지 않도록 제한
     const scrollAmount = Math.max(0, Math.min(newScrollLeft, maxScrollLeft));
     scrollContainer.current.scrollLeft = scrollAmount;
+    // 성능 측정 및 출력 (개발 전용)
+    if (process.env.NODE_ENV === 'development') {
+      callCount.current += 1;
+      if (callCount.current === 100) {
+        performance.mark('end');
+        console.log('Performance measure', performance.measure('onDrag', 'start', 'end'));
+        callCount.current = 0;
+      }
+    }
+  }
+
+  function performanceOnDragStart(e) {
+    // 성능 측정 시작 (개발 전용)
+    if (process.env.NODE_ENV === 'development') {
+      performance.mark('start');
+    }
+    onDragStart(e);
   }
 
   return (
@@ -49,9 +67,9 @@ export default function MenuCateoryTitleList() {
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           draggable={isScrollAble}
-          onDragStart={onDragStart}
-          onDrag={throttle(onDragMouse, 20)}
-          onDragEnd={throttle(onDragMouse, 20)}
+          onDragStart={performanceOnDragStart}
+          onDrag={throttle(onDragMouse, 0)}
+          onDragEnd={throttle(onDragMouse, 0)}
         >
           <MenuCategoryList />
         </motion.div>

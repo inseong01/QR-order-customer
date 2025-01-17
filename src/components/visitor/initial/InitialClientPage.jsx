@@ -30,7 +30,7 @@ export default function InitialClientPage() {
     // 팝업 초기화
     dispatch(resetRequestState());
 
-    // 고유 테이블 숫자 할당 (임시 - 가끔 초기값 0으로 설정될 때 있음)
+    // 고유 테이블 숫자 할당 (가끔 초기값 0으로 설정될 때 있음)
     const tableNum = Number(pathName.replace('/', ''));
     dispatch(setTableNum({ tableNum }));
   }, []);
