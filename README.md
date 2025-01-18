@@ -1,4 +1,5 @@
-<!-- 고객 전용 QR-order 로고 삽입 -->
+![qr-order-customer-img](./docs/src/img/qr-order-customer.png)
+
 ## QR-Order-Customer
 QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주문 웹 애플리케이션**입니다.
 
@@ -7,9 +8,9 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 ## 프로젝트
 ### 목표
 - 효율적인 주문 접근    
-  : 메뉴판을 찾을 필요 없이 스마트폰으로 즉시 메뉴 확인, 주문 과정 진입 시간 최소화
+  : 메뉴판을 찾을 필요 없이 스마트폰으로 메뉴 즉시 확인, 주문 과정 진입 시간 최소화
 
-- 사용자 만족도 향상    
+- 고객 만족도 향상    
   : 웹 구조 복잡함 없이 필요한 정보 제공, 주문 과정 직관화
   
 ### 웹 주요 기능 
@@ -30,7 +31,9 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 
 ## 미리보기
 
-클릭하면 [QR-order-client 웹 1번 테이블](https://qr-order-client.vercel.app/1)로 접속할 수 있어요.
+클릭하면 [QR-ORDER 고객 전용 서비스](https://qr-order-client.vercel.app/1)를 웹 브라우저에서 경험할 수 있어요.    
+
+매장 1번 테이블로 접속돼요 😊
 
 ## 설치하기
 ```bash
@@ -49,4 +52,8 @@ npm install
 # .env 파일이 존재하지 않아 서버를 생성/접속할 수 없어요 :(
 ```
 
-<!-- QR-order 로고 첨부 -->
+<br />
+
+---
+
+<img src="./docs/src/img/qr-order-logo.png" width="150px" align="right" />
