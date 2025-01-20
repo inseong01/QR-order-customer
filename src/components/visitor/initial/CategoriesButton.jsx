@@ -1,9 +1,10 @@
 import styles from '@/style/visitor/initial/CategoriesButton.module.css';
 import { setRequestClick } from '@/lib/features/requestState/requestSlice';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBellConcierge, faList, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 export default function CategoriesButton() {
   // useSelector
@@ -25,21 +26,21 @@ export default function CategoriesButton() {
   return (
     <ul className={styles.categories}>
       <li className={styles.cate} onClick={onClickRouterOnce('call')}>
-        <span className={styles.icon}>
-          <Image src="/img/bell.webp" alt="직원호출" width={15} height={15} />
-        </span>
+        <div className={styles.icon}>
+          <FontAwesomeIcon icon={faBellConcierge} />
+        </div>
         <span className={styles.title}>직원호출</span>
       </li>
       <li className={styles.cate} onClick={onClickRouterOnce('orderList')}>
-        <span className={styles.icon}>
-          <Image src="/img/bullet-list.webp" alt="주문내역" width={15} height={15} />
-        </span>
+        <div className={styles.icon}>
+          <FontAwesomeIcon icon={faList} />
+        </div>
         <span className={styles.title}>주문내역</span>
       </li>
       <li className={styles.cate} onClick={onClickRouterOnce('bill')}>
-        <span className={styles.icon}>
-          <Image src="/img/won.webp" alt="계산서" width={15} height={15} />
-        </span>
+        <div className={styles.icon}>
+          <FontAwesomeIcon icon={faReceipt} />
+        </div>
         <span className={styles.title}>계산서</span>
       </li>
     </ul>

@@ -1,11 +1,12 @@
 'use client';
 
 import styles from '@/style/CountButton.module.css';
+import calculateAmount from '@/lib/function/calculateAmount';
 import { changeItemAmount } from '@/lib/features/callState/callSlice';
+import { changeAmountInPickUpList, changeSelectedMenuAmount } from '@/lib/features/pickUpState/pickUpSlice';
+import PlusMinusIcon from './SimpleIcon';
 
 import { useDispatch } from 'react-redux';
-import calculateAmount from '@/lib/function/calculateAmount';
-import { changeAmountInPickUpList, changeSelectedMenuAmount } from '@/lib/features/pickUpState/pickUpSlice';
 
 export default function CountButton({ type, amount, id }) {
   // dispatch
@@ -39,13 +40,13 @@ export default function CountButton({ type, amount, id }) {
   return (
     <div className={styles.btnWrap}>
       <div className={styles.count} onClick={onClickMenuCount(-1)}>
-        <span className={styles.context}>-</span>
+        <PlusMinusIcon type={'minus'} />
       </div>
       <div className={styles.number}>
-        <span className={styles.context}>{amount}</span>
+        <span>{amount}</span>
       </div>
       <div className={styles.count} onClick={onClickMenuCount(1)}>
-        <span className={styles.context}>+</span>
+        <PlusMinusIcon type={'plus'} />
       </div>
     </div>
   );

@@ -12,16 +12,15 @@
 
 /* cate icon */
 .cate {
+  height: 19px;
+
   display: flex;
   align-items: center;
   gap: 5px;
 
   cursor: pointer;
 }
-.icon {
-  width: 15px;
-  height: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.title {
+  line-height: 19px;
 }

@@ -1,7 +1,7 @@
-import styles from '@/style/visitor/initial/Menu.module.css';
+import styles from '@/style/visitor/initial/menuCategory/MenuIconBox.module.css';
 import { addMenuToPickUpList, deletePickUpList } from '@/lib/features/pickUpState/pickUpSlice';
+import PlusMinusIcon from '@/components/SimpleIcon';
 
-import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,23 +45,32 @@ export default function MenuIconBox({ list }) {
   }
 
   return (
-    <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
-      <AnimatePresence initial={false} mode="popLayout">
-        {!isPickedItem ? (
-          list.tag === 'soldout' ? (
-            <div className={styles.shopIcon}>
-              <Image
-                src={'/img/error-border-icon.webp'}
-                alt="제한"
-                width={20}
-                height={20}
-                style={{ filter: 'opacity(0.3)' }}
-              />
-            </div>
+    <div className={styles.shopIconWrap}>
+      <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
+        <AnimatePresence initial={false} mode="popLayout">
+          {!isPickedItem ? (
+            list.tag === 'soldout' ? (
+              <div className={`${styles.shopIcon} ${styles.disabled}`}>
+                <PlusMinusIcon type={'plus'} />
+              </div>
+            ) : (
+              <motion.div
+                className={styles.shopIcon}
+                key={'plus'}
+                initial={{ rotateY: 0 }}
+                animate={{ rotateY: 180 }}
+                exit={{ rotateY: 360 }}
+                transition={{ duration: 0.3 }}
+                onAnimationStart={() => setIsIconClicked(true)}
+                onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
+              >
+                <PlusMinusIcon type={'plus'} />
+              </motion.div>
+            )
           ) : (
             <motion.div
               className={styles.shopIcon}
-              key={'plus'}
+              key={'minus'}
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 180 }}
               exit={{ rotateY: 360 }}
@@ -69,24 +78,11 @@ export default function MenuIconBox({ list }) {
               onAnimationStart={() => setIsIconClicked(true)}
               onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
             >
-              <Image src={'/img/plus-border-icon.webp'} alt="담기" width={20} height={20} loading="lazy" />
+              <PlusMinusIcon type={'minus'} />
             </motion.div>
-          )
-        ) : (
-          <motion.div
-            className={styles.shopIcon}
-            key={'minus'}
-            initial={{ rotateY: 0 }}
-            animate={{ rotateY: 180 }}
-            exit={{ rotateY: 360 }}
-            transition={{ duration: 0.3 }}
-            onAnimationStart={() => setIsIconClicked(true)}
-            onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
-          >
-            <Image src={'/img/minus-border-icon.webp'} alt="빼기" width={20} height={20} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

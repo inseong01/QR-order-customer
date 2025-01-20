@@ -1,0 +1,26 @@
+/* shopping cart icon */
+.shopIconWrap {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+}
+.iconBox {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+/* 장바구니 아이콘 span */
+.shopIcon {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 1px solid #222;
+  border-radius: 50%;
+}
+
+/* 품절 */
+.shopIcon.disabled {
+  filter: opacity(0.3);
+}

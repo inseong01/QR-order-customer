@@ -1,12 +1,3 @@
-// motion
-export const arrowVar = {
-  active: {
-    rotateZ: -180,
-  },
-  inactive: {
-    rotateZ: 0,
-  },
-};
 // ul
 export const ulVar = {
   active: {

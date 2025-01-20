@@ -2,8 +2,8 @@
 
 import styles from '@/style/AppVisitorHeader.module.css';
 import { resetPickUpState } from '@/lib/features/pickUpState/pickUpSlice';
+import SimpleIcon from './SimpleIcon';
 
-import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
@@ -30,7 +30,9 @@ function AppVisitorHeader({ title }) {
     <header className={styles.header}>
       <div className={styles.wrap}>
         <div onClick={navOnClickBack} className={styles.nav}>
-          <Image src={'/img/back-button.webp'} alt={'이전'} width={15} height={15} />
+          <SimpleIcon type={'arrow-left'} />
+          {/* <FontAwesomeIcon icon={faChevronCircleLeft} /> */}
+          {/* <Image src={'/img/back-button.webp'} alt={'이전'} width={15} height={15} /> */}
         </div>
         <div className={styles.title}>{title}</div>
       </div>

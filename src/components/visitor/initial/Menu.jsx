@@ -51,9 +51,7 @@ export default memo(function Menu({ list }) {
           <div className={styles.name}>{name}</div>
           <div className={styles.price}>{priceToString}원</div>
         </div>
-        <div className={styles.shopIconWrap}>
-          <MenuIconBox list={list} />
-        </div>
+        <MenuIconBox list={list} />
       </div>
     </motion.li>
   );

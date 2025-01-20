@@ -16,12 +16,11 @@ export default function Popup() {
   const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
   const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
   const pickUpList = useSelector((state) => state.pickUpState.list);
-  const currentSelectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
   const tableNum = useSelector((state) => state.userState.tableNum);
   const isRequestClicked = useSelector((state) => state.requestState.isClicked);
   // variant
-  const alreadySelected = pickUpList.some((list) => list.id === currentSelectedMenu.id);
-  const popUpType = !pickUpIsClicked || alreadySelected ? 'order' : 'pick';
+  const shoppingcartEnable = !!pickUpList.length;
+  const popUpType = pickUpIsClicked || !shoppingcartEnable ? 'pick' : 'order';
   // dispatch
   const dispatch = useDispatch();
   // useRouter

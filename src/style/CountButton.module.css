@@ -3,9 +3,7 @@
   height: auto;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
 
   border: 1px solid #e6e6e6;
   border-radius: 3px;
@@ -20,9 +18,10 @@
   align-items: center;
 }
 .count {
-  /* width: 20px; */
-  height: 100%;
-  padding: 0 10px;
+  width: 20px;
+  height: 20px;
+  padding: 2px 4px;
+  box-sizing: content-box;
   color: #959595;
 
   cursor: pointer;
@@ -33,9 +32,6 @@
   border: 1px solid #e6e6e6;
   border-top: none;
   border-bottom: none;
-}
 
-.context {
-  font-size: 12px;
-  /* zoom: 0.85; */
+  font-size: 13px;
 }

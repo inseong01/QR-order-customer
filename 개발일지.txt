@@ -64,7 +64,7 @@
   - db: 고객-읽기(주문 목록만 생성 허용), 관리자-CURD
     -> db 규칙 생성
   - 주문목록 전송 db 연동: 사용자 이전 주문목록 확인 localStorage 활용, 데이터 서버 전송할 때는 localStorage 사용 안함
-  - 주문, 요청 알림 전달 계획 구상: supabase Realtime으로 적용, firebase messaging 유료
+  - 주문, 요청 알림 전달 계획 구상: supabase Realtime으로 적용, firebase blaze 요금제 업그레이드(호스팅 기능)
     -> 추후 db도 supabase로 변경
   - Error, ReferenceError: localStorage is not defined
     -> next build 페이지 생성 할 때 발생, SSR 진행 하면서 오류 발생 
@@ -192,9 +192,15 @@
   - throttle 측정
     : 개발 전용 코드 작성
 
-<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림 --->
 25.1.19.
   - throttle 측정 코드 개선
     : 측정 오류
   - UI 개선
     : img 없어도 imgBox 크기 일정 유지
+
+<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림 --->
+25.1.20.
+  - 아이콘 이미지 변환
+    : 폰트화 || CSS 스타일링
+  - PopUp 오류 수정
+    : type 할당 조건
