@@ -1,10 +1,11 @@
 import styles from '@/style/visitor/initial/InitialHeader.module.css';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { motion } from 'motion/react';
+import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 export default function HeaderMiddle() {
-  const tableNum = useSelector((state) => state.userState.tableNum);
+  const tableNum = useBoundStroe((state) => state.table);
 
   return (
     <div className={styles.middle}>

@@ -4,14 +4,15 @@ import styles from '@/style/visitor/initial/InitialClientPage.module.css';
 import InitialHeader from '@/components/visitor/initial/InitialHeader';
 import InitialMain from '@/components/visitor/initial/InitialMain';
 import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
-import { setTableNum } from '@/lib/features/userState/userSlice';
 import { resetRequestState } from '@/lib/features/requestState/requestSlice';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
 
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { setInitCookies } from '@/app/[table]/actions';
+import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 export default function InitialClientPage() {
   // useSelector
@@ -20,19 +21,30 @@ export default function InitialClientPage() {
   // dispatch
   const dispatch = useDispatch();
   // usePathname
-  const pathName = usePathname();
+  const params = useParams();
+  // store
+  const store = useBoundStroe((state) => state);
+  const setTableNumber = useBoundStroe((state) => state.setTableNumber);
 
   // 2번 반복됨 -> 개발 모드여서?
   useEffect(() => {
+    // 고유 테이블 숫자 할당
+    // async function initCookies(params) {
+    //   try {
+    //     await setInitCookies(params);
+    //     console.log('Cookies initialized successfully.');
+    //   } catch (error) {
+    //     console.error('Failed to set cookies:', error);
+    //   }
+    // }
+    // initCookies(params);
+    setTableNumber(params);
+
     // 직원호출 초기화
     dispatch(resetSubmitState());
 
     // 팝업 초기화
     dispatch(resetRequestState());
-
-    // 고유 테이블 숫자 할당 (가끔 초기값 0으로 설정될 때 있음)
-    const tableNum = Number(pathName.replace('/', ''));
-    dispatch(setTableNum({ tableNum }));
   }, []);
 
   return (

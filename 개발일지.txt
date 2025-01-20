@@ -198,9 +198,17 @@
   - UI 개선
     : img 없어도 imgBox 크기 일정 유지
 
-<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림 --->
 25.1.20.
   - 아이콘 이미지 변환
     : 폰트화 || CSS 스타일링
   - PopUp 오류 수정
     : type 할당 조건
+  - zustand > redux 마이그레이션
+      userState: userSliceReducer 0
+      menuState: menuStateSliceReducer, 0
+      pickUpState: pickUpSlice,
+      callState: callSliceReducer,
+      submitState: submitSliceReducer,
+      requestState: requestSliceReducer,
+
+<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림, Supabase menu list sort text -> id로 변경 --->

@@ -1,4 +1,5 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuCategoryUnderLine.module.css';
+import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,7 +9,7 @@ export default function MenuCategoryUnderLine({ category }) {
   // useState
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   // useSelector
-  const selectedTagTitle = useSelector((state) => state.menuState.selectedMenuCategoryTitle);
+  const selectedTagId = useBoundStroe((state) => state.selectedMenuCategoryId);
 
   useEffect(() => {
     setIsFirstLoad(false);
@@ -16,7 +17,7 @@ export default function MenuCategoryUnderLine({ category }) {
 
   return (
     <>
-      {!isFirstLoad && selectedTagTitle === category.title && (
+      {!isFirstLoad && selectedTagId === category.id && (
         <motion.div className={styles.underline} layoutId="underline"></motion.div>
       )}
     </>

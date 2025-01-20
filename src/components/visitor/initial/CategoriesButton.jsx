@@ -1,5 +1,6 @@
 import styles from '@/style/visitor/initial/CategoriesButton.module.css';
 import { setRequestClick } from '@/lib/features/requestState/requestSlice';
+import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBellConcierge, faList, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 export default function CategoriesButton() {
+  // store
+  const tableNum = useBoundStroe((state) => state.table);
   // useSelector
-  const tableNum = useSelector((state) => state.userState.tableNum);
   const requestIsClicked = useSelector((state) => state.requestState.isClicked);
   // useDispatch
   const dispatch = useDispatch();

@@ -9,8 +9,8 @@ import requestSliceReducer from '@/lib/features/requestState/requestSlice.js'
 export function makeStore() {
   return configureStore({
     reducer: {
-      userState: userSliceReducer,
-      menuState: menuStateSliceReducer,
+      // userState: userSliceReducer,
+      // menuState: menuStateSliceReducer,
       pickUpState: pickUpSlice,
       callState: callSliceReducer,
       submitState: submitSliceReducer,
