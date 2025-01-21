@@ -203,7 +203,7 @@
     : 폰트화 || CSS 스타일링
   - PopUp 오류 수정
     : type 할당 조건
-  - zustand > redux 마이그레이션
+  - redux > zustand 마이그레이션
       userState: userSliceReducer 0
       menuState: menuStateSliceReducer, 0
       pickUpState: pickUpSlice,
@@ -215,7 +215,7 @@
 25.1.21.
   - Supabase 수정
     : menuList sortId 속성 추가
-  - zustand > redux 마이그레이션
+  - redux > zustand  마이그레이션
       userState: userSliceReducer 0
       menuState: menuStateSliceReducer 0,
       pickUpState: pickUpSlice 0,
