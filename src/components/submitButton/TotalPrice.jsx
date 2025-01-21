@@ -1,10 +1,8 @@
 import styles from '@/style/submitButton/TotalPrice.module.css';
-
-import { useSelector } from 'react-redux';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 export default function TotalPrice() {
-  // useSelector
-  const pickUpList = useSelector((state) => state.pickUpState.list);
+  const pickUpList = useBoundStore((state) => state.pickUpState.list);
   const totalPrice = pickUpList.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 

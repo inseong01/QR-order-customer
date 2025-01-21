@@ -2,16 +2,15 @@
 
 import styles from '@/style/CountButton.module.css';
 import calculateAmount from '@/lib/function/calculateAmount';
-import { changeItemAmount } from '@/lib/features/callState/callSlice';
-import { changeAmountInPickUpList, changeSelectedMenuAmount } from '@/lib/features/pickUpState/pickUpSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import PlusMinusIcon from './SimpleIcon';
 
-import { useDispatch } from 'react-redux';
-
 export default function CountButton({ type, amount, id }) {
-  // dispatch
-  const dispatch = useDispatch();
+  const changeItemAmount = useBoundStore((state) => state.changeItemAmount);
+  const changeSelectedMenuAmount = useBoundStore((state) => state.changeSelectedMenuAmount);
+  const changeMenuAmountInPickUpList = useBoundStore((state) => state.changeMenuAmountInPickUpList);
 
+  // 항목 수량 변경
   function onClickMenuCount(num) {
     return () => {
       const calcedAmount = calculateAmount(amount, num);
@@ -19,15 +18,15 @@ export default function CountButton({ type, amount, id }) {
       if (calcedAmount === amount) return;
       switch (type) {
         case 'pick': {
-          dispatch(changeSelectedMenuAmount({ amount: calcedAmount }));
+          changeSelectedMenuAmount({ amount: calcedAmount });
           break;
         }
         case 'call': {
-          dispatch(changeItemAmount({ id, amount: calcedAmount }));
+          changeItemAmount({ id, amount: calcedAmount });
           break;
         }
         case 'pickUpList': {
-          dispatch(changeAmountInPickUpList({ id, amount: calcedAmount }));
+          changeMenuAmountInPickUpList({ id, amount: calcedAmount });
           break;
         }
         default: {

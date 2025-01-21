@@ -4,7 +4,6 @@ import MenuCategory from './MenuCategory';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 export default function MenuCategoryList() {
-  // useSuspenseQuery
   const { data } = useSuspenseQuery(categoryListQueryOption);
 
   return (

@@ -1,15 +1,12 @@
 import styles from '@/style/SubmitButton.module.css';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import TotalPrice from './TotalPrice';
-import { changeModalStatus } from '@/lib/features/submitState/submitSlice';
-
-import { useDispatch } from 'react-redux';
 
 export default function SubmitOrder() {
-  // useDispatch
-  const dispatch = useDispatch();
+  const setModalOpen = useBoundStore((state) => state.setModalOpen);
   // 주문하기
   function onClickSubmitOrderList() {
-    dispatch(changeModalStatus({ status: true }));
+    setModalOpen({ isOpen: true });
   }
 
   return (

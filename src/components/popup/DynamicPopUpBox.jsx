@@ -1,13 +1,13 @@
+import { useBoundStore } from '@/lib/store/useBoundStore';
+
 import { AnimatePresence } from 'motion/react';
-import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 
 const DynamicPopUp = dynamic(() => import('./Popup'));
 
 export default function DynamicPopUpBox() {
-  // useSelector
-  const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
-  const pickUpList = useSelector((state) => state.pickUpState.list);
+  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
 
   return (
     <AnimatePresence>

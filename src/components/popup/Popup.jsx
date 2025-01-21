@@ -2,39 +2,37 @@
 
 import styles from '@/style/popup/Popup.module.css';
 import CountButton from '../CountButton';
-import { pickUpMenu } from '@/lib/features/pickUpState/pickUpSlice';
-import { setRequestClick } from '@/lib/features/requestState/requestSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function Popup() {
-  // useSelector
-  const selectedMenu = useSelector((state) => state.pickUpState.selectedMenu);
-  const selectedMenuID = useSelector((state) => state.pickUpState.selectedMenu.id);
-  const selectedMenuAmount = useSelector((state) => state.pickUpState.selectedMenu.amount);
-  const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
-  const pickUpList = useSelector((state) => state.pickUpState.list);
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  const isRequestClicked = useSelector((state) => state.requestState.isClicked);
+  // store
+  const isRequestClicked = useBoundStore((state) => state.requestState.isClicked);
+  const selectedMenu = useBoundStore((state) => state.pickUpState.selectedMenu);
+  const selectedMenuID = useBoundStore((state) => state.pickUpState.selectedMenu.id);
+  const selectedMenuAmount = useBoundStore((state) => state.pickUpState.selectedMenu.amount);
+  const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
+  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const pickUpSelectedMenu = useBoundStore((state) => state.pickUpSelectedMenu);
   // variant
   const shoppingcartEnable = !!pickUpList.length;
   const popUpType = pickUpIsClicked || !shoppingcartEnable ? 'pick' : 'order';
-  // dispatch
-  const dispatch = useDispatch();
   // useRouter
   const router = useRouter();
 
   // 항목 선택
-  function onClickList() {
-    dispatch(pickUpMenu());
+  function onClickBottom() {
+    pickUpSelectedMenu();
   }
 
   // 주문표 확인하기
   function onClickCheckPickUpList() {
     if (isRequestClicked) return;
-    dispatch(setRequestClick({ isClicked: true }));
+    setRequestClick({ isClicked: true });
     router.push(`${tableNum}/pickUpList`);
   }
 
@@ -54,7 +52,7 @@ export default function Popup() {
             </div>
             <CountButton type={popUpType} amount={selectedMenuAmount} id={selectedMenuID} />
           </div>
-          <div className={styles.bottom} onClick={onClickList}>
+          <div className={styles.bottom} onClick={onClickBottom}>
             <span className={styles.context}>음식 담기</span>
           </div>
         </motion.div>

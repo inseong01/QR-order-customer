@@ -1,24 +1,19 @@
 import styles from '@/style/submitButton/SubmitRequestBtn.module.css';
-import { fetchRequestListResponse } from '@/lib/features/submitState/submitSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import makeSentence from '@/lib/function/makeSentence';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 export default function SubmitRequestBtn() {
-  // useSelector
-  const requestList = useSelector((state) => state.callState.selectedItemArr);
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  const isSubmit = useSelector((state) => state.submitState.isSubmit);
-
-  // useDispatch
-  const dispatch = useDispatch();
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const requestList = useBoundStore((state) => state.callState.selectedItemArr);
+  const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
+  const fetchRequestSubmitState = useBoundStore((state) => state.fetchRequestSubmitState);
 
   // 호출하기
   function onClickSubmitRequestList() {
     if (isSubmit) return;
     // 알림으로 requestList(요청) 전달
     const requestStr = makeSentence(requestList);
-    dispatch(fetchRequestListResponse({ tableNum, requestStr }));
+    fetchRequestSubmitState({ tableNum, requestStr });
   }
 
   return (

@@ -1,15 +1,14 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuCategoryUnderLine.module.css';
-import { useBoundStroe } from '@/lib/store/useBoundStroe';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 
 export default function MenuCategoryUnderLine({ category }) {
   // useState
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  // useSelector
-  const selectedTagId = useBoundStroe((state) => state.selectedMenuCategoryId);
+  // store
+  const selectedTagId = useBoundStore((state) => state.menuState.selectedMenuCategoryId);
 
   useEffect(() => {
     setIsFirstLoad(false);

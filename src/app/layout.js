@@ -1,6 +1,5 @@
 import "./globals.css";
 import QueryProvider from "./QueryProvider";
-import StoreProvider from "./StoreProvider";
 
 import { Inter } from 'next/font/google'
 
@@ -12,18 +11,13 @@ export const metadata = {
 const inter = Inter({
   subsets: ['latin']
 })
-// const notoSansKR = Noto_Sans_KR({
-//   subsets: ['latin']
-// })
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <QueryProvider>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
+          {children}
         </QueryProvider>
       </body>
     </html>

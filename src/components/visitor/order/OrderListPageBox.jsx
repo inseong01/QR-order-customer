@@ -2,21 +2,22 @@
 
 import styles from '@/style/visitor/orderList/OrderListPage.module.css';
 import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import OrderList from '@/components/OrderList';
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 export default function OrderListPageBox() {
-  // useSelector
-  const tableNum = useSelector((state) => state.userState.tableNum);
+  // store
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
   // useQuery
   const { data } = useSuspenseQuery({
     queryKey: ['orderList'],
     queryFn: () => getTableOrderList(tableNum),
     staleTime: 1000 * 1,
   });
+  // useState
   const [orderListArr, setListArr] = useState([]);
 
   useEffect(() => {

@@ -1,20 +1,19 @@
 import styles from '@/style/visitor/call/Request.module.css';
-import { selectCallBtn } from '@/lib/features/callState/callSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import { child } from '@/lib/motion/call/motion_requestList';
 
 import { motion } from 'motion/react';
-import { useDispatch } from 'react-redux';
 import { memo } from 'react';
 
 function Request({ req, isIncludedItem }) {
-  // useDispatch
-  const dispatch = useDispatch();
+  // store
+  const selectCallBtn = useBoundStore((state) => state.selectCallBtn);
   // variant
   const { title } = req;
 
   function onClickSelect({ id, title }) {
     return () => {
-      dispatch(selectCallBtn({ id, title, amount: 1 }));
+      selectCallBtn({ id, title, amount: 1 });
     };
   }
 

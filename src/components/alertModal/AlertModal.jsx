@@ -1,38 +1,36 @@
 'use client';
 
 import styles from '@/style/alertModal/AlertModal.module.css';
-import { changeModalStatus, fetchOrderListResponse } from '@/lib/features/submitState/submitSlice';
-import { resetCallState } from '@/lib/features/callState/callSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export default function AlertModal({ type }) {
-  // useSelector
-  const pickUpList = useSelector((state) => state.pickUpState.list);
-  const isSubmit = useSelector((state) => state.submitState.isSubmit);
-  const modalStatus = useSelector((state) => state.submitState.modal.status);
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  // dispatch
-  const dispatch = useDispatch();
+  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const isOpenModal = useBoundStore((state) => state.modalState.isOpen);
+  const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
+  const setModalOpen = useBoundStore((state) => state.setModalOpen);
+  const resetCallState = useBoundStore((state) => state.resetCallState);
+  const fetchOrderSubmitState = useBoundStore((state) => state.fetchOrderSubmitState);
 
-  // db 제출 거부
+  // db 제출 거부, '아니요'
   function onClickNotEnsureSubmit() {
-    dispatch(changeModalStatus({ status: false }));
+    setModalOpen({ isOpen: false });
   }
 
-  // db 제출 허용
+  // db 제출 허용, '예'
   function onClickEnsureSubmit() {
     if (isSubmit) return;
     switch (type) {
       case 'orderCheck': {
-        dispatch(fetchOrderListResponse({ tableNum, pickUpList }));
-        dispatch(changeModalStatus({ status: false }));
+        fetchOrderSubmitState({ tableNum, pickUpList });
+        setModalOpen({ isOpen: false });
         break;
       }
       case 'request': {
-        dispatch(resetCallState()); // 초기화
+        resetCallState(); // 초기화
         break;
       }
     }
@@ -45,11 +43,10 @@ export default function AlertModal({ type }) {
           <motion.dialog
             id="orderCheck"
             className={styles.wrap}
-            open={modalStatus}
+            open={isOpenModal}
             style={{ translateX: '-50%', translateY: '-50%' }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
             transition={{ type: 'spring', duration: 0.3 }}
           >
             <div className={styles.top}>주문하시겠습니까?</div>
@@ -78,11 +75,10 @@ export default function AlertModal({ type }) {
           <motion.dialog
             id="request"
             className={styles.wrap}
-            open={modalStatus}
+            open={isOpenModal}
             style={{ translateX: '-50%', translateY: '-50%' }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
             transition={{ type: 'spring', duration: 0.3 }}
           >
             <div className={styles.top}>요청되었습니다</div>

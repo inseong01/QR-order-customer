@@ -1,18 +1,17 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuIconBox.module.css';
-import { addMenuToPickUpList, deletePickUpList } from '@/lib/features/pickUpState/pickUpSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import PlusMinusIcon from '@/components/SimpleIcon';
 
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function MenuIconBox({ list }) {
-  // useSelector
-  const currentOrderList = useSelector((state) => state.pickUpState.list);
+  // store
+  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
+  const pickUpMenu = useBoundStore((state) => state.pickUpMenu);
+  const removePickUpMenu = useBoundStore((state) => state.removePickUpMenu);
   // useState
   const [isIconClicked, setIsIconClicked] = useState(false);
-  // useDispatch
-  const dispatch = useDispatch();
   // variant
   const isPickedItem = currentOrderList.some((order) => order.id === list.id);
 
@@ -23,25 +22,26 @@ export default function MenuIconBox({ list }) {
       if (tag === 'soldout' || isIconClicked) return;
       switch (isPickedItem) {
         case true: {
-          onClickIconRemoveMenuInPickUpList(list);
+          onClickMinusIcon(list);
           return;
         }
         case false: {
-          onClickIconAddMenuInPickUpList(list);
+          onClickPlusIcon(list);
           return;
         }
       }
     };
   }
 
-  function onClickIconAddMenuInPickUpList({ name, price, id, tag }) {
+  function onClickPlusIcon({ name, price, id, tag }) {
     if (tag === 'soldout') return;
-    dispatch(addMenuToPickUpList({ menu: { name, price, amount: 1, id } }));
+    const menu = { name, price, amount: 1, id };
+    pickUpMenu(menu);
   }
 
-  function onClickIconRemoveMenuInPickUpList({ id, tag }) {
+  function onClickMinusIcon({ id, tag }) {
     if (tag === 'soldout') return;
-    dispatch(deletePickUpList({ id }));
+    removePickUpMenu({ id });
   }
 
   return (

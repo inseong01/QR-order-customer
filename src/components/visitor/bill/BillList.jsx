@@ -1,20 +1,20 @@
 import styles from '@/style/OrderList.module.css';
 import createReceipt from '@/lib/function/createReceipt';
 import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import OrderListBox from '../order/OrderListBox';
 
-import { useSelector } from 'react-redux';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 export default function BillList() {
-  // useSelector
-  const tableNum = useSelector((state) => state.userState.tableNum);
+  // store
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
   // useQuery
   const { data } = useSuspenseQuery({
     queryKey: ['orderList'],
     queryFn: () => getTableOrderList(tableNum),
   });
-
+  // variant
   const orderListArr = data[0].order?.map((list) => list.orderList) ?? [];
   const billArr = createReceipt(orderListArr);
   const totalPrice = billArr.reduce((result, data) => result + data.price * data.amount, 0);

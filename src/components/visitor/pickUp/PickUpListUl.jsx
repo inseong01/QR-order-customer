@@ -1,18 +1,14 @@
 import styles from '@/style/visitor/pickUpList/PickUpListUl.module.css';
-import { deletePickUpList } from '@/lib/features/pickUpState/pickUpSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import CountButton from '../../CountButton';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 export default function PickUpListUl() {
-  // useSelector
-  const currentOrderList = useSelector((state) => state.pickUpState.list);
-  // useDispatch
-  const dispatch = useDispatch();
+  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
+  const removePickUpMenu = useBoundStore((state) => state.removePickUpMenu);
 
   function onClickdeletePickUpList(id) {
     return () => {
-      dispatch(deletePickUpList({ id }));
+      removePickUpMenu({ id });
     };
   }
 

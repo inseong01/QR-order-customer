@@ -1,17 +1,15 @@
 import styles from '@/style/visitor/initial/Menu.module.css';
-import { clickMenu } from '@/lib/features/pickUpState/pickUpSlice';
 import { liVariants } from '@/lib/motion/middle/motion_menuList';
-
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { memo } from 'react';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import MenuImageBox from './menuCategory/MenuImageBox';
 import MenuIconBox from './menuCategory/MenuIconBox';
 
+import { motion } from 'motion/react';
+import { memo } from 'react';
+
 export default memo(function Menu({ list }) {
-  // dispatch
-  const dispatch = useDispatch();
+  // store
+  const clickMenu = useBoundStore((state) => state.clickMenu);
   // variant
   const { name, price, tag } = list;
   const priceToString = price.toLocaleString();
@@ -32,10 +30,10 @@ export default memo(function Menu({ list }) {
     }
   }
 
-  function onClickMenuClick({ name, price, tag, id }) {
+  function onClickMenuClick(list) {
     return () => {
       if (tag === 'soldout') return;
-      dispatch(clickMenu({ menuData: { name, price, tag, id } }));
+      clickMenu(list);
     };
   }
 

@@ -1,13 +1,12 @@
 import styles from '@/style/visitor/call/RequestList.module.css';
 import { parents } from '@/lib/motion/call/motion_requestList';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import Request from './Request';
 
 import { motion } from 'motion/react';
-import { useSelector } from 'react-redux';
 
 export default function RequestList({ data }) {
-  // useSelector
-  const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
+  const selectedItemArr = useBoundStore((state) => state.callState.selectedItemArr);
 
   return (
     <motion.div className={styles.middle} initial={'hidden'} animate={'visible'} variants={parents}>

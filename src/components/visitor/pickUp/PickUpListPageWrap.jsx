@@ -2,25 +2,22 @@
 
 import styles from '@/style/visitor/pickUpList/PickUpListPageWrap.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
-import { changeModalId } from '@/lib/features/submitState/submitSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import PickUpListMain from './PickUpListMain';
 import PickUpListSubmit from './PickUpListSubmit';
 
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 function AppVisitorHeaderBox() {
-  // useSelector
-  const submitStatus = useSelector((state) => state.submitState.status);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
   return <AppVisitorHeader title={submitStatus !== 'fulfilled' ? '주문표' : '주문완료'} />;
 }
 
 export default function PickUpListPageWrap() {
-  // dispatch
-  const dispatch = useDispatch();
+  const setModalType = useBoundStore((state) => state.setModalType);
 
   useEffect(() => {
-    dispatch(changeModalId({ target: 'orderCheck' }));
+    setModalType({ type: 'orderCheck' });
   }, []);
 
   return (

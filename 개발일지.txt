@@ -211,4 +211,18 @@
       submitState: submitSliceReducer,
       requestState: requestSliceReducer,
 
-<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림, Supabase menu list sort text -> id로 변경 --->
+<---  이미지 로드 한번에 되도록, 로드 UI 삽입, 로딩 너무 느림  --->
+25.1.21.
+  - Supabase 수정
+    : menuList sortId 속성 추가
+  - zustand > redux 마이그레이션
+      userState: userSliceReducer 0
+      menuState: menuStateSliceReducer 0,
+      pickUpState: pickUpSlice 0,
+      callState: callSliceReducer 0,
+      submitState: submitSliceReducer 0,
+      requestState: requestSliceReducer 0,
+      -> PopUp 등장여부는 isClick으로 판단, 상태 갱신 순서 착오 상황과 코드 이해를 고려하여 PopUpSlice에서 isClick을 통합 처리하지 않고 각 페이지 별 상태 처리 
+      -> 상태 처리 함수는 통합 처리보다 개별 처리를 지향, 코드 가독성 우선
+      -> submitState status 변경 fetch 통합 처리, 코드 중복 개선
+      -> 개발 전용 디버그 적용

@@ -1,9 +1,6 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuCategory.module.css';
-import { getSelectedMenuCategoryTitle } from '@/lib/features/menuState/menuSlice';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import MenuCategoryUnderLine from './MenuCategoryUnderLine';
-import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 function Category({ category, children, onClickChangeMenuTitle }) {
   return (
@@ -16,15 +13,11 @@ function Category({ category, children, onClickChangeMenuTitle }) {
   );
 }
 export default function MenuCategory({ category }) {
-  // store
-  const selectedTagId = useBoundStroe((state) => state.selectedMenuCategoryId);
-  const getSelectedMenuCategoryId = useBoundStroe((state) => state.getSelectedMenuCategoryId);
-  // dispatch
-  const dispatch = useDispatch();
+  const selectedTagId = useBoundStore((state) => state.menuState.selectedMenuCategoryId);
+  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
 
   function onClickChangeMenuTitle() {
     if (selectedTagId === category.id) return;
-    // dispatch(getSelectedMenuCategoryTitle({ title: category.title }));
     getSelectedMenuCategoryId({ id: category.id });
   }
 

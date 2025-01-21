@@ -1,15 +1,15 @@
+import { useBoundStore } from '@/lib/store/useBoundStore';
+
 import { AnimatePresence } from 'motion/react';
-import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 
 const DynamicAlertModal = dynamic(() => import('@/components/alertModal/AlertModal'));
 
 export default function DynamicAlertModalBox() {
-  // useSelector
-  const target = useSelector((state) => state.submitState.modal.target);
-  const modalStatus = useSelector((state) => state.submitState.modal.status);
+  const type = useBoundStore((state) => state.modalState.type);
+  const isOpenModal = useBoundStore((state) => state.modalState.isOpen);
 
   return (
-    <AnimatePresence>{modalStatus && <DynamicAlertModal key={'AlertModal'} type={target} />}</AnimatePresence>
+    <AnimatePresence>{isOpenModal && <DynamicAlertModal key={'AlertModal'} type={type} />}</AnimatePresence>
   );
 }

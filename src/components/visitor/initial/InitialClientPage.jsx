@@ -3,50 +3,43 @@
 import styles from '@/style/visitor/initial/InitialClientPage.module.css';
 import InitialHeader from '@/components/visitor/initial/InitialHeader';
 import InitialMain from '@/components/visitor/initial/InitialMain';
-import { resetSubmitState } from '@/lib/features/submitState/submitSlice';
-import { resetRequestState } from '@/lib/features/requestState/requestSlice';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
+import { setInitCookies } from '@/app/[table]/actions';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'next/navigation';
-import { setInitCookies } from '@/app/[table]/actions';
-import { useBoundStroe } from '@/lib/store/useBoundStroe';
 
 export default function InitialClientPage() {
-  // useSelector
-  const pickUpIsClicked = useSelector((state) => state.pickUpState.isClicked);
-  const pickUpList = useSelector((state) => state.pickUpState.list);
-  // dispatch
-  const dispatch = useDispatch();
   // usePathname
   const params = useParams();
   // store
-  const store = useBoundStroe((state) => state);
-  const setTableNumber = useBoundStroe((state) => state.setTableNumber);
+  const store = useBoundStore((state) => state);
+  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
+  const requestIsClicked = useBoundStore((state) => state.requestState.isClicked);
+  const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
+  const setTableNumber = useBoundStore((state) => state.setTableNumber);
+  const resetRequestState = useBoundStore((state) => state.resetRequestState);
+  const setModalOpen = useBoundStore((state) => state.setModalOpen);
 
   // 2번 반복됨 -> 개발 모드여서?
   useEffect(() => {
     // 고유 테이블 숫자 할당
-    // async function initCookies(params) {
-    //   try {
-    //     await setInitCookies(params);
-    //     console.log('Cookies initialized successfully.');
-    //   } catch (error) {
-    //     console.error('Failed to set cookies:', error);
-    //   }
-    // }
-    // initCookies(params);
     setTableNumber(params);
 
-    // 직원호출 초기화
-    dispatch(resetSubmitState());
+    // 모달 초기화
+    if (modalIsOpen) {
+      setModalOpen({ isOpen: false });
+    }
 
     // 팝업 초기화
-    dispatch(resetRequestState());
+    if (requestIsClicked) {
+      resetRequestState();
+    }
   }, []);
-
+  console.log(store);
   return (
     <motion.div
       className={styles.wrap}

@@ -2,17 +2,17 @@ import styles from '@/style/visitor/pickUpList/ProcessOrder.module.css';
 import OrderSubmit from '@/components/OrderSubmit';
 import OrderList from '@/components/OrderList';
 import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import PickUpListUl from './PickUpListUl';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 export default function ProcessOrder() {
-  // useSelector
-  const submitStatus = useSelector((state) => state.submitState.status);
-  const tableNum = useSelector((state) => state.userState.tableNum);
+  // store
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
   // useQuery
   const { data, isFetching } = useQuery({
     queryKey: ['orderList', submitStatus],

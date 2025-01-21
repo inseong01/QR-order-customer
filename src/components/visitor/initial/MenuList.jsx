@@ -1,11 +1,10 @@
 import styles from '@/style/visitor/initial/MenuList.module.css';
 import { ulVariants } from '@/lib/motion/middle/motion_menuList';
 import { menuListQueryOption } from '@/lib/function/useQuery/queryOption';
-import { useBoundStroe } from '@/lib/store/useBoundStroe';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import Menu from './Menu';
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { motion } from 'motion/react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -13,7 +12,7 @@ export default function MenuList() {
   // useState
   const [isfirstLoad, setIsFirstLoad] = useState(true);
   // store
-  const currentCategoryId = useBoundStroe((state) => state.selectedMenuCategoryId);
+  const currentCategoryId = useBoundStore((state) => state.menuState.selectedMenuCategoryId);
   // useSuspenseQuery
   const { data, isFetched } = useSuspenseQuery(menuListQueryOption);
 
@@ -31,7 +30,7 @@ export default function MenuList() {
     >
       {isFetched &&
         data
-          .filter((list) => list.sort === currentCategoryId)
+          .filter((list) => list.sortId === currentCategoryId)
           .map((list, idx) => {
             return <Menu key={idx} list={list} />;
           })}

@@ -1,11 +1,9 @@
 import styles from '@/style/submitButton/PickAndCountButton.module.css';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import PickItem from './PickItem';
 
-import { useSelector } from 'react-redux';
-
 export default function PickAndCountButton() {
-  // useSelector
-  const selectedItemArr = useSelector((state) => state.callState.selectedItemArr);
+  const selectedItemArr = useBoundStore((state) => state.callState.selectedItemArr);
 
   return (
     <div className={styles.pickAndCount}>

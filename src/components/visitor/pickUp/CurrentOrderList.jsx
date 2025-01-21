@@ -1,31 +1,31 @@
 import styles from '@/style/OrderList.module.css';
 import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import OrderListBox from '../order/OrderListBox';
 
 import { useEffect } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
 
 export default function CurrentOrderList() {
-  // useSelector
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  const submitStatus = useSelector((state) => state.submitState.status);
+  // store
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
   // useQuery
   const { data } = useSuspenseQuery({
     queryKey: ['orderList', submitStatus],
     queryFn: () => getTableOrderList(tableNum),
   });
-
-  useEffect(() => {
-    if (!data) return;
-  }, [data]);
-
+  // variant
   const latestOrder = data[0].order.findLast((order) => order);
   const totalPrice = latestOrder.orderList.reduce(
     (prev, current) => prev + current.price * current.amount,
     0
   );
   const totalPriceToString = totalPrice.toLocaleString();
+
+  useEffect(() => {
+    if (!data) return;
+  }, [data]);
 
   return (
     <div className={styles.includeMsg}>

@@ -1,11 +1,9 @@
 import SubmitButton from '@/components/SubmitButton';
-
-import { useSelector } from 'react-redux';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 export default function PickUpListSubmit() {
-  // useSelector
-  const submitStatus = useSelector((state) => state.submitState.status);
-  const currentOrderList = useSelector((state) => state.pickUpState.list);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
+  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
 
   return (
     <SubmitButton

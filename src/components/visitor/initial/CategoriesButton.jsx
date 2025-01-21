@@ -1,26 +1,22 @@
 import styles from '@/style/visitor/initial/CategoriesButton.module.css';
-import { setRequestClick } from '@/lib/features/requestState/requestSlice';
-import { useBoundStroe } from '@/lib/store/useBoundStroe';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBellConcierge, faList, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 export default function CategoriesButton() {
   // store
-  const tableNum = useBoundStroe((state) => state.table);
-  // useSelector
-  const requestIsClicked = useSelector((state) => state.requestState.isClicked);
-  // useDispatch
-  const dispatch = useDispatch();
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const requestIsClicked = useBoundStore((state) => state.requestState.isClicked);
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
   // useRouter
   const router = useRouter();
 
   function onClickRouterOnce(category) {
     return () => {
       if (requestIsClicked) return;
-      dispatch(setRequestClick({ isClicked: true }));
+      setRequestClick({ isClicked: true });
       router.push(`${tableNum}/${category}`);
     };
   }

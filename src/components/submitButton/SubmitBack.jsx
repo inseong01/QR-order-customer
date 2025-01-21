@@ -1,18 +1,15 @@
 import styles from '@/style/SubmitButton.module.css';
-import { resetPickUpState } from '@/lib/features/pickUpState/pickUpSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function SubmitBack() {
-  // useSelector
-  const tableNum = useSelector((state) => state.userState.tableNum);
-  // dispatch
-  const dispatch = useDispatch();
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
 
   // 돌아가기
   async function onClickReturnHome() {
-    dispatch(resetPickUpState()); // 초기화
+    resetPickUpState(); // 초기화
   }
 
   return (

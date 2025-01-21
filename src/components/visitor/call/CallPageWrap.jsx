@@ -2,22 +2,20 @@
 
 import styles from '@/style/visitor/call/CallPageWrap.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
-import { resetCallState } from '@/lib/features/callState/callSlice';
-import { changeModalId } from '@/lib/features/submitState/submitSlice';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 import CallPageMain from './CallPageMain';
 import SubmitButtonWrap from './SubmitButtonWrap';
 import DynamicAlertModalBox from '../../alertModal/DynamicAlertModalBox';
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 export default function CallPageWrap() {
-  // dispatch
-  const dispatch = useDispatch();
+  const resetCallState = useBoundStore((state) => state.resetCallState);
+  const setModalType = useBoundStore((state) => state.setModalType);
 
   useEffect(() => {
-    dispatch(resetCallState());
-    dispatch(changeModalId({ target: 'request' }));
+    resetCallState();
+    setModalType({ type: 'request' });
   }, []);
 
   return (
