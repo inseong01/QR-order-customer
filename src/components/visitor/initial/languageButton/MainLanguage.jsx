@@ -1,14 +1,11 @@
 import styles from '@/style/visitor/initial/languageButton/LanguageButton.module.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 export default function MainLanguage() {
   return (
     <>
-      <div>
-        <FontAwesomeIcon icon={faGlobe} />
-      </div>
+      <Image src={'/img/internet.webp'} width={13} height={13} alt="language" />
       <div className={styles.context}>KR</div>
     </>
   );

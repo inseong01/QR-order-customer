@@ -10,7 +10,7 @@
   font-size: 13px;
 }
 
-/* cate icon */
+/* cate */
 .cate {
   height: 19px;
 
@@ -19,6 +19,10 @@
   gap: 5px;
 
   cursor: pointer;
+}
+
+.icon {
+  display: flex;
 }
 
 .title {

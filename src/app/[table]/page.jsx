@@ -8,8 +8,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 async function Page() {
   // useQuery prefetch
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(menuListQueryOption);
-  await queryClient.prefetchQuery(categoryListQueryOption);
+
+  // parallel process
+  await Promise.all(
+    [queryClient.prefetchQuery(menuListQueryOption)],
+    [queryClient.prefetchQuery(categoryListQueryOption)]
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

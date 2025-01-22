@@ -52,10 +52,10 @@ export function middleware(request) {
   const isMobile = device.type === 'mobile' || device.type === 'tablet'
 
   // 장치 별 페이지 접근 제한
-  if (!isMobile && !isDev) {
-    console.log('device', typeof device.type)
-    return NextResponse.redirect(HomePage);
-  }
+  // if (!isMobile && !isDev) {
+  //   console.log('device', typeof device.type)
+  //   return NextResponse.redirect(HomePage);
+  // }
 
   // 링크 테이블 값 유형 검증
   const isWrongTableValue = checkValidTableValue(tablePathname)
