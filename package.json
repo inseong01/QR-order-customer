@@ -26,6 +26,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^15.1.2",
     "@tanstack/eslint-plugin-query": "^5.60.1",
+    "@tanstack/react-query-devtools": "^5.64.2",
     "eslint": "^8",
     "eslint-config-next": "15.0.3"
   }

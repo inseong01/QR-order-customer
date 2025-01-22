@@ -6,10 +6,13 @@ import InitialMain from '@/components/visitor/initial/InitialMain';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { initCookies } from '@/lib/function/initCookies';
+import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
+import Loading from '@/components/loading/Loading';
 
 import { motion } from 'motion/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useSuspenseQueries } from '@tanstack/react-query';
 
 export default function InitialClientPage() {
   // usePathname
@@ -23,6 +26,18 @@ export default function InitialClientPage() {
   const setTableNumber = useBoundStore((state) => state.setTableNumber);
   const resetRequestState = useBoundStore((state) => state.resetRequestState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
+  // useState
+  const [screenLoading, setLoading] = useState(true);
+  // useSuspenseQueries;
+  const [menuList, categoryList] = useSuspenseQueries({
+    queries: [menuListQueryOption, categoryListQueryOption],
+  });
+
+  // 로딩 여부
+  useEffect(() => {
+    if (!menuList.isFetched || !categoryList.isFetched) return;
+    setLoading(false);
+  }, [menuList.isFetched, categoryList.isFetched]);
 
   // 2번 반복됨 -> 개발 모드여서?
   useEffect(() => {
@@ -46,13 +61,19 @@ export default function InitialClientPage() {
   }, []);
 
   return (
-    <motion.div
-      className={styles.wrap}
-      style={{ height: pickUpList.length || pickUpIsClicked ? 'calc(100vh + 190px)' : '100vh' }}
-    >
-      <InitialHeader />
-      <InitialMain />
-      <DynamicPopUpBox />
-    </motion.div>
+    <>
+      {screenLoading ? (
+        <Loading />
+      ) : (
+        <motion.div
+          className={styles.wrap}
+          style={{ height: pickUpList.length || pickUpIsClicked ? 'calc(100vh + 190px)' : '100vh' }}
+        >
+          <InitialHeader />
+          <InitialMain />
+          <DynamicPopUpBox />
+        </motion.div>
+      )}
+    </>
   );
 }
