@@ -15,9 +15,11 @@ function AppVisitorHeaderBox() {
 
 export default function PickUpListPageWrap() {
   const setModalType = useBoundStore((state) => state.setModalType);
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
 
   useEffect(() => {
     setModalType({ type: 'orderCheck' });
+    setRequestClick({ isClicked: false });
   }, []);
 
   return (

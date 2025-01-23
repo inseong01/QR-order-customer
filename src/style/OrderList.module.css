@@ -11,6 +11,9 @@
 
   cursor: default;
 }
+.empty {
+  color: #959595;
+}
 
 /* common */
 .bottom {

@@ -1,7 +1,9 @@
+import Loading from "@/components/loading/Loading";
 import "./globals.css";
 import QueryProvider from "./QueryProvider";
 
 import { Inter } from 'next/font/google'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata = {
   title: "QR order client",
@@ -17,7 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <QueryProvider>
+          <Loading type={'link'} />
           {children}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryProvider>
       </body>
     </html>

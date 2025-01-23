@@ -25,6 +25,7 @@ export default function AlertModal({ type }) {
     if (isSubmit) return;
     switch (type) {
       case 'orderCheck': {
+        // 주문 전달
         fetchOrderSubmitState({ tableNum, pickUpList });
         setModalOpen({ isOpen: false });
         break;

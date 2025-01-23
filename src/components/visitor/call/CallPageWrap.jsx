@@ -12,10 +12,12 @@ import { useEffect } from 'react';
 export default function CallPageWrap() {
   const resetCallState = useBoundStore((state) => state.resetCallState);
   const setModalType = useBoundStore((state) => state.setModalType);
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
 
   useEffect(() => {
     resetCallState();
     setModalType({ type: 'request' });
+    setRequestClick({ isClicked: false });
   }, []);
 
   return (

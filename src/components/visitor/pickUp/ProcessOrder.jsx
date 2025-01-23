@@ -1,7 +1,7 @@
 import styles from '@/style/visitor/pickUpList/ProcessOrder.module.css';
-import OrderSubmit from '@/components/OrderSubmit';
+import OrderSubmitComplete from '@/components/OrderSubmitComplete';
 import OrderList from '@/components/OrderList';
-import getTableOrderList from '@/lib/supabase/function/getTableOrderList';
+import { orderListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import PickUpListUl from './PickUpListUl';
 
@@ -14,25 +14,27 @@ export default function ProcessOrder() {
   const tableNum = useBoundStore((state) => state.tableState.tableNum);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   // useQuery
-  const { data, isFetching } = useQuery({
-    queryKey: ['orderList', submitStatus],
-    queryFn: () => getTableOrderList(tableNum),
-  });
+  const { refetch, error, isError } = useQuery(orderListQueryOption(tableNum));
+  console.log(error, isError);
   // useState
-  const [currentOrder, getCurrentOrder] = useState([]);
+  const [isCurrent, setCurrent] = useState(false);
 
   // 주문 완료 시 주문 데이터 추출
   useEffect(() => {
-    if (isFetching || submitStatus !== 'fulfilled') return;
-    const sortOrder = [...data[0].order].sort(
-      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
-    getCurrentOrder(sortOrder[0].orderList);
-  }, [data, isFetching, submitStatus]);
+    // 중복 refetch 제한
+    if (isCurrent) return;
+    // submitStatus 상황 별 처리
+    if (submitStatus === 'fulfilled') {
+      refetch();
+      setCurrent(true);
+    } else if (submitStatus === 'rejected') {
+      setCurrent(true);
+    }
+  }, [submitStatus]);
 
   return (
     <AnimatePresence mode="popLayout">
-      {submitStatus !== 'fulfilled' ? (
+      {!isCurrent ? (
         <motion.main
           className={styles.main}
           key={'NotCompletedOrder'}
@@ -54,8 +56,8 @@ export default function ProcessOrder() {
           animate={{ x: '0%' }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          <OrderSubmit />
-          <OrderList type={'currentOrderList'} listData={currentOrder} />
+          <OrderSubmitComplete />
+          <OrderList type={'currentOrderList'} />
         </motion.main>
       )}
     </AnimatePresence>

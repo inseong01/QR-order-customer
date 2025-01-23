@@ -2,7 +2,8 @@ import styles from '@/style/visitor/initial/CategoriesButton.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBellConcierge, faList, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 export default function CategoriesButton() {
   // store
@@ -24,19 +25,19 @@ export default function CategoriesButton() {
     <ul className={styles.categories}>
       <li className={styles.cate} onClick={onClickRouterOnce('call')}>
         <div className={styles.icon}>
-          <Image src={'/img/hotel-bell.webp'} width={13} height={13} alt="request" />
+          <FontAwesomeIcon icon={faBellConcierge} />
         </div>
         <span className={styles.title}>직원호출</span>
       </li>
       <li className={styles.cate} onClick={onClickRouterOnce('orderList')}>
         <div className={styles.icon}>
-          <Image src={'/img/list.webp'} width={13} height={13} alt="list" />
+          <FontAwesomeIcon icon={faList} />
         </div>
         <span className={styles.title}>주문내역</span>
       </li>
       <li className={styles.cate} onClick={onClickRouterOnce('bill')}>
         <div className={styles.icon}>
-          <Image src={'/img/invoice.webp'} width={13} height={13} alt="bill" />
+          <FontAwesomeIcon icon={faReceipt} />
         </div>
         <span className={styles.title}>계산서</span>
       </li>

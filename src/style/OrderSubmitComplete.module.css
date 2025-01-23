@@ -9,8 +9,11 @@
   padding: 40px;
 }
 
-.submitState {
+.ok {
   color: #4caff8;
+}
+.fail {
+  color: #f84c4c;
 }
 
 .description {

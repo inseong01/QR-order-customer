@@ -2,7 +2,9 @@ import styles from '@/style/submitButton/TotalPrice.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 
 export default function TotalPrice() {
+  // store
   const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  // variant
   const totalPrice = pickUpList.reduce((prev, curr) => prev + curr.price * curr.amount, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 

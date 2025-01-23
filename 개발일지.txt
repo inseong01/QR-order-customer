@@ -241,4 +241,19 @@
   - 폰트 > 이미지 롤백
     : fontAwesome 제거
 
-<---  이미지 로드 한번에 되도록, 라우팅 이동 너무 느림 --->
+25.1.23.
+  - 이미지 > 폰트 롤백
+    : fontAwesome 설치
+  - 페이지 이동, 로딩 UI 설정
+    "Displaying a progress indicator while a route transition is happening"
+    https://github.com/vercel/next.js/discussions/41934#discussioncomment-8996669
+
+    (v) 1. 링크 클릭 > true > 로딩UI 등장 > 페이지 이동 > (Suspense 설정 시 fallBack 페이지) > 페이지 등장 > false > 로딩UI 퇴장
+        2. 버튼 클릭 > true > 로딩UI 등장 > api 호출 > 페이지 등장 > false > 로딩UI 퇴장
+  - useQuery 개선
+    - staleTime 설정
+    - refetch 조건 부여
+    - 에러 처리 점검
+    - 주요 에러 출력, 개발 모드 적용
+
+<---  이미지 로드 한번에 되도록, 라우팅 이동 너무 느림, 메뉴 전달 정상일 때 메뉴 목록 받아오기 비정상 처리 상황 ProcessOrder 컴포넌트 예외처리 하기 --->

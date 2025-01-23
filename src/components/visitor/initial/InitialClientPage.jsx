@@ -23,9 +23,11 @@ export default function InitialClientPage() {
   const requestIsClicked = useBoundStore((state) => state.requestState.isClicked);
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
   const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
   const setTableNumber = useBoundStore((state) => state.setTableNumber);
   const resetRequestState = useBoundStore((state) => state.resetRequestState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
+  const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
   // useState
   const [screenLoading, setLoading] = useState(true);
   // useSuspenseQueries;
@@ -54,16 +56,21 @@ export default function InitialClientPage() {
       setModalOpen({ isOpen: false });
     }
 
-    // 팝업 초기화
+    // 링크 이동 초기화
     if (requestIsClicked) {
       resetRequestState();
+    }
+
+    // 제출 초기화
+    if (submitStatus === 'fulfilled' || submitStatus === 'rejected') {
+      resetSubmitState();
     }
   }, []);
 
   return (
     <>
       {screenLoading ? (
-        <Loading />
+        <Loading type={'init'} />
       ) : (
         <motion.div
           className={styles.wrap}
