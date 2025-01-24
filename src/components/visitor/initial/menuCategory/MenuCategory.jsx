@@ -2,7 +2,7 @@ import styles from '@/style/visitor/initial/menuCategory/MenuCategory.module.css
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import MenuCategoryUnderLine from './MenuCategoryUnderLine';
 
-function Category({ category, children, onClickChangeMenuTitle }) {
+function CategoryComponent({ category, children, onClickChangeMenuTitle }) {
   return (
     <div className={styles.category} onClick={onClickChangeMenuTitle}>
       <div className={`${styles.titleWrap}`}>
@@ -22,8 +22,8 @@ export default function MenuCategory({ category }) {
   }
 
   return (
-    <Category category={category} onClickChangeMenuTitle={onClickChangeMenuTitle}>
+    <CategoryComponent category={category} onClickChangeMenuTitle={onClickChangeMenuTitle}>
       <MenuCategoryUnderLine category={category} />
-    </Category>
+    </CategoryComponent>
   );
 }

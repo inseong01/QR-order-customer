@@ -8,7 +8,7 @@ import PickUpListSubmit from './PickUpListSubmit';
 
 import { useEffect } from 'react';
 
-function AppVisitorHeaderBox() {
+function HeaderComponent() {
   const submitStatus = useBoundStore((state) => state.submitState.status);
   return <AppVisitorHeader title={submitStatus !== 'fulfilled' ? '주문표' : '주문완료'} />;
 }
@@ -24,7 +24,7 @@ export default function PickUpListPageWrap() {
 
   return (
     <div className={styles.wrap}>
-      <AppVisitorHeaderBox />
+      <HeaderComponent />
       <PickUpListMain />
       <PickUpListSubmit />
     </div>

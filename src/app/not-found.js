@@ -1,4 +1,3 @@
-// import styles from '@/style/NotFound.module.css'
 import styles from '@/app/page.module.css'
 import LogoImage from '@/components/visitor/initial/LogoImage';
 

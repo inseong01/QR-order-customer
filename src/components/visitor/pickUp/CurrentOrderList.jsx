@@ -2,45 +2,48 @@ import styles from '@/style/OrderList.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import OrderListBox from '../order/OrderListBox';
 
-import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { orderListQueryOption } from '@/lib/function/useQuery/queryOption';
+import { useQueryClient } from '@tanstack/react-query';
 
-export default function CurrentOrderList() {
-  // store
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
-  const submitStatus = useBoundStore((state) => state.submitState.status);
-  // useQuery
-  const { data, isError } = useQuery(orderListQueryOption(tableNum));
-  // variant
-  const latestOrder = data && data[0].order.findLast((order) => order);
+function EmptyListComponent() {
+  return <div className={styles.empty}>접수된 주문이 없습니다.</div>;
+}
+
+function CurrentListComponent({ queryState }) {
+  const latestOrder = queryState.data && queryState.data[0].order.findLast((order) => order);
   const totalPrice = latestOrder?.orderList.reduce(
     (prev, current) => prev + current.price * current.amount,
     0
   );
   const totalPriceToString = totalPrice?.toLocaleString();
 
-  useEffect(() => {
-    if (!data) return;
-  }, [data]);
+  return (
+    <>
+      <div className={styles.top}>
+        <OrderListBox listData={latestOrder?.orderList} />
+      </div>
+      <div className={styles.line}></div>
+      <div className={styles.bottom}>
+        <div className={styles.name}>결제금액</div>
+        <div className={styles.price}>{totalPriceToString}원</div>
+      </div>
+    </>
+  );
+}
+
+export default function CurrentOrderList() {
+  // store
+  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const submitStatus = useBoundStore((state) => state.submitState.status);
+  // useQueryClient
+  const query = useQueryClient();
+  const queryState = query.getQueryState(['orderList']);
+  // variant
+  const isOk = submitStatus === 'fulfilled' && queryState.status === 'success';
 
   return (
     <div className={styles.includeMsg}>
       <div className={styles.wrap}>
-        {submitStatus === 'rejected' ? (
-          <div className={styles.empty}>접수된 주문이 없습니다.</div>
-        ) : (
-          <>
-            <div className={styles.top}>
-              <OrderListBox listData={latestOrder?.orderList} />
-            </div>
-            <div className={styles.line}></div>
-            <div className={styles.bottom}>
-              <div className={styles.name}>결제금액</div>
-              <div className={styles.price}>{totalPriceToString}원</div>
-            </div>
-          </>
-        )}
+        {isOk ? <CurrentListComponent queryState={queryState} /> : <EmptyListComponent />}
       </div>
       <p className={styles.msg}>
         <span>결제는 후불결제입니다.</span>

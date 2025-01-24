@@ -6,7 +6,6 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 export default async function OrderListPage({ params }) {
   const paramsObj = await params;
-  // useQuery prefetch
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(orderListQueryOption(paramsObj.table));
 

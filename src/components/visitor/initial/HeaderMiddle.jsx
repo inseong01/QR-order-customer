@@ -1,7 +1,7 @@
 import styles from '@/style/visitor/initial/InitialHeader.module.css';
+import { useBoundStore } from '@/lib/store/useBoundStore';
 
 import { motion } from 'motion/react';
-import { useBoundStore } from '@/lib/store/useBoundStore';
 
 export default function HeaderMiddle() {
   const tableNum = useBoundStore((state) => state.tableState.tableNum);

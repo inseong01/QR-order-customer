@@ -9,6 +9,7 @@ export const menuListQueryOption = queryOptions({
   queryFn: getMenuList,
   // 관리자 메뉴 상태 갱신 고려 
   staleTime: 1000 * 10,
+  retry: 2,
   meta: {
     errorMessage: '메뉴 목록을 불러오는데 실패하였습니다.'
   }
@@ -19,6 +20,7 @@ export const categoryListQueryOption = queryOptions({
   queryFn: () => getCategoryList('menu'),
   // 신선도 유지 
   staleTime: Infinity,
+  retry: 2,
   meta: {
     errorMessage: '카테고리 목록을 불러오는데 실패하였습니다.'
   }
@@ -29,6 +31,7 @@ export const requestListQueryOption = queryOptions({
   queryFn: () => getCategoryList('request'),
   // 신선도 유지 
   staleTime: Infinity,
+  retry: 1,
   meta: {
     errorMessage: '요청사항 목록을 불러오는데 실패하였습니다.'
   }

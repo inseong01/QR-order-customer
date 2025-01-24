@@ -1,15 +1,15 @@
-import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 import MenuCategory from './MenuCategory';
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function MenuCategoryList() {
-  const { data } = useSuspenseQuery(categoryListQueryOption);
+  const queryClient = useQueryClient();
+  const categoryList = queryClient.getQueryData(['category']);
 
   return (
     <>
-      {data
-        .filter((list) => list.id !== 0)
+      {categoryList
+        ?.filter((list) => list.id !== 0)
         .map((category, idx) => {
           return <MenuCategory key={idx} category={category} />;
         })}

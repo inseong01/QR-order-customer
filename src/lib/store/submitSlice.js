@@ -22,8 +22,8 @@ export const submitSlice = process.env.NODE_ENV === 'development' ?
   (set, get) => ({
     ...initialState,
     resetSubmitState: () => set(initialState, undefined, 'submitState/resetSubmitState'),
-    fetchOrderSubmitState: ({ pickUpList }) => {
-      fetchSubmitState({ set, get, pickUpList })
+    fetchOrderSubmitState: ({ pickUpList, submitError }) => {
+      fetchSubmitState({ set, get, pickUpList, submitError })
     },
     fetchRequestSubmitState: ({ requestStr }) => {
       fetchSubmitState({ set, get, requestStr })
@@ -32,8 +32,8 @@ export const submitSlice = process.env.NODE_ENV === 'development' ?
   (set, get) => ({
     ...initialState,
     resetSubmitState: () => set(initialState),
-    fetchOrderSubmitState: ({ pickUpList }) => {
-      fetchSubmitState({ set, get, pickUpList })
+    fetchOrderSubmitState: ({ pickUpList, submitError }) => {
+      fetchSubmitState({ set, get, pickUpList, submitError })
     },
     fetchRequestSubmitState: ({ requestStr }) => {
       fetchSubmitState({ set, get, requestStr })

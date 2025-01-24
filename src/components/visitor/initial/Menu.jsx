@@ -7,7 +7,7 @@ import MenuIconBox from './menuCategory/MenuIconBox';
 import { motion } from 'motion/react';
 import { memo } from 'react';
 
-export default memo(function Menu({ list }) {
+function Menu({ list }) {
   // store
   const clickMenu = useBoundStore((state) => state.clickMenu);
   // variant
@@ -53,4 +53,6 @@ export default memo(function Menu({ list }) {
       </div>
     </motion.li>
   );
-});
+}
+
+export default memo(Menu);
