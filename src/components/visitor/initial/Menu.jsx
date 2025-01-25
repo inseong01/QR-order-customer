@@ -30,19 +30,13 @@ function Menu({ list }) {
     }
   }
 
-  function onClickMenuClick(list) {
-    return () => {
-      if (tag === 'soldout') return;
-      clickMenu(list);
-    };
+  function onClickMenuClick() {
+    if (tag === 'soldout') return;
+    clickMenu(list);
   }
 
   return (
-    <motion.li
-      className={`${styles.menu} ${styles[tag]}`}
-      onClick={onClickMenuClick(list)}
-      variants={liVariants}
-    >
+    <motion.li className={`${styles.menu} ${styles[tag]}`} onClick={onClickMenuClick} variants={liVariants}>
       <MenuImageBox list={list} tagDescription={tagDescription} />
       <div className={styles.contextWrap}>
         <div className={styles.content}>

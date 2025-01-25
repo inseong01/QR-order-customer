@@ -13,7 +13,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
     if (submitError) {
       status = 'rejected';
       isSubmit = false;
-      set(() => ({ submitState: { isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
+      set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
       return;
     }
     // 패치 유형 분류
@@ -23,9 +23,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
       result = await postRequestList(tableNum, requestStr);
     }
     // pending
-    set(() => ({ submitState: { isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
-    // UX, 결과 대기 
-    await new Promise(res => setTimeout(() => res(), 500));
+    set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
     // fulfilled
     status = 'fulfilled';
     isSubmit = false;
@@ -35,7 +33,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
       isSubmit = false;
     }
     // 결과값에 따른 상태 변화
-    set(() => ({ submitState: { isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
+    set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }), undefined, `submitState/${submitType}/${status}`);
     // 요청 완료창 등장
     if (requestStr) {
       setModalOpen({ isOpen: true });
@@ -51,7 +49,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
     if (submitError) {
       status = 'rejected';
       isSubmit = false;
-      set(() => ({ submitState: { isSubmit, status } }));
+      set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }));
       return;
     }
     // 패치 유형 분류
@@ -61,9 +59,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
       result = await postRequestList(tableNum, requestStr);
     }
     // pending
-    set(() => ({ submitState: { isSubmit, status } }));
-    // UX, 결과 대기 
-    await new Promise(res => setTimeout(() => res(), 500));
+    set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }));
     // fulfilled
     status = 'fulfilled';
     isSubmit = false;
@@ -73,7 +69,7 @@ export const fetchSubmitState = process.env.NODE_ENV === 'development' ?
       isSubmit = false;
     }
     // 결과값에 따른 상태 변화
-    set(() => ({ submitState: { isSubmit, status } }));
+    set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }));
     // 요청 완료창 등장
     if (requestStr) {
       setModalOpen({ isOpen: true });

@@ -28,7 +28,7 @@ function LoadedComponent() {
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
 
-  // 2번 반복됨 -> 개발 모드여서?
+  // 2번 반복 (개발 모드)
   useEffect(() => {
     // 한 번만 지정되도록, 첫 접속 할당 중요
     if (!tableNum) {

@@ -1,4 +1,4 @@
-import { userSlice } from "./userSlice";
+import { tableSlice } from "./tableSlice";
 import { menuSlice } from "./menuSlice";
 import { requestSlice } from "./requestSlice";
 import { pickUpSlice } from "./pickUpSlice";
@@ -12,7 +12,7 @@ import { devtools } from 'zustand/middleware'
 export const useBoundStore = process.env.NODE_ENV === 'development' ?
   create()(
     devtools((...a) => ({
-      ...userSlice(...a),
+      ...tableSlice(...a),
       ...menuSlice(...a),
       ...requestSlice(...a),
       ...pickUpSlice(...a),
@@ -21,7 +21,7 @@ export const useBoundStore = process.env.NODE_ENV === 'development' ?
       ...submitSlice(...a),
     }))) :
   create((...a) => ({
-    ...userSlice(...a),
+    ...tableSlice(...a),
     ...menuSlice(...a),
     ...requestSlice(...a),
     ...pickUpSlice(...a),

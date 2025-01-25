@@ -3,10 +3,8 @@ import { useBoundStore } from '@/lib/store/useBoundStore';
 
 export default function PickUpListSubmit() {
   // store
-  const submitStatus = useBoundStore((state) => state.submitState.status);
   const currentOrderList = useBoundStore((state) => state.pickUpState.list);
-  // variant
-  const isAbleGoBack = submitStatus === 'fulfilled' || submitStatus === 'rejected';
+  const isNext = useBoundStore((state) => state.submitState.isNext);
 
-  return <SubmitButton type={isAbleGoBack ? 'back' : currentOrderList.length !== 0 ? 'order' : 'back'} />;
+  return <SubmitButton type={isNext ? 'back' : currentOrderList.length !== 0 ? 'order' : 'back'} />;
 }

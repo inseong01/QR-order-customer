@@ -4,6 +4,7 @@ const initialState = {
   submitState: {
     isSubmit: false,
     status: '',
+    isNext: false
   }
 }
 
@@ -27,7 +28,8 @@ export const submitSlice = process.env.NODE_ENV === 'development' ?
     },
     fetchRequestSubmitState: ({ requestStr }) => {
       fetchSubmitState({ set, get, requestStr })
-    }
+    },
+    setNexPageEnable: ({ isNext }) => set((state) => ({ submitState: { ...state.submitState, isNext } }), undefined, 'submitState/setNexPageEnable')
   }) :
   (set, get) => ({
     ...initialState,
@@ -37,5 +39,6 @@ export const submitSlice = process.env.NODE_ENV === 'development' ?
     },
     fetchRequestSubmitState: ({ requestStr }) => {
       fetchSubmitState({ set, get, requestStr })
-    }
+    },
+    setNexPageEnable: ({ isNext }) => set((state) => ({ submitState: { ...state.submitState, isNext } }))
   })

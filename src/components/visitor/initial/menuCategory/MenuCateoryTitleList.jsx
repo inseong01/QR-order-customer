@@ -42,7 +42,7 @@ export default function MenuCateoryTitleList() {
   }
 
   function performanceOnDragStart(e) {
-    // 성능 측정 시작 (개발 전용)
+    // 성능 측정 시작
     if (process.env.NODE_ENV === 'development') {
       // 60fps 지향, delay는 최대 16.666ms
       measureCallbackCount(0, 15);
@@ -60,7 +60,7 @@ export default function MenuCateoryTitleList() {
           animate={{ y: 0 }}
           draggable={isScrollAble}
           onDragStart={performanceOnDragStart}
-          onDrag={throttle(onDragMouse, 5)}
+          onDrag={throttle(onDragMouse, 15)}
           onDragEnd={onDragMouse}
         >
           <MenuCategoryList />
