@@ -6,10 +6,14 @@ import Link from 'next/link';
 export default function SubmitBack() {
   const tableNum = useBoundStore((state) => state.tableState.tableNum);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
+  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
 
   // 돌아가기
   async function onClickReturnHome() {
-    resetPickUpState(); // 초기화
+    // 선택 메뉴 초기화
+    resetPickUpState();
+    // 초기 카테고리 메뉴로 초기화
+    getSelectedMenuCategoryId({ id: 1 });
   }
 
   return (

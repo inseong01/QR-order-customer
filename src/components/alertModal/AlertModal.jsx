@@ -29,11 +29,13 @@ export default function AlertModal({ type }) {
       case 'orderCheck': {
         // 주문 전달
         fetchOrderSubmitState({ pickUpList, submitError: queryState.status === 'error' });
+        // 모달 닫기
         setModalOpen({ isOpen: false });
         break;
       }
       case 'request': {
-        resetCallState(); // 초기화
+        // 초기화
+        resetCallState();
         break;
       }
     }
