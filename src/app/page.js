@@ -16,6 +16,8 @@ export default function Home() {
             </div>
             <div className={styles.sub2}>
               <p>주문하시려는 경우 QR코드를 다시 스캔해주세요</p>
+              <br />
+              <p>서비스를 이용하시려는 경우 <br /> 모바일 또는 태블릿으로 접속해주세요</p>
             </div>
           </div>
           <div className={styles.links}>
