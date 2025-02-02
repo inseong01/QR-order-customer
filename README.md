@@ -13,28 +13,50 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 #### "사용자 만족도 향상"    
 웹 구조 복잡함 없이 필요한 정보 제공, 주문 과정 직관화
 
-### 웹 주요 기능 
-- 메뉴
-  1. 카테고리 별 메뉴 분류
-  2. 장바구니
-- 테이블 요청   
-- 주문 목록    
-- 계산서
-- 주문
+### 주요 기능 
+메뉴
+1. 카테고리 별 메뉴 분류
+2. 장바구니
+   
+테이블 요청   
+주문 목록    
+계산서
+주문
 
 ### 기술 스택
 `React` `Next` `Tanstack React Query` `Zustand` `Supabase`
-
 ## 미리보기
+**매뉴 탐색**
+
+![](./docs/src/gif/menu-1-search.gif)
+
+**메뉴 주문**
+
+![](./docs/src/gif/menu-2-pick%20check%20order.gif)
+
+**직원 요청**
+
+![](./docs/src/gif/call-3-list.gif)
+
+**주문목록 확인**
+
+![](./docs/src/gif/order-4-list.gif)
+
+**계산서 확인**
+
+![](./docs/src/gif/bill-5.gif)
+
+
+## 체험하기
 
 클릭하면 [QR-ORDER 고객 전용 서비스](https://qr-order-client.vercel.app/1)를 웹 브라우저에서 경험할 수 있어요.    
 
 ![](./docs/src/img/table-1-QRcode.png)
 
 상단 QR 코드를 스캔해도 동일한 매장 1번 테이블로 접속돼요 😊   
-모바일과 태블릿만 주문 서비스를 이용할 수 있어요
+모바일과 태블릿만 주문 서비스를 이용할 수 있도록 제한하고 있어요
 
-PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-izowjv7xq-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요
+PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-cece8e3gh-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요
 
 ## 설치하기
 ```bash
