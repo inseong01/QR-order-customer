@@ -23,10 +23,10 @@ export default function Home() {
           <div className={styles.links}>
             <p>자세한 내용 확인하기</p>
             <div>
-              <Link href={'https://github.com/inseong01/QR-order-customer'} className={styles.btn} >
+              <Link href={'https://github.com/inseong01/QR-order-admin'} className={styles.btn} >
                 관리자
               </Link>
-              <Link href={'https://github.com/inseong01/QR-order-admin'} className={styles.btn} >
+              <Link href={'https://github.com/inseong01/QR-order-customer'} className={styles.btn} >
                 고객
               </Link>
             </div>
