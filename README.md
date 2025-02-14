@@ -26,6 +26,29 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 ### 기술 스택
 `React` `Next` `Tanstack React Query` `Zustand` `Supabase`
 ## 미리보기
+**메뉴 화면 (첫 페이지)**
+
+![메뉴 화면 (첫 페이지)](./docs/src/img/1-menu.png)
+
+**주문 진행 과정**
+
+![주문 진행 과정](./docs/src/img/2-order.png)
+
+**요청 진행 과정**
+
+![요청 진행 과정](./docs/src/img/3-request.png)
+
+**주문 목록**
+
+![주문 목록](./docs/src/img/4-orderList.png)
+
+**계산서**
+
+![계산서](./docs/src/img/5-bill.png)
+
+<details>
+  <summary>GIF</summary>
+
 **매뉴 탐색**
 
 ![](./docs/src/gif/menu-1-search.gif)
@@ -46,6 +69,7 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 
 ![](./docs/src/gif/bill-5.gif)
 
+</details>
 
 ## 체험하기
 
@@ -54,9 +78,11 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 ![](./docs/src/img/table-1-QRcode.png)
 
 상단 QR 코드를 스캔해도 동일한 매장 1번 테이블로 접속돼요 😊   
-모바일과 태블릿만 주문 서비스를 이용할 수 있도록 제한하고 있어요
+모바일과 태블릿만 주문 서비스를 이용할 수 있도록 제한하고 있어요.
 
-PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-qcpz8hlgq-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요
+PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-qcpz8hlgq-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요.
+
+서버 문제로 접속이 느릴 수 있어요. 
 
 ## 설치하기
 ```bash
