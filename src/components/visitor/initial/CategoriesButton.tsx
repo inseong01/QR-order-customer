@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBellConcierge, faList, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
+type RouterCategory = 'call' | 'orderList' | 'bill';
+
 export default function CategoriesButton() {
   // store
   const tableNum = useBoundStore((state) => state.tableState.tableNum);
@@ -13,7 +15,7 @@ export default function CategoriesButton() {
   // useRouter
   const router = useRouter();
 
-  function onClickRouterOnce(category) {
+  function onClickRouterOnce(category: RouterCategory) {
     return () => {
       if (requestIsClicked) return;
       setRequestClick({ isClicked: true });

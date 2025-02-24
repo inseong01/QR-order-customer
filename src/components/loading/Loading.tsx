@@ -2,8 +2,9 @@
 
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import styles from '@/style/loading/Loading.module.css';
+import { LoadingType } from '@/types/common';
 
-export default function Loading({ type }) {
+export default function Loading({ type }: { type: LoadingType }) {
   const isBtnClicked = useBoundStore((state) => state.requestState.isClicked);
 
   switch (type) {

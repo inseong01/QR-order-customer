@@ -1,5 +1,7 @@
-import { NextResponse, userAgent } from "next/server";
-import { checkValidTableValue } from "./lib/function/checkValidTableValue";
+import { NextResponse, userAgent } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+import { checkValidTableValue } from './lib/function/checkValidTableValue';
 
 /*
   1. 모바일 접속만 허가
@@ -23,7 +25,7 @@ import { checkValidTableValue } from "./lib/function/checkValidTableValue";
 
 */
 
-export function middleware(request) {
+export function middleware(request: NextRequest) {
   // dev
   const isDev = process.env.NODE_ENV === 'development';
   // home uri
@@ -32,7 +34,7 @@ export function middleware(request) {
   const notFoundPage = new URL(`/0/not-found`, request.nextUrl.origin);
 
   // 링크 값
-  const pathname = request.nextUrl.pathname.split('/'); // ['', (tableNum), (subpage)]  
+  const pathname = request.nextUrl.pathname.split('/'); // ['', (tableNum), (subpage)]
   const tablePathname = pathname[1];
 
   // not fouud 페이지 접속 판별
@@ -49,16 +51,16 @@ export function middleware(request) {
   const { device } = userAgent(request);
 
   // 장치 판별
-  const isMobile = device.type === 'mobile' || device.type === 'tablet'
+  const isMobile = device.type === 'mobile' || device.type === 'tablet';
 
   // 장치 별 페이지 접근 제한
   if (!isMobile && !isDev) {
-    console.log('device', typeof device.type)
+    console.log('device', typeof device.type);
     return NextResponse.redirect(HomePage);
   }
 
   // 링크 테이블 값 유형 검증
-  const isWrongTableValue = checkValidTableValue(tablePathname)
+  const isWrongTableValue = checkValidTableValue(tablePathname);
 
   // 잘못된 테이블 값, 홈페이지 이동
   if (isWrongTableValue) return NextResponse.redirect(HomePage);
@@ -70,18 +72,18 @@ export function middleware(request) {
   if (isSubPage) {
     // 부여된 테이블 쿠키 값
     const cookie = request.cookies.get('table');
-    const cookieTableNum = cookie.value;
+    const cookieTableNum = cookie?.value;
 
     // 링크, 쿠키 값 검증
     if (tablePathname !== cookieTableNum) {
-      return NextResponse.redirect(notFoundPage)
+      return NextResponse.redirect(notFoundPage);
     }
   }
 
   // 하위 페이지가 아니면 링크 이동
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: ['/((?!_next|favicon|img).*)'], // url 경로만 매치
-}
+};

@@ -1,7 +1,7 @@
-import styles from '@/app/page.module.css'
-import LogoImage from '@/components/visitor/initial/LogoImage'
+import styles from '@/app/page.module.css';
+import LogoImage from '@/components/visitor/initial/LogoImage';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -17,16 +17,18 @@ export default function Home() {
             <div className={styles.sub2}>
               <p>주문하시려는 경우 QR코드를 다시 스캔해주세요</p>
               <br />
-              <p>서비스를 이용하시려는 경우 <br /> 모바일 또는 태블릿으로 접속해주세요</p>
+              <p>
+                서비스를 이용하시려는 경우 <br /> 모바일 또는 태블릿으로 접속해주세요
+              </p>
             </div>
           </div>
           <div className={styles.links}>
             <p>자세한 내용 확인하기</p>
             <div>
-              <Link href={'https://github.com/inseong01/QR-order-admin'} className={styles.btn} >
+              <Link href={'https://github.com/inseong01/QR-order-admin'} className={styles.btn}>
                 관리자
               </Link>
-              <Link href={'https://github.com/inseong01/QR-order-customer'} className={styles.btn} >
+              <Link href={'https://github.com/inseong01/QR-order-customer'} className={styles.btn}>
                 고객
               </Link>
             </div>
@@ -37,5 +39,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  )
+  );
 }

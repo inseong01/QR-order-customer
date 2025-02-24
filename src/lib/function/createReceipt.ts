@@ -1,4 +1,6 @@
-function createReceipt(orderList) {
+import { OrderList } from '@/types/common';
+
+function createReceipt(orderList: OrderList[]) {
   const billArr = [];
   const allMenuObj = {};
   const flatOrderListArr = orderList.flat();
@@ -7,13 +9,15 @@ function createReceipt(orderList) {
     allMenuObj[flatOrderListArr[i].name] = {
       name: flatOrderListArr[i].name,
       price: flatOrderListArr[i].price,
-      amount: allMenuObj[flatOrderListArr[i].name]?.amount + flatOrderListArr[i].amount || flatOrderListArr[i].amount
-    }
+      amount:
+        allMenuObj[flatOrderListArr[i].name]?.amount + flatOrderListArr[i].amount ||
+        flatOrderListArr[i].amount,
+    };
   }
   // 메뉴 배열화
   for (let i = 0; i < Object.keys(allMenuObj).length; i++) {
     const key = Object.keys(allMenuObj)[i];
-    billArr.push(allMenuObj[key])
+    billArr.push(allMenuObj[key]);
   }
   // 영수증 반환
   return billArr;

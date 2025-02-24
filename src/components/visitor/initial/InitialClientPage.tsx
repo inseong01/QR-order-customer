@@ -7,6 +7,7 @@ import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
 import Loading from '@/components/loading/Loading';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { initCookies } from '@/lib/function/initCookies';
+import { CategoryList, CategoryType, MenuList } from '@/types/common';
 
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
@@ -15,7 +16,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 function LoadedComponent() {
   // usePathname
-  const params = useParams();
+  const params = useParams<{ table: string }>();
   // store
   const pickUpList = useBoundStore((state) => state.pickUpState.list);
   const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
@@ -71,7 +72,7 @@ export default function InitialClientPage() {
   const [screenLoading, setLoading] = useState(true);
   // useQueryClient
   const queryClient = useQueryClient();
-  const [menuList, categoryList] = queryClient.getQueriesData();
+  const [menuList, categoryList] = queryClient.getQueriesData<MenuList[] | CategoryList<CategoryType>[]>({});
 
   // 로딩 여부
   useEffect(() => {

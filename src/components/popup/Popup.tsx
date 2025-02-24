@@ -1,8 +1,8 @@
 'use client';
 
 import styles from '@/style/popup/Popup.module.css';
-import CountButton from '../CountButton';
 import { useBoundStore } from '@/lib/store/useBoundStore';
+import CountButton from '../CountButton';
 
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';

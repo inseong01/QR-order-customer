@@ -2,7 +2,6 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,8 +15,9 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@supabase/supabase-js": "^2.47.8",
     "@tanstack/react-query": "^5.61.0",
+    "@types/eslint__eslintrc": "^2.1.2",
     "dotenv": "^16.4.5",
-    "motion": "^11.11.17",
+    "motion": "^11.14.4",
     "next": "15.0.3",
     "react": "^18",
     "react-dom": "^18",
@@ -27,7 +27,12 @@
     "@next/bundle-analyzer": "^15.1.2",
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/react-query-devtools": "^5.64.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "eslint-config-next": "15.0.3",
+    "supabase": "^2.12.1",
+    "typescript": "^5"
   }
 }

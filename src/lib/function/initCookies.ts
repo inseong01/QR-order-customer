@@ -1,6 +1,6 @@
-import { setInitCookies } from "@/app/[table]/actions";
+import { setInitCookies } from '@/app/[table]/actions';
 
-export async function initCookies(params) {
+export async function initCookies(params: { table: string }) {
   try {
     await setInitCookies(params);
     console.log('Cookies initialized successfully.');
