@@ -10,7 +10,7 @@ function ErrorMessageComponent() {
 export default function CallPageMain() {
   // useQueryClient
   const queryClient = useQueryClient();
-  const request = queryClient.getQueryState(['request']);
+  const request = queryClient.getQueryState(['requestCategory']);
   // variant
   const isError = request === undefined || request.status === 'error';
   const title = isError ? '요청 목록 오류' : '요청 항목을 선택해주세요';

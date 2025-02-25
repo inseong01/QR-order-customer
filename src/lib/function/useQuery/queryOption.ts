@@ -16,7 +16,7 @@ export const menuListQueryOption = queryOptions({
 });
 
 export const categoryListQueryOption = queryOptions({
-  queryKey: ['category'],
+  queryKey: ['menuCategory'],
   queryFn: () => getCategoryList('menu'),
   // 신선도 유지
   staleTime: Infinity,
@@ -27,7 +27,7 @@ export const categoryListQueryOption = queryOptions({
 });
 
 export const requestListQueryOption = queryOptions({
-  queryKey: ['request'],
+  queryKey: ['requestCategory'],
   queryFn: () => getCategoryList('request'),
   // 신선도 유지
   staleTime: Infinity,

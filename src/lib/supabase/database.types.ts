@@ -1,3 +1,5 @@
+import { TableOrderType } from '@/types/common';
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
@@ -184,19 +186,19 @@ export type Database = {
         Row: {
           id: string;
           init: Json | null;
-          order: Json[] | null;
+          order: TableOrderType[];
           tableNum: number;
         };
         Insert: {
           id?: string;
           init?: Json | null;
-          order?: Json[] | null;
+          order?: TableOrderType[];
           tableNum: number;
         };
         Update: {
           id?: string;
           init?: Json | null;
-          order?: Json[] | null;
+          order?: TableOrderType[];
           tableNum?: number;
         };
         Relationships: [];
