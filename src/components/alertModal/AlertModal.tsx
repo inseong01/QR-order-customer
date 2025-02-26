@@ -1,6 +1,7 @@
 'use client';
 
 import { useBoundStore } from '@/lib/store/useBoundStore';
+import { orderListQueryOption } from '@/lib/function/useQuery/queryOption';
 import OrderCheckDialog from './OrderCheckDialog';
 import RequestDialog from './RequestDialog';
 
@@ -8,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 export default function AlertModal() {
   // store
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const pickUpList = useBoundStore((state) => state.pickUpState.list);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const type = useBoundStore((state) => state.modalState.type);
@@ -16,7 +18,7 @@ export default function AlertModal() {
   const fetchOrderSubmitState = useBoundStore((state) => state.fetchOrderSubmitState);
   // useQueryClient
   const queryClient = useQueryClient();
-  const queryState = queryClient.getQueryState(['orderList']);
+  const queryState = queryClient.getQueryState(orderListQueryOption(tableName).queryKey);
 
   // db 제출 거부, '아니요'
   function onClickNotEnsureSubmit() {

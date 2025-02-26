@@ -1,4 +1,4 @@
-import { QueryCache, QueryClient, defaultShouldDehydrateQuery, isServer } from "@tanstack/react-query";
+import { QueryCache, QueryClient, defaultShouldDehydrateQuery, isServer } from '@tanstack/react-query';
 
 function makeQueryClient() {
   return new QueryClient({
@@ -9,22 +9,23 @@ function makeQueryClient() {
         refetchOnWindowFocus: false,
       },
       dehydrate: {
-        // SSR, pending 데이터도 dehydrate 처리 
-        shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query) || query.state.status === 'pending'
-      }
+        // SSR, pending 데이터도 dehydrate 처리
+        shouldDehydrateQuery: (query) =>
+          defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
+      },
     },
     queryCache: new QueryCache({
-      // 쿼리 에러 통합 처리 
+      // 쿼리 에러 통합 처리
       onError: (error, query) => {
-        if (query.meta.errorMessage) {
-          console.error(query.meta.errorMessage)
+        if (query?.meta?.errorMessage) {
+          console.error(query.meta.errorMessage);
         }
-      }
-    })
-  })
+      },
+    }),
+  });
 }
 
-let browserQueryClient = undefined;
+let browserQueryClient: QueryClient | undefined = undefined;
 
 export function getQueryClient() {
   if (isServer) {

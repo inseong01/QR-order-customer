@@ -3,7 +3,7 @@ import { useBoundStore } from '@/lib/store/useBoundStore';
 import makeSentence from '@/lib/function/makeSentence';
 
 export default function SubmitRequestBtn() {
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const requestList = useBoundStore((state) => state.callState.selectedItemArr);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const fetchRequestSubmitState = useBoundStore((state) => state.fetchRequestSubmitState);
@@ -13,7 +13,7 @@ export default function SubmitRequestBtn() {
     if (isSubmit) return;
     // 알림으로 requestList(요청) 전달
     const requestStr = makeSentence(requestList);
-    fetchRequestSubmitState({ tableNum, requestStr });
+    fetchRequestSubmitState({ requestStr });
   }
 
   return (

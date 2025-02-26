@@ -10,7 +10,7 @@ export default function PickUpListUl() {
   const currentOrderList = useBoundStore((state) => state.pickUpState.list);
   const removePickUpMenu = useBoundStore((state) => state.removePickUpMenu);
 
-  function onClickDeletePickUpList(id: number) {
+  function onClickDeletePickUpList(id: string) {
     return () => {
       removePickUpMenu({ id });
     };

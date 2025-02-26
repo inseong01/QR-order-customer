@@ -37,10 +37,10 @@ export const requestListQueryOption = queryOptions({
   },
 });
 
-export const orderListQueryOption = (tablNum: number) =>
+export const orderListQueryOption = (tableName: string) =>
   queryOptions({
     queryKey: ['orderList'],
-    queryFn: () => getTableOrderList(tablNum),
+    queryFn: () => getTableOrderList(tableName),
     // 신선도 유지, 주문 이후 리패치
     staleTime: Infinity,
     retry: 1,

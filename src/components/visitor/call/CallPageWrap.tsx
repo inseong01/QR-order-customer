@@ -3,9 +3,9 @@
 import styles from '@/style/visitor/call/CallPageWrap.module.css';
 import AppVisitorHeader from '@/components/AppVisitorHeader';
 import { useBoundStore } from '@/lib/store/useBoundStore';
+import DynamicAlertModalBox from '../../alertModal/DynamicAlertModalBox';
 import CallPageMain from './CallPageMain';
 import SubmitButtonWrap from './SubmitButtonWrap';
-import DynamicAlertModalBox from '../../alertModal/DynamicAlertModalBox';
 
 import { useEffect } from 'react';
 

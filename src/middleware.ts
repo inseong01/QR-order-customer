@@ -34,7 +34,7 @@ export function middleware(request: NextRequest) {
   const notFoundPage = new URL(`/0/not-found`, request.nextUrl.origin);
 
   // 링크 값
-  const pathname = request.nextUrl.pathname.split('/'); // ['', (tableNum), (subpage)]
+  const pathname = request.nextUrl.pathname.split('/'); // ['', (tableName), (subpage)]
   const tablePathname = pathname[1];
 
   // not fouud 페이지 접속 판별

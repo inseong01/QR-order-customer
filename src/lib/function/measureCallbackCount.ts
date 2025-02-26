@@ -1,7 +1,7 @@
 import { throttle } from './throttle';
 
 // 두 가지 throttle 동시 비교
-export function measureCallbackCount(delay1: number, delay2: number, timeout = 5000) {
+export function measureCallbackCount(e: DragEvent, delay1: number, delay2: number, timeout = 5000) {
   // 함수 호출 수
   let first = 0;
   let second = 0;
@@ -17,8 +17,8 @@ export function measureCallbackCount(delay1: number, delay2: number, timeout = 5
   // 함수 호출 실행
   const startTm = Date.now();
   let interval = setInterval(() => {
-    firstThrottle();
-    secondThrottle();
+    firstThrottle(e);
+    secondThrottle(e);
 
     // 함수 호출 결과 출력력
     if (timeout < Date.now() - startTm) {

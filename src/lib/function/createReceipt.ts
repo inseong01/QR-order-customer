@@ -1,17 +1,33 @@
-import { OrderList } from '@/types/common';
+import { AllMenuObj, OrderListType } from '@/types/common';
+/*
+  {
+    "히레카츠": {
+        "name": "히레카츠",
+        "price": 12000,
+        "amount": 8
+    },
+    "고구마 치즈카츠": {
+        "name": "고구마 치즈카츠",
+        "price": 12000,
+        "amount": 16
+    },
+  }
+*/
 
-function createReceipt(orderList: OrderList[]) {
+function createReceipt(orderList: OrderListType[][]) {
   const billArr = [];
-  const allMenuObj = {};
+  const allMenuObj: AllMenuObj = {};
   const flatOrderListArr = orderList.flat();
   // 중복 메뉴 계산
   for (let i = 0; i < flatOrderListArr.length; i++) {
+    const currentAmount = allMenuObj[flatOrderListArr[i].name]?.amount ?? 0;
+    const prevAmount = flatOrderListArr[i].amount;
+
     allMenuObj[flatOrderListArr[i].name] = {
+      id: flatOrderListArr[i].id,
       name: flatOrderListArr[i].name,
       price: flatOrderListArr[i].price,
-      amount:
-        allMenuObj[flatOrderListArr[i].name]?.amount + flatOrderListArr[i].amount ||
-        flatOrderListArr[i].amount,
+      amount: currentAmount + prevAmount || prevAmount,
     };
   }
   // 메뉴 배열화

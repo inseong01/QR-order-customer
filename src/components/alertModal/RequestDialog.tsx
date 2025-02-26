@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 
 export default function RequestDialog({ onClickEnsureSubmit }: { onClickEnsureSubmit: () => void }) {
   // store
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const isOpenModal = useBoundStore((state) => state.modalState.isOpen);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   // variant
@@ -24,7 +24,7 @@ export default function RequestDialog({ onClickEnsureSubmit }: { onClickEnsureSu
         transition={{ type: 'spring', duration: 0.3 }}
       >
         <div className={styles.top}>{title}</div>
-        <Link href={`/${tableNum}`} replace={true} className={styles.bottom} onClick={onClickEnsureSubmit}>
+        <Link href={`/${tableName}`} replace={true} className={styles.bottom} onClick={onClickEnsureSubmit}>
           <span className={`${styles.title} ${styles.last}`}>확인</span>
         </Link>
       </motion.dialog>

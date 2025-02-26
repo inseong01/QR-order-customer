@@ -306,8 +306,17 @@
 
 25.2.24.
   JS -> TS 전환 작업 중
+  // DynamicAlertModal 인자 type 제외해봄
 
 25.2.25.
   JS -> TS 전환 작업 중
-  
-<--- submitSlice 부터 다시 시작 --->
+
+25.2.25.
+  JS -> TS 전환 작업 중
+  // makeQueryClient(), QueryCache unknown 옵셔널 체이닝 적용 
+
+25.2.26.
+  JS -> TS 전환 작업 중
+  // tableName 받아올 때 string, DB 전달할 때 number 타입 적용
+
+<--- postOrderList 부터 다시 시작 --->

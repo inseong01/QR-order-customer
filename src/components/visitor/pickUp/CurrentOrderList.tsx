@@ -1,5 +1,6 @@
 import styles from '@/style/OrderList.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
+import { orderListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { TableList } from '@/types/common';
 import OrderListBox from '../order/OrderListBox';
 
@@ -34,22 +35,22 @@ function CurrentListComponent({ queryData }: { queryData?: TableList[] }) {
 
 export default function CurrentOrderList() {
   // store
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   // useQueryClient
-  const query = useQueryClient();
-  const queryState = query.getQueryState<TableList[]>(['orderList']);
+  const queryClient = useQueryClient();
+  const orderList = queryClient.getQueryState(orderListQueryOption(tableName).queryKey);
   // variant
-  const isOk = submitStatus === 'fulfilled' && queryState?.status === 'success';
+  const isOk = submitStatus === 'fulfilled' && orderList?.status === 'success';
 
   return (
     <div className={styles.includeMsg}>
       <div className={styles.wrap}>
-        {isOk ? <CurrentListComponent queryData={queryState.data} /> : <EmptyListComponent />}
+        {isOk ? <CurrentListComponent queryData={orderList.data} /> : <EmptyListComponent />}
       </div>
       <p className={styles.msg}>
         <span>결제는 후불결제입니다.</span>
-        <span>현재 앉아 계신 테이블 번호는 {tableNum}번 입니다.</span>
+        <span>현재 앉아 계신 테이블 번호는 {tableName}번 입니다.</span>
       </p>
     </div>
   );

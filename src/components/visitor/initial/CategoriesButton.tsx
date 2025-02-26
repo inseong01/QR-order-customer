@@ -9,7 +9,7 @@ type RouterCategory = 'call' | 'orderList' | 'bill';
 
 export default function CategoriesButton() {
   // store
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const requestIsClicked = useBoundStore((state) => state.requestState.isClicked);
   const setRequestClick = useBoundStore((state) => state.setRequestClick);
   // useRouter
@@ -19,7 +19,7 @@ export default function CategoriesButton() {
     return () => {
       if (requestIsClicked) return;
       setRequestClick({ isClicked: true });
-      router.push(`${tableNum}/${category}`);
+      router.push(`${tableName}/${category}`);
     };
   }
 

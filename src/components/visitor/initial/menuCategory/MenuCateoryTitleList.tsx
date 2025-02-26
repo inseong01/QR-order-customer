@@ -34,6 +34,7 @@ export default function MenuCateoryTitleList() {
 
   // 드래그 스크롤 이동
   function onDragMouse(e: DragEvent) {
+    if (!e) return;
     if (scrollContainer.current) {
       const lastX = e.clientX;
       const move = lastX - scrollStart.x;
@@ -48,10 +49,10 @@ export default function MenuCateoryTitleList() {
   }
 
   function performanceOnDragStart(e: DragEvent) {
-    // 성능 측정 시작('production' 변경)
+    // 성능 측정('production' 변경)
     if (process.env.NODE_ENV === 'development') {
       // 60fps 지향, delay는 최대 16.666ms
-      measureCallbackCount(0, 15);
+      measureCallbackCount(e, 0, 15);
     }
     onDragStart(e);
   }

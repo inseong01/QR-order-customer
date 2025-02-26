@@ -13,7 +13,7 @@ export default function CountButton({
 }: {
   type: CountButtonType;
   amount: number;
-  id: number;
+  id: number | string;
 }) {
   const changeItemAmount = useBoundStore((state) => state.changeItemAmount);
   const changeSelectedMenuAmount = useBoundStore((state) => state.changeSelectedMenuAmount);
@@ -31,11 +31,14 @@ export default function CountButton({
           break;
         }
         case 'call': {
-          changeItemAmount({ id, amount: calcedAmount });
+          // overlaps 문제로 타입 단언
+          const ItemId = id as number;
+          changeItemAmount({ id: ItemId, amount: calcedAmount });
           break;
         }
         case 'pickUpList': {
-          changeMenuAmountInPickUpList({ id, amount: calcedAmount });
+          const listId = id as string;
+          changeMenuAmountInPickUpList({ id: listId, amount: calcedAmount });
           break;
         }
         default: {

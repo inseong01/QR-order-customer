@@ -1,6 +1,5 @@
 import { SelectedMenu, SliceCreator, Status } from '@/types/common';
 import { fetchSubmitState } from '../function/fetchSubmitState';
-import { AllSlices } from './useBoundStore';
 
 type InitialState = {
   submitState: {
@@ -29,7 +28,7 @@ export interface SubmitSlice {
     pickUpList,
     submitError,
   }: {
-    pickUpList: SelectedMenu;
+    pickUpList: SelectedMenu[];
     submitError: boolean;
   }) => void;
   fetchRequestSubmitState: ({ requestStr }: { requestStr: string }) => void;
@@ -56,7 +55,7 @@ export const submitSlice: SliceCreator<SubmitSlice> =
           pickUpList,
           submitError,
         }: {
-          pickUpList: SelectedMenu;
+          pickUpList: SelectedMenu[];
           submitError: boolean;
         }) => {
           fetchSubmitState({ pickUpList, submitError, set, get });
@@ -78,7 +77,7 @@ export const submitSlice: SliceCreator<SubmitSlice> =
           pickUpList,
           submitError,
         }: {
-          pickUpList: SelectedMenu;
+          pickUpList: SelectedMenu[];
           submitError: boolean;
         }) => {
           fetchSubmitState({ set, get, pickUpList, submitError });

@@ -4,15 +4,15 @@ import { useBoundStore } from '@/lib/store/useBoundStore';
 import { motion } from 'motion/react';
 
 export default function HeaderMiddle() {
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
 
   return (
     <div className={styles.middle}>
       <div className={styles.restaurantName}>
         <span>희락카츠 </span>
-        {tableNum ? (
+        {tableName ? (
           <motion.span className={styles.table} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            #{tableNum}
+            #{tableName}
           </motion.span>
         ) : null}
       </div>

@@ -22,7 +22,7 @@ function LoadedComponent() {
   const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
   const requestIsClicked = useBoundStore((state) => state.requestState.isClicked);
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const setTableNumber = useBoundStore((state) => state.setTableNumber);
   const resetRequestState = useBoundStore((state) => state.resetRequestState);
@@ -32,7 +32,7 @@ function LoadedComponent() {
   // 2번 반복 (개발 모드)
   useEffect(() => {
     // 한 번만 지정되도록, 첫 접속 할당 중요
-    if (!tableNum) {
+    if (!tableName) {
       // 테이블 - 쿠키 할당
       initCookies(params);
       // 테이블 - 전역 상태

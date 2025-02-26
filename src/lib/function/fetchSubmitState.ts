@@ -13,18 +13,20 @@ export const fetchSubmitState =
         set,
         get,
       }: {
-        pickUpList?: SelectedMenu;
+        pickUpList?: SelectedMenu[];
         requestStr?: string;
         submitError?: boolean;
         set: typeof useBoundStore.setState;
-        get: () => AllSlices;
+        get: () => SubmitSlice;
       }) => {
         let result;
         let status: Status = 'pending';
         let isSubmit = true;
         const submitType = pickUpList ? 'fetchOrderSubmitState' : 'fetchRequestSubmitState';
-        const tableNum = get().tableState.tableNum;
-        const setModalOpen = get().setModalOpen;
+        // get 인자 타입 오류로 AllSlices 타입 단언
+        const getAll = get() as AllSlices;
+        const tableName = getAll.tableState.tableName;
+        const setModalOpen = getAll.setModalOpen;
         // GetTableOrderList 에러 발생, 메뉴 전달 이전 반환
         if (submitError) {
           status = 'rejected';
@@ -37,10 +39,11 @@ export const fetchSubmitState =
           return;
         }
         // 패치 유형 분류
+        // tableName number 타입 적용
         if (pickUpList) {
-          result = await postOrderList(tableNum, pickUpList);
+          result = await postOrderList(Number(tableName), pickUpList);
         } else if (requestStr) {
-          result = await postRequestList(tableNum, requestStr);
+          result = await postRequestList(Number(tableName), requestStr);
         }
         // pending
         set(
@@ -74,18 +77,21 @@ export const fetchSubmitState =
         set,
         get,
       }: {
-        pickUpList?: SelectedMenu;
+        pickUpList?: SelectedMenu[];
         requestStr?: string;
         submitError?: boolean;
         set: typeof useBoundStore.setState;
-        get: () => AllSlices;
+        get: () => SubmitSlice;
       }) => {
         let result;
         let status: Status = 'pending';
         let isSubmit = true;
-        const tableNum = get().tableState.tableNum;
-        const setModalOpen = get().setModalOpen;
-        // GetTableOrderList 에러 발생, 메뉴 전달 전 반환
+        const submitType = pickUpList ? 'fetchOrderSubmitState' : 'fetchRequestSubmitState';
+        // get 인자 타입 오류로 AllSlices 타입 단언
+        const getAll = get() as AllSlices;
+        const tableName = getAll.tableState.tableName;
+        const setModalOpen = getAll.setModalOpen;
+        // GetTableOrderList 에러 발생, 메뉴 전달 이전 반환
         if (submitError) {
           status = 'rejected';
           isSubmit = false;
@@ -94,9 +100,9 @@ export const fetchSubmitState =
         }
         // 패치 유형 분류
         if (pickUpList) {
-          result = await postOrderList(tableNum, pickUpList);
+          result = await postOrderList(Number(tableName), pickUpList);
         } else if (requestStr) {
-          result = await postRequestList(tableNum, requestStr);
+          result = await postRequestList(Number(tableName), requestStr);
         }
         // pending
         set((state) => ({ submitState: { ...state.submitState, isSubmit, status } }));

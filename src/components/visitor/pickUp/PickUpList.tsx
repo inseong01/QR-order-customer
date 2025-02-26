@@ -7,7 +7,7 @@ export default function PickUpList({
   onClickDeleteList,
 }: {
   currentOrderList: OrderListType[];
-  onClickDeleteList: (id: number) => () => void;
+  onClickDeleteList: (id: string) => () => void;
 }) {
   return (
     <>

@@ -2,13 +2,13 @@
 
 import styles from '@/style/AppVisitorHeader.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
-import { HeadTitle } from '@/types/common';
+import { HeaderTitle } from '@/types/common';
 import SimpleIcon from './SimpleIcon';
 
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 
-function AppVisitorHeader({ title }: { title: HeadTitle }) {
+function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   // store
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);

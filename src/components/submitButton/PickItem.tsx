@@ -1,8 +1,8 @@
 import styles from '@/style/submitButton/PickItem.module.css';
-import { RequestCategoryList } from '@/types/common';
+import { CallItem } from '@/types/common';
 import CountButton from '../CountButton';
 
-export default function PickItem({ item }: { item: {} }) {
+export default function PickItem({ item }: { item: CallItem }) {
   return (
     <li className={styles.list}>
       <div className={styles.name}>{item.title}</div>

@@ -1,15 +1,16 @@
 import styles from '@/style/OrderSubmitComplete.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
-import { TableList } from '@/types/common';
+import { orderListQueryOption } from '@/lib/function/useQuery/queryOption';
 
 import { useQueryClient } from '@tanstack/react-query';
 
 export default function OrderSubmitComplete() {
   // store
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   // useQueryClient
   const query = useQueryClient();
-  const queryState = query.getQueryState<TableList>(['orderList']);
+  const queryState = query.getQueryState(orderListQueryOption(tableName).queryKey);
   // variant
   const isOk = submitStatus === 'fulfilled' && queryState?.status === 'success';
   const status = isOk ? 'ok' : 'fail';

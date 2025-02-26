@@ -17,9 +17,9 @@ const initialState: InitialState = {
     isClicked: false,
     selectedMenu: {
       name: '',
-      price: '0',
+      price: 0,
       amount: 1,
-      id: null,
+      id: '',
     },
     list: [],
     // error: {
@@ -39,7 +39,8 @@ export interface PickUpSlice {
     //   msg: string
     // }
   };
-  clickMenu: ({ name, price, id }: { name: string; price: string; id: string }) => void;
+  resetPickUpState: () => void;
+  clickMenu: ({ name, price, id }: { name: string; price: number; id: string }) => void;
   pickUpSelectedMenu: () => void;
   pickUpMenu: (menu: SelectedMenu) => void;
   removePickUpMenu: ({ id }: { id: SelectedMenu['id'] }) => void;
@@ -59,7 +60,7 @@ export const pickUpSlice: SliceCreator<PickUpSlice> =
         ...initialState,
         resetPickUpState: () => set(initialState, undefined, 'pickUpState/resetPickUpState'),
         // 메뉴 항목 클릭
-        clickMenu: ({ name, price, id }: { name: string; price: string; id: string }) =>
+        clickMenu: ({ name, price, id }: { name: string; price: number; id: string }) =>
           set(
             (state) => {
               // 동일 메뉴 선택 여부, 참일 때 팝업 퇴장 설정
@@ -175,7 +176,7 @@ export const pickUpSlice: SliceCreator<PickUpSlice> =
         ...initialState,
         resetPickUpState: () => set(initialState),
         // 메뉴 항목 클릭
-        clickMenu: ({ name, price, id }: { name: string; price: string; id: string }) =>
+        clickMenu: ({ name, price, id }: { name: string; price: number; id: string }) =>
           set((state) => {
             // 동일 메뉴 선택 여부, 참일 때 팝업 퇴장 설정
             const isSame = state.pickUpState.isClicked && state.pickUpState.selectedMenu.id === id;

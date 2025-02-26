@@ -4,7 +4,7 @@ import { useBoundStore } from '@/lib/store/useBoundStore';
 import Link from 'next/link';
 
 export default function SubmitBack() {
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
   const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
 
@@ -18,7 +18,7 @@ export default function SubmitBack() {
 
   return (
     <div className={styles.wrap} onClick={onClickReturnHome}>
-      <Link href={`/${tableNum}`} replace={true} className={styles.bottom}>
+      <Link href={`/${tableName}`} replace={true} className={styles.bottom}>
         돌아가기
       </Link>
     </div>

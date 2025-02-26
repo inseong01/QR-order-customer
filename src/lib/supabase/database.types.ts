@@ -1,4 +1,4 @@
-import { TableOrderType } from '@/types/common';
+import { SelectedMenu, TableOrderType } from '@/types/common';
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
@@ -10,7 +10,7 @@ export type Database = {
           created_at: string;
           id: string;
           isDone: boolean;
-          orderList: Json[];
+          orderList: SelectedMenu[];
           orderNum: number;
           tableNum: number;
           updated_at: string | null;
@@ -19,7 +19,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           isDone?: boolean;
-          orderList: Json[];
+          orderList: SelectedMenu[];
           orderNum?: number;
           tableNum: number;
           updated_at?: string | null;
@@ -28,7 +28,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           isDone?: boolean;
-          orderList?: Json[];
+          orderList?: SelectedMenu[];
           orderNum?: number;
           tableNum?: number;
           updated_at?: string | null;

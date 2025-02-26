@@ -26,12 +26,12 @@ function NextComponent() {
 
 export default function ProcessOrder() {
   // store
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const isNext = useBoundStore((state) => state.submitState.isNext);
   const setNexPageEnable = useBoundStore((state) => state.setNexPageEnable);
   // useQuery
-  const { refetch } = useQuery(orderListQueryOption(tableNum));
+  const { refetch } = useQuery(orderListQueryOption(tableName));
 
   // 주문 완료 시 주문 데이터 추출
   useEffect(() => {

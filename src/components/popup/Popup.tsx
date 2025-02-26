@@ -16,7 +16,7 @@ export default function Popup() {
   const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
   const pickUpList = useBoundStore((state) => state.pickUpState.list);
   const setRequestClick = useBoundStore((state) => state.setRequestClick);
-  const tableNum = useBoundStore((state) => state.tableState.tableNum);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const pickUpSelectedMenu = useBoundStore((state) => state.pickUpSelectedMenu);
   // variant
   const shoppingcartEnable = !!pickUpList.length;
@@ -33,7 +33,7 @@ export default function Popup() {
   function onClickCheckPickUpList() {
     if (isRequestClicked) return;
     setRequestClick({ isClicked: true });
-    router.push(`${tableNum}/pickUpList`);
+    router.push(`${tableName}/pickUpList`);
   }
 
   switch (popUpType) {
