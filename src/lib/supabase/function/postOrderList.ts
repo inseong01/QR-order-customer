@@ -1,11 +1,9 @@
-import { SelectedMenu } from '@/types/common';
+import { InsertOrderList, SelectedMenu } from '@/types/common';
 import supabase from '../supabaseConfig';
 
 export default async function postOrderList(tableName: number, orderList: SelectedMenu[]) {
-  const response = await supabase
-    .from('qr-order-allOrderList')
-    .insert({ orderList, tableNum: tableName })
-    .select();
+  const insertData: InsertOrderList = { tableNum: tableName, orderList };
+  const response = await supabase.from('qr-order-allOrderList').insert(insertData).select();
   if (response.error) {
     const msg = response.error.message ?? '주문이 정상적으로 처리되지 않았습니다.';
     console.error(msg);

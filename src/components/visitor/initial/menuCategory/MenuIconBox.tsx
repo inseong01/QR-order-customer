@@ -1,11 +1,12 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuIconBox.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import PlusMinusIcon from '@/components/SimpleIcon';
+import { MenuList } from '@/types/common';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
-export default function MenuIconBox({ list }) {
+export default function MenuIconBox({ list }: { list: MenuList }) {
   // store
   const currentOrderList = useBoundStore((state) => state.pickUpState.list);
   const pickUpMenu = useBoundStore((state) => state.pickUpMenu);
@@ -15,8 +16,8 @@ export default function MenuIconBox({ list }) {
   // variant
   const isPickedItem = currentOrderList.some((order) => order.id === list.id);
 
-  function onClickIcon(list, isPickedItem) {
-    return (e) => {
+  function onClickIcon(list: MenuList, isPickedItem: boolean) {
+    return (e: MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       const { tag } = list;
       if (tag === 'soldout' || isIconClicked) return;
@@ -33,13 +34,13 @@ export default function MenuIconBox({ list }) {
     };
   }
 
-  function onClickPlusIcon({ name, price, id, tag }) {
+  function onClickPlusIcon({ name, price, id, tag }: MenuList) {
     if (tag === 'soldout') return;
     const menu = { name, price, amount: 1, id };
     pickUpMenu(menu);
   }
 
-  function onClickMinusIcon({ id, tag }) {
+  function onClickMinusIcon({ id, tag }: MenuList) {
     if (tag === 'soldout') return;
     removePickUpMenu({ id });
   }
@@ -62,7 +63,7 @@ export default function MenuIconBox({ list }) {
                 exit={{ rotateY: 360 }}
                 transition={{ duration: 0.3 }}
                 onAnimationStart={() => setIsIconClicked(true)}
-                onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
+                onAnimationComplete={() => setIsIconClicked(false)}
               >
                 <PlusMinusIcon type={'plus'} />
               </motion.div>
@@ -76,7 +77,7 @@ export default function MenuIconBox({ list }) {
               exit={{ rotateY: 360 }}
               transition={{ duration: 0.3 }}
               onAnimationStart={() => setIsIconClicked(true)}
-              onAnimationComplete={(status) => status.rotateY === 180 && setIsIconClicked(false)}
+              onAnimationComplete={() => setIsIconClicked(false)}
             >
               <PlusMinusIcon type={'minus'} />
             </motion.div>

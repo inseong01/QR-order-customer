@@ -86,7 +86,6 @@ export const fetchSubmitState =
         let result;
         let status: Status = 'pending';
         let isSubmit = true;
-        const submitType = pickUpList ? 'fetchOrderSubmitState' : 'fetchRequestSubmitState';
         // get 인자 타입 오류로 AllSlices 타입 단언
         const getAll = get() as AllSlices;
         const tableName = getAll.tableState.tableName;

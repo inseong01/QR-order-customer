@@ -55,7 +55,7 @@ export function middleware(request: NextRequest) {
 
   // 장치 별 페이지 접근 제한
   if (!isMobile && !isDev) {
-    console.log('device', typeof device.type);
+    console.log(`Device is not modile, ${device?.type ?? typeof device.type}`);
     return NextResponse.redirect(HomePage);
   }
 

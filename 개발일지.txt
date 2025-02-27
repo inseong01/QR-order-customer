@@ -306,7 +306,7 @@
 
 25.2.24.
   JS -> TS 전환 작업 중
-  // DynamicAlertModal 인자 type 제외해봄
+  // DynamicAlertModal 인자 type 제외해봄 (확인 완료)
 
 25.2.25.
   JS -> TS 전환 작업 중
@@ -319,4 +319,8 @@
   JS -> TS 전환 작업 중
   // tableName 받아올 때 string, DB 전달할 때 number 타입 적용
 
-<--- postOrderList 부터 다시 시작 --->
+25.2.27.
+  JS -> TS 전환 완료
+  빌드 점검 완료
+
+<--- --->

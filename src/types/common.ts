@@ -1,4 +1,4 @@
-import { Tables } from '@/lib/supabase/database.types';
+import { Tables, TablesInsert } from '@/lib/supabase/database.types';
 import { StateCreator } from 'zustand';
 
 export type LoadingType = 'link' | 'init' | '';
@@ -8,6 +8,9 @@ export type MenuList = Tables<'qr-order-menu'>;
 export type MenuCategoryList = Tables<'qr-order-category-menu'>;
 export type RequestCategoryList = Tables<'qr-order-category-request'>;
 export type TableList = Tables<'qr-order-table-list'>;
+export type InsertOrderList = TablesInsert<'qr-order-allOrderList'>;
+export type InsertRequestList = TablesInsert<'qr-order-request-list'>;
+
 // supabase variant
 export type CategoryType = 'menu' | 'request';
 export type TableOrderType = {
