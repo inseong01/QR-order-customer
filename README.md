@@ -24,7 +24,7 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 주문
 
 ### 기술 스택
-`React` `Next` `Tanstack React Query` `Zustand` `Supabase`
+`React` `TypeScript` `Next` `Tanstack React Query` `Zustand` `Supabase`
 ## 미리보기
 **메뉴 화면 (첫 페이지)**
 
@@ -80,7 +80,7 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 상단 QR 코드를 스캔해도 동일한 매장 1번 테이블로 접속돼요 😊   
 모바일과 태블릿만 주문 서비스를 이용할 수 있도록 제한하고 있어요.
 
-PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-qcpz8hlgq-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요.
+PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-hrlz01zot-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요.
 
 서버 문제로 접속이 느릴 수 있어요. 
 
