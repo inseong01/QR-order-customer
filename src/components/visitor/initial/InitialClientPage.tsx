@@ -8,6 +8,7 @@ import Loading from '@/components/loading/Loading';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { initCookies } from '@/lib/function/initCookies';
 import { CategoryList, CategoryType, MenuList } from '@/types/common';
+import { postRNMessage } from '@/lib/function/reactNativeMessage';
 
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
@@ -73,6 +74,11 @@ export default function InitialClientPage() {
   // useQueryClient
   const queryClient = useQueryClient();
   const [menuList, categoryList] = queryClient.getQueriesData<MenuList[] | CategoryList<CategoryType>[]>({});
+
+  useEffect(() => {
+    // native로 데이터 전달
+    postRNMessage('Hello');
+  }, []);
 
   // 로딩 여부
   useEffect(() => {

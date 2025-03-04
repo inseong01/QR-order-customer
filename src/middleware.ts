@@ -52,9 +52,9 @@ export function middleware(request: NextRequest) {
 
   // 장치 판별
   const isMobile = device.type === 'mobile' || device.type === 'tablet';
-
+  console.log('isMobile', isMobile);
   // 장치 별 페이지 접근 제한
-  if (!isMobile && isDev) {
+  if (!isMobile && !isDev) {
     console.log(`Device is not modile, ${device?.type ?? typeof device.type}`);
     return NextResponse.redirect(HomePage);
   }
@@ -73,7 +73,11 @@ export function middleware(request: NextRequest) {
     // 부여된 테이블 쿠키 값
     const cookie = request.cookies.get('table');
     const cookieTableNum = cookie?.value;
-
+    console.log('tablePathname: ', tablePathname, 'cookieTableNum: ', cookieTableNum);
+    /**
+     * cookieTableNum undefined 문제
+     * : 404 라우팅 원인
+     */
     // 링크, 쿠키 값 검증
     if (tablePathname !== cookieTableNum) {
       return NextResponse.redirect(notFoundPage);

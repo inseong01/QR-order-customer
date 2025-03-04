@@ -327,4 +327,16 @@
   webview 적용 (expo), 
   새로운 레포지토리 생성: 실시간 수정 목적으로 개발 서버 생성 필요
 
-<--- webview nextjs 포트 미인식 오류 해결 --->
+25.3.4.
+  webview nextjs 호스트명 미인식 오류 해결
+  : HOSTNAME 현재 접속 IP 주소 할당, nextjs 서버 환경설정 파일 생성
+    - 참고
+    Nextjs 호스트 설정: https://nextjs.org/docs/pages/building-your-application/configuring/custom-server
+    ReactNativeWebView 타입 선언: https://0422.tistory.com/347
+
+  웹뷰 -> 네이티브 통신 확인
+    - 참고
+    https://velog.io/@imzzuu/React-Native-%EC%9B%B9%EB%B7%B0-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0
+    https://0422.tistory.com/347
+
+<--- cookieTableNum undefined 문제 해결 --->

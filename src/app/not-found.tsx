@@ -1,4 +1,4 @@
-import styles from '@/app/page.module.css'
+import styles from '@/app/page.module.css';
 import LogoImage from '@/components/visitor/initial/LogoImage';
 
 import { cookies } from 'next/headers';
@@ -30,8 +30,10 @@ export default async function NotFound() {
             </div>
           </div>
           <div className={styles.links}>
-            <div >
-              <Link href={link} className={styles.btn}>돌아가기</Link>
+            <div>
+              <Link href={link} className={styles.btn}>
+                돌아가기
+              </Link>
             </div>
           </div>
         </div>
