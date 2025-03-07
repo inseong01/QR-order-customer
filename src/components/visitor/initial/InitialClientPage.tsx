@@ -92,5 +92,6 @@ export default function InitialClientPage() {
     setLoading(false);
   }, [menuList, categoryList]);
 
+  // 카테고리에서 메인으로 돌아올 때 로딩 재등장
   return <>{screenLoading ? <Loading type={'init'} /> : <LoadedComponent />}</>;
 }
