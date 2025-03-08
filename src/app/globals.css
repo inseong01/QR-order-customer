@@ -4,6 +4,7 @@ body {
   height: 100vh;
   overflow: auto;
   overflow-x: hidden;
+  color: #222;
 }
 
 * {

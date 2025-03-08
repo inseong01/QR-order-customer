@@ -1,7 +1,7 @@
 .category {
   width: calc(100% / 4);
-  max-width: 260px;
-  min-width: 160px;
+  max-width: 230px;
+  min-width: 145px;
 
   display: flex;
   justify-content: center;
@@ -33,15 +33,4 @@
   background-color: #e7e7e7;
 
   cursor: default;
-}
-
-@media (max-width: 500px) {
-  .category {
-    width: calc(100% / 2);
-  }
-}
-@media (max-width: 460px) {
-  .category {
-    width: calc(100% / 2);
-  }
 }

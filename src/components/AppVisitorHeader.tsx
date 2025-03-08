@@ -13,6 +13,7 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
+  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
   // useRouter
   const router = useRouter();
 
@@ -21,6 +22,8 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
     if (submitStatus === 'fulfilled') {
       // 주문완료 이후 초기화
       resetPickUpState();
+      // 초기 카테고리 메뉴로 초기화
+      getSelectedMenuCategoryId({ id: 1 });
     }
     router.back();
   }

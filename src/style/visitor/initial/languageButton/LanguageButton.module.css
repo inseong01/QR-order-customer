@@ -11,3 +11,8 @@
   transform: translateY(0);
   transition: 0.3s;
 }
+
+.icon {
+  width: 13px;
+  height: 16px;
+}

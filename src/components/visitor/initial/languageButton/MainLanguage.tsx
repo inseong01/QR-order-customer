@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function MainLanguage() {
   return (
     <>
-      <div>
+      <div className={styles.icon}>
         <FontAwesomeIcon icon={faGlobe} />
       </div>
       <div className={styles.context}>KR</div>

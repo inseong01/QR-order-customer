@@ -22,16 +22,6 @@ export default function Loading({ type }: { type: LoadingType }) {
         </>
       );
     }
-    // 첫 로딩은 하얀 배경
-    case 'init': {
-      return (
-        <div className={styles.bg}>
-          <div className={styles.loaderBox}>
-            <div className={styles.loader}></div>
-          </div>
-        </div>
-      );
-    }
     // 이외 로딩은 x
     default: {
       return;

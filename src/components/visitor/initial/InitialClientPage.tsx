@@ -4,18 +4,14 @@ import styles from '@/style/visitor/initial/InitialClientPage.module.css';
 import InitialHeader from '@/components/visitor/initial/InitialHeader';
 import InitialMain from '@/components/visitor/initial/InitialMain';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
-import Loading from '@/components/loading/Loading';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { initCookies } from '@/lib/function/initCookies';
-import { CategoryList, CategoryType, MenuList } from '@/types/common';
-import { postRNMessage } from '@/lib/function/reactNativeMessage';
 
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
 
-function LoadedComponent() {
+export default function InitialClientPage() {
   // usePathname
   const params = useParams<{ table: string }>();
   // store
@@ -30,9 +26,8 @@ function LoadedComponent() {
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
 
-  // 2번 반복 (개발 모드)
   useEffect(() => {
-    // 한 번만 지정되도록, 첫 접속 할당 중요
+    // 한 번만 지정되도록, 초기 접속 할당 중요
     if (!tableName) {
       // 테이블 - 쿠키 할당
       initCookies(params);
@@ -66,32 +61,4 @@ function LoadedComponent() {
       <DynamicPopUpBox />
     </motion.div>
   );
-}
-
-export default function InitialClientPage() {
-  // useState
-  const [screenLoading, setLoading] = useState(true);
-  // useQueryClient
-  const queryClient = useQueryClient();
-  const [menuList, categoryList] = queryClient.getQueriesData<MenuList[] | CategoryList<CategoryType>[]>({});
-
-  useEffect(() => {
-    // native로 데이터 전달
-    postRNMessage('Hello');
-  }, []);
-
-  // 로딩 여부
-  useEffect(() => {
-    /*
-      <Suspense />로 감싸지 않은 이유
-      : 두 쿼리가 SSR로 미리 데이터가 불러와져 isLoading: false, isFetched: true를 반환,
-        페이지가 마운트 되었을 때 useState 초기 값에 맞춰 로딩 UI 노출,
-        데이터가 없다면 undefined 반환
-    */
-    if (!menuList || !categoryList) return;
-    setLoading(false);
-  }, [menuList, categoryList]);
-
-  // 카테고리에서 메인으로 돌아올 때 로딩 재등장
-  return <>{screenLoading ? <Loading type={'init'} /> : <LoadedComponent />}</>;
 }

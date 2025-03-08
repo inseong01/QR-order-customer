@@ -1,7 +1,7 @@
 import { Tables, TablesInsert } from '@/lib/supabase/database.types';
 import { StateCreator } from 'zustand';
 
-export type LoadingType = 'link' | 'init' | '';
+export type LoadingType = 'link' | '';
 
 // supabase
 export type MenuList = Tables<'qr-order-menu'>;
