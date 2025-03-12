@@ -4,7 +4,7 @@ import next from 'next';
 
 const port = parseInt(process.env.PORT || '3000', 10);
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = process.env.NEXT_PUBLIC_HOSTNAME || '192.168.0.13';
+const hostname = process.env.NEXT_PUBLIC_IP;
 const app = next({
   dev,
   hostname,
@@ -19,6 +19,6 @@ app.prepare().then(() => {
   }).listen(port);
 
   console.log(
-    `> Server listening at http://${hostname}:${port} as ${dev ? 'development' : process.env.NODE_ENV}`
+    `> Server listening at http://${process.env.NEXT_PUBLIC_IP}:${port} as ${process.env.NODE_ENV}`
   );
 });
