@@ -359,4 +359,7 @@
   hostname 환경변수 설정
   : server.mjs 수정, 서버 실행 시 hostname 출력 undefined 발생하여 링크 process.env.NEXT_PUBLIC_IP 직접 할당, 서버 구동 문제 없음
   
+  앱 헤더 뒤로가기 기능 오류 수정 
+  : 주문 처리 후 replace 적용하여 주문 페이지 메인 페이지로 변경, 주문 페이지 재접근 방지
+  
 <--- --->

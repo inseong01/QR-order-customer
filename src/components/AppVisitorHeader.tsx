@@ -7,11 +7,13 @@ import SimpleIcon from './SimpleIcon';
 
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
+import { postRNMessage } from '@/lib/function/reactNativeMessage';
 
 function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   // store
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
   const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
   // useRouter
@@ -24,6 +26,9 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
       resetPickUpState();
       // 초기 카테고리 메뉴로 초기화
       getSelectedMenuCategoryId({ id: 1 });
+      // 주문 페이지 돌아오기 방지
+      router.replace(`/${tableName}`);
+      return;
     }
     router.back();
   }
