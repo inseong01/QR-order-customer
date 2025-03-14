@@ -25,6 +25,7 @@ export default function InitialClientPage() {
   const resetRequestState = useBoundStore((state) => state.resetRequestState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
+  const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
 
   useEffect(() => {
     // 한 번만 지정되도록, 초기 접속 할당 중요
@@ -48,6 +49,7 @@ export default function InitialClientPage() {
     // 제출 초기화
     if (submitStatus === 'fulfilled' || submitStatus === 'rejected') {
       resetSubmitState();
+      resetPickUpState();
     }
   }, []);
 

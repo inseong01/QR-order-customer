@@ -10,13 +10,9 @@ function EmptyListComponent() {
   return <div className={styles.empty}>접수된 주문이 없습니다.</div>;
 }
 
-// queryData 어떻게 나오는 지 확인요
 function CurrentListComponent({ queryData }: { queryData?: TableList[] }) {
   const latestOrder = queryData && queryData[0].order.findLast((order) => order);
-  const totalPrice = latestOrder?.orderList.reduce(
-    (prev, current) => prev + current.price * current.amount,
-    0
-  );
+  const totalPrice = latestOrder?.orderList.reduce((prev, current) => prev + current.price * current.amount, 0);
   const totalPriceToString = totalPrice?.toLocaleString();
 
   return (
