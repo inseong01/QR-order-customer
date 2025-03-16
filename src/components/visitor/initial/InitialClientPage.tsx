@@ -26,6 +26,7 @@ export default function InitialClientPage() {
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
+  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
 
   useEffect(() => {
     // 한 번만 지정되도록, 초기 접속 할당 중요
@@ -51,6 +52,9 @@ export default function InitialClientPage() {
       resetSubmitState();
       resetPickUpState();
     }
+
+    // 초기 카테고리 메뉴로 초기화
+    getSelectedMenuCategoryId({ id: 1 });
   }, []);
 
   return (
