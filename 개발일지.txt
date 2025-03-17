@@ -376,4 +376,10 @@
 
   헤더 메타데이터 설정
 
-<--- 페이지 별 메타 데이터 설정 --->
+25.3.17.
+  페이지 별 메타데이터 설정
+  : layout 생성하여 메타데이터 title 연동, children 속성 React 18부터 없어짐, 속성 명시 필요
+    - 참고
+    children 속성 미지원: https://solverfox.dev/writing/no-implicit-children/
+
+<--- --->

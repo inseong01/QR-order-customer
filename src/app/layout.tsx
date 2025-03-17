@@ -1,15 +1,16 @@
 import Loading from '@/components/loading/Loading';
-import './globals.css';
 import QueryProvider from './QueryProvider';
+import './globals.css';
 
 import { Inter } from 'next/font/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'QR 오더',
   description: '언제나 주문의 간편함을 추구합니다.',
-  url: 'https://qr-order-client.vercel.app/',
+  metadataBase: new URL('https://qr-order-client.vercel.app/'),
 };
 
 const inter = Inter({

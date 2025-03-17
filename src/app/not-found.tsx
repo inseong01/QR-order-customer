@@ -1,8 +1,17 @@
 import styles from '@/app/page.module.css';
 import LogoImage from '@/components/visitor/initial/LogoImage';
+import { Metadata } from 'next';
 
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `404 : Not found`,
+    description: `페이지가 존재하지 않습니다.`,
+    metadataBase: new URL(`https://qr-order-client.vercel.app/0/not-found`),
+  };
+}
 
 export default async function NotFound() {
   const cookie = await cookies();

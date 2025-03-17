@@ -6,6 +6,7 @@ import InitialMain from '@/components/visitor/initial/InitialMain';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { initCookies } from '@/lib/function/initCookies';
+import { ParamsList } from '@/types/common';
 
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
@@ -13,7 +14,7 @@ import { useParams } from 'next/navigation';
 
 export default function InitialClientPage() {
   // usePathname
-  const params = useParams<{ table: string }>();
+  const params = useParams<ParamsList>();
   // store
   const pickUpList = useBoundStore((state) => state.pickUpState.list);
   const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);

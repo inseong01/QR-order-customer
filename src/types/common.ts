@@ -59,4 +59,5 @@ export type CallItem = {
 export type ModalType = 'orderCheck' | 'request' | '';
 
 // next
-export type Params = Promise<{ table: string }>;
+export type ParamsList = { table: string };
+export type Params = Promise<ParamsList>;
