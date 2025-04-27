@@ -382,4 +382,12 @@
     - 참고
     children 속성 미지원: https://solverfox.dev/writing/no-implicit-children/
 
+25.4.27.
+  스크롤 애니메이션 개선
+  - throttle -> requestAnimationFrame 전환
+
+  - 비교 테스트 함수 작성
+
+  - 테스트 결과, 개선 비율 도출 기록
+
 <--- --->

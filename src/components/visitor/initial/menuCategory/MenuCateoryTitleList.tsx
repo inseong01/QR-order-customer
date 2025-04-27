@@ -1,7 +1,6 @@
 import styles from '@/style/visitor/initial/menuCategory/MenuCateoryTitleList.module.css';
 import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
-import { throttle } from '@/lib/function/throttle';
-import { measureCallbackCount } from '@/lib/function/measureCallbackCount';
+import { measureCallbackElapsed } from '@/lib/function/measureCallbackElapsed';
 import useEnableScroll from '@/lib/hook/useEnableScroll';
 import MenuCategoryList from './MenuCategoryList';
 
@@ -35,24 +34,27 @@ export default function MenuCateoryTitleList() {
   // 드래그 스크롤 이동
   function onDragMouse(e: DragEvent) {
     if (!e) return;
-    if (scrollContainer.current) {
-      const lastX = e.clientX;
-      const move = lastX - scrollStart.x;
-      // 새로운 스크롤 위치
-      const newScrollLeft = scrollStart.scrollX - move;
-      // 최대 스크롤 가능 범위
-      const maxScrollLeft = scrollContainer.current.scrollWidth - scrollContainer.current.offsetWidth;
-      // 스크롤 위치가 스크롤 길이를 넘지 않도록 제한
-      const scrollAmount = Math.max(0, Math.min(newScrollLeft, maxScrollLeft));
+    if (!scrollContainer.current) return;
+
+    const lastX = e.clientX;
+    const move = lastX - scrollStart.x;
+    // 새로운 스크롤 위치
+    const newScrollLeft = scrollStart.scrollX - move;
+    // 최대 스크롤 가능 범위
+    const maxScrollLeft =
+      scrollContainer.current.scrollWidth - scrollContainer.current.offsetWidth;
+    // 스크롤 위치가 스크롤 길이를 넘지 않도록 제한
+    const scrollAmount = Math.max(0, Math.min(newScrollLeft, maxScrollLeft));
+    requestAnimationFrame(() => {
+      if (!scrollContainer.current) return;
       scrollContainer.current.scrollLeft = scrollAmount;
-    }
+    });
   }
 
   function performanceOnDragStart(e: DragEvent) {
     // 성능 측정('production' 변경)
     if (process.env.NODE_ENV === 'development') {
-      // 60fps 지향, delay는 최대 16.666ms
-      measureCallbackCount(e, 0, 15);
+      measureCallbackElapsed(e, 'throttle', scrollContainer.current);
     }
     onDragStart(e);
   }
@@ -67,7 +69,7 @@ export default function MenuCateoryTitleList() {
           animate={{ y: 0 }}
           draggable={isScrollAble}
           onDragStart={performanceOnDragStart}
-          onDrag={throttle(onDragMouse, 15)}
+          onDrag={onDragMouse}
           onDragEnd={onDragMouse}
         >
           <MenuCategoryList />
