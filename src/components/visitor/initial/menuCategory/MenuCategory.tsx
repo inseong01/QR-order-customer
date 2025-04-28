@@ -1,4 +1,3 @@
-import styles from '@/style/visitor/initial/menuCategory/MenuCategory.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import { MenuCategoryList } from '@/types/common';
 import MenuCategoryUnderLine from './MenuCategoryUnderLine';
@@ -15,9 +14,14 @@ function CategoryComponent({
   onClickChangeMenuTitle: () => void;
 }) {
   return (
-    <div className={styles.category} onClick={onClickChangeMenuTitle}>
-      <div className={`${styles.titleWrap}`}>
-        <span className={styles.title}>{category.title}</span>
+    <div
+      className={
+        'flex justify-center items-center relative cursor-pointer w-1/4 max-w-[230px] min-w-[145px]'
+      }
+      onClick={onClickChangeMenuTitle}
+    >
+      <div className={`w-full relative text-center`} data-id='menuCategory'>
+        <span className={'text-sm'}>{category.title}</span>
       </div>
       {children}
     </div>
@@ -25,7 +29,9 @@ function CategoryComponent({
 }
 export default function MenuCategory({ category }: { category: MenuCategoryList }) {
   const selectedTagId = useBoundStore((state) => state.menuState.selectedMenuCategoryId);
-  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
+  const getSelectedMenuCategoryId = useBoundStore(
+    (state) => state.getSelectedMenuCategoryId
+  );
 
   function onClickChangeMenuTitle() {
     if (selectedTagId === category.id) return;
@@ -33,7 +39,10 @@ export default function MenuCategory({ category }: { category: MenuCategoryList 
   }
 
   return (
-    <CategoryComponent category={category} onClickChangeMenuTitle={onClickChangeMenuTitle}>
+    <CategoryComponent
+      category={category}
+      onClickChangeMenuTitle={onClickChangeMenuTitle}
+    >
       <MenuCategoryUnderLine category={category} />
     </CategoryComponent>
   );

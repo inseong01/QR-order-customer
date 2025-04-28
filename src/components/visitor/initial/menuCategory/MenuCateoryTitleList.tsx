@@ -1,4 +1,3 @@
-import styles from '@/style/visitor/initial/menuCategory/MenuCateoryTitleList.module.css';
 import { categoryListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { measureCallbackElapsed } from '@/lib/function/measureCallbackElapsed';
 import useEnableScroll from '@/lib/hook/useEnableScroll';
@@ -63,8 +62,11 @@ export default function MenuCateoryTitleList() {
     <>
       {data && (
         <motion.div
+          id='menucateoryList'
           ref={scrollContainer}
-          className={styles.cateoryList}
+          className={
+            'w-full h-10 bg-white relative flex overflow-x-auto px-2 pb-[1px] border-b-[#e7e7e7]-[1px]'
+          }
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           draggable={isScrollAble}

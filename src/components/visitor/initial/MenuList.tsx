@@ -1,4 +1,3 @@
-import styles from '@/style/visitor/initial/MenuList.module.css';
 import { ulVariants } from '@/lib/motion/middle/motion_menuList';
 import { menuListQueryOption } from '@/lib/function/useQuery/queryOption';
 import { useBoundStore } from '@/lib/store/useBoundStore';
@@ -12,7 +11,9 @@ export default function MenuList() {
   // useState
   const [isfirstLoad, setIsFirstLoad] = useState(true);
   // store
-  const currentCategoryId = useBoundStore((state) => state.menuState.selectedMenuCategoryId);
+  const currentCategoryId = useBoundStore(
+    (state) => state.menuState.selectedMenuCategoryId
+  );
   // useSuspenseQuery
   const { data, isFetched } = useSuspenseQuery(menuListQueryOption);
 
@@ -23,7 +24,7 @@ export default function MenuList() {
 
   return (
     <motion.ul
-      className={`menuList ${styles.menuList}`}
+      className={`menuList w-full flex flex-col gap-1 py-4`}
       variants={ulVariants}
       initial={isfirstLoad ? 'inactive' : false}
       animate={isfirstLoad ? 'active' : false}

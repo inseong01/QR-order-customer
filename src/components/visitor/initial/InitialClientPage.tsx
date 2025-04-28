@@ -1,6 +1,5 @@
 'use client';
 
-import styles from '@/style/visitor/initial/InitialClientPage.module.css';
 import InitialHeader from '@/components/visitor/initial/InitialHeader';
 import InitialMain from '@/components/visitor/initial/InitialMain';
 import DynamicPopUpBox from '@/components/popup/DynamicPopUpBox';
@@ -27,7 +26,10 @@ export default function InitialClientPage() {
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
   const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
-  const getSelectedMenuCategoryId = useBoundStore((state) => state.getSelectedMenuCategoryId);
+  const getSelectedMenuCategoryId = useBoundStore(
+    (state) => state.getSelectedMenuCategoryId
+  );
+  const isOrderBoxAppeared = pickUpList.length !== 0 && pickUpIsClicked;
 
   useEffect(() => {
     // 한 번만 지정되도록, 초기 접속 할당 중요
@@ -60,8 +62,9 @@ export default function InitialClientPage() {
 
   return (
     <motion.div
-      className={styles.wrap}
-      style={{ height: pickUpList.length || pickUpIsClicked ? 'calc(100vh + 190px)' : '100vh' }}
+      className={`${
+        isOrderBoxAppeared ? 'h-[100vh + 190px]' : 'h-dvh'
+      } w-full relative m-auto cursor-default`}
     >
       <InitialHeader />
       <InitialMain />

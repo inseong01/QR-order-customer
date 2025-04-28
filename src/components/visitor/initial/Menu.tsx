@@ -37,12 +37,21 @@ function Menu({ list }: { list: MenuList }) {
   }
 
   return (
-    <motion.li className={`${styles.menu} ${styles[tag]}`} onClick={onClickMenuClick} variants={liVariants}>
+    <motion.li
+      className={`w-full flex gap-2.5 py-2 px-4`}
+      onClick={onClickMenuClick}
+      variants={liVariants}
+      data-tag={styles[tag]}
+    >
       <MenuImageBox list={list} tagDescription={tagDescription} />
-      <div className={styles.contextWrap}>
-        <div className={styles.content}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.price}>{priceToString}원</div>
+      <div
+        className={
+          'min-h-full flex flex-col justify-between cursor-pointer max-h-[60px] flex-1'
+        }
+      >
+        <div className={'flex flex-col gap-0.5 text-sm'}>
+          <span>{name}</span>
+          <span>{priceToString}원</span>
         </div>
         <MenuIconBox list={list} />
       </div>

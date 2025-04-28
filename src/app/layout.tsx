@@ -19,8 +19,8 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang='en'>
+      <body className={`${inter.className} w-full h-dvh`}>
         <QueryProvider>
           <Loading type={'link'} />
           {children}

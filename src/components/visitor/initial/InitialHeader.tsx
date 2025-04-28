@@ -8,8 +8,12 @@ import { memo } from 'react';
 
 function InitialHeader() {
   return (
-    <header className={styles.header}>
-      <ul className={styles.top}>
+    <header
+      className={
+        'w-full bg-[#f4f4f4] flex flex-col justify-between relative px-6 py-4 z-99 min-h-[200px] h-1/5'
+      }
+    >
+      <ul className={'flex justify-between items-center w-full'}>
         <LogoImage />
         <LanguageButton />
       </ul>

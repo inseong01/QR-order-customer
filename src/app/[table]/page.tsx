@@ -1,6 +1,9 @@
 import InitialClientPage from '@/components/visitor/initial/InitialClientPage';
 import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
-import { categoryListQueryOption, menuListQueryOption } from '@/lib/function/useQuery/queryOption';
+import {
+  categoryListQueryOption,
+  menuListQueryOption,
+} from '@/lib/function/useQuery/queryOption';
 
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { redirect } from 'next/navigation';

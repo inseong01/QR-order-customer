@@ -1,4 +1,3 @@
-import styles from '@/style/visitor/initial/menuCategory/MenuIconBox.module.css';
 import { useBoundStore } from '@/lib/store/useBoundStore';
 import PlusMinusIcon from '@/components/SimpleIcon';
 import { MenuList } from '@/types/common';
@@ -46,17 +45,21 @@ export default function MenuIconBox({ list }: { list: MenuList }) {
   }
 
   return (
-    <div className={styles.shopIconWrap}>
-      <div className={styles.iconBox} onClick={onClickIcon(list, isPickedItem)}>
-        <AnimatePresence initial={false} mode="popLayout">
+    <div className={'w-full flex justify-end'}>
+      <div className={'w-5 h-5 relative'} onClick={onClickIcon(list, isPickedItem)}>
+        <AnimatePresence initial={false} mode='popLayout'>
           {!isPickedItem ? (
             list.tag === 'soldout' ? (
-              <div className={`${styles.shopIcon} ${styles.disabled}`}>
+              <div
+                className={`'w-full h-full bg-white border-[1px] border-[#222] rounded-full' opacity-30`}
+              >
                 <PlusMinusIcon type={'plus'} />
               </div>
             ) : (
               <motion.div
-                className={styles.shopIcon}
+                className={
+                  'w-full h-full bg-white border-[1px] border-[#222] rounded-full'
+                }
                 key={'plus'}
                 initial={{ rotateY: 0 }}
                 animate={{ rotateY: 180 }}
@@ -70,7 +73,7 @@ export default function MenuIconBox({ list }: { list: MenuList }) {
             )
           ) : (
             <motion.div
-              className={styles.shopIcon}
+              className={'w-full h-full bg-white border-[1px] border-[#222] rounded-full'}
               key={'minus'}
               initial={{ rotateY: 0 }}
               animate={{ rotateY: 180 }}

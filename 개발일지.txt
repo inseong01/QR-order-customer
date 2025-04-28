@@ -390,4 +390,14 @@
 
   - 테스트 결과, 개선 비율 도출 기록
 
+25.4.28.
+  - tailwind 전환
+    - root page
+
+    - not-found page
+
+    - layout page
+
+    - menu page
+
 <--- --->
