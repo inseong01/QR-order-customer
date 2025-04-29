@@ -34,6 +34,8 @@
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/react-query-devtools": "^5.64.2",
     "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "eslint-config-next": "15.0.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }

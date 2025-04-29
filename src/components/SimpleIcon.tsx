@@ -1,29 +1,46 @@
-import styles from '@/style/SimpleIcon.module.css';
-import { IconType } from '@/types/common';
+import { IconType } from "@/types/common";
+import { ReactNode } from "react";
 
 export default function SimpleIcon({ type }: { type: IconType }) {
   switch (type) {
-    case 'arrow-left': {
+    case "arrow-left": {
       return (
-        <div className={styles.iconBox}>
-          <span className={styles.arw}></span>
-        </div>
+        <SimpleIconBox>
+          <span
+            className={
+              "inline-block translate-x-1 -translate-y-0.5 -rotate-45 border-t-[1px] border-l-[1px] border-[#c9c9c9] p-1"
+            }
+          ></span>
+        </SimpleIconBox>
       );
     }
-    case 'plus': {
+    case "plus": {
       return (
-        <div className={styles.iconBox}>
-          <span className={styles.vert}></span>
-          <span className={styles.horz}></span>
-        </div>
+        <SimpleIconBox>
+          <Bar rotate="rotate-90" />
+          <Bar rotate="rotate-0" />
+        </SimpleIconBox>
       );
     }
-    case 'minus': {
+    case "minus": {
       return (
-        <div className={styles.iconBox}>
-          <span className={styles.horz}></span>
-        </div>
+        <SimpleIconBox>
+          <Bar rotate="rotate-0" />
+        </SimpleIconBox>
       );
     }
   }
+}
+
+function Bar({ rotate }: { rotate: string }) {
+  return (
+    <span
+      id="line"
+      className={`rounded-1 absolute top-1/2 left-1/2 h-[1px] w-1/2 -translate-1/2 ${rotate} bg-[#222]`}
+    ></span>
+  );
+}
+
+function SimpleIconBox({ children }: { children: ReactNode }) {
+  return <div className={"relative h-full w-full"}>{children}</div>;
 }

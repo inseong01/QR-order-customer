@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import styles from '@/style/AppVisitorHeader.module.css';
-import { useBoundStore } from '@/lib/store/useBoundStore';
-import { HeaderTitle } from '@/types/common';
-import SimpleIcon from './SimpleIcon';
+import { useBoundStore } from "@/lib/store/useBoundStore";
+import { HeaderTitle } from "@/types/common";
+import SimpleIcon from "./SimpleIcon";
 
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
+import { useRouter } from "next/navigation";
+import { memo } from "react";
 
 function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   // store
@@ -18,7 +17,7 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
 
   function navOnClickBack() {
     if (isSubmit) return;
-    if (submitStatus === 'fulfilled') {
+    if (submitStatus === "fulfilled") {
       // 주문 페이지 돌아오기 방지
       router.replace(`/${tableName}`);
       return;
@@ -27,12 +26,19 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   }
 
   return (
-    <header className={styles.header}>
-      <div className={styles.wrap}>
-        <div onClick={navOnClickBack} className={styles.nav}>
-          <SimpleIcon type={'arrow-left'} />
-        </div>
-        <div className={styles.title}>{title}</div>
+    <header
+      className={"relative z-9 h-auto w-full cursor-default bg-[#f4f4f4]"}
+    >
+      <div className={"relative flex h-full w-full items-center p-4"}>
+        <nav
+          onClick={navOnClickBack}
+          className={"h-4 w-4 cursor-pointer text-sm"}
+        >
+          <SimpleIcon type={"arrow-left"} />
+        </nav>
+        <span className={"absolute top-1/2 left-1/2 -translate-1/2 leading-5"}>
+          {title}
+        </span>
       </div>
     </header>
   );

@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import styles from '@/style/visitor/call/CallPageWrap.module.css';
-import AppVisitorHeader from '@/components/AppVisitorHeader';
-import { useBoundStore } from '@/lib/store/useBoundStore';
-import DynamicAlertModalBox from '../../alertModal/DynamicAlertModalBox';
-import CallPageMain from './CallPageMain';
-import SubmitButtonWrap from './SubmitButtonWrap';
+import AppVisitorHeader from "@/components/AppVisitorHeader";
+import { useBoundStore } from "@/lib/store/useBoundStore";
+import DynamicAlertModalBox from "../../alertModal/DynamicAlertModalBox";
+import CallPageMain from "./CallPageMain";
+import SubmitButtonWrap from "./SubmitButtonWrap";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function CallPageWrap() {
   const resetCallState = useBoundStore((state) => state.resetCallState);
@@ -16,13 +15,13 @@ export default function CallPageWrap() {
 
   useEffect(() => {
     resetCallState();
-    setModalType({ type: 'request' });
+    setModalType({ type: "request" });
     setRequestClick({ isClicked: false });
   }, []);
 
   return (
-    <div className={styles.wrap}>
-      <AppVisitorHeader title={'직원호출'} />
+    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+      <AppVisitorHeader title={"직원호출"} />
       <CallPageMain />
       <SubmitButtonWrap />
       <DynamicAlertModalBox />

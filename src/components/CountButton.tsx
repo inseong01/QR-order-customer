@@ -1,9 +1,8 @@
 'use client';
 
-import styles from '@/style/CountButton.module.css';
 import calculateAmount from '@/lib/function/calculateAmount';
 import { useBoundStore } from '@/lib/store/useBoundStore';
-import { CountButtonType } from '@/types/common';
+import { CountButtonType, IconType } from '@/types/common';
 import PlusMinusIcon from './SimpleIcon';
 
 export default function CountButton({
@@ -16,8 +15,12 @@ export default function CountButton({
   id: number | string;
 }) {
   const changeItemAmount = useBoundStore((state) => state.changeItemAmount);
-  const changeSelectedMenuAmount = useBoundStore((state) => state.changeSelectedMenuAmount);
-  const changeMenuAmountInPickUpList = useBoundStore((state) => state.changeMenuAmountInPickUpList);
+  const changeSelectedMenuAmount = useBoundStore(
+    (state) => state.changeSelectedMenuAmount
+  );
+  const changeMenuAmountInPickUpList = useBoundStore(
+    (state) => state.changeMenuAmountInPickUpList
+  );
 
   // 항목 수량 변경
   function onClickMenuCount(num: number) {
@@ -49,16 +52,24 @@ export default function CountButton({
   }
 
   return (
-    <div className={styles.btnWrap}>
-      <div className={styles.count} onClick={onClickMenuCount(-1)}>
-        <PlusMinusIcon type={'minus'} />
-      </div>
-      <div className={styles.number}>
+    <div
+      className={
+        'h-auto flex items-center rounded-sm cursor-default border-[1px] border-[#e6e6e6]'
+      }
+    >
+      <CountIconBox onClick={onClickMenuCount(-1)} type='minus' />
+      <div className={'w-7 flex justify-center items-center'}>
         <span>{amount}</span>
       </div>
-      <div className={styles.count} onClick={onClickMenuCount(1)}>
-        <PlusMinusIcon type={'plus'} />
-      </div>
+      <CountIconBox onClick={onClickMenuCount(1)} type='plus' />
+    </div>
+  );
+}
+
+function CountIconBox({ onClick, type }: { onClick: () => void; type: IconType }) {
+  return (
+    <div className={'w-5 h-6 box-content cursor-pointer px-2 py-0.5'} onClick={onClick}>
+      <PlusMinusIcon type={type} />
     </div>
   );
 }

@@ -1,12 +1,12 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 #menucateoryList::-webkit-scrollbar {
   -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-[data-id='menuCategory']::after {
-  content: '';
+[data-id="menuCategory"]::after {
+  content: "";
 
   position: absolute;
   top: 50%;
@@ -20,19 +20,19 @@
   cursor: default;
 }
 
-[data-tag='popular'] .tag {
+[data-tag="popular"] .tag {
   background-color: #fbbc58;
 }
-[data-tag='new'] .tag {
+[data-tag="new"] .tag {
   background-color: #b65637;
 }
-[data-tag='soldout'] .tag {
+[data-tag="soldout"] .tag {
   background-color: #555b5f;
 }
-[data-tag='soldout'] .imgBox,
-[data-tag='soldout'] .shopIcon {
+[data-tag="soldout"] .imgBox,
+[data-tag="soldout"] .shopIcon {
   background-color: #e7e7e7;
 }
-[data-tag='soldout'] .content {
+[data-tag="soldout"] .content {
   color: #b4b4b4;
 }

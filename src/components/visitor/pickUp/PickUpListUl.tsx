@@ -1,10 +1,6 @@
-import styles from '@/style/visitor/pickUpList/PickUpListUl.module.css';
-import { useBoundStore } from '@/lib/store/useBoundStore';
-import PickUpList from './PickUpList';
-
-function EmptyListComponent() {
-  return <li>주문 목록이 없습니다.</li>;
-}
+import styles from "@/style/visitor/pickUpList/PickUpListUl.module.css";
+import { useBoundStore } from "@/lib/store/useBoundStore";
+import PickUpList from "./PickUpList";
 
 export default function PickUpListUl() {
   const currentOrderList = useBoundStore((state) => state.pickUpState.list);
@@ -19,10 +15,17 @@ export default function PickUpListUl() {
   return (
     <ul className={`${styles.pickUpLists}`}>
       {currentOrderList.length !== 0 ? (
-        <PickUpList currentOrderList={currentOrderList} onClickDeleteList={onClickDeletePickUpList} />
+        <PickUpList
+          currentOrderList={currentOrderList}
+          onClickDeleteList={onClickDeletePickUpList}
+        />
       ) : (
         <EmptyListComponent />
       )}
     </ul>
   );
+}
+
+function EmptyListComponent() {
+  return <li>주문 목록이 없습니다.</li>;
 }

@@ -1,6 +1,6 @@
-import styles from '@/style/visitor/pickUpList/PickUpList.module.css';
-import CountButton from '@/components/CountButton';
-import { OrderListType } from '@/types/common';
+import styles from "@/style/visitor/pickUpList/PickUpList.module.css";
+import CountButton from "@/components/CountButton";
+import { OrderListType } from "@/types/common";
 
 export default function PickUpList({
   currentOrderList,
@@ -15,20 +15,25 @@ export default function PickUpList({
         const { name, price, amount, id } = list;
         const priceToString = price.toLocaleString();
         return (
-          <li key={idx} className={styles.list}>
-            <div className={styles.middle}>
-              <div className={styles.top}>
-                <div className={styles.name}>{name}</div>
-                <div className={styles.price}>{priceToString}원</div>
+          <li key={idx} className={"flex w-full flex-col gap-5"}>
+            <div className={"flex flex-col gap-2.5"}>
+              <div className={"flex w-full items-center justify-between"}>
+                <span>{name}</span>
+                <span>{priceToString}원</span>
               </div>
-              <div className={styles.bottom}>
-                <div className={styles.deleteBtn} onClick={onClickDeleteList(id)}>
+              <div className={"flex w-full items-center justify-between"}>
+                <div
+                  className={
+                    "cursor-pointer rounded-sm border-[1px] border-[#c9c9c9] px-3 py-1 text-xs leading-5 text-[#959595]"
+                  }
+                  onClick={onClickDeleteList(id)}
+                >
                   빼기
                 </div>
-                <CountButton type={'pickUpList'} amount={amount} id={id} />
+                <CountButton type={"pickUpList"} amount={amount} id={id} />
               </div>
             </div>
-            <div className={styles.line}></div>
+            <span id="line" className={"h-[1px] bg-[#d9d9d9]"}></span>
           </li>
         );
       })}

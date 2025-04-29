@@ -29,7 +29,7 @@ export default function InitialClientPage() {
   const getSelectedMenuCategoryId = useBoundStore(
     (state) => state.getSelectedMenuCategoryId
   );
-  const isOrderBoxAppeared = pickUpList.length !== 0 && pickUpIsClicked;
+  const isOrderBoxAppeared = pickUpList.length !== 0 || pickUpIsClicked;
 
   useEffect(() => {
     // 한 번만 지정되도록, 초기 접속 할당 중요
@@ -59,11 +59,11 @@ export default function InitialClientPage() {
     // 초기 카테고리 메뉴로 초기화
     getSelectedMenuCategoryId({ id: 1 });
   }, []);
-
+  console.log(pickUpIsClicked);
   return (
     <motion.div
       className={`${
-        isOrderBoxAppeared ? 'h-[100vh + 190px]' : 'h-dvh'
+        isOrderBoxAppeared ? 'h-[calc(100%+190px)]' : 'h-auto'
       } w-full relative m-auto cursor-default`}
     >
       <InitialHeader />

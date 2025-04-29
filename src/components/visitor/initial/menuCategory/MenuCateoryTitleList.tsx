@@ -65,7 +65,7 @@ export default function MenuCateoryTitleList() {
           id='menucateoryList'
           ref={scrollContainer}
           className={
-            'w-full h-10 bg-white relative flex overflow-x-auto px-2 pb-[1px] border-b-[#e7e7e7]-[1px]'
+            'w-full h-10 bg-white relative flex overflow-x-auto px-2 pb-[1px] border-b-[1px] border-[#e6e6e6]'
           }
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}

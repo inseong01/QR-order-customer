@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import styles from '@/style/visitor/pickUpList/PickUpListPageWrap.module.css';
-import AppVisitorHeader from '@/components/AppVisitorHeader';
-import { useBoundStore } from '@/lib/store/useBoundStore';
-import PickUpListMain from './PickUpListMain';
-import PickUpListSubmit from './PickUpListSubmit';
+import styles from "@/style/visitor/pickUpList/PickUpListPageWrap.module.css";
+import AppVisitorHeader from "@/components/AppVisitorHeader";
+import { useBoundStore } from "@/lib/store/useBoundStore";
+import PickUpListMain from "./PickUpListMain";
+import PickUpListSubmit from "./PickUpListSubmit";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function PickUpListPageWrap() {
   const setModalType = useBoundStore((state) => state.setModalType);
   const setRequestClick = useBoundStore((state) => state.setRequestClick);
 
   useEffect(() => {
-    setModalType({ type: 'orderCheck' });
+    setModalType({ type: "orderCheck" });
     setRequestClick({ isClicked: false });
   }, []);
 
   return (
-    <div className={styles.wrap}>
-      <AppVisitorHeader title={'주문'} />
+    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+      <AppVisitorHeader title={"주문"} />
       <PickUpListMain />
       <PickUpListSubmit />
     </div>
