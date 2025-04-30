@@ -1,8 +1,8 @@
-import LogoImage from '@/components/visitor/initial/LogoImage';
-import { Metadata } from 'next';
+import LogoImage from "feature/components/logo/logo-index";
 
-import { cookies } from 'next/headers';
-import Link from 'next/link';
+import { cookies } from "next/headers";
+import { Metadata } from "next";
+import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -14,17 +14,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function NotFound() {
   return (
-    <main className={'w-full h-full bg-[#fafdff] text-[#3273b5] cursor-default'}>
+    <main
+      className={"h-full w-full cursor-default bg-[#fafdff] text-[#3273b5]"}
+    >
       <div
         className={
-          'w-full h-full flex flex-col justify-between text-left p-6 max-w-[450px] m-auto'
+          "m-auto flex h-full w-full max-w-[450px] flex-col justify-between p-6 text-left"
         }
       >
-        <div className={'h-[90%] gap-12 justify-center flex flex-col'}>
+        <div className={"flex h-[90%] flex-col justify-center gap-12"}>
           <TopContext />
           <BottomContext />
         </div>
-        <div className={'justify-end items-end h-[10%] flex flex-col'}>
+        <div className={"flex h-[10%] flex-col items-end justify-end"}>
           <LogoImage />
         </div>
       </div>
@@ -34,9 +36,9 @@ export default async function NotFound() {
 
 function TopContext() {
   return (
-    <div className={'flex flex-col gap-3'}>
+    <div className={"flex flex-col gap-3"}>
       <h1>404 &#x003A;&#x0028;</h1>
-      <div className={'w-full text-2xl font-bold leading-8 break-keep'}>
+      <div className={"w-full text-2xl leading-8 font-bold break-keep"}>
         <p>페이지가</p>
         <p>존재하지 않아요.</p>
       </div>
@@ -46,7 +48,7 @@ function TopContext() {
 
 async function BottomContext() {
   const cookie = await cookies();
-  const table = cookie.get('table');
+  const table = cookie.get("table");
   /*
     쿠키 값
     : 미들웨어 검증을 통해 정상 형태(정수) 
@@ -56,13 +58,13 @@ async function BottomContext() {
     쿠키 O
     - 원래 테이블 이동
   */
-  const link = table?.value ? `/${table.value}` : '/';
+  const link = table?.value ? `/${table.value}` : "/";
   return (
-    <div className={'text-xs'}>
+    <div className={"text-xs"}>
       <div>
         <Link
           href={link}
-          className={'inline-block text-[#5486b7] py-1 xl:hover:underline'}
+          className={"inline-block py-1 text-[#5486b7] xl:hover:underline"}
         >
           돌아가기
         </Link>

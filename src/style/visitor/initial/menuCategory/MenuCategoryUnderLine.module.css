@@ -1,8 +1,0 @@
-.underline {
-  width: calc(100% - 24px);
-  height: 1px;
-  background-color: #222;
-  position: absolute;
-  bottom: -1px;
-  left: 12px;
-}

@@ -1,12 +1,16 @@
-import CallPageWrap from '@/components/visitor/call/CallPageWrap';
-import { getQueryClient } from '@/lib/function/useQuery/getQueryClient';
-import { requestListQueryOption } from '@/lib/function/useQuery/queryOption';
-import { Params } from '@/types/common';
+import CallPage from "feature/table/(router)/call/call-index";
+import { getQueryClient } from "@/lib/function/useQuery/getQueryClient";
+import { requestListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { Params } from "@/types/common";
 
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { Metadata } from 'next';
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
   const { table } = await params;
 
   return {
@@ -16,13 +20,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function CallPage() {
+export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(requestListQueryOption);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CallPageWrap />
+      <CallPage />
     </HydrationBoundary>
   );
 }

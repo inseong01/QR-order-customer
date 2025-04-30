@@ -418,4 +418,24 @@
 
     - Popup
 
+25.4.30.
+  - tailwind 전환 완료 점검 
+
+  - 컴포넌트 디렉터리 구조화
+    - /[table]
+
+    - /[table]/order
+     - 디렉터리명 수정
+      : pickUpList -> order
+
+    - /[table]/history
+     - 디렉터리명 수정
+      : orderList -> history
+
+    - /[table]/bill
+
+    - /[table]/call
+
+  - 디렉터리 전환 완료 점검
+  
 <--- --->

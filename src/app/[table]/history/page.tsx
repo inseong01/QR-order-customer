@@ -1,4 +1,4 @@
-import BillPage from "feature/table/(router)/bill/bill-index";
+import HistoryPage from "feature/table/(router)/history/history-index";
 import { getQueryClient } from "@/lib/function/useQuery/getQueryClient";
 import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
 import { Params } from "@/types/common";
@@ -14,9 +14,11 @@ export async function generateMetadata({
   const { table } = await params;
 
   return {
-    title: `계산서`,
-    description: `${table}번 테이블 계산서 페이지입니다.`,
-    metadataBase: new URL(`https://qr-order-client.vercel.app/${table}/bill`),
+    title: `주문내역`,
+    description: `${table}번 테이블 주문내역 페이지입니다.`,
+    metadataBase: new URL(
+      `https://qr-order-client.vercel.app/${table}/history`,
+    ),
   };
 }
 
@@ -27,7 +29,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BillPage />
+      <HistoryPage />
     </HydrationBoundary>
   );
 }

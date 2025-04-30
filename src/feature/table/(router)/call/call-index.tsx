@@ -1,0 +1,41 @@
+"use client";
+
+import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
+import { useBoundStore } from "@/lib/store/useBoundStore";
+import SubmitButton from "feature/components/submit-button/button-index";
+import AlertModal from "feature/alert-modal/modal-index";
+import CallPageMain from "./call-main/main-index";
+
+import { useEffect } from "react";
+import { AnimatePresence } from "motion/react";
+
+export default function CallPage() {
+  const resetCallState = useBoundStore((state) => state.resetCallState);
+  const setModalType = useBoundStore((state) => state.setModalType);
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+
+  useEffect(() => {
+    resetCallState();
+    setModalType({ type: "request" });
+    setRequestClick({ isClicked: false });
+  }, []);
+
+  return (
+    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+      <AppVisitorHeader title={"직원호출"} />
+      <CallPageMain />
+      <SubmitButtonComp />
+      <AlertModal />
+    </div>
+  );
+}
+
+function SubmitButtonComp() {
+  const isClicked = useBoundStore((state) => state.callState.isClicked);
+
+  return (
+    <AnimatePresence>
+      {isClicked && <SubmitButton key={"SubmitButton"} type={"request"} />}
+    </AnimatePresence>
+  );
+}
