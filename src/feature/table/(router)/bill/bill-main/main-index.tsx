@@ -3,8 +3,10 @@
 import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
 import { useQueryClient } from "@tanstack/react-query";
 import { useBoundStore } from "@/lib/store/useBoundStore";
-import { MsgType } from "@/types/common";
 import Bill from "./display-bill/bill-index";
+import MainTagFrame from "../../components/frame/main/main-index";
+import VerticalStackGroup from "../../components/vertical-stack/stack-index";
+import ExceptionMessage from "../../components/exception/show-message/message-index";
 
 import { ReactNode } from "react";
 
@@ -17,28 +19,28 @@ export default function BillPageMain() {
     orderListQueryOption(tableName).queryKey,
   );
   // variant
-  const isError = !table || table.status === "error";
+  const error = { table: !table, staus: table?.status === "error" };
+  const isError = Object.values(error).some((value) => value);
+  const errorType = Object.entries(error).filter(
+    ([key, value]) => value === true,
+  );
   const tableData = table?.data?.[0];
   const orderData = tableData?.order ?? [];
   const orderListArr = isError ? [] : orderData.map((list) => list.orderList);
 
   return (
-    <main
-      className={
-        "flex h-[calc(100vh-45px)] w-full flex-col gap-5 overflow-y-auto p-4"
-      }
-    >
-      <div className={"flex h-auto w-full flex-col gap-5"}>
+    <MainTagFrame>
+      <VerticalStackGroup tag="div" gap="gap-5">
         <BillInfo tableName={tableName} />
         <BillBox>
           {isError ? (
-            <ExceptionMessage type={"error"} />
+            <ErrorComp errorType={errorType[0]} />
           ) : (
             <Bill orderListArr={orderListArr} />
           )}
         </BillBox>
-      </div>
-    </main>
+      </VerticalStackGroup>
+    </MainTagFrame>
   );
 }
 
@@ -63,14 +65,9 @@ function BillBox({ children }: { children: ReactNode }) {
   );
 }
 
-function ExceptionMessage({ type }: { type: MsgType }) {
-  const isError = type === "error";
-  const description = isError
-    ? "목록을 불러오는 데 오류가 발생했습니다. 카운터에서 확인해 주세요."
-    : "주문 내역이 없습니다.";
-  return (
-    <div>
-      <p className={"text-xs text-[#959595]"}>{description}</p>
-    </div>
-  );
+function ErrorComp({ errorType }: { errorType: [string, boolean] }) {
+  const [key] = errorType;
+  const isServerError = key === "status";
+
+  return <ExceptionMessage domain="bill" isServerError={isServerError} />;
 }

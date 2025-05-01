@@ -5,12 +5,11 @@ import { memo } from "react";
 
 function TableInitMain() {
   return (
-    <main id="menuList" className={"relative h-full w-full bg-white"}>
+    <main className={"relative h-full w-full bg-white"}>
       <ScrollMenuCateory />
       <MenuDisplay />
     </main>
   );
 }
 
-// export default memo(InitialMain);
 export default memo(TableInitMain);

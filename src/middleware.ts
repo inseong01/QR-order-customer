@@ -1,7 +1,7 @@
-import { NextResponse, userAgent } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, userAgent } from "next/server";
+import type { NextRequest } from "next/server";
 
-import { checkValidTableValue } from './lib/function/checkValidTableValue';
+import { checkValidTableValue } from "./lib/function/checkValidTableValue";
 
 /*
   1. 모바일 접속만 허가
@@ -27,23 +27,23 @@ import { checkValidTableValue } from './lib/function/checkValidTableValue';
 
 export function middleware(request: NextRequest) {
   // dev
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = process.env.NODE_ENV === "development";
   // home uri
   const HomePage = new URL(`/`, request.nextUrl.origin);
   // not-found uri
   const notFoundPage = new URL(`/0/not-found`, request.nextUrl.origin);
 
   // 링크 값
-  const pathname = request.nextUrl.pathname.split('/'); // ['', (tableName), (subpage)]
+  const pathname = request.nextUrl.pathname.split("/"); // ['', (tableName), (subpage)]
   const tablePathname = pathname[1];
 
   // not fouud 페이지 접속 판별
-  if (pathname[2] === 'not-found') {
+  if (pathname[2] === "not-found") {
     return NextResponse.next();
   }
 
   // 홈페이지 접속 판별
-  if (tablePathname === '') {
+  if (tablePathname === "") {
     return NextResponse.next();
   }
 
@@ -51,7 +51,7 @@ export function middleware(request: NextRequest) {
   const { device } = userAgent(request);
 
   // 장치 판별
-  const isMobile = device.type === 'mobile' || device.type === 'tablet';
+  const isMobile = device.type === "mobile" || device.type === "tablet";
 
   // 장치 별 페이지 접근 제한
   if (!isMobile && !isDev) {
@@ -71,7 +71,7 @@ export function middleware(request: NextRequest) {
   // 하위 페이지 접속
   if (isSubPage) {
     // 부여된 테이블 쿠키 값
-    const cookie = request.cookies.get('table');
+    const cookie = request.cookies.get("table");
     const cookieTableNum = cookie?.value;
 
     // 링크, 쿠키 값 검증
@@ -85,5 +85,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|favicon|img).*)'], // url 경로만 매치
+  matcher: ["/((?!_next|favicon|img).*)"], // url 경로만 매치
 };

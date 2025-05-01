@@ -6,11 +6,10 @@ import { AnimatePresence } from "motion/react";
 
 import TableInitHeader from "feature/table/table-header/header-index";
 import TableInitMain from "feature/table/table-main/main-index";
-// import DynamicPopUp from "feature/popup/popup-index";
 import { useBoundStore } from "@/lib/store/useBoundStore";
 import { initCookies } from "@/lib/function/initCookies";
 import { ParamsList } from "@/types/common";
-import SubmitButton from "feature/components/submit-button/button-index";
+import SubmitButton from "feature/table/components/submit-button/button-index";
 
 export default function TableInitPage() {
   return (

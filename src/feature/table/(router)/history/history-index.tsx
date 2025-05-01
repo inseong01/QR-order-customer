@@ -1,8 +1,9 @@
 "use client";
 
+import { useBoundStore } from "@/lib/store/useBoundStore";
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
 import OrderHistory from "./history-main/main-index";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 
@@ -14,9 +15,9 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+    <RoutePageFrame>
       <AppVisitorHeader title={"주문내역"} />
       <OrderHistory />
-    </div>
+    </RoutePageFrame>
   );
 }

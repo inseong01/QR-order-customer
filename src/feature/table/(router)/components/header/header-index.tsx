@@ -1,6 +1,6 @@
 "use client";
 
-import SimpleIcon from "../../../../components/simple-icon/icon-index";
+import SimpleIcon from "../../../components/simple-icon/icon-index";
 import { useBoundStore } from "@/lib/store/useBoundStore";
 import { HeaderTitle } from "@/types/common";
 

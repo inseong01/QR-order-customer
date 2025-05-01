@@ -3,6 +3,7 @@
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
 import { useBoundStore } from "@/lib/store/useBoundStore";
 import BillPageMain from "./bill-main/main-index";
+import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 
@@ -14,9 +15,9 @@ export default function BillPage() {
   }, []);
 
   return (
-    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+    <RoutePageFrame>
       <AppVisitorHeader title={"계산서"} />
       <BillPageMain />
-    </div>
+    </RoutePageFrame>
   );
 }

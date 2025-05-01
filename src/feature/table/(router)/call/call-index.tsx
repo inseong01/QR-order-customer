@@ -2,9 +2,10 @@
 
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
 import { useBoundStore } from "@/lib/store/useBoundStore";
-import SubmitButton from "feature/components/submit-button/button-index";
-import AlertModal from "feature/alert-modal/modal-index";
+import SubmitButton from "feature/table/components/submit-button/button-index";
+import AlertModal from "feature/components/modal/alert-modal/modal-index";
 import CallPageMain from "./call-main/main-index";
+import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 import { AnimatePresence } from "motion/react";
@@ -21,12 +22,12 @@ export default function CallPage() {
   }, []);
 
   return (
-    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+    <RoutePageFrame>
       <AppVisitorHeader title={"직원호출"} />
       <CallPageMain />
       <SubmitButtonComp />
       <AlertModal />
-    </div>
+    </RoutePageFrame>
   );
 }
 

@@ -1,10 +1,11 @@
 "use client";
 
-import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import SubmitButton from "feature/components/submit-button/button-index";
-import AlertModal from "feature/alert-modal/modal-index";
 import { useBoundStore } from "@/lib/store/useBoundStore";
+import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
+import SubmitButton from "feature/table/components/submit-button/button-index";
+import AlertModal from "feature/components/modal/alert-modal/modal-index";
 import OrderProcedure from "./order-main/main-index";
+import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 
@@ -18,12 +19,12 @@ export default function OrderPage() {
   }, []);
 
   return (
-    <div className={"relative h-full w-full cursor-default overflow-hidden"}>
+    <RoutePageFrame>
       <AppVisitorHeader title={"주문"} />
       <OrderProcedure />
       <SubmitButtonComp />
       <AlertModal />
-    </div>
+    </RoutePageFrame>
   );
 }
 

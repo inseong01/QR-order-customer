@@ -58,10 +58,16 @@ export default function CountButton({
       }
     >
       <CountIconBox onClick={onClickMenuCount(-1)} type="minus" />
-      <div className={"flex w-7 items-center justify-center"}>
-        <span>{amount}</span>
-      </div>
+      <DisplayAmount amount={amount} />
       <CountIconBox onClick={onClickMenuCount(1)} type="plus" />
+    </div>
+  );
+}
+
+function DisplayAmount({ amount }: { amount: number }) {
+  return (
+    <div className={"flex w-7 items-center justify-center"}>
+      <span>{amount}</span>
     </div>
   );
 }

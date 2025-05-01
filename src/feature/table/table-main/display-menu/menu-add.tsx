@@ -1,5 +1,5 @@
 import { useBoundStore } from "@/lib/store/useBoundStore";
-import PlusMinusIcon from "feature/components/simple-icon/icon-index";
+import PlusMinusIcon from "feature/table/components/simple-icon/icon-index";
 import { MenuList } from "@/types/common";
 
 import { AnimatePresence, motion } from "motion/react";

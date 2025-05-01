@@ -5,11 +5,7 @@ import Request from "./request-item";
 
 import { motion } from "motion/react";
 
-export default function RequestList({
-  data,
-}: {
-  data?: RequestCategoryList[];
-}) {
+export default function RequestList({ data }: { data: RequestCategoryList[] }) {
   const selectedItemArr = useBoundStore(
     (state) => state.callState.selectedItemArr,
   );
@@ -21,7 +17,7 @@ export default function RequestList({
       animate={"visible"}
       variants={parents}
     >
-      {data?.map((req, idx) => {
+      {data.map((req, idx) => {
         const isIncludedItem = selectedItemArr.some(
           (item) => item.id === req.id,
         );

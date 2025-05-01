@@ -1,0 +1,30 @@
+import { useBoundStore } from "@/lib/store/useBoundStore";
+
+import { useRouter } from "next/navigation";
+
+// Bottom
+export function CheckMenu() {
+  const isRequestClicked = useBoundStore(
+    (state) => state.requestState.isClicked,
+  );
+  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const router = useRouter();
+
+  // 주문표 확인하기
+  function onClickCheckPickUpList() {
+    if (isRequestClicked) return;
+    setRequestClick({ isClicked: true });
+    router.push(`${tableName}/order`);
+  }
+  return (
+    <button
+      className={
+        "flex h-1/2 w-full cursor-pointer items-center justify-center bg-[#4caff8] p-4 font-semibold text-white"
+      }
+      onClick={onClickCheckPickUpList}
+    >
+      <span>주문표 확인하기</span>
+    </button>
+  );
+}

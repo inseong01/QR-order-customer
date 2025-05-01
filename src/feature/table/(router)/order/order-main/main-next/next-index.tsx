@@ -3,6 +3,7 @@
 import { useBoundStore } from "@/lib/store/useBoundStore";
 import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
 import ProcessedOrderList from "./display-order/order-index";
+import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
 
 import { motion } from "motion/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -67,7 +68,7 @@ function ProcessedtOrder() {
   const isOk = submitStatus === "fulfilled" && orderList?.status === "success";
 
   return (
-    <div className={"flex h-auto w-full flex-col gap-5"}>
+    <VerticalStackGroup tag="div" gap="gap-5">
       <MenuListBox>
         {isOk ? (
           <ProcessedOrderList queryData={orderList.data} />
@@ -76,7 +77,7 @@ function ProcessedtOrder() {
         )}
       </MenuListBox>
       <BillInfo tableName={tableName} />
-    </div>
+    </VerticalStackGroup>
   );
 }
 

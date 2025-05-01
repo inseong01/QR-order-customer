@@ -4,6 +4,8 @@ import { useBoundStore } from "@/lib/store/useBoundStore";
 import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
 import CheckOrderList from "./display-order/order-index";
 import ProcessResult from "./main-next/next-index";
+import Divider from "../../components/line/line-index";
+import VerticalStackGroup from "../../components/vertical-stack/stack-index";
 
 import { AnimatePresence, motion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
@@ -45,13 +47,10 @@ export default function OrderProcedure() {
           exit={{ x: "-100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
-          <div className={"z-9 flex w-full flex-col gap-2.5 bg-white"}>
+          <VerticalStackGroup tag="div" gap="gap-2.5">
             <p>주문표 목록</p>
-            <span
-              id="line"
-              className={"h-[1px] w-full border-[1px] border-[#c9c9c9]"}
-            ></span>
-          </div>
+            <Divider />
+          </VerticalStackGroup>
           <CheckOrderList />
         </motion.main>
       ) : (

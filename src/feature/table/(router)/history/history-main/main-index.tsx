@@ -1,7 +1,11 @@
-import OrderList from "./display-order/order-index";
 import { MsgType, TableList } from "@/types/common";
 import { useBoundStore } from "@/lib/store/useBoundStore";
 import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
+import OrderList from "./display-order/order-index";
+import MainTagFrame from "../../components/frame/main/main-index";
+import VerticalStackGroup from "../../components/vertical-stack/stack-index";
+import ExceptionMessage from "../../components/exception/show-message/message-index";
+import Divider from "../../components/line/line-index";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -17,7 +21,11 @@ export default function OrderHistory() {
   // useState
   const [orderListArr, setListArr] = useState<TableList["order"]>([]);
   // variant
-  const isError = !orderList || orderList.status === "error";
+  const error = { list: !orderList, staus: orderList?.status === "error" };
+  const isError = Object.values(error).some((value) => value);
+  const errorType = Object.entries(error).filter(
+    ([key, value]) => value === true,
+  );
 
   // 프리패치 후 최신순 정렬
   useEffect(() => {
@@ -31,38 +39,34 @@ export default function OrderHistory() {
   }, [orderList]);
 
   return (
-    <main
-      className={
-        "flex h-[calc(100vh-45px)] w-full flex-col gap-5 overflow-y-auto p-4"
-      }
-    >
-      <ul className={"flex h-auto w-full flex-col gap-5"}>
+    <MainTagFrame>
+      <VerticalStackGroup tag="ul" gap="gap-5">
         {isError ? (
-          <ExceptionMessage type={"error"} />
+          <ErrorComp errorType={errorType[0]} />
         ) : (
           <OrderList orderListArr={orderListArr} />
         )}
-      </ul>
-    </main>
+      </VerticalStackGroup>
+    </MainTagFrame>
   );
 }
 
-function ExceptionMessage({ type }: { type: MsgType }) {
-  const isError = type === "error";
-  const title = isError ? `주문 내역 오류` : "주문 내역";
-  const description = isError
-    ? "카운터에서 확인해 주세요."
-    : "주문 내역이 없습니다.";
+/**
+ * OrderList 컴포넌트가 하나의 목록으로 생성되기 때문에
+ * 컴포넌트 자체를 재생성해야 함
+ */
+function ErrorComp({ errorType }: { errorType: [string, boolean] }) {
+  const [key] = errorType;
+  const isServerError = key === "status";
+  const title = isServerError ? "주문 내역 오류" : "주문 내역";
 
   return (
-    <li className={"flex h-auto w-full flex-col gap-5"}>
-      <div className={"flex w-full flex-col gap-2.5"}>
+    <VerticalStackGroup tag="li" gap="gap-5">
+      <VerticalStackGroup tag="div" gap="gap-2.5">
         <p>{title}</p>
-        <span className={"h-[1px] w-full border-[1px] border-[#c9c9c9]"}></span>
-      </div>
-      <div>
-        <p className={"text-xs text-[#959595]"}>{description}</p>
-      </div>
-    </li>
+        <Divider />
+      </VerticalStackGroup>
+      <ExceptionMessage domain="history" isServerError={isServerError} />
+    </VerticalStackGroup>
   );
 }
