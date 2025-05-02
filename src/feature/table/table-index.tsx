@@ -6,10 +6,10 @@ import { AnimatePresence } from "motion/react";
 
 import TableInitHeader from "feature/table/table-header/header-index";
 import TableInitMain from "feature/table/table-main/main-index";
-import { useBoundStore } from "@/lib/store/useBoundStore";
-import { initCookies } from "@/lib/function/initCookies";
-import { ParamsList } from "@/types/common";
 import SubmitButton from "feature/table/components/submit-button/button-index";
+import { useBoundStore } from "@/lib/store/use-bound-store";
+import { initCookies } from "@/lib/function/table/set-init-cookies";
+import { ParamsList } from "@/types/common";
 
 export default function TableInitPage() {
   return (
@@ -25,19 +25,17 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
   // usePathname
   const params = useParams<ParamsList>();
   // store
-  const requestIsClicked = useBoundStore(
-    (state) => state.requestState.isClicked,
-  );
+  const isClicked = useBoundStore((state) => state.flagState.isClicked);
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const setTableNumber = useBoundStore((state) => state.setTableNumber);
-  const resetRequestState = useBoundStore((state) => state.resetRequestState);
+  const resetflagState = useBoundStore((state) => state.resetflagState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
-  const resetPickUpState = useBoundStore((state) => state.resetPickUpState);
-  const getSelectedMenuCategoryId = useBoundStore(
-    (state) => state.getSelectedMenuCategoryId,
+  const resetPickUpState = useBoundStore((state) => state.resetOrderState);
+  const selectMenuCategoryId = useBoundStore(
+    (state) => state.selectMenuCategoryId,
   );
 
   useEffect(() => {
@@ -55,8 +53,8 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
     }
 
     // 링크 이동 초기화
-    if (requestIsClicked) {
-      resetRequestState();
+    if (isClicked) {
+      resetflagState();
     }
 
     // 제출 초기화
@@ -66,7 +64,7 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
     }
 
     // 초기 카테고리 메뉴로 초기화
-    getSelectedMenuCategoryId({ id: 1 });
+    selectMenuCategoryId({ id: 1 });
   }, []);
 
   return (
@@ -77,8 +75,8 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
 }
 
 function SubmitButtonComp() {
-  const pickUpList = useBoundStore((state) => state.pickUpState.list);
-  const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
+  const pickUpList = useBoundStore((state) => state.orderState.list);
+  const pickUpIsClicked = useBoundStore((state) => state.orderState.isClicked);
 
   const shoppingcartEnable = !!pickUpList.length;
   const submitType = !shoppingcartEnable || pickUpIsClicked ? "pick" : "check";

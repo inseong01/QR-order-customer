@@ -1,5 +1,5 @@
 // motion
-export const parents = {
+export const request_parents = {
   hidden: {
     opacity: 0,
   },
@@ -11,7 +11,7 @@ export const parents = {
   },
 };
 
-export const child = {
+export const request_child = {
   hidden: {
     scale: 0,
   },

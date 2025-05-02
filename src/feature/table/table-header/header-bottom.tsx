@@ -7,24 +7,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 
 type RouterCategory = "call" | "history" | "bill";
 
 export default function HeaderBottom() {
   // store
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  const requestIsClicked = useBoundStore(
-    (state) => state.requestState.isClicked,
-  );
-  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const requestIsClicked = useBoundStore((state) => state.flagState.isClicked);
+  const setFlag = useBoundStore((state) => state.setFlag);
   // useRouter
   const router = useRouter();
 
   function onClickRouterOnce(category: RouterCategory) {
     return () => {
       if (requestIsClicked) return;
-      setRequestClick({ isClicked: true });
+      setFlag({ isClicked: true });
       router.push(`${tableName}/${category}`);
     };
   }

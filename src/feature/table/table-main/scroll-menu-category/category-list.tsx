@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { MenuCategoryList } from "@/types/common";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import CategoryUnderBar from "./category-mark";
 
 export default function MenuCategory({
@@ -9,16 +9,14 @@ export default function MenuCategory({
 }: {
   category: MenuCategoryList;
 }) {
-  const selectedTagId = useBoundStore(
-    (state) => state.menuState.selectedMenuCategoryId,
-  );
-  const getSelectedMenuCategoryId = useBoundStore(
-    (state) => state.getSelectedMenuCategoryId,
+  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
+  const selectMenuCategoryId = useBoundStore(
+    (state) => state.selectMenuCategoryId,
   );
 
   function onClickChangeMenuTitle() {
-    if (selectedTagId === category.id) return;
-    getSelectedMenuCategoryId({ id: category.id });
+    if (currentCategoryId === category.id) return;
+    selectMenuCategoryId({ id: category.id });
   }
 
   return (

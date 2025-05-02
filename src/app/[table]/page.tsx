@@ -1,9 +1,9 @@
 import TableInitPage from "feature/table/table-index";
-import { getQueryClient } from "@/lib/function/useQuery/getQueryClient";
+import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
 import {
   categoryListQueryOption,
   menuListQueryOption,
-} from "@/lib/function/useQuery/queryOption";
+} from "@/lib/function/useQuery/query-option";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { redirect } from "next/navigation";

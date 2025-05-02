@@ -1,4 +1,4 @@
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import PlusMinusIcon from "feature/table/components/simple-icon/icon-index";
 import { MenuList } from "@/types/common";
 
@@ -7,9 +7,11 @@ import { MouseEvent, useState } from "react";
 
 export default function MenuAddIcon({ list }: { list: MenuList }) {
   // store
-  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
-  const pickUpMenu = useBoundStore((state) => state.pickUpMenu);
-  const removePickUpMenu = useBoundStore((state) => state.removePickUpMenu);
+  const currentOrderList = useBoundStore((state) => state.orderState.list);
+  const selectMenuInstantly = useBoundStore(
+    (state) => state.selectMenuInstantly,
+  );
+  const removeSelectedMenu = useBoundStore((state) => state.removeSelectedMenu);
   // useState
   const [isIconClicked, setIsIconClicked] = useState(false);
   // variant
@@ -36,12 +38,12 @@ export default function MenuAddIcon({ list }: { list: MenuList }) {
   function onClickPlusIcon({ name, price, id, tag }: MenuList) {
     if (tag === "soldout") return;
     const menu = { name, price, amount: 1, id };
-    pickUpMenu(menu);
+    selectMenuInstantly(menu);
   }
 
   function onClickMinusIcon({ id, tag }: MenuList) {
     if (tag === "soldout") return;
-    removePickUpMenu({ id });
+    removeSelectedMenu({ id });
   }
 
   return (

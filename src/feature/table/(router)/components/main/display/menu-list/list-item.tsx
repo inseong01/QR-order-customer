@@ -15,7 +15,7 @@ export default function Item({
         <span>{name}</span>
       </div>
       <div className={"flex items-center justify-end gap-2.5 text-right"}>
-        <span>{amount}</span>x<span className="min-w-23">{price}원</span>
+        <span>{amount}</span>x<span className="min-w-18">{price}원</span>
       </div>
     </RowSpaceBetween>
   );

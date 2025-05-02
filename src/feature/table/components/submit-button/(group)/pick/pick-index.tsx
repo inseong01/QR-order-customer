@@ -1,14 +1,14 @@
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import CountButton from "feature/table/components/count-button/button-index";
 
 // Top
 export function MenuCount() {
-  const selectedMenu = useBoundStore((state) => state.pickUpState.selectedMenu);
+  const selectedMenu = useBoundStore((state) => state.orderState.selectedMenu);
   const selectedMenuID = useBoundStore(
-    (state) => state.pickUpState.selectedMenu.id,
+    (state) => state.orderState.selectedMenu.id,
   );
   const selectedMenuAmount = useBoundStore(
-    (state) => state.pickUpState.selectedMenu.amount,
+    (state) => state.orderState.selectedMenu.amount,
   );
   return (
     <div className={"flex h-1/2 w-full items-center justify-between bg-white"}>
@@ -26,11 +26,11 @@ export function MenuCount() {
 
 // Bottom
 export function PickMenu() {
-  const pickUpSelectedMenu = useBoundStore((state) => state.pickUpSelectedMenu);
+  const selectClickedMenu = useBoundStore((state) => state.selectClickedMenu);
 
   // 항목 선택
   function onClickBottom() {
-    pickUpSelectedMenu();
+    selectClickedMenu();
   }
 
   return (

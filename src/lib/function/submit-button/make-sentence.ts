@@ -1,4 +1,4 @@
-import { CallItem } from '@/types/common';
+import { Request } from "@/types/common";
 
 // const mock = [
 //   {
@@ -14,11 +14,11 @@ import { CallItem } from '@/types/common';
 // ]
 // =>> "물 1, 젓가락 1"
 
-export default function makeSentence(requestList: CallItem[]) {
+export default function makeSentence(requestList: Request[]) {
   let sentence = requestList
     .map((request) => {
-      return request.title + ' ' + request.amount;
+      return request.title + " " + request.amount;
     })
-    .join(', ');
+    .join(", ");
   return sentence;
 }

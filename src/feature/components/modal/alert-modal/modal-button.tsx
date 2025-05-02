@@ -1,5 +1,5 @@
-import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -27,12 +27,10 @@ export function ConfirmButton() {
 
 export function YesNoButtons() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const pickUpList = useBoundStore((state) => state.orderState.list);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
-  const fetchOrderSubmitState = useBoundStore(
-    (state) => state.fetchOrderSubmitState,
-  );
+  const fetchOrderArr = useBoundStore((state) => state.fetchOrderArr);
 
   const queryClient = useQueryClient();
   const queryState = queryClient.getQueryState(
@@ -43,7 +41,7 @@ export function YesNoButtons() {
   function onClickPermission() {
     if (isSubmit) return;
     // 주문 전달
-    fetchOrderSubmitState({
+    fetchOrderArr({
       pickUpList,
       submitError: queryState?.status === "error",
     });

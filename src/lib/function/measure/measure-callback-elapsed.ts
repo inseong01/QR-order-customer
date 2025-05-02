@@ -1,4 +1,4 @@
-import { throttle } from './throttle';
+import { throttle } from "../optimize/throttle";
 /**
  * 콜백 함수 실행 간격 측정
  *
@@ -8,11 +8,12 @@ import { throttle } from './throttle';
  */
 export function measureCallbackElapsed(
   e: DragEvent,
-  test_type: 'throttle' | 'requestAnimationFrame',
-  scrollContainer: HTMLDivElement | null
+  test_type: "throttle" | "requestAnimationFrame",
+  scrollContainer: HTMLDivElement | null,
 ) {
   if (!scrollContainer) return;
-  const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.offsetWidth;
+  const maxScrollLeft =
+    scrollContainer.scrollWidth - scrollContainer.offsetWidth;
 
   // 함수 실행 간격 확인
   const arr: number[] = [];
@@ -22,7 +23,7 @@ export function measureCallbackElapsed(
   const sum = (prev: number, current: number) => prev + current;
 
   switch (test_type) {
-    case 'throttle': {
+    case "throttle": {
       let interval: NodeJS.Timeout | number;
 
       const animationCallback = () => {
@@ -35,7 +36,7 @@ export function measureCallbackElapsed(
             arr.reduce((sum, curt) => sum + (curt - mean) ** 2, 0) / arr.length;
           // 표준편차 계산
           const standardDevation = Math.sqrt(variance);
-          console.log('Throttle: ', mean, variance, standardDevation);
+          console.log("Throttle: ", mean, variance, standardDevation);
           return;
         }
         scrollContainer.scrollLeft += 1;
@@ -49,12 +50,12 @@ export function measureCallbackElapsed(
           animationCallback();
           startTime = now;
         }, 6),
-        1
+        1,
       );
 
       break;
     }
-    case 'requestAnimationFrame': {
+    case "requestAnimationFrame": {
       let animationCallbackID = 0;
 
       const animationCallback = () => {
@@ -71,7 +72,12 @@ export function measureCallbackElapsed(
             arr.reduce((sum, curt) => sum + (curt - mean) ** 2, 0) / arr.length;
           // 표준편차 계산
           const standardDevation = Math.sqrt(variance);
-          console.log('RequestAnimationFrame: ', mean, variance, standardDevation);
+          console.log(
+            "RequestAnimationFrame: ",
+            mean,
+            variance,
+            standardDevation,
+          );
           return;
         }
         scrollContainer.scrollLeft += 1;
@@ -83,7 +89,7 @@ export function measureCallbackElapsed(
       break;
     }
     default: {
-      console.error('Invaliable case');
+      console.error("Invaliable case");
     }
   }
 }

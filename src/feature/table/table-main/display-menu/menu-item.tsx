@@ -1,5 +1,5 @@
-import { liVariants } from "@/lib/motion/middle/motion_menuList";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { menu_child } from "@/lib/motion/display-menu/menu-variants";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { MenuList, TagDescription } from "@/types/common";
 import MenuAddIcon from "./menu-add";
 
@@ -39,7 +39,7 @@ function Item({ list }: { list: MenuList }) {
     <motion.li
       className={`flex w-full gap-2.5 px-4 py-2`}
       onClick={onClickMenuClick}
-      variants={liVariants}
+      variants={menu_child}
       data-tag={tag}
     >
       <ItemImage list={list} tagDescription={tagDescription} />

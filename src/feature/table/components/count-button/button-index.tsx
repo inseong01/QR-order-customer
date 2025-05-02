@@ -1,7 +1,7 @@
 "use client";
 
-import calculateAmount from "@/lib/function/calculateAmount";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import calculateAmount from "@/lib/function/count-button/calculate-amount";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { CountButtonType, IconType } from "@/types/common";
 import SimpleIcon from "../simple-icon/icon-index";
 
@@ -14,12 +14,12 @@ export default function CountButton({
   amount: number;
   id: number | string;
 }) {
-  const changeItemAmount = useBoundStore((state) => state.changeItemAmount);
-  const changeSelectedMenuAmount = useBoundStore(
-    (state) => state.changeSelectedMenuAmount,
+  const changeRequestAmount = useBoundStore(
+    (state) => state.changeRequestAmount,
   );
-  const changeMenuAmountInPickUpList = useBoundStore(
-    (state) => state.changeMenuAmountInPickUpList,
+  const changeMenuAmount = useBoundStore((state) => state.changeMenuAmount);
+  const changeMenuAmountInList = useBoundStore(
+    (state) => state.changeMenuAmountInList,
   );
 
   // 항목 수량 변경
@@ -30,18 +30,18 @@ export default function CountButton({
       if (calcedAmount === amount) return;
       switch (type) {
         case "pick": {
-          changeSelectedMenuAmount({ amount: calcedAmount });
+          changeMenuAmount({ amount: calcedAmount });
           break;
         }
         case "call": {
           // overlaps 문제로 타입 단언
           const ItemId = id as number;
-          changeItemAmount({ id: ItemId, amount: calcedAmount });
+          changeRequestAmount({ id: ItemId, amount: calcedAmount });
           break;
         }
         case "pickUpList": {
           const listId = id as string;
-          changeMenuAmountInPickUpList({ id: listId, amount: calcedAmount });
+          changeMenuAmountInList({ id: listId, amount: calcedAmount });
           break;
         }
         default: {

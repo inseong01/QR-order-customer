@@ -1,6 +1,6 @@
 "use client";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { OrderListType } from "@/types/common";
 import CountButton from "feature/table/components/count-button/button-index";
 import RowSpaceBetween from "feature/table/(router)/components/horizontal-stack/stack-between/between-index";
@@ -9,13 +9,13 @@ import DisplayTotalPrice from "feature/table/(router)/components/main/display/to
 import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
 
 export default function CheckOrderList() {
-  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
-  const removePickUpMenu = useBoundStore((state) => state.removePickUpMenu);
+  const currentOrderList = useBoundStore((state) => state.orderState.list);
+  const removeSelectedMenu = useBoundStore((state) => state.removeSelectedMenu);
   const isOrderExist = currentOrderList.length !== 0;
 
   function onClickDeletePickUpList(id: string) {
     return () => {
-      removePickUpMenu({ id });
+      removeSelectedMenu({ id });
     };
   }
 

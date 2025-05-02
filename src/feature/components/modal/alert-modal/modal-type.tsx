@@ -1,6 +1,6 @@
 "use client";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { ConfirmButton, YesNoButtons } from "./modal-button";
 
 import { motion } from "motion/react";

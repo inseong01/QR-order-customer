@@ -1,8 +1,8 @@
 "use client";
 
-import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
 import { useQueryClient } from "@tanstack/react-query";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import Bill from "./display-bill/bill-index";
 import MainTagFrame from "../../components/frame/main/main-index";
 import VerticalStackGroup from "../../components/vertical-stack/stack-index";

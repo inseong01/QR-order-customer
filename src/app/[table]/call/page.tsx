@@ -1,6 +1,6 @@
 import CallPage from "feature/table/(router)/call/call-index";
-import { getQueryClient } from "@/lib/function/useQuery/getQueryClient";
-import { requestListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
+import { requestListQueryOption } from "@/lib/function/useQuery/query-option";
 import { Params } from "@/types/common";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";

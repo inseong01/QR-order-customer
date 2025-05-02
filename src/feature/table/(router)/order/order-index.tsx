@@ -1,6 +1,6 @@
 "use client";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
 import SubmitButton from "feature/table/components/submit-button/button-index";
 import AlertModal from "feature/components/modal/alert-modal/modal-index";
@@ -11,11 +11,11 @@ import { useEffect } from "react";
 
 export default function OrderPage() {
   const setModalType = useBoundStore((state) => state.setModalType);
-  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const setFlag = useBoundStore((state) => state.setFlag);
 
   useEffect(() => {
     setModalType({ type: "orderCheck" });
-    setRequestClick({ isClicked: false });
+    setFlag({ isClicked: false });
   }, []);
 
   return (
@@ -29,7 +29,7 @@ export default function OrderPage() {
 }
 
 function SubmitButtonComp() {
-  const currentOrderList = useBoundStore((state) => state.pickUpState.list);
+  const currentOrderList = useBoundStore((state) => state.orderState.list);
   const isNext = useBoundStore((state) => state.submitState.isNext);
 
   return (

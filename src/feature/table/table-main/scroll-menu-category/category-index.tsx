@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { ReactNode, useRef, useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { categoryListQueryOption } from "@/lib/function/useQuery/queryOption";
-import useEnableScroll from "@/lib/hook/useEnableScroll";
-import { measureCallbackElapsed } from "@/lib/function/measureCallbackElapsed";
+import { categoryListQueryOption } from "@/lib/function/useQuery/query-option";
+import useEnableScroll from "@/lib/hook/scroll-menu-category/use-enable-scroll";
+import { measureCallbackElapsed } from "@/lib/function/measure/measure-callback-elapsed";
 import MenuCategory from "./category-list";
 import { CategoryList } from "@/types/common";
 

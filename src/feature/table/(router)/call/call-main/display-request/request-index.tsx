@@ -1,13 +1,13 @@
-import { parents } from "@/lib/motion/call/motion_requestList";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { request_parents } from "@/lib/motion/display-request/request-variants";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { RequestCategoryList } from "@/types/common";
 import Request from "./request-item";
 
 import { motion } from "motion/react";
 
 export default function RequestList({ data }: { data: RequestCategoryList[] }) {
-  const selectedItemArr = useBoundStore(
-    (state) => state.callState.selectedItemArr,
+  const selectedArr = useBoundStore(
+    (state) => state.callState.selectedRequests,
   );
 
   return (
@@ -15,12 +15,10 @@ export default function RequestList({ data }: { data: RequestCategoryList[] }) {
       className={"flex flex-wrap gap-2.5"}
       initial={"hidden"}
       animate={"visible"}
-      variants={parents}
+      variants={request_parents}
     >
       {data.map((req, idx) => {
-        const isIncludedItem = selectedItemArr.some(
-          (item) => item.id === req.id,
-        );
+        const isIncludedItem = selectedArr.some((item) => item.id === req.id);
         return <Request key={idx} req={req} isIncludedItem={isIncludedItem} />;
       })}
     </motion.div>

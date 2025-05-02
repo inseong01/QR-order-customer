@@ -1,7 +1,7 @@
 "use client";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
-import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { useBoundStore } from "@/lib/store/use-bound-store";
+import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
 import ProcessedOrderList from "./display-order/order-index";
 import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
 

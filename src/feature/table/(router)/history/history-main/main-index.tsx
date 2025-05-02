@@ -1,6 +1,6 @@
 import { MsgType, TableList } from "@/types/common";
-import { useBoundStore } from "@/lib/store/useBoundStore";
-import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { useBoundStore } from "@/lib/store/use-bound-store";
+import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
 import OrderList from "./display-order/order-index";
 import MainTagFrame from "../../components/frame/main/main-index";
 import VerticalStackGroup from "../../components/vertical-stack/stack-index";

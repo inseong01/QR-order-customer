@@ -1,5 +1,5 @@
 // motion
-export const ulVariants = {
+export const menu_parents = {
   active: {
     transition: {
       delayChildren: 0.2,
@@ -8,7 +8,7 @@ export const ulVariants = {
   },
   inactive: {},
 };
-export const liVariants = {
+export const menu_child = {
   active: {
     y: 0,
     opacity: 1,

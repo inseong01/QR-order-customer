@@ -1,4 +1,4 @@
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import { MenuCategoryList } from "@/types/common";
 
 import { useEffect, useState } from "react";
@@ -12,15 +12,15 @@ export default function CategoryUnderBar({
   // useState
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   // store
-  const selectedTagId = useBoundStore(
-    (state) => state.menuState.selectedMenuCategoryId,
-  );
+  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
 
   useEffect(() => {
     setIsFirstLoad(false);
   }, []);
 
-  return <>{!isFirstLoad && selectedTagId === category.id && <UnderBar />}</>;
+  return (
+    <>{!isFirstLoad && currentCategoryId === category.id && <UnderBar />}</>
+  );
 }
 
 function UnderBar() {

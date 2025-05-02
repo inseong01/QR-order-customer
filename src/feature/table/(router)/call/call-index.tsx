@@ -1,7 +1,7 @@
 "use client";
 
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import SubmitButton from "feature/table/components/submit-button/button-index";
 import AlertModal from "feature/components/modal/alert-modal/modal-index";
 import CallPageMain from "./call-main/main-index";
@@ -13,12 +13,12 @@ import { AnimatePresence } from "motion/react";
 export default function CallPage() {
   const resetCallState = useBoundStore((state) => state.resetCallState);
   const setModalType = useBoundStore((state) => state.setModalType);
-  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const setFlag = useBoundStore((state) => state.setFlag);
 
   useEffect(() => {
     resetCallState();
     setModalType({ type: "request" });
-    setRequestClick({ isClicked: false });
+    setFlag({ isClicked: false });
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import HistoryPage from "feature/table/(router)/history/history-index";
-import { getQueryClient } from "@/lib/function/useQuery/getQueryClient";
-import { orderListQueryOption } from "@/lib/function/useQuery/queryOption";
+import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
+import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
 import { Params } from "@/types/common";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";

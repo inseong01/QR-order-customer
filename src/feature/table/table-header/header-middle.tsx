@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 
 export default function HeaderMiddle() {
   return (

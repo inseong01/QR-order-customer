@@ -1,4 +1,4 @@
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 
 import { AnimatePresence } from "motion/react";
 import dynamic from "next/dynamic";

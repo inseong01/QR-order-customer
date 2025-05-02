@@ -1,17 +1,17 @@
 "use client";
 
 import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import BillPageMain from "./bill-main/main-index";
 import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 
 export default function BillPage() {
-  const setRequestClick = useBoundStore((state) => state.setRequestClick);
+  const setFlag = useBoundStore((state) => state.setFlag);
 
   useEffect(() => {
-    setRequestClick({ isClicked: false });
+    setFlag({ isClicked: false });
   }, []);
 
   return (

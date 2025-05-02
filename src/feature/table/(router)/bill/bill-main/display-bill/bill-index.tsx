@@ -1,4 +1,4 @@
-import createReceipt from "@/lib/function/createReceipt";
+import createReceipt from "@/lib/function/display-bill/create-receipt";
 import { OrderListType } from "@/types/common";
 import Divider from "feature/table/(router)/components/line/line-index";
 import MenuList from "feature/table/(router)/components/main/display/menu-list/list-index";

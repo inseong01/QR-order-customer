@@ -1,6 +1,6 @@
-import { ulVariants } from "@/lib/motion/middle/motion_menuList";
-import { menuListQueryOption } from "@/lib/function/useQuery/queryOption";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { menu_parents } from "@/lib/motion/display-menu/menu-variants";
+import { menuListQueryOption } from "@/lib/function/useQuery/query-option";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import Item from "./menu-item";
 
 import { ReactNode, useEffect, useState } from "react";
@@ -9,9 +9,7 @@ import { motion } from "motion/react";
 
 export default function MenuDisplay() {
   const { data, isFetched } = useSuspenseQuery(menuListQueryOption);
-  const currentCategoryId = useBoundStore(
-    (state) => state.menuState.selectedMenuCategoryId,
-  );
+  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
 
   const currentCategoryMenu = data.filter(
     (list) => list.sortId === currentCategoryId,
@@ -34,8 +32,8 @@ function MainMenuBox({
 }) {
   const [isfirstLoad, setIsFirstLoad] = useState(true);
 
-  const pickUpList = useBoundStore((state) => state.pickUpState.list);
-  const pickUpIsClicked = useBoundStore((state) => state.pickUpState.isClicked);
+  const pickUpList = useBoundStore((state) => state.orderState.list);
+  const pickUpIsClicked = useBoundStore((state) => state.orderState.isClicked);
   const isOrderBoxAppeared = pickUpList.length !== 0 || pickUpIsClicked;
 
   useEffect(() => {
@@ -46,7 +44,7 @@ function MainMenuBox({
   return (
     <motion.ul
       className={`w-full ${isOrderBoxAppeared ? `h-lvh` : "h-auto"} flex flex-col gap-1 py-4`}
-      variants={ulVariants}
+      variants={menu_parents}
       initial={isfirstLoad ? "inactive" : false}
       animate={isfirstLoad ? "active" : false}
     >

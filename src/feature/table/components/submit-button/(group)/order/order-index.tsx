@@ -1,4 +1,4 @@
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
 
 import { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // Top
 export function TotalPrice() {
   // store
-  const pickUpList = useBoundStore((state) => state.pickUpState.list);
+  const pickUpList = useBoundStore((state) => state.orderState.list);
   // variant
   const totalPrice = pickUpList.reduce(
     (prev, curr) => prev + curr.price * curr.amount,

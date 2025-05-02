@@ -1,7 +1,7 @@
 import { NextResponse, userAgent } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { checkValidTableValue } from "./lib/function/checkValidTableValue";
+import { checkValidTableValue } from "./lib/function/middleware/check-valid-table-value";
 
 /*
   1. 모바일 접속만 허가

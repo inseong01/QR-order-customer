@@ -1,17 +1,17 @@
-import makeSentence from "@/lib/function/makeSentence";
-import { useBoundStore } from "@/lib/store/useBoundStore";
+import makeSentence from "@/lib/function/submit-button/make-sentence";
+import { useBoundStore } from "@/lib/store/use-bound-store";
 import PickItem from "./request-item";
 
 // Top
 export function PickAndCountButton() {
-  const selectedItemArr = useBoundStore(
-    (state) => state.callState.selectedItemArr,
+  const selectedArr = useBoundStore(
+    (state) => state.callState.selectedRequests,
   );
 
   return (
     <div className={"h-auto w-full"}>
       <ul className={"flex w-full flex-col gap-4"}>
-        {selectedItemArr.map((item, idx) => {
+        {selectedArr.map((item, idx) => {
           return <PickItem key={idx} item={item} />;
         })}
       </ul>
@@ -21,18 +21,16 @@ export function PickAndCountButton() {
 
 // Bottom
 export function SubmitRequest() {
-  const requestList = useBoundStore((state) => state.callState.selectedItemArr);
+  const requestArr = useBoundStore((state) => state.callState.selectedRequests);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
-  const fetchRequestSubmitState = useBoundStore(
-    (state) => state.fetchRequestSubmitState,
-  );
+  const fetchRequest = useBoundStore((state) => state.fetchRequest);
 
   // 호출하기
   function onClickSubmitRequestList() {
     if (isSubmit) return;
     // 알림으로 requestList(요청) 전달
-    const requestStr = makeSentence(requestList);
-    fetchRequestSubmitState({ requestStr });
+    const requestStr = makeSentence(requestArr);
+    fetchRequest({ requestStr });
   }
 
   return (

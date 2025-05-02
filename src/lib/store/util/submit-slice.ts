@@ -1,5 +1,5 @@
-import { SelectedMenu, SliceCreator, Status } from '@/types/common';
-import { fetchSubmitState } from '../function/fetchSubmitState';
+import { SelectedMenu, SliceCreator, Status } from "@/types/common";
+import { postSubmitState } from "../../function/fetch/fetch-submit-state";
 
 type InitialState = {
   submitState: {
@@ -12,7 +12,7 @@ type InitialState = {
 const initialState: InitialState = {
   submitState: {
     isSubmit: false,
-    status: '',
+    status: "",
     isNext: false,
   },
 };
@@ -24,14 +24,14 @@ export interface SubmitSlice {
     isNext: boolean;
   };
   resetSubmitState: () => void;
-  fetchOrderSubmitState: ({
+  fetchOrderArr: ({
     pickUpList,
     submitError,
   }: {
     pickUpList: SelectedMenu[];
     submitError: boolean;
   }) => void;
-  fetchRequestSubmitState: ({ requestStr }: { requestStr: string }) => void;
+  fetchRequest: ({ requestStr }: { requestStr: string }) => void;
   setNexPageEnable: ({ isNext }: { isNext: boolean }) => void;
 }
 
@@ -47,43 +47,44 @@ export interface SubmitSlice {
 */
 
 export const submitSlice: SliceCreator<SubmitSlice> =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV === "development"
     ? (set, get) => ({
         ...initialState,
-        resetSubmitState: () => set(initialState, undefined, 'submitState/resetSubmitState'),
-        fetchOrderSubmitState: ({
+        resetSubmitState: () =>
+          set(initialState, undefined, "submitState/resetSubmitState"),
+        fetchOrderArr: ({
           pickUpList,
           submitError,
         }: {
           pickUpList: SelectedMenu[];
           submitError: boolean;
         }) => {
-          fetchSubmitState({ pickUpList, submitError, set, get });
+          postSubmitState({ pickUpList, submitError, set, get });
         },
-        fetchRequestSubmitState: ({ requestStr }: { requestStr: string }) => {
-          fetchSubmitState({ requestStr, set, get });
+        fetchRequest: ({ requestStr }: { requestStr: string }) => {
+          postSubmitState({ requestStr, set, get });
         },
         setNexPageEnable: ({ isNext }: { isNext: boolean }) =>
           set(
             (state) => ({ submitState: { ...state.submitState, isNext } }),
             undefined,
-            'submitState/setNexPageEnable'
+            "submitState/setNexPageEnable",
           ),
       })
     : (set, get) => ({
         ...initialState,
         resetSubmitState: () => set(initialState),
-        fetchOrderSubmitState: ({
+        fetchOrderArr: ({
           pickUpList,
           submitError,
         }: {
           pickUpList: SelectedMenu[];
           submitError: boolean;
         }) => {
-          fetchSubmitState({ set, get, pickUpList, submitError });
+          postSubmitState({ set, get, pickUpList, submitError });
         },
-        fetchRequestSubmitState: ({ requestStr }: { requestStr: string }) => {
-          fetchSubmitState({ set, get, requestStr });
+        fetchRequest: ({ requestStr }: { requestStr: string }) => {
+          postSubmitState({ set, get, requestStr });
         },
         setNexPageEnable: ({ isNext }: { isNext: boolean }) =>
           set((state) => ({ submitState: { ...state.submitState, isNext } })),
