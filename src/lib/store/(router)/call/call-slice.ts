@@ -110,7 +110,7 @@ export const callSlice: SliceCreator<CallSlice> =
     : (set) => ({
         ...initialState,
         resetCallState: () =>
-          set(initialState, undefined, "callState/resetCallState"),
+          set(initialState),
         selectRequest: ({ id, title, amount }: Request) =>
           set(
             (state) => {
@@ -146,8 +146,6 @@ export const callSlice: SliceCreator<CallSlice> =
                 },
               };
             },
-            undefined,
-            "callState/selectRequest",
           ),
         changeRequestAmount: ({
           id,
@@ -178,7 +176,5 @@ export const callSlice: SliceCreator<CallSlice> =
                 },
               };
             },
-            undefined,
-            "callState/changeItemAmount",
           ),
       });

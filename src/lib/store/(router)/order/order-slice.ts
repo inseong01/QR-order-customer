@@ -213,7 +213,7 @@ export const orderSlice: SliceCreator<OrderSlice> =
     : (set) => ({
         ...initialState,
         resetOrderState: () =>
-          set(initialState, undefined, "orderState/resetPickUpState"),
+          set(initialState),
         clickMenu: ({
           name,
           price,
@@ -242,8 +242,6 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/clickMenu",
           ),
         selectClickedMenu: () =>
           set(
@@ -286,8 +284,6 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/selectClickedMenu",
           ),
         selectMenuInstantly: (menu: SelectedMenu) =>
           set(
@@ -301,8 +297,6 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/selectMenuInstantly",
           ),
         removeSelectedMenu: ({ id }: { id: SelectedMenu["id"] }) =>
           set(
@@ -317,8 +311,6 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/removeSelectedMenu",
           ),
         // button, 메뉴 수량 변경
         changeMenuAmount: ({ amount }: { amount: SelectedMenu["amount"] }) =>
@@ -336,8 +328,6 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/changeMenuAmount",
           ),
         // [table]/order, 메뉴 수량 변경
         changeMenuAmountInList: ({
@@ -364,7 +354,5 @@ export const orderSlice: SliceCreator<OrderSlice> =
                 },
               };
             },
-            undefined,
-            "orderState/changeMenuAmountInList",
           ),
       });

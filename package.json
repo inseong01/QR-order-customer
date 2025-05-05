@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
-    "build": "next build",
+    "build": "npm run remove:debug && next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "npx cross-env ANALYZE=true npm run build"
+    "analyze": "npx cross-env ANALYZE=true npm run build",
+    "remove:debug": "tsx ./src/lib/function/node/remove-debuge-code.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
