@@ -1,8 +1,8 @@
 export default function calculateAmount(amount: number, num: number) {
   const currentAmount = amount;
-  const receivedAmount = Number(num);
-  let calcedAmount = currentAmount + receivedAmount;
-  calcedAmount = Math.max(1, calcedAmount);
+  const receivedAmount = num;
+  const totalAmount = currentAmount + receivedAmount;
+  const limitedAmount = Math.max(1, totalAmount);
 
-  return calcedAmount;
+  return limitedAmount;
 }

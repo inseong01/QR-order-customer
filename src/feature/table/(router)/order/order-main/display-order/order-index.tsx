@@ -45,6 +45,7 @@ function CartOrderList({
       {currentOrderList.map((list, idx) => {
         const { name, price, amount, id } = list;
         const priceToString = price.toLocaleString();
+
         return (
           <VerticalStackGroup key={idx} tag="li" gap="gap-5">
             <VerticalStackGroup tag="div" gap="gap-2.5">

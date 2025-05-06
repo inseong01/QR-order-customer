@@ -2,7 +2,12 @@
 
 import calculateAmount from "@/lib/function/count-button/calculate-amount";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { CountButtonType, IconType } from "@/types/common";
+import {
+  CountButtonType,
+  IconType,
+  Request,
+  SelectedMenu,
+} from "@/types/common";
 import SimpleIcon from "../simple-icon/icon-index";
 
 export default function CountButton({
@@ -25,22 +30,22 @@ export default function CountButton({
   // 항목 수량 변경
   function onClickMenuCount(num: number) {
     return () => {
-      const calcedAmount = calculateAmount(amount, num);
       // 수량 1개 이하 제한
+      const calcedAmount = calculateAmount(amount, num);
       if (calcedAmount === amount) return;
+
       switch (type) {
         case "pick": {
           changeMenuAmount({ amount: calcedAmount });
           break;
         }
         case "call": {
-          // overlaps 문제로 타입 단언
-          const ItemId = id as number;
+          const ItemId = id as Request["id"];
           changeRequestAmount({ id: ItemId, amount: calcedAmount });
           break;
         }
         case "pickUpList": {
-          const listId = id as string;
+          const listId = id as SelectedMenu["id"];
           changeMenuAmountInList({ id: listId, amount: calcedAmount });
           break;
         }

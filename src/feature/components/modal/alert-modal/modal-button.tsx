@@ -13,10 +13,10 @@ export function ConfirmButton() {
     if (isSubmit) return;
     resetCallState();
   }
-
+  console.log("tableName: ", tableName);
   return (
     <Link
-      href={`/${tableName}`}
+      href={`/table/${tableName}`}
       replace={true}
       className={"flex h-2/5 w-full border-t-[1px] border-[#e6e6e6]"}
     >

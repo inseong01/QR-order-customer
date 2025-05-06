@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "qr-order-customer",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,9 +12,6 @@
     "remove:debug": "tsx ./src/lib/function/node/remove-debuge-code.js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
     "@supabase/supabase-js": "^2.47.8",
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/vite": "^4.1.4",

@@ -1,3 +1,4 @@
+import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import createReceipt from "@/lib/function/display-bill/create-receipt";
 import { OrderListType } from "@/types/common";
 import Divider from "feature/table/(router)/components/line/line-index";
@@ -11,10 +12,7 @@ export default function Bill({
   orderListArr: OrderListType[][];
 }) {
   const billArr = createReceipt(orderListArr);
-  const totalPrice = billArr.reduce(
-    (result, data) => result + data.price * data.amount,
-    0,
-  );
+  const totalPrice = billArr.reduce(calculateTotalPrice, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 
   return (

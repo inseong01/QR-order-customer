@@ -16,12 +16,15 @@ export async function generateMetadata({
   return {
     title: `계산서`,
     description: `${table}번 테이블 계산서 페이지입니다.`,
-    metadataBase: new URL(`https://qr-order-client.vercel.app/${table}/bill`),
+    metadataBase: new URL(
+      `https://qr-order-client.vercel.app/table/${table}/bill`,
+    ),
   };
 }
 
 export default async function Page({ params }: { params: Params }) {
   const paramsObj = await params;
+
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(orderListQueryOption(paramsObj.table));
 

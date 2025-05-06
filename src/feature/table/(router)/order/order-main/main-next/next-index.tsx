@@ -25,15 +25,14 @@ export default function ProcessResult() {
 }
 
 function OrderProcessResult() {
-  // store
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
-  // useQueryClient
+
   const query = useQueryClient();
   const queryState = query.getQueryState(
     orderListQueryOption(tableName).queryKey,
   );
-  // variant
+
   const isOk = submitStatus === "fulfilled" && queryState?.status === "success";
   const status = isOk ? "ok" : "fail";
   const result = isOk ? "완료" : "실패";
@@ -56,15 +55,14 @@ function OrderProcessResult() {
 }
 
 function ProcessedtOrder() {
-  // store
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
-  // useQueryClient
+
   const queryClient = useQueryClient();
   const orderList = queryClient.getQueryState(
     orderListQueryOption(tableName).queryKey,
   );
-  // variant
+
   const isOk = submitStatus === "fulfilled" && orderList?.status === "success";
 
   return (

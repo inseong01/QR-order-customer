@@ -1,6 +1,7 @@
 "use client";
 
-import { OrderListType, TableList } from "@/types/common";
+import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
+import { TableList } from "@/types/common";
 import Divider from "feature/table/(router)/components/line/line-index";
 import MenuList from "feature/table/(router)/components/main/display/menu-list/list-index";
 import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
@@ -16,10 +17,7 @@ export default function ProcessedOrderList({
 
   if (!latestOrder) return <EmptyListComponent />;
 
-  const totalPrice = latestOrder.orderList.reduce(
-    (prev, current) => prev + current.price * current.amount,
-    0,
-  );
+  const totalPrice = latestOrder.orderList.reduce(calculateTotalPrice, 0);
   const totalPriceToString = totalPrice?.toLocaleString();
 
   return (

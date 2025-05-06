@@ -6,6 +6,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 export const menuListQueryOption = queryOptions({
   queryKey: ["menuList"],
+  // () => getMenuList, 함수로 타입 할당 됨
   queryFn: getMenuList,
   // 관리자 메뉴 상태 갱신 고려
   staleTime: 1000 * 10,

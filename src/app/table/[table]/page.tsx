@@ -24,7 +24,7 @@ async function Page() {
         // dehydrate 에러 처리
         shouldDehydrateQuery: (query) => {
           if (query.state.status === "error") {
-            return redirect("/0/not-found");
+            return redirect("/not-found");
           }
           return true;
         },

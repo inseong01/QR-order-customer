@@ -25,7 +25,7 @@ export default function SubmitButton({ type }: { type: SubmitBtn }) {
     }
     case "order": {
       return (
-        <SubmitButtonBox initAnimation={false}>
+        <SubmitButtonBox initAnimation={true}>
           <TopComp node={<TotalPrice />} />
           <BottomComp node={<SubmitOrder />} />
         </SubmitButtonBox>

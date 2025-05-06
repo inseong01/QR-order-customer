@@ -19,6 +19,7 @@ export default function RequestList({ data }: { data: RequestCategoryList[] }) {
     >
       {data.map((req, idx) => {
         const isIncludedItem = selectedArr.some((item) => item.id === req.id);
+
         return <Request key={idx} req={req} isIncludedItem={isIncludedItem} />;
       })}
     </motion.div>

@@ -6,22 +6,21 @@ import { AnimatePresence, motion } from "motion/react";
 import { MouseEvent, useState } from "react";
 
 export default function MenuAddIcon({ list }: { list: MenuList }) {
-  // store
   const currentOrderList = useBoundStore((state) => state.orderState.list);
   const selectMenuInstantly = useBoundStore(
     (state) => state.selectMenuInstantly,
   );
   const removeSelectedMenu = useBoundStore((state) => state.removeSelectedMenu);
-  // useState
   const [isIconClicked, setIsIconClicked] = useState(false);
-  // variant
   const isPickedItem = currentOrderList.some((order) => order.id === list.id);
 
   function onClickIcon(list: MenuList, isPickedItem: boolean) {
     return (e: MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       const { tag } = list;
+
       if (tag === "soldout" || isIconClicked) return;
+
       switch (isPickedItem) {
         case true: {
           onClickMinusIcon(list);
@@ -37,12 +36,15 @@ export default function MenuAddIcon({ list }: { list: MenuList }) {
 
   function onClickPlusIcon({ name, price, id, tag }: MenuList) {
     if (tag === "soldout") return;
+
     const menu = { name, price, amount: 1, id };
+
     selectMenuInstantly(menu);
   }
 
   function onClickMinusIcon({ id, tag }: MenuList) {
     if (tag === "soldout") return;
+
     removeSelectedMenu({ id });
   }
 

@@ -1,17 +1,15 @@
+import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import { useBoundStore } from "@/lib/store/use-bound-store";
+import { SelectedMenu } from "@/types/common";
 import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
 
 import { useEffect, useState } from "react";
 
 // Top
 export function TotalPrice() {
-  // store
-  const pickUpList = useBoundStore((state) => state.orderState.list);
-  // variant
-  const totalPrice = pickUpList.reduce(
-    (prev, curr) => prev + curr.price * curr.amount,
-    0,
-  );
+  const orderList = useBoundStore((state) => state.orderState.list);
+
+  const totalPrice = orderList.reduce(calculateTotalPrice, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 
   return <DisplayTotalPrice title="합계" price={totalPriceToString} />;
@@ -19,29 +17,27 @@ export function TotalPrice() {
 
 // Bottom
 export function SubmitOrder() {
-  // store
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
-  // useState
-  const [isClickAble, setClickAble] = useState(false);
 
-  // // 클릭 지연, orderListQueryOption 에러 확인 목적
+  const [enable, setClickEnable] = useState(false);
+
+  // 클릭 지연, orderListQueryOption 에러 확인 목적
   useEffect(() => {
     const timer = setTimeout(() => {
-      setClickAble(true);
+      setClickEnable(true);
     }, 500);
     return () => clearTimeout(timer);
   }, []);
 
-  // // 주문하기
   function onClickSubmitOrderList() {
-    if (!isClickAble) return;
+    if (!enable) return;
     setModalOpen({ isOpen: true });
   }
 
   return (
     <button
-      className="flex h-full w-full cursor-pointer items-center justify-center p-4"
-      // className={`${styles.bottom} ${isClickAble ? "" : styles.able}`}
+      className={`flex h-full w-full cursor-pointer items-center justify-center p-4`}
+      disabled={!enable}
       onClick={onClickSubmitOrderList}
     >
       주문하기

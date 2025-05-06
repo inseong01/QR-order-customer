@@ -16,47 +16,47 @@ export default function ScrollMenuCateory() {
 }
 
 function ScrollMenuCateoryBox({ children }: { children: ReactNode }) {
-  // useState
   const [scrollStart, geScrollX] = useState({ x: 0, scrollX: 0 });
-  // useRef
+
   const scrollContainer = useRef<HTMLDivElement>(null);
-  // useSuspenseQuery
+
   const { data } = useSuspenseQuery(categoryListQueryOption);
-  // hook
+
   const { isScrollAble } = useEnableScroll(scrollContainer);
 
-  // 첫 드래그 감지
   function onDragStart(e: MouseEvent | DragEvent) {
     if (!scrollContainer.current) return;
     if (e) {
       geScrollX({ x: e.clientX, scrollX: scrollContainer.current.scrollLeft });
+
       // 사진 잔상 없애기
       const img = new Image();
       img.src =
         "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=";
+
       const event = e as DragEvent;
       event.dataTransfer?.setDragImage(img, 0, 0);
     }
   }
 
-  // 드래그 스크롤 이동
   function onDragMouse(e: DragEvent) {
     if (!e) return;
-    if (!scrollContainer.current) return;
+
+    const container = scrollContainer.current;
+    if (!container) return;
 
     const lastX = e.clientX;
     const move = lastX - scrollStart.x;
-    // 새로운 스크롤 위치
     const newScrollLeft = scrollStart.scrollX - move;
-    // 최대 스크롤 가능 범위
-    const maxScrollLeft =
-      scrollContainer.current.scrollWidth - scrollContainer.current.offsetWidth;
-    // 스크롤 위치가 스크롤 길이를 넘지 않도록 제한
+    const maxScrollLeft = container.scrollWidth - container.offsetWidth;
     const scrollAmount = Math.max(0, Math.min(newScrollLeft, maxScrollLeft));
-    requestAnimationFrame(() => {
-      if (!scrollContainer.current) return;
-      scrollContainer.current.scrollLeft = scrollAmount;
-    });
+
+    function scrollAnimation() {
+      if (!container) return;
+      container.scrollLeft = scrollAmount;
+    }
+
+    requestAnimationFrame(scrollAnimation);
   }
 
   function performanceOnDragStart(e: DragEvent) {

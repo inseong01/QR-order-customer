@@ -1,6 +1,6 @@
-import HistoryPage from "feature/table/(router)/history/history-index";
+import CallPage from "feature/table/(router)/call/call-index";
 import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import { requestListQueryOption } from "@/lib/function/useQuery/query-option";
 import { Params } from "@/types/common";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -14,22 +14,21 @@ export async function generateMetadata({
   const { table } = await params;
 
   return {
-    title: `주문내역`,
-    description: `${table}번 테이블 주문내역 페이지입니다.`,
+    title: `요청`,
+    description: `${table}번 테이블 요청 페이지입니다.`,
     metadataBase: new URL(
-      `https://qr-order-client.vercel.app/${table}/history`,
+      `https://qr-order-client.vercel.app/table/${table}/call`,
     ),
   };
 }
 
-export default async function Page({ params }: { params: Params }) {
-  const paramsObj = await params;
+export default async function Page() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(orderListQueryOption(paramsObj.table));
+  await queryClient.prefetchQuery(requestListQueryOption);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <HistoryPage />
+      <CallPage />
     </HydrationBoundary>
   );
 }

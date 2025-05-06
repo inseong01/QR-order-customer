@@ -14,30 +14,21 @@ export default function useEnableScroll(
   useEffect(() => {
     if (!scrollContainer.current) return;
 
+    const hasHorizontalOverflow =
+      scrollContainer.current.scrollWidth > scrollContainer.current.offsetWidth;
+
     // 스크롤 조건적 허용, 이벤트 발생 제한
-    function checkScroll() {
-      if (!scrollContainer.current) return;
-      if (
-        scrollContainer.current.scrollWidth >
-        scrollContainer.current.offsetWidth
-      ) {
-        setScrollAble(true);
-      }
+    function checkScrollCondition() {
+      if (hasHorizontalOverflow) setScrollAble(true);
     }
 
     function detectWindowWidth() {
-      if (!scrollContainer.current) return;
-      setScrollAble(
-        scrollContainer.current.scrollWidth >
-          scrollContainer.current.offsetWidth,
-      );
+      setScrollAble(hasHorizontalOverflow);
     }
 
-    // decounce 할당당
     debouncedCallbackRef.current = debounce(detectWindowWidth, 250);
 
-    // 초기 로드, 스크로 여부 결정
-    checkScroll();
+    checkScrollCondition();
 
     // resize 이벤트 최적화
     window.addEventListener("resize", debouncedCallbackRef.current);

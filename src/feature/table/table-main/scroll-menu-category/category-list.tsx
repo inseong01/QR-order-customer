@@ -16,6 +16,7 @@ export default function MenuCategory({
 
   function onClickChangeMenuTitle() {
     if (currentCategoryId === category.id) return;
+
     selectMenuCategoryId({ id: category.id });
   }
 

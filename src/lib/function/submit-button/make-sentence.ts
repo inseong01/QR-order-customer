@@ -15,10 +15,11 @@ import { Request } from "@/types/common";
 // =>> "물 1, 젓가락 1"
 
 export default function makeSentence(requestList: Request[]) {
-  let sentence = requestList
-    .map((request) => {
-      return request.title + " " + request.amount;
-    })
-    .join(", ");
+  const sentence = requestList.map(generateRequestString).join(", ");
+
+  function generateRequestString(request: Request) {
+    return request.title + " " + request.amount;
+  }
+
   return sentence;
 }

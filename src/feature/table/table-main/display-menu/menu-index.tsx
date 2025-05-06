@@ -1,19 +1,22 @@
 import { menu_parents } from "@/lib/motion/display-menu/menu-variants";
 import { menuListQueryOption } from "@/lib/function/useQuery/query-option";
 import { useBoundStore } from "@/lib/store/use-bound-store";
+import { MenuList } from "@/types/common";
 import Item from "./menu-item";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useMemo } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 
 export default function MenuDisplay() {
   const { data, isFetched } = useSuspenseQuery(menuListQueryOption);
+
   const currentCategoryId = useBoundStore((state) => state.categoryState.id);
 
-  const currentCategoryMenu = data.filter(
-    (list) => list.sortId === currentCategoryId,
-  );
+  const currentCategoryMenu = data.filter(selectedCategoryMenu);
+  function selectedCategoryMenu(list: MenuList) {
+    return list.sortId === currentCategoryId;
+  }
 
   return (
     <MainMenuBox isFetched={isFetched}>
@@ -30,20 +33,15 @@ function MainMenuBox({
   isFetched: boolean;
   children: ReactNode;
 }) {
-  const [isfirstLoad, setIsFirstLoad] = useState(true);
-
+  const isfirstLoad = useMemo(() => isFetched, [isFetched]);
   const pickUpList = useBoundStore((state) => state.orderState.list);
   const pickUpIsClicked = useBoundStore((state) => state.orderState.isClicked);
-  const isOrderBoxAppeared = pickUpList.length !== 0 || pickUpIsClicked;
 
-  useEffect(() => {
-    if (!isFetched) return;
-    setIsFirstLoad(isFetched);
-  }, [isFetched]);
+  const isSubmitButtonAppeared = !pickUpList.length || pickUpIsClicked;
 
   return (
     <motion.ul
-      className={`w-full ${isOrderBoxAppeared ? `h-lvh` : "h-auto"} flex flex-col gap-1 py-4`}
+      className={`w-full ${isSubmitButtonAppeared ? `h-lvh` : "h-auto"} flex flex-col gap-1 py-4`}
       variants={menu_parents}
       initial={isfirstLoad ? "inactive" : false}
       animate={isfirstLoad ? "active" : false}

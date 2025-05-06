@@ -7,14 +7,17 @@ export function CheckMenu() {
   const isClicked = useBoundStore((state) => state.flagState.isClicked);
   const setFlag = useBoundStore((state) => state.setFlag);
   const tableName = useBoundStore((state) => state.tableState.tableName);
+
   const router = useRouter();
 
-  // 주문표 확인하기
   function onClickCheckPickUpList() {
     if (isClicked) return;
+
     setFlag({ isClicked: true });
+
     router.push(`${tableName}/order`);
   }
+
   return (
     <button
       className={

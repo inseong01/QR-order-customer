@@ -10,6 +10,7 @@ export function MenuCount() {
   const selectedMenuAmount = useBoundStore(
     (state) => state.orderState.selectedMenu.amount,
   );
+
   return (
     <div className={"flex h-1/2 w-full items-center justify-between bg-white"}>
       <div>
@@ -28,7 +29,6 @@ export function MenuCount() {
 export function PickMenu() {
   const selectClickedMenu = useBoundStore((state) => state.selectClickedMenu);
 
-  // 항목 선택
   function onClickBottom() {
     selectClickedMenu();
   }

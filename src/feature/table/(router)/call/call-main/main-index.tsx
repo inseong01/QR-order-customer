@@ -8,10 +8,9 @@ import Divider from "../../components/line/line-index";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function CallPageMain() {
-  // useQueryClient
   const queryClient = useQueryClient();
   const request = queryClient.getQueryState(requestListQueryOption.queryKey);
-  // variant
+
   const isNotError = !!request && request.status !== "error";
 
   return (

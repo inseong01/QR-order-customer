@@ -1,4 +1,4 @@
-import { MsgType, TableList } from "@/types/common";
+import { MsgType, TableList, TableOrderType } from "@/types/common";
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
 import OrderList from "./display-order/order-index";
@@ -11,16 +11,15 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 export default function OrderHistory() {
-  // store
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  // useQueryClient
+
   const queryClient = useQueryClient();
   const orderList = queryClient.getQueryState(
     orderListQueryOption(tableName).queryKey,
   );
-  // useState
+
   const [orderListArr, setListArr] = useState<TableList["order"]>([]);
-  // variant
+
   const error = { list: !orderList, staus: orderList?.status === "error" };
   const isError = Object.values(error).some((value) => value);
   const errorType = Object.entries(error).filter(
@@ -30,11 +29,16 @@ export default function OrderHistory() {
   // 프리패치 후 최신순 정렬
   useEffect(() => {
     if (!orderList?.data) return;
+
     const tableData = orderList.data[0];
-    const copiedOrderData = [...tableData.order].sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-    );
+    const copiedOrderData = [...tableData.order].sort(sortDesc);
+    function sortDesc(a: TableOrderType, b: TableOrderType) {
+      const at = new Date(b.created_at).getTime();
+      const bt = new Date(a.created_at).getTime();
+
+      return at - bt;
+    }
+
     setListArr(copiedOrderData);
   }, [orderList]);
 

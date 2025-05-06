@@ -8,13 +8,13 @@ import { memo } from "react";
 import Image from "next/image";
 
 function Item({ list }: { list: MenuList }) {
-  // store
   const clickMenu = useBoundStore((state) => state.clickMenu);
-  // variant
+
   const { name, price, tag } = list;
   const priceToString = price.toLocaleString();
 
   let tagDescription: TagDescription = "";
+
   switch (tag) {
     case "popular": {
       tagDescription = "인기";
@@ -32,6 +32,7 @@ function Item({ list }: { list: MenuList }) {
 
   function onClickMenuClick() {
     if (tag === "soldout") return;
+
     clickMenu(list);
   }
 

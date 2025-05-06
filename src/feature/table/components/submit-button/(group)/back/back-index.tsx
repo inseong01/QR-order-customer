@@ -6,7 +6,7 @@ export function SubmitBack() {
 
   return (
     <Link
-      href={`/${tableName}`}
+      href={`/table/${tableName}`}
       replace={true}
       className="flex h-full w-full cursor-pointer items-center justify-center p-4"
     >

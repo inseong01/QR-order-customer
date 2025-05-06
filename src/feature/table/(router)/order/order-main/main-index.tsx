@@ -16,23 +16,26 @@ export default function OrderProcedure() {
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const isNext = useBoundStore((state) => state.submitState.isNext);
   const setNexPageEnable = useBoundStore((state) => state.setNexPageEnable);
-  // useQuery
+
   const { refetch } = useQuery(orderListQueryOption(tableName));
 
   // 주문 완료 시 주문 데이터 추출
   useEffect(() => {
     // 중복 refetch 제한
     if (isNext) return;
-    // submitStatus 상황 별 처리
+
+    // submitStatus 상황 처리
     if (!submitStatus) return;
     if (submitStatus === "pending") return;
     if (submitStatus === "fulfilled") {
       refetch();
     }
-    // 화면전환 지연시간 부여, UX 개선
-    let timer = setTimeout(() => {
+
+    // 주문 처리 결과 화면전환 지연시간 부여
+    const timer = setTimeout(() => {
       setNexPageEnable({ isNext: true });
-    }, 500);
+    }, 600);
+
     return () => clearTimeout(timer);
   }, [submitStatus]);
 

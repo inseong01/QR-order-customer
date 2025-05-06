@@ -28,7 +28,7 @@ function TopContext() {
     <div className={"flex flex-col gap-3"}>
       <h1 className="font-bold">반갑습니다 &#x003A;&#x0029;</h1>
       <div className={"w-full text-2xl leading-8 font-bold break-keep"}>
-        <p>주문의 간편함을 추구하는</p>
+        <p>주문의 간편함,</p>
         <p>QR-ORDER 입니다.</p>
       </div>
       <div className={"text-xs text-[#5486b7]"}>
@@ -49,14 +49,14 @@ function BottomContext() {
       <div className="flex gap-3">
         <Link
           href={"https://github.com/inseong01/QR-order-admin"}
-          className={"inline-block py-1 text-[#5486b7] xl:hover:underline"}
+          className={"inline-block border-b-[1px] py-1 pb-0 text-[#5486b7]"}
           target="_blank"
         >
           관리자
         </Link>
         <Link
           href={"https://github.com/inseong01/QR-order-customer"}
-          className={"inline-block py-1 text-[#5486b7] xl:hover:underline"}
+          className={"inline-block border-b-[1px] py-1 pb-0 text-[#5486b7]"}
           target="_blank"
         >
           고객

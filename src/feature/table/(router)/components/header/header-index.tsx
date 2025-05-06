@@ -8,20 +8,20 @@ import { useRouter } from "next/navigation";
 import { memo } from "react";
 
 function Header({ title }: { title: HeaderTitle }) {
-  // store
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  // useRouter
+
   const router = useRouter();
 
   function navOnClickBack() {
     if (isSubmit) return;
     if (submitStatus === "fulfilled") {
       // 주문 페이지 돌아오기 방지
-      router.replace(`/${tableName}`);
+      router.replace(`/table/${tableName}`);
       return;
     }
+
     router.back();
   }
 

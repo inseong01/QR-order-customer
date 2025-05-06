@@ -26,5 +26,4 @@ function TableInitHeaderBox({ children }: { children: ReactNode }) {
   );
 }
 
-// export default memo(InitialHeader);
 export default memo(TableInitInfo);

@@ -25,12 +25,11 @@ export function SubmitRequest() {
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const fetchRequest = useBoundStore((state) => state.fetchRequest);
 
-  // 호출하기
   function onClickSubmitRequestList() {
     if (isSubmit) return;
     // 알림으로 requestList(요청) 전달
-    const requestStr = makeSentence(requestArr);
-    fetchRequest({ requestStr });
+    const requestString = makeSentence(requestArr);
+    fetchRequest({ requestStr: requestString });
   }
 
   return (

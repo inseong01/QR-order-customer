@@ -1,3 +1,4 @@
+import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import { OrderListType } from "@/types/common";
 import Divider from "feature/table/(router)/components/line/line-index";
 import MenuList from "feature/table/(router)/components/main/display/menu-list/list-index";
@@ -11,10 +12,7 @@ export default function AllOfOrderList({
 }: {
   listData: OrderListType[];
 }) {
-  const totalPrice = listData.reduce(
-    (prev, current) => prev + current.price * current.amount,
-    0,
-  );
+  const totalPrice = listData.reduce(calculateTotalPrice, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 
   return (

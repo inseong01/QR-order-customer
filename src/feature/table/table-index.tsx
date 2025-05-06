@@ -22,14 +22,13 @@ export default function TableInitPage() {
 }
 
 function TableInitPageBox({ children }: { children: ReactNode }) {
-  // usePathname
   const params = useParams<ParamsList>();
-  // store
+
   const isClicked = useBoundStore((state) => state.flagState.isClicked);
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
-  const setTableNumber = useBoundStore((state) => state.setTableNumber);
+  const setTableName = useBoundStore((state) => state.setTableName);
   const resetflagState = useBoundStore((state) => state.resetflagState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
@@ -39,12 +38,12 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    // 한 번만 지정되도록, 초기 접속 할당 중요
+    // 초기 접속 할당
     if (!tableName) {
       // 테이블 - 쿠키 할당
       initCookies(params);
       // 테이블 - 전역 상태
-      setTableNumber(params);
+      setTableName(params);
     }
 
     // 모달 초기화
@@ -75,17 +74,16 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
 }
 
 function SubmitButtonComp() {
-  const pickUpList = useBoundStore((state) => state.orderState.list);
-  const pickUpIsClicked = useBoundStore((state) => state.orderState.isClicked);
+  const orderList = useBoundStore((state) => state.orderState.list);
+  const isMenuClicked = useBoundStore((state) => state.orderState.isClicked);
 
-  const shoppingcartEnable = !!pickUpList.length;
-  const submitType = !shoppingcartEnable || pickUpIsClicked ? "pick" : "check";
+  const isOrderListEmpty = !!orderList.length;
+  const submitType = !isOrderListEmpty || isMenuClicked ? "pick" : "check";
+  const showUpButton = isOrderListEmpty || isMenuClicked;
 
   return (
     <AnimatePresence>
-      {(pickUpList.length || pickUpIsClicked) && (
-        <SubmitButton key={"submitBtn"} type={submitType} />
-      )}
+      {showUpButton && <SubmitButton key={"submitBtn"} type={submitType} />}
     </AnimatePresence>
   );
 }

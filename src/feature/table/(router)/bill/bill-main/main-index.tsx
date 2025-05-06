@@ -11,14 +11,13 @@ import ExceptionMessage from "../../components/exception/show-message/message-in
 import { ReactNode } from "react";
 
 export default function BillPageMain() {
-  // store
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  // useQueryClient
+
   const queryClient = useQueryClient();
   const table = queryClient.getQueryState(
     orderListQueryOption(tableName).queryKey,
   );
-  // variant
+
   const error = { table: !table, staus: table?.status === "error" };
   const isError = Object.values(error).some((value) => value);
   const errorType = Object.entries(error).filter(

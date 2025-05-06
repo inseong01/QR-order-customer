@@ -1,4 +1,4 @@
-import { SliceCreator } from '@/types/common';
+import { SliceCreator } from "@/types/common";
 
 type InitialState = {
   tableState: {
@@ -8,7 +8,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   tableState: {
-    tableName: '',
+    tableName: "",
   },
 };
 
@@ -16,17 +16,22 @@ export interface TableSlice {
   tableState: {
     tableName: string;
   };
-  setTableNumber: ({ table }: { table: string }) => void;
+  setTableName: ({ table }: { table: string }) => void;
 }
 
 export const tableSlice: SliceCreator<TableSlice> =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV === "development"
     ? (set) => ({
         ...initialState,
-        setTableNumber: ({ table }: { table: string }) =>
-          set(() => ({ tableState: { tableName: table } }), undefined, 'tableState/setTableNumber'),
+        setTableName: ({ table }: { table: string }) =>
+          set(
+            () => ({ tableState: { tableName: table } }),
+            undefined,
+            "tableState/setTableName",
+          ),
       })
     : (set) => ({
         ...initialState,
-        setTableNumber: ({ table }: { table: string }) => set(() => ({ tableState: { tableName: table } })),
+        setTableName: ({ table }: { table: string }) =>
+          set(() => ({ tableState: { tableName: table } })),
       });
