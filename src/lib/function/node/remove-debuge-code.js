@@ -21,6 +21,7 @@ async function updateStoreFile(fullPath) {
 
     const rs_table = debugCodeArr.map((value) => {
       const keyValue = value.split(/,\s*/);
+
       return { list: keyValue[2].replaceAll('"', '') }
     })
 
@@ -58,7 +59,9 @@ async function scanStoreDir() {
 
       if (!isTs) {
         const childPath = await readdir(fullPath)
+
         findStoreFile(fullPath, childPath);
+
         continue;
       }
 

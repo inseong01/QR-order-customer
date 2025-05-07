@@ -7,13 +7,16 @@ import Link from "next/link";
 export function ConfirmButton() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
-  const resetCallState = useBoundStore((state) => state.resetCallState);
+  const setMenuCategoryId = useBoundStore(
+    (state) => state.selectMenuCategoryId,
+  );
 
   function onClickContinue() {
     if (isSubmit) return;
-    resetCallState();
+
+    setMenuCategoryId({ id: 1 });
   }
-  console.log("tableName: ", tableName);
+
   return (
     <Link
       href={`/table/${tableName}`}
@@ -27,7 +30,7 @@ export function ConfirmButton() {
 
 export function YesNoButtons() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  const pickUpList = useBoundStore((state) => state.orderState.list);
+  const orderList = useBoundStore((state) => state.orderState.list);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const fetchOrderArr = useBoundStore((state) => state.fetchOrderArr);
@@ -40,11 +43,13 @@ export function YesNoButtons() {
   // db 제출 허용, '예'
   function onClickPermission() {
     if (isSubmit) return;
+
     // 주문 전달
     fetchOrderArr({
-      pickUpList,
+      orderList,
       submitError: queryState?.status === "error",
     });
+
     // 모달 닫기
     setModalOpen({ isOpen: false });
   }
@@ -62,7 +67,7 @@ export function YesNoButtons() {
   );
 }
 
-function Button({ onClick, title }: { onClick: () => void; title: string }) {
+function Button({ onClick, title }: { onClick?: () => void; title: string }) {
   return (
     <button
       className={`flex h-full w-1/2 flex-1 cursor-pointer items-center justify-center text-xs text-[#808080]`}

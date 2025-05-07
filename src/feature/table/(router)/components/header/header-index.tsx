@@ -11,6 +11,9 @@ function Header({ title }: { title: HeaderTitle }) {
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const tableName = useBoundStore((state) => state.tableState.tableName);
+  const selectMenuCategoryId = useBoundStore(
+    (state) => state.selectMenuCategoryId,
+  );
 
   const router = useRouter();
 
@@ -21,6 +24,8 @@ function Header({ title }: { title: HeaderTitle }) {
       router.replace(`/table/${tableName}`);
       return;
     }
+
+    selectMenuCategoryId({ id: 1 });
 
     router.back();
   }

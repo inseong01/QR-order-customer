@@ -5,7 +5,7 @@ export default function HeaderTop() {
   return (
     <RowSpaceBetween tag="div">
       <LogoImage />
-      <LanguageButton />
+      {/* <LanguageButton /> */}
     </RowSpaceBetween>
   );
 }

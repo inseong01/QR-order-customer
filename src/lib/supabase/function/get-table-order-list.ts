@@ -10,7 +10,9 @@ export default async function getTableOrderList(
     .eq("tableNum", tableName);
   if (response.error) {
     const msg = response.error.message ?? "GetTableOrderList Error";
+
     if (process.env.NODE_ENV === "development") console.error(msg);
+
     throw new Error(msg);
   }
   return response.data;

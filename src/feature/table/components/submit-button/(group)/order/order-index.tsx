@@ -1,6 +1,5 @@
 import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { SelectedMenu } from "@/types/common";
 import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
 
 import { useEffect, useState } from "react";
@@ -26,11 +25,13 @@ export function SubmitOrder() {
     const timer = setTimeout(() => {
       setClickEnable(true);
     }, 500);
+
     return () => clearTimeout(timer);
   }, []);
 
   function onClickSubmitOrderList() {
     if (!enable) return;
+
     setModalOpen({ isOpen: true });
   }
 

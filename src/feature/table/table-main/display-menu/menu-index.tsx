@@ -34,10 +34,10 @@ function MainMenuBox({
   children: ReactNode;
 }) {
   const isfirstLoad = useMemo(() => isFetched, [isFetched]);
-  const pickUpList = useBoundStore((state) => state.orderState.list);
-  const pickUpIsClicked = useBoundStore((state) => state.orderState.isClicked);
+  const orderList = useBoundStore((state) => state.orderState.list);
+  const isMenuClicked = useBoundStore((state) => state.orderState.isClicked);
 
-  const isSubmitButtonAppeared = !pickUpList.length || pickUpIsClicked;
+  const isSubmitButtonAppeared = isMenuClicked || !!orderList.length;
 
   return (
     <motion.ul

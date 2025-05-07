@@ -21,6 +21,7 @@ export function middleware(request: NextRequest) {
 
   // 링크
   const path = request.nextUrl.pathname;
+
   if (path === "/") return NextResponse.next();
   if (path === "/not-found") return NextResponse.next();
   if (path === "/table") return NextResponse.redirect(HomePage);
@@ -31,6 +32,7 @@ export function middleware(request: NextRequest) {
   // 장치 별 페이지 접근 제한
   const isMobile = device.type === "mobile" || device.type === "tablet";
   const isRedirectCondition = !isMobile && !isDev;
+
   if (isRedirectCondition) {
     console.log(`Device is not modile, ${device?.type ?? typeof device.type}`);
     return NextResponse.redirect(HomePage);
@@ -39,10 +41,12 @@ export function middleware(request: NextRequest) {
   // 링크 테이블 값 유형 검증
   const table = path.split("/")[2]; // path 예시: /table/1
   const isWrongTableValue = checkValidTableValue(table);
+
   if (isWrongTableValue) return NextResponse.redirect(HomePage);
 
   // 하위 페이지 접속 판별
   const isSubPage = !!path.split("/")[3];
+
   if (isSubPage) {
     const cookie = request.cookies.get("table");
     const cookieTable = cookie?.value;

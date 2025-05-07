@@ -34,7 +34,7 @@ export default function OrderProcedure() {
     // 주문 처리 결과 화면전환 지연시간 부여
     const timer = setTimeout(() => {
       setNexPageEnable({ isNext: true });
-    }, 600);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [submitStatus]);

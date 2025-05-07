@@ -13,7 +13,9 @@ export default async function postOrderList(
   if (response.error) {
     const msg =
       response.error.message ?? "주문이 정상적으로 처리되지 않았습니다.";
+
     console.error(msg);
+
     // 조건문을 통해 에러를 판별, 에러 던지지 않음
     return { error: { message: msg } };
   }

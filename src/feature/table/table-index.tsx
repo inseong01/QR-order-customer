@@ -28,14 +28,12 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const submitStatus = useBoundStore((state) => state.submitState.status);
+  const fetchMode = useBoundStore((state) => state.submitState.fetchMode);
   const setTableName = useBoundStore((state) => state.setTableName);
   const resetflagState = useBoundStore((state) => state.resetflagState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
   const resetPickUpState = useBoundStore((state) => state.resetOrderState);
-  const selectMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
-  );
 
   useEffect(() => {
     // 초기 접속 할당
@@ -56,14 +54,12 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
       resetflagState();
     }
 
-    // 제출 초기화
-    if (submitStatus === "fulfilled" || submitStatus === "rejected") {
-      resetSubmitState();
+    if (submitStatus === "pending") return;
+    resetSubmitState();
+
+    if (fetchMode === "order") {
       resetPickUpState();
     }
-
-    // 초기 카테고리 메뉴로 초기화
-    selectMenuCategoryId({ id: 1 });
   }, []);
 
   return (

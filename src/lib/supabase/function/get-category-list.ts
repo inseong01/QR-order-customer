@@ -10,7 +10,9 @@ export default async function getCategoryList(
     .order("id", { ascending: true });
   if (response.error) {
     const msg = response.error.message ?? "GetCategoryList Error";
+
     if (process.env.NODE_ENV === "development") console.error(msg);
+
     throw new Error(response.error.message);
   }
   return response.data;
