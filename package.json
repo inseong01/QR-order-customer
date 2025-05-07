@@ -1,11 +1,11 @@
 {
   "name": "qr-order-customer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
-    "build": "npm run remove:debug && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "analyze": "npx cross-env ANALYZE=true npm run build",
