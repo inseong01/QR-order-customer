@@ -500,4 +500,20 @@
 
   - package.json 버전 수정
 
+25.5.8.
+chore: 작업 로그 자동화 기능 작업
+
+- .gitignore 파일 수정
+  - 작업 로그 관련 파일 추가
+  - daily_work.txt, file_status.txt, commit_head.txt, commit_body.txt 추가
+
+- commit-work-log.sh 파일 추가
+  - git status, git diff 명령어를 사용하여 작업 내용 기록, 커밋 메시지 생성 (미구현)
+
+- summary-work_log.js 파일 추가
+  - daily_work.txt, file_status.txt 파일을 기반으로 커밋 메시지 요약 생성 (미구현)
+
+- package.json 파일 수정
+  - commit:log 스크립트 추가
+
 <---  --->

@@ -43,3 +43,9 @@ env.d.ts
 
 # custom server
 dist/server.js
+
+# work log
+daily_work.txt
+file_status.txt
+commit_head.txt
+commit_body.txt

@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "analyze": "npx cross-env ANALYZE=true npm run build",
-    "remove:debug": "tsx ./src/lib/function/node/remove-debuge-code.js"
+    "remove:debug": "tsx ./src/lib/function/auto/node/remove-debuge-code.js",
+    "commit:log": "bash ./src/lib/function/auto/bash/commit-work-log.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.8",
