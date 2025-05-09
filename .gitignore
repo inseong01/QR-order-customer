@@ -45,7 +45,6 @@ env.d.ts
 dist/server.js
 
 # work log
-daily_work.txt
-file_status.txt
-commit_head.txt
-commit_body.txt
+diff-files.txt
+file-status.txt
+commit-msg.txt

@@ -1,14 +1,14 @@
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import analyzeWorkLog from "./ai-analyze-work-log.js";
+
 // path
-const work_log_path = resolve('./daily_work.txt');
-const file_status_path = resolve('./daily_work.txt');
+const diff_path = resolve('./diff-files.txt');
+const status_path = resolve('./file-status.txt');
 
-// API
+const git_diff_text = await readFile(diff_path, { encoding: 'utf8' });
+const git_status_text = await readFile(status_path, { encoding: 'utf8' });
 
-// result > create commit-head.txt, commit-body.txt 
-
-// past result (개발일지.txt)
-
-
-console.log('Work log summary is completed')
+// API > fetch txt files 
+await analyzeWorkLog({ git_diff_text, git_status_text });

@@ -10,7 +10,7 @@
     "lint": "next lint",
     "analyze": "npx cross-env ANALYZE=true npm run build",
     "remove:debug": "tsx ./src/lib/function/auto/node/remove-debuge-code.js",
-    "commit:log": "bash ./src/lib/function/auto/bash/commit-work-log.sh"
+    "commit": "bash ./src/lib/function/auto/bash/commit-work-log.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.8",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
+    "@google/genai": "^0.13.0",
     "@next/bundle-analyzer": "^15.1.2",
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/react-query-devtools": "^5.64.2",
