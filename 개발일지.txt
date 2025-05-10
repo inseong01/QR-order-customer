@@ -517,43 +517,32 @@ chore: 작업 로그 자동화 기능 작업
   - commit:log 스크립트 추가
 
 25.5.9.
-feat: AI 기반 커밋 메시지 생성 기능 작업
-
-
-- @google/genai 라이브러리 추가 (package.json, package-lock.json)
-
-- ai-analyze-work-log.js 파일 생성 (AI 기반 커밋 메시지 생성 로직 구현)
-
-- summary-work-log.js 수정 (AI 분석 기능 통합)
-
-- commit-work-log.sh 수정 (커밋 메시지 생성 전 줄바꿈 추가)
-
-- package.json: 버전 업데이트 (0.1.0 -> 0.2.0)
-
-25.5.9.
-feat: AI 기반 커밋 메시지 생성 기능 작업
-
+feat: AI 기반 커밋 메시지 자동 생성 기능 추가
 
 - @google/genai 라이브러리 추가 (package.json, package-lock.json)
 
-- ai-analyze-work-log.js 파일 생성 (AI 기반 커밋 메시지 생성 로직 구현)
+- ai-analyze-work-log.js 생성 (AI 기반 커밋 메시지 생성)
 
 - summary-work-log.js 수정 (AI 분석 기능 통합)
 
-- commit-work-log.sh 수정 (커밋 메시지 생성 전 줄바꿈 추가)
+- commit-work-log.sh 수정 (자동 커밋 프로세스 개선)
 
-- package.json: 버전 업데이트 (0.1.0 -> 0.2.0)
+- 개발일지.txt 파일에 커밋 로그 추가 기능 구현 (past-work-log.js)
 
-25.5.9.
-feat: AI 기반 커밋 메시지 생성 기능 작업
+- package.json 버전 업데이트 (0.1.0 -> 0.2.0)
+
+- .gitignore 파일 수정 (불필요한 파일 제거 및 commit-msg.txt 추가)
+
+25.5.10.
+feat: 자동 커밋 기능 개선
 
 
-- @google/genai 라이브러리 추가 (package.json, package-lock.json)
+- commit-work-log.sh 수정
+  - 자동 커밋 실행 프로세스 개선
+  - 파일 스테이징, Git 상태 파일 생성, 요약, 커밋 메시지 작성, 푸시 기능 자동화
+  - 사용자 인터랙션 추가 (요약 재작성, 커밋 실행, 푸시 여부 확인)
+  - 에러 핸들링 및 종료 기능 추가 (SIGINT 트랩)
 
-- ai-analyze-work-log.js 파일 생성 (AI 기반 커밋 메시지 생성 로직 구현)
-
-- summary-work-log.js 수정 (AI 분석 기능 통합)
-
-- commit-work-log.sh 수정 (커밋 메시지 생성 전 줄바꿈 추가)
-
-- package.json: 버전 업데이트 (0.1.0 -> 0.2.0)
+- ai-analyze-work-log.js 수정
+  - AI 모델 응답 템플릿 수정
+  - 제약 조건 및 예시 추가
