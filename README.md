@@ -5,28 +5,23 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 
 이 웹 애플리케이션은 [QR-order-admin 프로젝트](https://github.com/inseong01/QR-order-admin)와 연계됩니다.
 
-해당 프로젝트는 `React Native WebView`를 도입해 모바일 프로젝트 [QR-order-mobile](https://github.com/inseong01/QR-order-mobile)로 확장됩니다.
+해당 프로젝트는 `React Native WebView`를 도입해 **모바일 프로젝트** [QR-order-mobile](https://github.com/inseong01/QR-order-mobile)로 확장됩니다.
 
 ## 프로젝트
 ### 목표
-#### "효율적인 주문 접근"    
-메뉴판을 찾을 필요 없이 스마트폰으로 메뉴 즉시 확인, 주문 과정 진입 시간 최소화
-
-#### "사용자 만족도 향상"    
-웹 구조 복잡함 없이 필요한 정보 제공, 주문 과정 직관화
+-  "효율적인 주문 접근"    
+    메뉴판을 찾을 필요 없이 스마트폰으로 메뉴 즉시 확인, **주문 과정 진입 시간 최소화**
 
 ### 주요 기능 
-메뉴
-1. 카테고리 별 메뉴 분류
-2. 장바구니
-   
-테이블 요청   
-주문 목록    
-계산서
-주문
+- 메뉴조회   
+- 테이블 요청   
+- 주문 목록    
+- 계산서
+- 주문
 
 ### 기술 스택
-`React` `TypeScript` `Next` `Tanstack React Query` `Zustand` `Supabase` `React Native`
+`React` `TypeScript` `Next` `Tanstack React Query` `Zustand` `Supabase` `NodeJS`
+
 ## 미리보기
 **메뉴 화면 (첫 페이지)**
 
@@ -75,15 +70,14 @@ QR 코드로 접속해 주문과 테이블 요청을 할 수 있는 **고객 주
 
 ## 체험하기
 
-클릭하면 [QR-ORDER 고객 전용 서비스](https://qr-order-client.vercel.app/1)를 웹 브라우저에서 경험할 수 있어요.    
+클릭하면 [QR-ORDER 고객 전용 서비스](https://qr-order-client.vercel.app/table/2)를 
+웹 브라우저에서 경험할 수 있어요.    
+다만, **모바일과 태블릿만** 주문 서비스를 이용할 수 있도록 제한하고 있어요.
 
-![](./docs/src/img/table-1-QRcode.png)
+![](./docs/src/img/table-2-QRcode.png)
 
-상단 QR 코드를 스캔해도 동일한 매장 1번 테이블로 접속돼요 😊   
-모바일과 태블릿만 주문 서비스를 이용할 수 있도록 제한하고 있어요.
-
-PC에서도 온전히 이용할 수 있도록 [개발 링크](https://qr-order-client-hrlz01zot-inseongs-projects-ab5eeeed.vercel.app/1)를 준비했어요.   
-다만, Vercel 로그인을 해야 사용할 수 있어요!
+상단 QR 코드를 모바일 카메라로 스캔하면   
+주문 서비스를 이용할 수 있어요 😊   
 
 ## 설치하기
 ```bash

@@ -9,6 +9,8 @@ git status --short | grep -vF '\352\260\234\353\260\234\354\235\274\354\247\200.
 git diff --cached -- . ':!개발일지.txt' > diff-files.txt
 echo -e '\nGit 파일이 성공적으로 생성되었습니다.'
 
+trap 'echo "첫번째 요약 에러가 발생하여 실행을 종료합니다."; exit 1' ERR
+
 echo '>> 작업 로그 요약 중...'
 node ./src/lib/function/auto/node/summary-work-log.js
 echo -e '\n요약이 완료되었습니다.'
@@ -25,6 +27,8 @@ while true; do
 
   case "${choice,,}" in 
     y)
+      trap 'echo "재실행 에러가 발생하여 실행을 종료합니다."; exit 1' ERR
+    
       echo '다시 요약을 진행합니다.'
       node ./src/lib/function/auto/node/summary-work-log.js
       echo '요약이 완료되었습니다.'
@@ -60,7 +64,10 @@ while true; do
   esac
 done
 
-echo -e '\n>> 작업일지.txt 업데이트 중...'
+FILE_NAME="개발일지.txt"
+trap 'echo "$FILE_NAME 업데이트 에러가 발생하여 실행을 종료합니다."; exit 1' ERR
+
+echo -e "\n>> $FILE_NAME 업데이트 중..."
 node ./src/lib/function/auto/node/past-work-log.js
 echo '파일이 업데이트 되었습니다.'
 
@@ -80,7 +87,7 @@ echo -e '\n>> 커밋 메시지를 확인하세요'
 git log -1
 
 CURRENT_BRANCH=$(git branch --show-current)
-echo -e "\n>> '$CURRENT_BRANCH' 브랜치에 커밋을 푸시할까요? (Y/n)"
+echo -e "\n>> $CURRENT_BRANCH 브랜치에 커밋을 푸시할까요? (Y/n)"
 
 while true; do
   read -r choice
@@ -88,6 +95,8 @@ while true; do
 
   case "${choice,,}" in 
     y)
+      trap 'echo "푸시 에러가 발생하여 실행을 종료합니다."; exit 1' ERR
+
       echo "'$CURRENT_BRANCH' 브랜치로 변경 사항을 푸시하는 중..."
       git push origin "$CURRENT_BRANCH"
       echo "푸시 완료!"

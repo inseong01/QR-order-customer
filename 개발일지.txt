@@ -546,3 +546,23 @@ feat: 자동 커밋 기능 개선
 - ai-analyze-work-log.js 수정
   - AI 모델 응답 템플릿 수정
   - 제약 조건 및 예시 추가
+
+25.5.12.
+chore: 프로젝트 설정 및 스크립트 업데이트
+
+
+- README.md 업데이트
+  - 프로젝트 설명 및 기술 스택 변경
+  - QR 코드 이미지 및 링크 업데이트
+
+- docs/src/img/table-1-QRcode.png 제거
+
+- docs/src/img/table-2-QRcode.png 추가
+
+- commit-work-log.sh 수정
+  - 에러 발생 시 스크립트 종료 기능 추가
+  - 파일 업데이트 메시지 변경
+  - 푸시 관련 문구 수정
+
+- ai-analyze-work-log.js 수정
+  - AI 분석 제약 조건 추가
